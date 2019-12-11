@@ -31,7 +31,7 @@ class textfield_elements extends base
         $this->size = '20'; $this->required = TRUE;
         $this->element_id = 'nfb_civicrm_l_name_1';
         $this->build_static_textfield($form);}
-    public function contact_email_element(&$form)
+    public function contact_email_element(&$form) // MOC contact info. todo ask Ross if we need a phone element
     {   $this->type = 'textfield'; $this->title = "Point of Contact Email";
         $this->min = '1'; $this->max = '40';
         $this->size = '20'; $this->required = TRUE;
