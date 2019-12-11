@@ -1,0 +1,4 @@
+name: NFB Washington
+type: module
+description: 'Handles all washington Seminar functions V1.0'
+core: 8.x

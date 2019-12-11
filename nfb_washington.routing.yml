@@ -1,0 +1,8 @@
+nfb_washington_new_meeting_form:
+  path: 'washington-seminar\admin\new-meeting'
+  defaults:
+    _form: 'Drupal\nfb_washington\Form\WashingtonSeminarNewMeetingForm'
+    _title: 'Enter a New Washington Seminar Meeting'
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator'
