@@ -8,10 +8,13 @@ class base
     public $element_id; // form element id
     public $title; // element title
     public $type; // element type
+    public $required; // is the field required. True or False
     public function get_element_id()
     {return $this->element_id;}
     public function get_element_title()
     {return$this->title;}
     public function get_element_type()
     {return $this->type;}
+    public function get_element_required_status()
+    {return $this->required;}
 }
