@@ -3,7 +3,7 @@ Namespace Drupal\nfb_washington\Form;
 use Drupal\nfb_washington\form_factory\form_factory;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-class WashingtonSeminarNewMeetingForm extends FormBase
+class NewMeetingForm extends FormBase
 {
     public $form_factory;
     public function getFormId()
