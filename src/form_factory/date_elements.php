@@ -60,8 +60,8 @@ class date_elements extends select_elements
     public function meeting_time_element(&$form)
     {
         $this->element_id = 'meeting_time'; $this->type = 'datetime';
-        $this->size = '20'; $this->date_date_element = 'none'; // hope this fixes this stupid module
-        $this->date_time_element = 'time'; $this->date_time_format = 'H:i A';
+        $this->size = '20'; $this->date_date_element = 'none';
+        $this->date_time_element = 'time'; $this->date_time_format = 'H:I A';
         $this->default_value = '05:00'; $this->build_time_elements($form);
     }
 
