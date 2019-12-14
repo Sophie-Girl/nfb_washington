@@ -9,6 +9,11 @@ class base
     public $title; // element title
     public $type; // element type
     public $required; // is the field required. True or False
+    public $callback; // ajax function
+    public $wrapper; // ajax div wrapper id
+    public $event; // event that triggers the ajax
+    public $prefix; // div wrapper beginning
+    public $suffix; // close div
     public function get_element_id()
     {return $this->element_id;}
     public function get_element_title()
@@ -17,4 +22,14 @@ class base
     {return $this->type;}
     public function get_element_required_status()
     {return $this->required;}
+    public function  get_callback()
+    {return $this->callback;}
+    public function get_wrapper()
+    {return $this->wrapper;}
+    public function get_event()
+    {return $this->event;}
+    public function get_prefix()
+    {return $this->prefix;}
+    public function get_suffix()
+    {return $this->suffix;}
 }

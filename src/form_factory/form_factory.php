@@ -35,8 +35,9 @@ class form_factory extends markup_elements
         $this->issue_3_ranking_element($form);
         $this->issue_3_comment_element($form);
     }
-    public function build_home_page_form(&$form){
+    public function build_home_page_form(&$form, $form_State){
         $this->state_select_element($form);
+        $this->build_meeting_info_button($form, $form_State);
     }
     
 }
