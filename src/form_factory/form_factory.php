@@ -11,7 +11,7 @@ class form_factory extends markup_elements
         $this->meeting_time_element($form);
         $this->meeting_comments_element($form);
     }
-    public function build_update_mmeting_form(&$form)
+    public function build_update_meeting_form(&$form)
     {
         $this->contact_first_name_element($form);
         $this->contact_last_name_element($form);
@@ -19,6 +19,18 @@ class form_factory extends markup_elements
         $this->meeting_day_element($form);
         $this->meeting_time_element($form);
         $this->meeting_comments_element($form);
+    }
+    public function build_rating_form(&$form)
+    {
+        $this->contact_first_name_element($form);
+        $this->contact_last_name_element($form);
+        $this->contact_email_element($form);
+        $this->issue_1_ranking_element($form);
+        $this->issue_1_comment_element($form);
+        $this->issue_2_ranking_element($form);
+        $this->issue_2_comment_element($form);
+        $this->issue_3_ranking_element($form);
+        $this->issue_3_comment_element($form);
     }
     
 }
