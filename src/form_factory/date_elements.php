@@ -44,7 +44,7 @@ class date_elements extends select_elements
         $this->format = 'm/d/Y'; $this->date_date_format = 'm/d/Y';
         $this->required = True; $this->default_value = '2/1/2020';
         $this->min = '2/1/2020'; $this->max = '2/28/2020';
-        $this->date_year_range = '-0: +0';
+        $this->date_year_range = '-0: +0'; $this->type = 'date';
         $this->day_picker($form);}
     public function build_time_elements(&$form)
     {
@@ -58,13 +58,6 @@ class date_elements extends select_elements
            '#date_time_format' => $this->get_date_time_format(),
         );
     }
-    public function meeting_time_element(&$form)
-    {
-        $this->element_id = 'meeting_time'; $this->type = 'datetime';
-        $this->size = '20'; $this->date_date_element = 'none';
-        $this->title = "Meeting Time"; $this->required = TRUE;
-        $this->date_time_element = 'select'; $this->date_time_format = 'H:i A';
-        $this->default_value = '05:00'; $this->build_time_elements($form);
-    }
+
 
 }
