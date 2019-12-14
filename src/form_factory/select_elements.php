@@ -7,7 +7,7 @@ class select_elements extends textfield_elements
     {return $this->options;}
     public function build_Static_select_box(&$form)
     {   $form[$this->get_element_id()] = array(
-        '#type' => $this->get_element_id(),
+        '#type' => $this->get_element_type(),
         '#title' => $this->t($this->get_element_title()), // do not stack translation trait elements
         '#options' => $this->get_element_options(),
         '#required' => $this->get_element_required_status(),);}
