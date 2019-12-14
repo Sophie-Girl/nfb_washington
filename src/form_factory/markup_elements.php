@@ -26,6 +26,7 @@ class markup_elements extends date_elements
     public function build_meeting_info_button(&$form, $form_state)
     {
         $this->type = 'button'; $this->title = "Find Meetings";
+        $this->element_id = 'meeting_button';
         $this->callback = 'refresh_meeting'; $this->wrapper = 'meeting_markup';
         $this->event = 'click'; $this->build_button_element($form, $form_state);
     }
