@@ -6,7 +6,7 @@ class markup_elements extends date_elements
     public function get_markup()
     {return $this->markup;}
 
-    public function build_static_markup(&$form)
+    public function build_static_markup(&$form, $form_state)
     {
         $form[$this->get_element_id()] = array(
             '#type' => $this->get_element_type(),
