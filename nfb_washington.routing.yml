@@ -22,3 +22,11 @@ nfb_washington_rate_issue:
   requirements:
     _permission: 'access content'
     _role: 'administrator'
+nfb_washington_home_form:
+  path: 'nfb-washington/home'
+  defaults:
+    _form: 'Drupal\nfb_washington\Form\HomeSemForm'
+    _title: 'NFB Washington Seminar Home'
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator'

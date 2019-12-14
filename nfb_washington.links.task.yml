@@ -1,4 +1,8 @@
 nfb_washington.seminar:
+  route_name: nfb_washington_home_form
+  title: 'Home'
+  base_route: nfb_washington.seminar
+nfb_washington.new_met:
   route_name: nfb_washington_new_meeting
   title: 'New Meeting'
   base_route: nfb_washington.seminar
