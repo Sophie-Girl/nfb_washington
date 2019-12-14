@@ -4,6 +4,7 @@ class form_factory extends markup_elements
 {
     public function build_new_meeting_time(&$form)
     {
+        $this->state_select_element($form);
         $this->contact_first_name_element($form);
         $this->contact_last_name_element($form);
         $this->contact_email_element($form);
@@ -13,6 +14,7 @@ class form_factory extends markup_elements
     }
     public function build_update_meeting_form(&$form)
     {
+        $this->state_select_element($form);
         $this->contact_first_name_element($form);
         $this->contact_last_name_element($form);
         $this->contact_email_element($form);
@@ -22,6 +24,7 @@ class form_factory extends markup_elements
     }
     public function build_rating_form(&$form)
     {
+        $this->state_select_element($form);
         $this->contact_first_name_element($form);
         $this->contact_last_name_element($form);
         $this->contact_email_element($form);

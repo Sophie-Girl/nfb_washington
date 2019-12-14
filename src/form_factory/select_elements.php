@@ -1,7 +1,10 @@
 <?php
 namespace Drupal\nfb_washington\form_factory;
+use Drupal\civicrm\Civicrm;
+use Drupal\nfb_civicrm_bridge\civicrm\query;
 class select_elements extends textfield_elements
 {
+    protected $civicrm;
     public $options;
     public function get_element_options()
     {return $this->options;}
@@ -65,11 +68,46 @@ class select_elements extends textfield_elements
         $this->element_id = "meeting_time"; $this->build_Static_select_box($form);
 
     }
+    public function state_select_element(&$form)
+    {
+        $this->state_options(); $this->type = 'select';
+        $this->title = "Select State"; $this->required = TRUE;
+        $this->element_id = 'select_state'; $this->build_Static_select_box($form);
+    }
     public function time_options()
     { $this->am_options($options);
     $this->pm_options($options);
     $this->options = $options;
     }
+    public function state_options()
+    {
+        $this->set_up_civi($result);
+        $this->set_state_options($result, $options);
+        $this->options = $options;
+    }
+    public function set_up_civi(&$result)
+    {
+        $civi = new Civicrm(); $civi->initialize();
+        $this->civicrm = new query($civi);
+        $this->civicrm->mode = 'get'; $this->civicrm->entity = 'StateProvince';
+        $this->civicrm->params = array(
+            'sequential' => 1,
+            'country_id' => "1228",
+            'options' => ['limit' => 60],
+        );
+        $this->civicrm->civi_query($result);
+    }
+     public function set_state_options($result, &$options)
+     {
+         foreach($result['values'] as $state)
+         {
+             if($state['id'] != "1052" && $state['id'] != "1053" &&$state['id'] != "1055"
+             && $state['id'] != "1057" && $state['id'] != "1058" && $state['id'] != "1059"
+             && $state['id'] != "1060" && $state['id'] != "1061"){
+             $options[$state['abbreviation']] = $state['name'];}
+         }
+         ksort($options);
+     }
     public function am_options(&$options)
     {
         $options['12:00 AM'] = "12:00 AM";
