@@ -9,7 +9,7 @@ nfb_washington_new_meeting:
 nfb_washington_update_meeting:
   path: 'nfb-washington/update-meeting'
   defaults:
-    _form: 'Drupal\nfb_wshington\Form\UpdateMeetingForm'
+    _form: 'Drupal\nfb_washington\Form\UpdateMeetingForm'
     _title: 'NFB Washington Seminar: Update Meeting'
   requirements:
     _permission: 'access content'
