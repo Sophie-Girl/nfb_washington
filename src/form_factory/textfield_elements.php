@@ -64,4 +64,10 @@ class textfield_elements extends base
     {   $this->element_id = 'issue_3_comment';
         $this->title = 'Comments on Reception to Issue 3';
         $this->comment_element_data_set($form);}
+     public function meeting_comments_element(&$form)
+     {  $this->element_id = "meeting_location"; $this->type = 'textfield';
+        $this->title = "Meeting Location"; $this->size = '20';
+        $this->min = '0'; $this->max = '200'; $this->required = TRUE;
+         $this->build_static_textfield($form);
+     }
 }

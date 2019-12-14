@@ -9,6 +9,7 @@ class form_factory extends markup_elements
         $this->contact_email_element($form);
         $this->meeting_day_element($form);
         $this->meeting_time_element($form);
+        $this->meeting_comments_element($form);
     }
     
 }
