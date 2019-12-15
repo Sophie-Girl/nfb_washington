@@ -2,9 +2,11 @@
 namespace Drupal\nfb_washington\form_factory;
 use Drupal\civicrm\Civicrm;
 use Drupal\nfb_civicrm_bridge\civicrm\query;
+use Drupal\nfb_washington\archive_nfb\representative_data;
 class select_elements extends textfield_elements
 {
     protected $civicrm;
+    protected $representative_data;
     public $options;
     public function get_element_options()
     {return $this->options;}
@@ -103,10 +105,19 @@ class select_elements extends textfield_elements
     {
         $this->state_options(); $this->type = 'select';
         $this->title = "Select State"; $this->required = TRUE;
-        $this->element_id = 'select_state'; $this->callback = 'state_rep_refresh';
+        $this->element_id = 'select_state'; $this->callback = '::state_rep_refresh';
         $this->wrapper = 'rep_wrapper';
         $this->build_ajax_select_box($form,  $form_state);
 
+    }
+    public function state_rep_ajax_select_element(&$form, $form_state){
+        $this->representative_data = new representative_data();
+        $this->representative_data->new_meeting_options_element($form_state, $options);
+        $this->options = $options; $this->prefix = "<div id='rep_wrapper'>";
+        $this->element_id = 'select_rep'; $this->type = 'select';
+        $this->title = "Select Elected Official"; $this->required = TRUE;
+        $this->suffix = "</div>";
+        $this->build_ajax_wrapped_select($form, $form_state);
     }
     public function time_options()
     { $this->am_options($options);
@@ -244,5 +255,6 @@ class select_elements extends textfield_elements
         $options["11:30 PM"] = "11:30 PM";
         $options["11:45 PM"] = "11:45 PM";
     }
+
 
 }
