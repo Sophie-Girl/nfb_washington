@@ -29,9 +29,8 @@ class representative_data extends query_base
     }
     public function new_meeting_options_element($form_state, &$options)
     {
-        if(!$form_state->getValue('select_state'))
-        {$options[''] = ['Select a State'];
-        \drupal::logger('nfb_washington')->notice("if you have selected a sate. We got a problem");}
-        else {$this->create_new_meeting_options($form_state, $options);}
+        $this->create_new_meeting_options($form_state, $options);
+        \drupal::logger('nfb_washington')->notice($form_state->getValue('select_state'));
+
     }
 }
