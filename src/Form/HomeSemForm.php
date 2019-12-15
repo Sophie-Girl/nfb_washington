@@ -20,4 +20,8 @@ class HomeSemForm extends FormBase
     {
         // TODO: Implement submitForm() method.
     }
+    public function refresh_meeting(&$form, $form_state)
+    {
+        return $form['meeting_info_markup'];
+    }
 }

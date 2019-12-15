@@ -38,6 +38,7 @@ class form_factory extends markup_elements
     public function build_home_page_form(&$form, $form_state){
         $this->state_select_element($form, $form_state);
         $this->build_meeting_info_button($form, $form_state);
+        $this->build_meeting_info_markup($form, $form_state);
     }
     
 }
