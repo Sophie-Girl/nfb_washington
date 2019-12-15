@@ -30,7 +30,8 @@ class representative_data extends query_base
     public function new_meeting_options_element($form_state, &$options)
     {
         $this->create_new_meeting_options($form_state, $options);
-        \drupal::logger('nfb_washington')->notice($form_state->getValue('select_state'));
+        if($form_state->getValue('select_state')){
+        \drupal::logger('nfb_washington')->notice($form_state->getValue('select_state'));}
 
     }
 }
