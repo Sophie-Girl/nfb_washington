@@ -26,5 +26,8 @@ class UpdateMeetingForm extends FormBase
     }
     public function state_rep_refresh(&$form, $form_state)
     {
-        return $form['select_rep'];}
+        \drupal::logger('nfb_washington_pass_back')->notice(print_r($form['select_rep'], true));
+        return $form['select_rep'];
+
+    }
 }
