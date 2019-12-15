@@ -105,7 +105,7 @@ class select_elements extends textfield_elements
     {
         $this->state_options(); $this->type = 'select';
         $this->title = "Select State"; $this->required = TRUE;
-        $this->element_id = 'select_state'; $this->callback = '::state_rep_refresh';
+        $this->element_id = 'select_state'; $this->callback = '::staterep_refresh';
         $this->wrapper = 'rep_wrapper';
         $this->build_ajax_select_box($form,  $form_state);
 
