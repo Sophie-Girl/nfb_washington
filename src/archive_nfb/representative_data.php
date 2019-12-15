@@ -18,14 +18,14 @@ class representative_data extends query_base
     }
     public function create_new_meeting_options($form_state, &$options)
     {
-        $this->test_array(); $options[''] = "- Select -";
-        foreach($this->get_rep_result() as $rep)
+        $this->test_array(); $options['empty'] = "Select";
+       if($form_state->getValue('select_state')){ foreach($this->get_rep_result() as $rep)
         {
             if($rep['meeting_id'] == '' and $form_state->getValue('select_state') == $rep['state'])
             {
                 $options[$rep['rep_id']] = $rep['first_name']." ".$rep["last_name"]." ".$rep['state']." District ".$rep['district_number'];
             }
-        }
+        }}
     }
     public function new_meeting_options_element($form_state, &$options)
     {
