@@ -22,7 +22,6 @@ class HomeSemForm extends FormBase
     }
     public function refresh_meeting(&$form, $form_state)
     {
-        \Drupal::logger('nfb_washington')->notice("ajax callback does fire");
         return $form['meeting_info_markup'];
     }
 }

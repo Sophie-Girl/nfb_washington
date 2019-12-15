@@ -40,9 +40,15 @@ class markup_elements extends date_elements
     }
     public function build_meeting_info_markup(&$form, $form_state)
     {
-        $this->type = "item"; $this->markup = '<p>This is just a test</p>';
+        $this->type = "item"; $this->markup = $this->temp_ajax_test($form, $form_state);
         $this->element_id = 'meeting_info_markup';
         $this->prefix = "<div id = meeting_markup>"; $this->suffix = "</div>";
         $this->build_ajax_markup($form, $form_state);
+    }
+    public function temp_ajax_test(&$form, $form_state)
+    {
+        if($form_state->getValue('select_state') != '')
+        {return "<p>".$form_state->getValue('select_state')." Information</p>";}
+        else {return "<p>Please Select a state</p>";}
     }
 }
