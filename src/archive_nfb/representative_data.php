@@ -18,7 +18,7 @@ class representative_data extends query_base
     }
     public function create_new_meeting_options($form_state, &$options)
     {
-        $this->test_array(); 
+        $this->test_array(); $options = [];
        if($form_state->getValue('select_state')){ foreach($this->get_rep_result() as $rep)
         {
             if($rep['meeting_id'] == '' and $form_state->getValue('select_state') == $rep['state'])
