@@ -116,7 +116,7 @@ class select_elements extends textfield_elements
         $this->options = $options; $this->prefix = "<div id='rep_wrapper'>";
         $this->element_id = 'select_rep'; $this->type = 'select';
         $this->title = "Select Elected Official"; $this->required = TRUE;
-        $this->suffix = "</div>";
+        $this->suffix = "</div>"; $this->representative_data = null;
         $this->build_ajax_wrapped_select($form, $form_state);
     }
     public function time_options()
