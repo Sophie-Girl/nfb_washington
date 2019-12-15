@@ -14,6 +14,31 @@ class select_elements extends textfield_elements
         '#title' => $this->t($this->get_element_title()), // do not stack translation trait elements
         '#options' => $this->get_element_options(),
         '#required' => $this->get_element_required_status(),);}
+    public function build_ajax_select_box(&$form, $form_state)
+    {
+        $form[$this->get_element_id()] = array(
+            '#type' => $this->get_element_type(),
+            '#title' => $this->t($this->get_element_title()), // do not stack translation trait elements
+            '#options' => $this->get_element_options(),
+            '#required' => $this->get_element_required_status(),
+            '#ajax' => array(
+                'callback' => $this->get_callback(),
+                'wrapper' => $this->get_wrapper(),
+                'event' => 'change',
+            ),
+        );
+    }
+    public function build_ajax_wrapped_select(&$form, $form_state)
+    {
+        $form[$this->get_element_id()] = array(
+            '#prefix' => $this->get_prefix(),
+            '#type' => $this->get_element_type(),
+            '#title' => $this->t($this->get_element_title()), // do not stack translation trait elements
+            '#options' => $this->get_element_options(),
+            '#required' => $this->get_element_required_status(),
+            '#suffix' => $this->get_suffix(),
+        );
+    }
     public function MOC_select_options()
     {
         //todo establish way to get data out fo archive.nfb.org
@@ -73,6 +98,15 @@ class select_elements extends textfield_elements
         $this->state_options(); $this->type = 'select';
         $this->title = "Select State"; $this->required = TRUE;
         $this->element_id = 'select_state'; $this->build_Static_select_box($form,  $form_state);
+    }
+    public function state_ajax_select_element(&$form,$form_state)
+    {
+        $this->state_options(); $this->type = 'select';
+        $this->title = "Select State"; $this->required = TRUE;
+        $this->element_id = 'select_state'; $this->callback = 'state_rep_refresh';
+        $this->wrapper = 'rep_wrapper';
+        $this->build_ajax_select_box($form,  $form_state);
+
     }
     public function time_options()
     { $this->am_options($options);
