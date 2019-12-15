@@ -113,10 +113,11 @@ class select_elements extends textfield_elements
     public function state_rep_ajax_select_element(&$form, $form_state){
         $this->representative_data = new representative_data();
         $this->representative_data->new_meeting_options_element($form_state, $options);
+        $this->representative_data = null; \drupal::logger('nfb_washington_pass_back')->notice(print_r($options, true));
         $this->options = $options; $this->prefix = "<div id='rep_wrapper'>";
         $this->element_id = 'select_rep'; $this->type = 'select';
         $this->title = "Select Elected Official"; $this->required = TRUE;
-        $this->suffix = "</div>"; $this->representative_data = null;
+        $this->suffix = "</div>";
         $this->build_ajax_wrapped_select($form, $form_state);
     }
     public function time_options()
