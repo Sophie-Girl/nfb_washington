@@ -120,6 +120,16 @@ class select_elements extends textfield_elements
         $this->suffix = "</div>";
         $this->build_ajax_wrapped_select($form, $form_state, $options);
     }
+    public function update_state_rep_meeting_select_elements(&$form, $fom_state)
+    {   $this->representative_data = new representative_data();
+        $this->representative_data->create_update_meeting_options($fom_state, $options);
+        $this->representative_data = null;
+        $this->options = $options; $this->prefix = "<div id='rep_wrapper'>";
+        $this->element_id = 'select_rep'; $this->type = 'select';
+        $this->title = "Select Elected Official"; $this->required = TRUE;
+        $this->suffix = "</div>";
+        $this->build_ajax_wrapped_select($form, $form_state, $options);
+    }
     public function time_options()
     { $this->am_options($options);
     $this->pm_options($options);
