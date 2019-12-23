@@ -51,4 +51,10 @@ class markup_elements extends date_elements
         {return "<p>".$form_state->getValue('select_state')." Information</p>";}
         else {return "<p>Please Select a state</p>";}
     }
+    public function submit_button(&$form, $form_state)
+    {
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => $this->t('Download'),);
+    }
 }

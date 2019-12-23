@@ -14,6 +14,7 @@ class UpdateMeetingForm extends FormBase
     {
        $this->form_factory = new form_factory();
        $this->form_factory->build_update_meeting_form($form, $form_state);
+       $this->form_factory = null;
        return $form;
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
