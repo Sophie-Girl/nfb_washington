@@ -16,7 +16,7 @@ class form_factory extends markup_elements
     public function build_update_meeting_form(&$form, $form_state)
     {
         $this->state_ajax_select_element($form, $form_state);
-        $this->update_state_rep_meeting_select_elements(&$form, $form_state);
+        $this->update_state_rep_meeting_select_elements($form, $form_state);
         $this->contact_first_name_element($form, $form_state);
         $this->contact_last_name_element($form, $form_state);
         $this->contact_email_element($form, $form_state);
