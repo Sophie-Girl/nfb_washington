@@ -21,4 +21,8 @@ class IssueRatingForm extends FormBase
     {
         // TODO: Implement submitForm() method.
     }
+    public function staterep_refresh(&$form, $form_state)
+    {
+        return $form['select_rep'];
+    }
 }

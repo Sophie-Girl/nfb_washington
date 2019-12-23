@@ -55,6 +55,6 @@ class markup_elements extends date_elements
     {
         $form['submit'] = array(
             '#type' => 'submit',
-            '#value' => $this->t('Download'),);
+            '#value' => $this->t('Submit'),);
     }
 }
