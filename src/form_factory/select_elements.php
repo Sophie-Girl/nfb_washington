@@ -122,7 +122,7 @@ class select_elements extends textfield_elements
     }
     public function update_state_rep_meeting_select_elements(&$form, $form_state)
     {   $this->representative_data = new representative_data();
-        $this->representative_data->create_update_meeting_options($fom_state, $options);
+        $this->representative_data->create_update_meeting_options($form_state, $options);
         $this->representative_data = null;
         $this->options = $options; $this->prefix = "<div id='rep_wrapper'>";
         $this->element_id = 'select_rep'; $this->type = 'select';
