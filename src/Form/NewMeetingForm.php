@@ -24,7 +24,6 @@ class NewMeetingForm extends FormBase
     }
     public function staterep_refresh(&$form, $form_state)
     {
-        \drupal::logger('nfb_washington_ajax_test')->notice(print_r($form['select_rep'], true));
         return $form['select_rep'];
     }
 }
