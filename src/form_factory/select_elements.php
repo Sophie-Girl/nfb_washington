@@ -30,13 +30,13 @@ class select_elements extends textfield_elements
             ),
         );
     }
-    public function build_ajax_wrapped_select(&$form, $form_state)
+    public function build_ajax_wrapped_select(&$form, $form_state, $options)
     {
         $form[$this->get_element_id()] = array(
             '#prefix' => $this->get_prefix(),
             '#type' => $this->get_element_type(),
             '#title' => $this->t($this->get_element_title()), // do not stack translation trait elements
-            '#options' => $this->get_element_options(),
+            '#options' => $options,
             '#required' => $this->get_element_required_status(),
             '#suffix' => $this->get_suffix(),
         );
@@ -118,7 +118,7 @@ class select_elements extends textfield_elements
         $this->element_id = 'select_rep'; $this->type = 'select';
         $this->title = "Select Elected Official"; $this->required = TRUE;
         $this->suffix = "</div>";
-        $this->build_ajax_wrapped_select($form, $form_state);
+        $this->build_ajax_wrapped_select($form, $form_state, $options);
     }
     public function time_options()
     { $this->am_options($options);
