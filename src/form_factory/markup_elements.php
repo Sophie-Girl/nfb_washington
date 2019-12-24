@@ -52,6 +52,7 @@ class markup_elements extends date_elements
         if($form_state->getValue('select_state') != '')
         {$this->representative_data = new representative_data();
             $this->representative_data->set_home_markup($form_state, $markup);
+            $this->representative_data = null;
             return $markup;}
         else {return "<p>Please Select a state</p>";}
     }
