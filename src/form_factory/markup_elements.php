@@ -1,5 +1,7 @@
 <?php
 Namespace Drupal\nfb_washington\form_factory;
+use Drupal\nfb_washington\archive_nfb\representative_data;
+
 class markup_elements extends date_elements
 {
     public $markup;
@@ -48,7 +50,9 @@ class markup_elements extends date_elements
     public function temp_ajax_test(&$form, $form_state)
     {
         if($form_state->getValue('select_state') != '')
-        {return "<p>".$form_state->getValue('select_state')." Information</p>";}
+        {$this->representative_data = new representative_data();
+            $this->representative_data->set_home_markup($form_state, $markup);
+            return $markup;}
         else {return "<p>Please Select a state</p>";}
     }
     public function submit_button(&$form, $form_state)
@@ -57,4 +61,5 @@ class markup_elements extends date_elements
             '#type' => 'submit',
             '#value' => $this->t('Submit'),);
     }
+
 }
