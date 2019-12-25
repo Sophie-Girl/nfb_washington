@@ -64,7 +64,7 @@ class representative_data extends query_base
     }
     public function set_home_markup($form_state, &$markup)
     {
-     $this->test_array(); $markup = "<p>".$form_state->getValue('select_state')."Representatives</p>
+     $this->test_array(); $markup = "<p>".$form_state->getValue('select_state')." Representatives</p>
     <table>
     <t><th>Representative Name:</th><th>State:</th><th>District:</th><th>Meeting Status:</th><th>Meeting Time:</th><th>Meeting Location:</th></tr>
     ";
