@@ -78,5 +78,9 @@ class representative_data extends query_base
      }}
      $markup = $markup."</table>";
     }
+    public function build_state_array()
+    {
+        
+    }
 
 }

@@ -30,4 +30,10 @@ where year = '2019';");
         $username = 'sconnell';
         $password = 'E7kr0129M!';
     }
+    public function get_house_rep_for_state($state, &$result)
+    { $year = date('Y');
+        $this->establish_connection(); $test = $this->sql_connection->query("SELECT * FROM nfb_new.aaxmarwash_activities
+where year = ".$year." and state = ".$state.";");
+        $result = $test->fetch_all(MYSQLI_ASSOC);
+    }
 }
