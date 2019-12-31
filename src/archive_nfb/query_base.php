@@ -19,9 +19,10 @@ class query_base
         $this->credentials($servername, $username, $password);
         $this->sql_connection = new  \mysqli;
         $this->sql_connection->connect($servername, $username, $password, 'nfb_new');
-        $this->sql_connection->query("SELECT * FROM nfb_new.aaxmarwash_activities
+        $test =  $this->sql_connection->query("SELECT * FROM nfb_new.aaxmarwash_activities
 where year = '2019';");
-        
+        print_r($test->fetch_array(MYSQLI_ASSOC));
+
     }
     public function credentials(&$servername, &$username, &$password)
     {
