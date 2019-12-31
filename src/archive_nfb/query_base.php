@@ -14,4 +14,16 @@ class query_base
     {return $this->query_where;}
     public function get_sql_connection()
     {return $this->sql_connection;}
+    public function establish_connection()
+    {
+        $this->credentials($servername, $username, $password);
+        $this->sql_connection = new  \mysqli;
+        $this->sql_connection->connect($servername, $username, $password);
+    }
+    public function credentials(&$servername, &$username, &$password)
+    {
+        $servername = '10.10.10.55:3306';
+        $username = 'sconnell';
+        $password = 'E7kr0129M!';
+    }
 }
