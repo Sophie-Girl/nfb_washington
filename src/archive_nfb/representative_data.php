@@ -85,9 +85,11 @@ class representative_data extends query_base
         if($state == '')
         {$array = [];} else{
         $this->get_house_rep_for_state($state, $result);
-        $this->find_meeting($result, $array);}
-        \drupal::logger('nfb_washington')->notice(memory_get_usage());
+        $this->find_meeting($result, $array);
+        unset($result);}
         $this->rep_result = $array; unset($array);
+        \drupal::logger('nfb_washington')->notice(memory_get_usage());
+
     }
     public function find_meeting($result, &$array)
     {
