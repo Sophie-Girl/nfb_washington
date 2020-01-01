@@ -40,7 +40,7 @@ class representative_data extends query_base
         if ($form_state->getValue('select_state')) {
             foreach ($this->get_rep_result() as $rep) {
                 if ($rep['meeting_id'] == '' and $form_state->getValue('select_state') == $rep['state']) {
-                    $options[$rep['rep_id']] = $rep['first_name'] . " " . $rep["last_name"] . " " . $rep['state'] . " District " . $rep['district_number'];
+                    $options[$rep['seminar_id']] = $rep['first_name'] . " " . $rep["last_name"] . " " . $rep['state'] . " District " . $rep['district'];
                 }
             }
         }
@@ -60,7 +60,7 @@ class representative_data extends query_base
         if ($form_state->getValue('select_state')) {
             foreach ($this->get_rep_result() as $rep) {
                 if ($rep['meeting_id'] != '' and $form_state->getValue('select_state') == $rep['state']) {
-                    $options[$rep['rep_id']] = $rep['first_name'] . " " . $rep["last_name"] . " " . $rep['state'] . " District " . $rep['district_number'];}}}
+                    $options[$rep['seminar_id']] = $rep['first_name'] . " " . $rep["last_name"] . " " . $rep['state'] . " District " . $rep['district'];}}}
     }
     public function set_home_markup($form_state, &$markup)
     {
@@ -74,13 +74,13 @@ class representative_data extends query_base
          if($rep['meeting_id'] == "")
          {$meeting_status = "Not Scheduled";}
          else {$meeting_status = "Scheduled";}
-         $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$rep['district_number']."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$rep['meeting_time']."</th><th>".$rep['meeting_location']."</th></tr>";
+         $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$rep['district']."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$rep['meeting_time']."</th><th>".$rep['meeting_location']."</th></tr>";
      }}
      $markup = $markup."</table>";
     }
     public function build_state_array($form_state)
     {
-        $state = 'nd'; //$form_state->getValue('select_state');
+        $state = $form_state->getValue('select_state');
         $this->get_house_rep_for_state($state, $result);
         $this->find_meeting($result, $array);
         $this->rep_result = $array;
