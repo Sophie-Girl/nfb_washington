@@ -67,14 +67,14 @@ class representative_data extends query_base
     {
      $this->build_state_array($form_state); $markup = "<p>".$form_state->getValue('select_state')." Representatives</p>
     <table>
-    <t><th>Representative Name:</th><th>State:</th><th>District:</th><th>Meeting Status:</th><th>Meeting Time:</th><th>Meeting Location:</th></tr>
+    <t><th>Representative Name:</th><th>State:</th><th>District:</th><th>Meeting Status:</th><th>Meeting Time:</th><th>Meeting Location:</th><th>Contact Person:</th><th>Contact Phone:</th></tr>
     ";
      foreach ($this->get_rep_result() as $rep){
          if($form_state->getValue('select_state') != ''){
              $this->convert_meeting($rep, $meeting_status);
              $this->convert_time($rep, $meeting_time);
              $this->convert_district($rep, $district);
-         $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$district."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$meeting_time."</th><th>".$rep['meeting_location']."</th></tr>";
+         $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$district."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$meeting_time."</th><th>".$rep['meeting_location']."</th><th>".$rep['contact_person']."</th><th>".$rep['contact_phone']."</th></tr>";
      }}
      $markup = $markup."</table>";
      \Drupal::logger('nfb_washington')->notice($markup);
