@@ -31,7 +31,7 @@ class query_base
     $this->establish_connection();
     $query = "SELECT
         firstname, lastname, state, district, seminar_id
-        FROM nfb_new.aaxmarwash_members where year = ".$year." and state = ".$state.";";
+        FROM nfb_new.aaxmarwash_members where year = '".$year."' and state = '".$state."';";
     echo $query.PHP_EOL;
     $test = $this->sql_connection->query($query);
         if($test){
