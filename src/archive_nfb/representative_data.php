@@ -69,8 +69,7 @@ class representative_data extends query_base
     <table>
     <t><th>Representative Name:</th><th>State:</th><th>District:</th><th>Meeting Status:</th><th>Meeting Time:</th><th>Meeting Location:</th></tr>
     ";
-     foreach ($this->get_rep_result() as $rep)
-     {
+     foreach ($this->get_rep_result() as $rep){
          if($form_state->getValue('select_state') != ''){
          if($rep['meeting_id'] == "")
          {$meeting_status = "Not Scheduled";}
@@ -87,8 +86,8 @@ class representative_data extends query_base
         {$array = [];} else{
         $this->get_house_rep_for_state($state, $result);
         $this->find_meeting($result, $array);}
-        \drupal::logger('nfb_washington')->notice(print_r($array, true));
-        $this->rep_result = $array;
+        \drupal::logger('nfb_washington')->notice(memory_get_usage());
+        $this->rep_result = $array; unset($array);
     }
     public function find_meeting($result, &$array)
     {
