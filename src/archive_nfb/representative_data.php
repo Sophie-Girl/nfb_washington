@@ -80,9 +80,10 @@ class representative_data extends query_base
     }
     public function build_state_array($form_state)
     {
-        $state = $form_state->getValue('select_state');
+        $state = 'nd'; //$form_state->getValue('select_state');
         $this->get_house_rep_for_state($state, $result);
         $this->find_meeting($result, $array);
+        $this->rep_result = $array;
     }
     public function find_meeting($result, &$array)
     {
