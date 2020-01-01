@@ -43,11 +43,12 @@ class query_base
         $year = date('Y'); $year = '2019';
         $this->establish_connection(); echo PHP_EOL.$sem_id.PHP_EOL;
         $query =  "select activity_id, activity_date, activity_time from nfb_new.aaxmarwash_activities
-    where 'year' = '".$year."' and aseminar_id = '".$sem_id."';";
+    where year = '".$year."' and aseminar_id = '".$sem_id."';";
         $test = $this->sql_connection->query($query);
         echo PHP_EOL.$query.PHP_EOL;
         if($test){
         $meeting = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;
+        print_r($meeting);
             $array[$sem_id]['meeting_id'] = $meeting['0']['activity_id'];
             $array[$sem_id]['meeting_date'] = $meeting['0']['activity_date'];
             $array[$sem_id]['meeting_time'] = $meeting['0']['activity_time'];}
