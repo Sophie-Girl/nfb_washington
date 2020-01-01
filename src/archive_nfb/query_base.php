@@ -27,7 +27,7 @@ class query_base
         $password = 'E7kr0129M!';
     }
     public function get_house_rep_for_state($state, &$result)
-    { $year = date('Y');
+    { $year = date('Y'); echo $year; echo $state;
     $this->establish_connection();
     $test = $this->sql_connection->query("SELECT
         firstname, lastname, state, district, seminar_id
