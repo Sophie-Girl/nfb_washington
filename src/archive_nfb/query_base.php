@@ -32,10 +32,10 @@ class query_base
     $query = "SELECT
         firstname, lastname, state, district, seminar_id
         FROM nfb_new.aaxmarwash_members where year = '".$year."' and state = '".$state."';";
-
     $test = $this->sql_connection->query($query);
         if($test){
-    $result = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;}
+    $result = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;
+        unset($test);}
         else {Echo "Bad Query"; Die;}
     }
     public function find_meeting_query($sem_id, &$array)
@@ -52,12 +52,14 @@ class query_base
             $array[$sem_id]['meeting_id'] = $meeting['0']['activity_id'];
             $array[$sem_id]['meeting_date'] = $meeting['0']['activity_date'];
             $array[$sem_id]['meeting_time'] = $meeting['0']['activity_time'];
-            $array[$sem_id]['meeting_location'] = $meeting['0']['activity_location'];}
+            $array[$sem_id]['meeting_location'] = $meeting['0']['activity_location'];
+            unset($meeting);}
          else {
              $array[$sem_id]['meeting_id']= "";
              $array[$sem_id]['meeting_date'] = "";
              $array[$sem_id]['meeting_time'] = "";
-             $array[$sem_id]['meeting_location'] = "";}
+             $array[$sem_id]['meeting_location'] = "";
+         } unset($test);
     }
 
 }
