@@ -29,9 +29,11 @@ class query_base
     public function get_house_rep_for_state($state, &$result)
     { $year = date('Y'); $year = '2019'; echo $year; echo $state;
     $this->establish_connection();
-    $test = $this->sql_connection->query("SELECT
+    $query = "SELECT
         firstname, lastname, state, district, seminar_id
-        FROM nfb_new.aaxmarwash_members where year = ".$year." and state = ".$state.";");
+        FROM nfb_new.aaxmarwash_members where year = ".$year." and state = ".$state.";";
+    echo $query.PHP_EOL;
+    $test = $this->sql_connection->query($query);
         if($test){
     $result = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;}
         else {Echo "Bad Query"; Die;}
