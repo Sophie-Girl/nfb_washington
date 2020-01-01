@@ -8,6 +8,8 @@ class  meeting_backend extends base
     {
         $this->dependency_injection($form_state);
         $this->database_mapping($form_state, $params);
+        $this->archive_nfb = new activity_data();
+        $this->archive_nfb->params_switch($form_state, $params);
     }
     public function database_mapping(FormStateInterface $form_state, &$params)
     {

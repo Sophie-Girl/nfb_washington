@@ -21,7 +21,6 @@ class activity_data extends representative_data
             case 'wash_sem_update_meeting':
                 $this->update_meeting_query($params);
                 break;
-
         }
     }
     public function new_meeting_query($params)
