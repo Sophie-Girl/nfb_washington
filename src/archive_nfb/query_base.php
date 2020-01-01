@@ -44,7 +44,7 @@ class query_base
         $this->establish_connection();
         $test = $this->sql_connection->query(
             "select activity_id, activity_date, activity_time from nfb_new.aaxmarwash_activities
-    where 'year' = ".$year." and aseminiar_id =".$sem_id.";");
+    where 'year' = ''".$year."'' and aseminiar_id = ''".$sem_id."'';");
         $meeting = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;
         if(!$meeting['0'])
         {$array[$sem_id]['meeting_id']= "";
