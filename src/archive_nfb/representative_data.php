@@ -81,8 +81,10 @@ class representative_data extends query_base
     public function build_state_array($form_state)
     {
         $state = $form_state->getValue('select_state');
+        if($state = '' || !$state)
+        {$array = [];} else{
         $this->get_house_rep_for_state($state, $result);
-        $this->find_meeting($result, $array);
+        $this->find_meeting($result, $array);}
         \drupal::logger('nfb_washington')->notice(print_r($array, true));
         $this->rep_result = $array;
     }
