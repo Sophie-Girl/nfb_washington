@@ -35,7 +35,7 @@ class representative_data extends query_base
 
     public function create_new_meeting_options($form_state, &$options)
     {
-        $this->test_array();
+        $this->build_state_array($form_state);
         $options = [];
         if ($form_state->getValue('select_state')) {
             foreach ($this->get_rep_result() as $rep) {
@@ -56,7 +56,7 @@ class representative_data extends query_base
 
     public function create_update_meeting_options($form_state, &$options)
     {
-        $this->test_array(); $options = [];
+        $this->build_state_array($form_state); $options = [];
         if ($form_state->getValue('select_state')) {
             foreach ($this->get_rep_result() as $rep) {
                 if ($rep['meeting_id'] != '' and $form_state->getValue('select_state') == $rep['state']) {
@@ -64,7 +64,7 @@ class representative_data extends query_base
     }
     public function set_home_markup($form_state, &$markup)
     {
-     $this->test_array(); $markup = "<p>".$form_state->getValue('select_state')." Representatives</p>
+     $this->build_state_array($form_state); $markup = "<p>".$form_state->getValue('select_state')." Representatives</p>
     <table>
     <t><th>Representative Name:</th><th>State:</th><th>District:</th><th>Meeting Status:</th><th>Meeting Time:</th><th>Meeting Location:</th></tr>
     ";
