@@ -82,6 +82,7 @@ class representative_data extends query_base
     public function build_state_array($form_state)
     {
         $state = $form_state->getValue('select_state');
+        unset($form_state);
         if($state == '')
         {$array = [];} else{
         $this->get_house_rep_for_state($state, $result);
