@@ -51,6 +51,7 @@ class query_base
             $array[$sem_id]['meeting_date'] = $meeting['0']['activity_date'];
             $array[$sem_id]['meeting_time'] = $meeting['0']['activity_time'];}
          else {
+
              $array[$sem_id]['meeting_id']= "";
              $array[$sem_id]['meeting_date'] = "";
              $array[$sem_id]['meeting_time'] = "";}
