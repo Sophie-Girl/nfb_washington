@@ -60,7 +60,7 @@ class representative_data extends query_base
         if ($form_state->getValue('select_state')) {
             foreach ($this->get_rep_result() as $rep) {
                 if ($rep['meeting_id'] != '' and $form_state->getValue('select_state') != '') {
-                    $options[$rep['seminar_id']] = $rep['first_name'] . " " . $rep["last_name"] . " " . $rep['state'] . " District " . $rep['district'];}}
+                    $options[$rep['meeting_id']] = $rep['first_name'] . " " . $rep["last_name"] . " " . $rep['state'] . " District " . $rep['district'];}}
         }
     }
     public function set_home_markup($form_state, &$markup)
@@ -73,9 +73,7 @@ class representative_data extends query_base
          if($form_state->getValue('select_state') != ''){
              $this->convert_meeting($rep, $meeting_status);
              $this->convert_time($rep, $meeting_time);
-         if($rep['district'] == '')
-         {$district = strtoupper(substr($rep['seminar_id'], 2,9))." Senator";}
-         else $district = $rep['district'];
+             $this->convert_district($rep, $district);
          $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$district."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$meeting_time."</th><th>".$rep['meeting_location']."</th></tr>";
      }}
      $markup = $markup."</table>";
@@ -121,4 +119,11 @@ class representative_data extends query_base
         $min = substr($rep['meeting_time'],2,2);
         $meeting_time =  $hour.":".$min." ".$am_pm;}
     }
+    public function convert_district($rep, &$district)
+    {
+        if($rep['district'] == '')
+        {$district = strtoupper(substr($rep['seminar_id'], 2,9))." Senator";}
+        else {$district = $rep['district'];}
+    }
+
 }

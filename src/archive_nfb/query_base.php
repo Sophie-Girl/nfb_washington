@@ -42,7 +42,7 @@ class query_base
     {
         $year = date('Y'); $year = '2019';
         $this->establish_connection();
-        $query =  "select activity_id, activity_date, activity_time, activity_location from nfb_new.aaxmarwash_activities
+        $query =  "select activity_id, activity_date, activity_time, activity_location, nfb_contact_name, nfb_contact_phone from nfb_new.aaxmarwash_activities
     where year = '".$year."' and aseminar_id = '".$sem_id."';";
         $test = $this->sql_connection->query($query);
         if($test){
@@ -51,12 +51,16 @@ class query_base
             $array[$sem_id]['meeting_date'] = $meeting['0']['activity_date'];
             $array[$sem_id]['meeting_time'] = $meeting['0']['activity_time'];
             $array[$sem_id]['meeting_location'] = $meeting['0']['activity_location'];
+            $array[$sem_id]['contact_person'] = $meeting['0']['nfb_contact_name'];
+            $array[$sem_id]['contact_phone'] =  $meeting['0']['nfb_contact_phone'];
             unset($meeting);}
          else {
              $array[$sem_id]['meeting_id']= "";
              $array[$sem_id]['meeting_date'] = "";
              $array[$sem_id]['meeting_time'] = "";
              $array[$sem_id]['meeting_location'] = "";
+             $array[$sem_id]['contact_phone'] = '';
+             $array[$sem_id]['contact_phone'] = "";
          } unset($test);
     }
 
