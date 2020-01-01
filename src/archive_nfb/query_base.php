@@ -31,7 +31,7 @@ class query_base
     $this->establish_connection();
     $test = $this->sql_connection->query("SELECT
         firstname, lastname, state, district, seminar_id
-        FROM nfb_new.aaxmarwash_members where 'year' = ".$year." and state = ".$state.";");
+        FROM nfb_new.aaxmarwash_members where year = ".$year." and state = ".$state.";");
         if($test){
     $result = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;}
         else {Echo "Bad Query"; Die;}
