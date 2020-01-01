@@ -60,7 +60,9 @@ class representative_data extends query_base
         if ($form_state->getValue('select_state')) {
             foreach ($this->get_rep_result() as $rep) {
                 if ($rep['meeting_id'] != '' and $form_state->getValue('select_state') != '') {
-                    $options[$rep['seminar_id']] = $rep['first_name'] . " " . $rep["last_name"] . " " . $rep['state'] . " District " . $rep['district'];}}}
+                    $options[$rep['seminar_id']] = $rep['first_name'] . " " . $rep["last_name"] . " " . $rep['state'] . " District " . $rep['district'];}}
+        \Drupal::logger('nfb_washington')->notice(print_r($options, true));
+        }
     }
     public function set_home_markup($form_state, &$markup)
     {
@@ -77,6 +79,7 @@ class representative_data extends query_base
          $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$rep['district']."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$rep['meeting_time']."</th><th>".$rep['meeting_location']."</th></tr>";
      }}
      $markup = $markup."</table>";
+     \Drupal::logger('nfb_washington')->notice($markup);
     }
     public function build_state_array($form_state)
     {
