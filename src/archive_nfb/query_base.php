@@ -19,10 +19,6 @@ class query_base
         $this->credentials($servername, $username, $password);
         $this->sql_connection = new  \mysqli;
         $this->sql_connection->connect($servername, $username, $password, 'nfb_new');
-        $test =  $this->sql_connection->query("SELECT * FROM nfb_new.aaxmarwash_activities
-where year = '2019';");
-        print_r($test->fetch_all(MYSQLI_ASSOC));
-
     }
     public function credentials(&$servername, &$username, &$password)
     {
@@ -40,7 +36,8 @@ where year = '2019';");
     public function find_meeting_query($sem_id, &$array)
     {
         $year = date('Y');
-        $this->establish_connection(); $test = $this->sql_connection->query(
+        $this->establish_connection();
+        $test = $this->sql_connection->query(
             "select activity_id, activity_date, activity_time from nfb_new.aaxmarwash_activities
     where 'year' = ".$year." and aseminiar_id =".$sem_id.";");
         $meeting = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;
