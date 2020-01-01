@@ -129,7 +129,6 @@ class select_elements extends textfield_elements
         $this->title = "Select Elected Official"; $this->required = TRUE;
         $this->suffix = "</div>";
         $this->build_ajax_wrapped_select($form, $form_state, $options);
-        \drupal::logger('nfb_washington')->notice(print_r($form['select_state'], true));
     }
     public function time_options()
     { $this->am_options($options);

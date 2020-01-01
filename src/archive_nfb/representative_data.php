@@ -61,7 +61,6 @@ class representative_data extends query_base
             foreach ($this->get_rep_result() as $rep) {
                 if ($rep['meeting_id'] != '' and $form_state->getValue('select_state') != '') {
                     $options[$rep['seminar_id']] = $rep['first_name'] . " " . $rep["last_name"] . " " . $rep['state'] . " District " . $rep['district'];}}
-        \Drupal::logger('nfb_washington')->notice(print_r($options, true));
         }
     }
     public function set_home_markup($form_state, &$markup)
