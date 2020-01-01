@@ -71,13 +71,12 @@ class representative_data extends query_base
     ";
      foreach ($this->get_rep_result() as $rep){
          if($form_state->getValue('select_state') != ''){
-         if($rep['meeting_id'] == "")
-         {$meeting_status = "Not Scheduled";}
-         else {$meeting_status = "Scheduled";}
+             $this->convert_meeting($rep, $meeting_status);
+             $this->convert_time($rep, $meeting_time);
          if($rep['district'] == '')
          {$district = strtoupper(substr($rep['seminar_id'], 2,9))." Senator";}
          else $district = $rep['district'];
-         $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$district."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$rep['meeting_time']."</th><th>".$rep['meeting_location']."</th></tr>";
+         $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$district."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$meeting_time."</th><th>".$rep['meeting_location']."</th></tr>";
      }}
      $markup = $markup."</table>";
      \Drupal::logger('nfb_washington')->notice($markup);
@@ -108,5 +107,18 @@ class representative_data extends query_base
             $this->find_meeting_query($sem_id, $array);
         }
     }
-
+    public function convert_meeting($rep, &$meeting_status)
+    {         if($rep['meeting_id'] == "")
+    {$meeting_status = "Not Scheduled";}
+    else {$meeting_status = "Scheduled";}}
+    public function convert_time($rep, &$meeting_time)
+    {
+        if($rep['meeting_time'] != ''){
+        $hour = substr($rep['meeting_time'], 0, 2);
+            if((int)$hour > 12){
+        $am_pm = 'PM'; $hour = (int)$hour - 12;}
+        else {$am_pm = 'AM';}
+        $min = substr($rep['meeting_time'],2,2);
+        $meeting_time =  $hour.":".$min." ".$am_pm;}
+    }
 }
