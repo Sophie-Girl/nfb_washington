@@ -74,7 +74,7 @@ class representative_data extends query_base
          if($rep['meeting_id'] == "")
          {$meeting_status = "Not Scheduled";}
          else {$meeting_status = "Scheduled";}
-         if($rep['district'] = '')
+         if($rep['district'] == '')
          {$district = substr($rep['seminar_id'], 2,9);}
          else $district = $rep['district'];
          $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$district."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$rep['meeting_time']."</th><th>".$rep['meeting_location']."</th></tr>";
