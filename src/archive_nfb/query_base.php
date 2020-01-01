@@ -32,8 +32,26 @@ where year = '2019';");
     }
     public function get_house_rep_for_state($state, &$result)
     { $year = date('Y');
-        $this->establish_connection(); $test = $this->sql_connection->query("SELECT * FROM nfb_new.aaxmarwash_activities
-where year = ".$year." and state = ".$state.";");
-        $result = $test->fetch_all(MYSQLI_ASSOC);
+        $this->establish_connection(); $test = $this->sql_connection->query("SELECT
+        firstname, lastname, state, district, seminar_id
+        FROM nfb_new.aaxmarwash_members where 'year' = ".$year." and state = ".$state.";");
+        $result = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;
+    }
+    public function find_meeting_query($sem_id, &$array)
+    {
+        $year = date('Y');
+        $this->establish_connection(); $test = $this->sql_connection->query(
+            "select activity_id, activity_date, activity_time from nfb_new.aaxmarwash_activities
+    where 'year' = ".$year." and aseminiar_id =".$sem_id.";");
+        $meeting = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;
+        if(!$meeting['0'])
+        {$array[$sem_id]['meeting_id']= "";
+         $array[$sem_id]['meeting_date'] = "";
+         $array[$sem_id]['meeting_time'] = "";
+        } else {
+            $array[$sem_id]['meeting_id'] = $meeting['0']['activity_id'];
+            $array[$sem_id]['meeting_date'] = $meeting['0']['activity_date'];
+            $array[$sem_id]['meeting_time'] = $meeting['0']['activity_time'];
+        }
     }
 }

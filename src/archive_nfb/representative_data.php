@@ -78,9 +78,23 @@ class representative_data extends query_base
      }}
      $markup = $markup."</table>";
     }
-    public function build_state_array()
+    public function build_state_array($form_state)
     {
-        
+        $state = $form_state->getValue('select_state');
+        $this->get_house_rep_for_state($state, $result);
+    }
+    public function find_meeting($result, &$array)
+    {
+        foreach ($result as $rep)
+        {
+            $sem_id = $rep['seminar_id'];
+            $array[$sem_id]['first_name'] = $rep['firstname'];
+            $array[$sem_id]['last_name'] = $rep['lastname'];
+            $array[$sem_id]['seminar_id'] = $rep['seminar_id'];
+            $array[$sem_id]['district'] = $rep['$district'];
+            $array[$sem_id]['state'] = $rep['state'];
+            $this->find_meeting_query($sem_id, $array);
+        }
     }
 
 }
