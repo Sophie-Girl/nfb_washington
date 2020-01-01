@@ -28,13 +28,13 @@ class query_base
     }
     public function get_house_rep_for_state($state, &$result)
     { $year = date('Y');
-        $this->credentials($servername, $username, $password);
-        $this->sql_connection = new  \mysqli;
-        $this->sql_connection->connect($servername, $username, $password, 'nfb_new');
+    $this->establish_connection();
     $test = $this->sql_connection->query("SELECT
         firstname, lastname, state, district, seminar_id
         FROM nfb_new.aaxmarwash_members where 'year' = ".$year." and state = ".$state.";");
-        $result = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;
+        if($test){
+    $result = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;}
+        else {Echo "Bad Query"; Die;}
     }
     public function find_meeting_query($sem_id, &$array)
     {
