@@ -82,6 +82,7 @@ class representative_data extends query_base
     {
         $state = $form_state->getValue('select_state');
         $this->get_house_rep_for_state($state, $result);
+        $this->find_meeting($result, $array);
     }
     public function find_meeting($result, &$array)
     {

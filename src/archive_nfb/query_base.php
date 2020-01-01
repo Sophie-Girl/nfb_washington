@@ -41,10 +41,10 @@ class query_base
     public function find_meeting_query($sem_id, &$array)
     {
         $year = date('Y'); $year = '2019';
-        $this->establish_connection();
+        $this->establish_connection(); echo PHP_EOL.$sem_id.PHP_EOL;
         $test = $this->sql_connection->query(
             "select activity_id, activity_date, activity_time from nfb_new.aaxmarwash_activities
-    where 'year' = ''".$year."'' and aseminiar_id = ''".$sem_id."'';");
+    where 'year' = ''".$year."'' and aseminar_id = ''".$sem_id."'';");
         if($test){
         $meeting = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;
             $array[$sem_id]['meeting_id'] = $meeting['0']['activity_id'];
