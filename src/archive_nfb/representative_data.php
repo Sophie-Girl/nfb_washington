@@ -59,7 +59,7 @@ class representative_data extends query_base
         $this->build_state_array($form_state); $options = [];
         if ($form_state->getValue('select_state')) {
             foreach ($this->get_rep_result() as $rep) {
-                if ($rep['meeting_id'] != '' and $form_state->getValue('select_state') == $rep['state']) {
+                if ($rep['meeting_id'] != '' and $form_state->getValue('select_state') != '') {
                     $options[$rep['seminar_id']] = $rep['first_name'] . " " . $rep["last_name"] . " " . $rep['state'] . " District " . $rep['district'];}}}
     }
     public function set_home_markup($form_state, &$markup)
@@ -70,7 +70,7 @@ class representative_data extends query_base
     ";
      foreach ($this->get_rep_result() as $rep)
      {
-         if($rep['state'] == $form_state->getValue('select_state')){
+         if($form_state->getValue('select_state') != ''){
          if($rep['meeting_id'] == "")
          {$meeting_status = "Not Scheduled";}
          else {$meeting_status = "Scheduled";}
