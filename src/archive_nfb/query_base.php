@@ -54,10 +54,11 @@ class query_base
             $array[$sem_id]['meeting_time'] = $meeting['0']['activity_time'];
          print_r($array[$sem_id]);}
          else {
-echo "Crap";
+            echo "Crap";
              $array[$sem_id]['meeting_id']= "";
              $array[$sem_id]['meeting_date'] = "";
              $array[$sem_id]['meeting_time'] = "";}
-
+        print_r($array[$sem_id]);
     }
+
 }
