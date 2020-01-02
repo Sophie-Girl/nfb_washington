@@ -13,6 +13,14 @@ class  meeting_backend extends base
         $this->archive_nfb->params_switch($form_state, $params);
         $this->set_email_meeting_body($form_state, $params);
     }
+    public function rating_backend(FormStateInterface $form_state)
+    {
+        $this->dependency_injection($form_state);
+        $this->database_mapping($form_state, $params);
+        $this->archive_nfb = new activity_data();
+        $this->archive_nfb->params_switch($form_state, $params);
+        $this->set_ranking_email_body($form_state, $params);
+    }
     public function database_mapping(FormStateInterface $form_state, &$params)
     {
         if($form_state->getFormObject()->getFormId() == 'washington_sem_new_meeting')

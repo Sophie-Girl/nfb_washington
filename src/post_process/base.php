@@ -29,4 +29,10 @@ class base {
         $this->email->meeting_details($form_state, $params);
         $this-> email = null;
     }
+    public function set_ranking_email_body(FormStateInterface $form_state, $params)
+    {
+        $this->email = new admin_notification();
+        $this->email->ratings_email_details($form_state, $params);
+        $this->email = null;
+    }
 }
