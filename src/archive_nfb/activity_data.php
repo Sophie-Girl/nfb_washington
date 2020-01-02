@@ -80,7 +80,7 @@ class activity_data extends representative_data
         $query = "update nfb_new.aaxmarwash_activities
             set activity_time = '".$params['time']."'
             where activity_id = '".$params['meeting_id']."';";
-        $$this->sql_connection->query($query);
+        $this->sql_connection->query($query);
 
         $this->sql_connection = null;
     }
