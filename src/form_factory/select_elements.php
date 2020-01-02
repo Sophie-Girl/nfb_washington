@@ -3,6 +3,7 @@ namespace Drupal\nfb_washington\form_factory;
 use Drupal\civicrm\Civicrm;
 use Drupal\nfb_civicrm_bridge\civicrm\query;
 use Drupal\nfb_washington\archive_nfb\representative_data;
+
 class select_elements extends textfield_elements
 {
     protected $civicrm;
@@ -40,14 +41,6 @@ class select_elements extends textfield_elements
             '#required' => $this->get_element_required_status(),
             '#suffix' => $this->get_suffix(),
         );
-    }
-    public function MOC_select_options()
-    {
-        //todo establish way to get data out fo archive.nfb.org
-    }
-    public function Meeting_select_options()
-    {
-        //todo establish way to get data out fo archive.nfb.org
     }
     public function rankings_options()
     {

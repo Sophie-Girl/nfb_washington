@@ -22,8 +22,11 @@ class activity_data extends representative_data
             case 'wash_sem_update_meeting':
                 $this->update_meeting_query($params);
                 break;
+            case "wash_sem_issue_rank":
+                break;
         }
     }
+
     public function new_meeting_query($params)
     {
         $this->establish_connection();
@@ -33,16 +36,16 @@ class activity_data extends representative_data
     '".$params['location']."','".$params['activity_name']."','".$params['staff_lead']."','".$params['staff_email']."','".$params['contact_name']."',
     '".$params['contact_phone']."', '".$params['seminar_id']."')";
        $result =  $this->sql_connection->query($query);
-
     }
-    public function update_meeting_query($params)
+
+    public function update_meeting_query(&$params)
     {
         $this->update_meeting_day_query($params);
         $this->update_meeting_time_query($params);
         $this->update_meeting_location_query($params);
         $this->update_contact_person_query($params);
         $this->update_contact_phone($params);
-        $this->get_updated_rep_name($params);
+       $this->get_updated_rep_name($params);
     }
     public function update_meeting_day_query($params)
     {
@@ -131,6 +134,17 @@ class activity_data extends representative_data
         $this->establish_connection();
         $this->sql_connection->query("update nfb_new.aaxmarwash_activities
         set comment3 = '".$params['comment_3']."' where activity_id = '".$params['meeting_id']."';");
+    }
+    public function issue_rating_queries(&$params)
+    {
+        $this->update_issue_1($params);
+        $this->update_issue_2($params);
+        $this->update_issue_3($params);
+        $this->update_issue_1_comment($params);
+        $this->update_issue_2_comment($params);
+        $this->update_issue_3_comment($params);
+        $this->update_contact_person_query($params);
+        $this->update_contact_phone($params);
     }
 
 }

@@ -20,9 +20,8 @@ class  meeting_backend extends base
         elseif($form_state->getFormObject()->getFormId() == 'wash_sem_update_meeting')
         { $this->update_meeting($form_state, $params);}
         elseif($form_state->getFormObject()->getFormId() == "wash_sem_issue_rank")
-        {}
-        else { die;
-            }
+        {$this->ranking_params_set_up($form_state, $params);}
+        else {die;}
     }
     public function new_meeting_database_map(FormStateInterface $form_state, &$params)
     {   $this->archive_nfb = new activity_data();
@@ -74,9 +73,50 @@ class  meeting_backend extends base
     public function update_meeting(FormStateInterface $form_state, $params)
     {
         $this->update_meeting($form_state, $params);
+        $this->update_meeting_database_map($form_state, $params);
         $this->meeting_time_conversion($form_state, $params);
         $this->contact_person($form_state, $params);
         $this->user_and_meta_data($params);
     }
+    public function issue_switch(&$issue)
+    {
+        switch ($issue) {
+            case 'Yes':
+                $issue = 'y';
+                break;
+            case 'No':
+                $issue = 'n';
+                break;
+            case 'Undecided':
+                $issue = 'u';
+                break;
+            case 'Not Discussed':
+                $issue = 'nd';
+                break;
+        }
+    }
+    public function set_issues(FormStateInterface $form_state, &$params)
+    {
+        $issue = $form_state->getValue('issue_1_ranking');
+        $this->issue_switch($issue); $params['issue_1'] = $issue;
+        $issue = $form_state->getValue('issue_2_ranking');
+        $this->issue_switch($issue); $params['issue_2'] = $issue;
+        $issue = $form_state->getValue('issue_3_tracking');
+        $this->issue_switch($issue); $params['issue_3'] = $issue;
+    }
+    public function set_comments(FormStateInterface $form_state, &$params)
+    {
+        $params['comment_1'] = $form_state->getValue('issue_1_comment');
+        $params['comment_2'] = $form_state->getValue('issue_2_comment');
+        $params['comment_3'] = $form_state->getValue('issue_3_comment');
+    }
+    public function ranking_params_set_up(FormStateInterface $form_state, &$params)
+    {
+        $this->contact_person($form_state, $params);
+        $this->set_issues($form_state, $params);
+        $this->set_comments($form_state, $params);
+        $this->user_and_meta_data($params);
+    }
+
 
 }

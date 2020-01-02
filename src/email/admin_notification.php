@@ -20,12 +20,13 @@ class admin_notification extends base
     }
 
 
-    public function ratings_email_details($recipient_email)
+    public function ratings_email_details(FormStateInterface $form_state, $params)
     {
+        $this->set_ranking_email_body($form_state, $params);
         $mailManager = \Drupal::service('plugin.manager.mail');
         $module = 'nfb_washington';
         $key = 'meeting_update';
-        $to = $recipient_email;
+        $to = $params['staff_email'];
         $send = true;
         $params['message'] = $this->get_body();
         $params['subject'] = $this->get_subject();
@@ -45,6 +46,18 @@ class admin_notification extends base
         Meeting Location: ".$form_state->getValue('meeting_location').PHP_EOL."
         NFB Contact Person: ".$form_state->getValue('nfb_civicrm_f_name_1')." ".$form_state->getValue('nfb_civicrm_l_name_1').PHP_EOL."
         NFB contact Phone Number: ".$form_state->getValue('nfb_civicrm_phone_1')."";
-
+    }
+    public function set_ranking_email_body(FormStateInterface $form_state, $params)
+    {
+        $this->body = "A rating has been submitted for ".$params['rep_name']." please see the details below.".PHP_EOL."
+        State: ".$form_state->getValue('select_state').PHP_EOL."
+        Elected Official: ".$params['rep_name']. PHP_EOL."
+        Issue 1 Rating: ".$form_state->getValue('issue_1_ranking'). PHP_EOL."
+        Issue 1 Comment: ".$params['comment1'].PHP_EOL."
+        Issue 2 Rating: ".$form_state->getValue('issue_2_ranking').PHP_EOL."
+        Issue 2 Comment: ".$params['comment2'].PHP_EOL. "
+        Issue 3 Rating: ".$form_state->getValue('issue_2_ranking').PHP_EOL."
+        Person Reporting: ".$form_state->getValue('nfb_civicrm_f_name_1')." ".$form_state->getValue('nfb_civicrm_l_name_1').PHP_EOL."
+        Reporting Person Phone: ".$form_state->getValue('nfb_civicrm_phone_1');
     }
 }
