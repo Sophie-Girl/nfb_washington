@@ -14,6 +14,7 @@ class activity_data extends representative_data
     }
     public function params_switch(FormStateInterface $form_state, &$params)
     {
+        \Drupal::logger('nfb_washington')->notice($form_state->getFormObject()->getFormId());
         switch ($form_state->getFormObject()->getFormId())
         {
             case 'washington_sem_new_meeting':
