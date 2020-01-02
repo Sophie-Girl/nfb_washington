@@ -28,10 +28,19 @@ class admin_notification extends base
         $langcode = \Drupal::currentUser()->getPreferredLangcode();
         $result = $mailManager->mail($module, $key, $to, $langcode, $params, $send);
     }
-    public function set_new_meeting_body(FormStateInterface $form_state)
+    public function set_new_meeting_body(FormStateInterface $form_state, $params)
     { $year = date('Y');
         $this->body = "
         A new meeting has been scheduled for the ".$year." Washington seminar. 
-        The details are below";
+        The details are below".PHP_EOL."
+        Elected Official: ".$params['rep_name'].PHP_EOL. "
+        State: ".$form_state->getValue('select_state').PHP_EOL."
+        District/Seniority: ".$params['district'].PHP_EOL."
+        Meeting Date: ".$form_state->getValue('meeting_date').PHP_EOL."
+        Meeting Time: ".$form_state->getValue('meeting_time').PHP_EOL. "
+        Meeting Location: ".$form_state->getValue('meeting_location').PHP_EOL."
+        NFB Contact Person: ".$form_state->getValue('nfb_civicrm_f_name_1')." ".$form_state->getValue('nfb_civicrm_l_name_1').PHP_EOL."
+        NFB contact Phone Number: ".$form_state->getValue('nfb_civicrm_phone_1')."";
+
     }
 }
