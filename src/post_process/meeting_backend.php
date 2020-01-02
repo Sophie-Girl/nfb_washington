@@ -129,6 +129,7 @@ class  meeting_backend extends base
     }
     public function ranking_params_set_up(FormStateInterface $form_state, &$params)
     {
+        $params['meeting_id'] = $form_state->getValue('select_rep');
         $this->contact_person($form_state, $params);
         $this->set_issues($form_state, $params);
         $this->set_comments($form_state, $params);
