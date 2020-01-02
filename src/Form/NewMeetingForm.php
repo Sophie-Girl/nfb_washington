@@ -1,11 +1,14 @@
 <?php
 Namespace Drupal\nfb_washington\Form;
-use Drupal\nfb_washington\form_factory\form_factory;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\nfb_washington\form_factory\form_factory;
+use Drupal\nfb_washington\post_process\meeting_backend;
+
 class NewMeetingForm extends FormBase
 {
     public $form_factory;
+    public $post_process;
     public function getFormId()
     {return 'washington_sem_new_meeting';}
     public function buildForm(array $form, FormStateInterface $form_state)
@@ -17,7 +20,8 @@ class NewMeetingForm extends FormBase
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        // TODO: Implement submitForm() method.
+        $this->post_process = new meeting_backend();
+        $this->post_process->meeting_person($form_state);
     }
     public function validateForm(array &$form, FormStateInterface $form_state)
     {
