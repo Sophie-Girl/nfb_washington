@@ -76,7 +76,7 @@ class  meeting_backend extends base
     {
         $params['uid'] = \Drupal::currentUser()->id();
         $params['update_date'] = date('m/d/Y');
-        $params['year'] = date('Y');
+        $params['year'] = '2019';//date('Y');
         $params['staff_lead'] = 'Kyle Walls';
         $params['staff_email'] = 'kwalls@nfb.org';
     }
