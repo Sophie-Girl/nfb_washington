@@ -40,7 +40,15 @@ class activity_data extends representative_data
        $result =  $this->sql_connection->query($query);
         $this->sql_connection = null;
     }
-
+    public function update_date_query(&$params)
+    {
+        $this->establish_connection();
+        $query = "update nfb_new.aaxmarwash_activities
+            set last_update = '".$params['update_date']."'
+            where activity_id = '".$params['meeting_id']."'";
+        $this->sql_connection->query($query);
+        $this->sql_connection = null;
+    }
     public function update_meeting_query(&$params)
     {
         $this->update_meeting_day_query($params);
