@@ -118,7 +118,7 @@ class  meeting_backend extends base
         $this->issue_switch($issue); $params['issue_1'] = $issue;
         $issue = $form_state->getValue('issue_2_ranking');
         $this->issue_switch($issue); $params['issue_2'] = $issue;
-        $issue = $form_state->getValue('issue_3_tracking');
+        $issue = $form_state->getValue('issue_3_ranking');
         $this->issue_switch($issue); $params['issue_3'] = $issue;
     }
     public function set_comments(FormStateInterface $form_state, &$params)

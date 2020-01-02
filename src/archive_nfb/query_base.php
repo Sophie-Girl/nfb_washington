@@ -64,6 +64,16 @@ class query_base
              $array[$sem_id]['contact_phone'] = "";
          } unset($test); $this->sql_connection = null;
     }
+    public function get_issue_name($rank, &$issue)
+    {
+        $year = '2019'; //date('Y');
+        $this->establish_connection();
+        $test = $this->sql_connection->query("select issue from nfb_new.aaxmarwash_issues
+        where year = '".$year."' and rank = '".$rank."';");
+        if($test){ $result = $test->fetch_all(MYSQLI_ASSOC);
+        $issue = $result['0']['issue'];} else{ $issue = "issue ".$rank;}
+
+    }
     public function error_message()
     {
     }

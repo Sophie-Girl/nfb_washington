@@ -56,7 +56,10 @@ class select_elements extends textfield_elements
         $this->rankings_options();
         $this->element_id = 'issue_1_ranking';
         $this->type = 'select';
-        $this->title = 'Issue 1 Ranking';
+        $this->representative_data =  new representative_data();
+        $rank = 1;
+        $this->representative_data->get_issue_name($rank, $issue);
+        $this->title = $issue." Rating";
         $this->required = True;
         $this->build_Static_select_box($form, $form_state);
     }
@@ -65,7 +68,10 @@ class select_elements extends textfield_elements
         $this->rankings_options();
         $this->element_id = 'issue_2_ranking';
         $this->type = 'select';
-        $this->title = 'Issue 2 Ranking';
+        $this->representative_data =  new representative_data();
+        $rank = 2;
+        $this->representative_data->get_issue_name($rank, $issue);
+        $this->title = $issue." Rating";
         $this->required = True;
         $this->build_Static_select_box($form, $form_state);
     }
@@ -74,7 +80,10 @@ class select_elements extends textfield_elements
         $this->rankings_options();
         $this->element_id = 'issue_3_ranking';
         $this->type = 'select';
-        $this->title = 'Issue 3 Ranking';
+        $this->representative_data =  new representative_data();
+        $rank = 3;
+        $this->representative_data->get_issue_name($rank, $issue);
+        $this->title = $issue." Rating";
         $this->required = True;
         $this->build_Static_select_box($form, $form_state);
     }
@@ -162,7 +171,7 @@ class select_elements extends textfield_elements
         $options['12:00 AM'] = "12:00 AM";
         $options["12:15 AM"] = "12:15 AM";
         $options["12:30 AM"] = "12:30 AM";
-        $options["12:45 AM"] = "!2:45 AM";
+        $options["12:45 AM"] = "12:45 AM";
         $options["1:00 AM"] =  "1:00 AM";
         $options["1:15 AM"] = "1:15 AM";
         $options["1:30 AM"] = "1:30 AM";
@@ -203,7 +212,7 @@ class select_elements extends textfield_elements
         $options["10:15 AM"] = "10:15 AM";
         $options["10:30 AM"] = "10:30 AM";
         $options["10:45 AM"] = "10:45 AM";
-        $options["1:00 AM"] =  "1:00 AM";
+        $options["11:00 AM"] =  "11:00 AM";
         $options["11:15 AM"] = "11:15 AM";
         $options["11:30 AM"] = "11:30 AM";
         $options["11:45 AM"] = "11:45 AM";
@@ -213,7 +222,7 @@ class select_elements extends textfield_elements
         $options['12:00 PM'] = "12:00 PM";
         $options["12:15 PM"] = "12:15 PM";
         $options["12:30 PM"] = "12:30 PM";
-        $options["12:45 PM"] = "!2:45 PM";
+        $options["12:45 PM"] = "12:45 PM";
         $options["1:00 PM"] =  "1:00 PM";
         $options["1:15 PM"] = "1:15 PM";
         $options["1:30 PM"] = "1:30 PM";
@@ -254,7 +263,7 @@ class select_elements extends textfield_elements
         $options["10:15 PM"] = "10:15 PM";
         $options["10:30 PM"] = "10:30 PM";
         $options["10:45 PM"] = "10:45 PM";
-        $options["1:00 PM"] =  "1:00 PM";
+        $options["11:00 PM"] =  "1:00 PM";
         $options["11:15 PM"] = "11:15 PM";
         $options["11:30 PM"] = "11:30 PM";
         $options["11:45 PM"] = "11:45 PM";
