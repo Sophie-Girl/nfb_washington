@@ -1,6 +1,7 @@
 <?php
 Namespace Drupal\nfb_washington\archive_nfb;
 use Drupal\Core\Form\FormStateInterface;
+
 class activity_data extends representative_data
 {
     public function find_rep_name($sem_id, &$rep_name)
@@ -41,6 +42,7 @@ class activity_data extends representative_data
         $this->update_meeting_location_query($params);
         $this->update_contact_person_query($params);
         $this->update_contact_phone($params);
+        $this->get_updated_rep_name($params);
     }
     public function update_meeting_day_query($params)
     {
@@ -82,4 +84,53 @@ class activity_data extends representative_data
             where activity_id = '".$params['meeting_id']."'";
         $this->sql_connection->query($query);
     }
+    public function get_updated_rep_name(&$params)
+    {
+        $this->establish_connection();
+        $result =$this->sql_connection->query("select aseminar_id from nfb_new.aaxmarwash_activities
+    where activity_id = '".$params['meeting_id']."';");
+        if($result){
+            $sem_id = $result['0']['aseminar_id'];
+            $this->find_rep_name($sem_id, $rep_name);
+            $params['rep_name'] = $rep_name;
+        }
+        else {$rep_name = '';}
+    }
+    public function update_issue_1($params)
+    {
+        $this->establish_connection();
+        $this->sql_connection->query("update nfb_new.aaxmarwash_activities
+        set issue1 = '".$params['issue_1']."' where activity_id = '".$params['meeting_id']."';");
+    }
+    public function update_issue_2($params)
+    {
+        $this->establish_connection();
+        $this->sql_connection->query("update nfb_new.aaxmarwash_activities
+        set issue2 = '".$params['issue_2']."' where activity_id = '".$params['meeting_id']."';");
+    }
+    public function update_issue_3($params)
+    {
+        $this->establish_connection();
+        $this->sql_connection->query("update nfb_new.aaxmarwash_activities
+        set issue3 = '".$params['issue_3']."' where activity_id = '".$params['meeting_id']."';");
+    }
+    public function update_issue_1_comment($params)
+    {
+        $this->establish_connection();
+        $this->sql_connection->query("update nfb_new.aaxmarwash_activities
+        set comment1 = '".$params['comment_1']."' where activity_id = '".$params['meeting_id']."';");
+    }
+    public function update_issue_2_comment($params)
+    {
+        $this->establish_connection();
+        $this->sql_connection->query("update nfb_new.aaxmarwash_activities
+        set comment2 = '".$params['comment_2']."' where activity_id = '".$params['meeting_id']."';");
+    }
+    public function update_issue_3_comment($params)
+    {
+        $this->establish_connection();
+        $this->sql_connection->query("update nfb_new.aaxmarwash_activities
+        set comment3 = '".$params['comment_3']."' where activity_id = '".$params['meeting_id']."';");
+    }
+
 }
