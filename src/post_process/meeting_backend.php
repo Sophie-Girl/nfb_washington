@@ -10,6 +10,7 @@ class  meeting_backend extends base
         $this->dependency_injection($form_state);
         $this->database_mapping($form_state, $params);
         $this->archive_nfb = new activity_data();
+        $this->district_data($form_state, $params);
         $this->archive_nfb->params_switch($form_state, $params);
         $this->set_email_meeting_body($form_state, $params);
     }
@@ -17,6 +18,7 @@ class  meeting_backend extends base
     {
         $this->dependency_injection($form_state);
         $this->database_mapping($form_state, $params);
+        $this->district_data($form_state, $params);
         $this->archive_nfb = new activity_data();
         $this->archive_nfb->params_switch($form_state, $params);
         $this->set_ranking_email_body($form_state, $params);
@@ -57,6 +59,11 @@ class  meeting_backend extends base
         {$hour = 00;}
         $min = substr($time, 3, 2);
         $params['time'] = $hour.$min;
+    }
+    public function district_data(FormStateInterface $form_state, &$params)
+    {
+       $string =  $form_state->getValue('select_rep');
+       $params['district'] = substr($string,2,10);
     }
     public function contact_person(FormStateInterface $form_state, &$params)
     {

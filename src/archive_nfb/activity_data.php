@@ -105,7 +105,8 @@ class activity_data extends representative_data
             $this->find_rep_name($sem_id, $rep_name);
             $params['rep_name'] = $rep_name;
         }
-        else {$rep_name = '';}
+        else {$rep_name = ''; $params['rep_name'];}
+
         $this->sql_connection = null;
     }
     public function update_issue_1($params)
