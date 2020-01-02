@@ -56,6 +56,7 @@ class activity_data extends representative_data
         $this->update_meeting_location_query($params);
         $this->update_contact_person_query($params);
         $this->update_contact_phone($params);
+        $this->update_date_query($params);
        $this->get_updated_rep_name($params);
     }
     public function update_meeting_day_query($params)
@@ -168,6 +169,7 @@ class activity_data extends representative_data
         $this->update_issue_2_comment($params);
         $this->update_issue_3_comment($params);
         $this->update_contact_person_query($params);
+        $this->update_date_query($params);
         $this->update_contact_phone($params);
     }
 
