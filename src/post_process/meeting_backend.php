@@ -87,7 +87,6 @@ class  meeting_backend extends base
     }
     public function update_meeting(FormStateInterface $form_state, $params)
     {
-        $this->update_meeting($form_state, $params);
         $this->update_meeting_database_map($form_state, $params);
         $this->meeting_time_conversion($form_state, $params);
         $this->contact_person($form_state, $params);
