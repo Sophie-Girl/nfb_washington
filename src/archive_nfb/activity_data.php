@@ -117,7 +117,7 @@ class activity_data extends representative_data
         $result =$this->sql_connection->query("select aseminar_id from nfb_new.aaxmarwash_activities
     where activity_id = '".$params['meeting_id']."';");
         if($result){
-            $data = $result->fetch_all(MYSQLASSOC);
+            $data = $result->fetch_all(MYSQLI_ASSOC);
             $sem_id = $data['0']['aseminar_id'];
             $this->find_rep_name($sem_id, $rep_name);
             $params['rep_name'] = $rep_name;
