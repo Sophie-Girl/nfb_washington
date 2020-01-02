@@ -40,11 +40,13 @@ class  meeting_backend extends base
         $params['activity_name'] = "Meeting with ".$rep_name;
         $params['rep_name'] = $rep_name;
         $params['seminar_id'] = $form_state->getValue('select_rep');
+
         $params['location'] = $form_state->getValue('meeting_location');
     }
     public function update_meeting_database_map(FormStateInterface $form_state, &$params)
     {
         $params['meeting_id'] = $form_state->getValue('select_rep');
+        \Drupal::logger('nfb_washington_debug')->notice($params['meeting_id']);
         $params['location'] = $form_state->getValue('meeting_location');
     }
     public function meeting_time_conversion(FormStateInterface $form_state, &$params)
@@ -88,6 +90,7 @@ class  meeting_backend extends base
     public function update_meeting(FormStateInterface $form_state, $params)
     {
         $this->update_meeting_database_map($form_state, $params);
+        $this->meeting_time_conversion($form_state, $params);
         $this->meeting_time_conversion($form_state, $params);
         $this->contact_person($form_state, $params);
         $this->user_and_meta_data($params);
