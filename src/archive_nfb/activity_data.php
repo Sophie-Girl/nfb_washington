@@ -38,6 +38,7 @@ class activity_data extends representative_data
     '".$params['location']."','".$params['activity_name']."','".$params['staff_lead']."','".$params['staff_email']."','".$params['contact_name']."',
     '".$params['contact_phone']."', '".$params['seminar_id']."')";
        $result =  $this->sql_connection->query($query);
+        if(!$result) {\Drupal::logger('nfb_washington')->notice("Something Is wrong:");}
         $this->sql_connection = null;
     }
     public function update_date_query(&$params)
@@ -45,8 +46,10 @@ class activity_data extends representative_data
         $this->establish_connection();
         $query = "update nfb_new.aaxmarwash_activities
             set last_update = '".$params['update_date']."'
-            where activity_id = '".$params['meeting_id']."'";
-        $this->sql_connection->query($query);
+            where activity_id = '".$params['meeting_id']."';";
+        $result =  $this->sql_connection->query($query);
+        if(!$result) {\Drupal::logger('nfb_washington')->notice("Something Is wrong:");}
+
         $this->sql_connection = null;
     }
     public function update_meeting_query(&$params)
@@ -64,8 +67,10 @@ class activity_data extends representative_data
         $this->establish_connection();
         $query = "update nfb_new.aaxmarwash_activities
             set activity_date = '".$params['date']."'
-            where activity_id = '".$params['meeting_id']."'";
-        $this->sql_connection->query($query);
+            where activity_id = '".$params['meeting_id']."';";
+        $result =  $this->sql_connection->query($query);
+        if(!$result) {\Drupal::logger('nfb_washington')->notice("Something Is wrong:");}
+        else {\Drupal::logger('nfb_washington')->notice(print_r($result,true));}
         $this->sql_connection = null;
     }
     public function update_meeting_time_query($params)
@@ -73,8 +78,9 @@ class activity_data extends representative_data
         $this->establish_connection();
         $query = "update nfb_new.aaxmarwash_activities
             set activity_time = '".$params['time']."'
-            where activity_id = '".$params['meeting_id']."'";
-        $this->sql_connection->query($query);
+            where activity_id = '".$params['meeting_id']."';";
+        $$this->sql_connection->query($query);
+
         $this->sql_connection = null;
     }
     public function update_meeting_location_query($params)
@@ -82,7 +88,7 @@ class activity_data extends representative_data
         $this->establish_connection();
         $query = "update nfb_new.aaxmarwash_activities
             set activity_location = '".$params['location']."'
-            where activity_id = '".$params['meeting_id']."'";
+            where activity_id = '".$params['meeting_id']."';";
         $this->sql_connection->query($query);
         $this->sql_connection = null;
     }
@@ -91,7 +97,7 @@ class activity_data extends representative_data
         $this->establish_connection();
         $query = "update nfb_new.aaxmarwash_activities
             set nfb_contact_name = '".$params['contact_name']."'
-            where activity_id = '".$params['meeting_id']."'";
+            where activity_id = '".$params['meeting_id']."';";
         $this->sql_connection->query($query);
         $this->sql_connection = null;
     }
@@ -100,7 +106,7 @@ class activity_data extends representative_data
         $this->establish_connection();
         $query = "update nfb_new.aaxmarwash_activities
             set nfb_contact_phone = '".$params['contact_phone']."'
-            where activity_id = '".$params['meeting_id']."'";
+            where activity_id = '".$params['meeting_id']."';";
         $this->sql_connection->query($query);
         $this->sql_connection = null;
     }

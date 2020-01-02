@@ -19,6 +19,7 @@ class query_base
         $this->credentials($servername, $username, $password);
         $this->sql_connection = new  \mysqli;
         $this->sql_connection->connect($servername, $username, $password, 'nfb_new');
+
     }
     public function credentials(&$servername, &$username, &$password)
     {
@@ -62,6 +63,9 @@ class query_base
              $array[$sem_id]['contact_phone'] = '';
              $array[$sem_id]['contact_phone'] = "";
          } unset($test); $this->sql_connection = null;
+    }
+    public function error_message()
+    {
     }
 
 }
