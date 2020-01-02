@@ -2,6 +2,7 @@
 Namespace Drupal\nfb_washington\post_process;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\archive_nfb\activity_data;
+
 class  meeting_backend extends base
 {
     public function meeting_person(FormStateInterface $form_state)
@@ -10,6 +11,7 @@ class  meeting_backend extends base
         $this->database_mapping($form_state, $params);
         $this->archive_nfb = new activity_data();
         $this->archive_nfb->params_switch($form_state, $params);
+        $this->set_email_meeting_body($form_state, $params);
     }
     public function database_mapping(FormStateInterface $form_state, &$params)
     {
@@ -19,7 +21,7 @@ class  meeting_backend extends base
         { $this->update_meeting($form_state, $params);}
         elseif($form_state->getFormObject()->getFormId() == "wash_sem_issue_rank")
         {}
-        else { // todo implement error catch
+        else { die;
             }
     }
     public function new_meeting_database_map(FormStateInterface $form_state, &$params)
@@ -27,6 +29,7 @@ class  meeting_backend extends base
         $sem_id = $form_state->getValue('select_rep');
         $this->archive_nfb->find_rep_name($sem_id, $rep_name);
         $params['activity_name'] = "Meeting with ".$rep_name;
+        $params['rep_name'] = $rep_name;
         $params['seminar_id'] = $form_state->getValue('select_rep');
         $params['location'] = $form_state->getValue('meeting_location');
     }
