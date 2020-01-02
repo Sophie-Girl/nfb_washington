@@ -61,7 +61,7 @@ class query_base
              $array[$sem_id]['meeting_location'] = "";
              $array[$sem_id]['contact_phone'] = '';
              $array[$sem_id]['contact_phone'] = "";
-         } unset($test);
+         } unset($test); $this->sql_connection = null;
     }
 
 }

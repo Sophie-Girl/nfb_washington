@@ -78,6 +78,7 @@ class representative_data extends query_base
             $array[$sem_id]['district'] = $rep['district'];
             $array[$sem_id]['state'] = $rep['state'];
             $this->find_meeting_query($sem_id, $array);
+
         }
     }
     public function convert_meeting($rep, &$meeting_status)
