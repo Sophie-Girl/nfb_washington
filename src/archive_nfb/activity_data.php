@@ -25,6 +25,7 @@ class activity_data extends representative_data
             case "wash_sem_issue_rank":
                 $this->issue_rating_queries($params);
                 break;
+
         }
     }
 
