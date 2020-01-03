@@ -1,5 +1,7 @@
 <?php
 namespace Drupal\nfb_washington\form_factory;
+use Drupal\nfb_washington\archive_nfb\representative_data;
+
 class textfield_elements extends base
 {
     public $min; // minimum input
@@ -54,15 +56,21 @@ class textfield_elements extends base
         $this->comment_element_data_set($form, $form_state);}
     public function issue_1_comment_element(&$form, $form_state)
     {   $this->element_id = 'issue_1_comment';
-        $this->title = 'Comments on Reception to Issue 1';
+        $this->representative_data = new representative_data();
+        $rank = 1; $this->representative_data->get_issue_name($rank, $issue);
+        $this->title = 'Comments on Reception to '.$issue;
         $this->comment_element_data_set($form, $form_state);}
     public function issue_2_comment_element(&$form, $form_state)
     {   $this->element_id = 'issue_2_comment';
-        $this->title = 'Comments on Reception to Issue 2';
+        $this->representative_data = new representative_data();
+        $rank = 2; $this->representative_data->get_issue_name($rank, $issue);
+        $this->title = 'Comments on Reception to '.$issue;
         $this->comment_element_data_set($form, $form_state);}
     public function issue_3_comment_element(&$form, $form_state)
     {   $this->element_id = 'issue_3_comment';
-        $this->title = 'Comments on Reception to Issue 3';
+        $this->representative_data = new representative_data();
+        $rank = 2; $this->representative_data->get_issue_name($rank, $issue);
+        $this->title = 'Comments on Reception to '.$issue;
         $this->comment_element_data_set($form, $form_state);}
      public function meeting_comments_element(&$form, $form_state)
      {  $this->element_id = "meeting_location"; $this->type = 'textfield';

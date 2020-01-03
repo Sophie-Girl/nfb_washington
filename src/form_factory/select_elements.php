@@ -7,7 +7,7 @@ use Drupal\nfb_washington\archive_nfb\representative_data;
 class select_elements extends textfield_elements
 {
     protected $civicrm;
-    public $representative_data;
+
     public $options;
     public function get_element_options()
     {return $this->options;}

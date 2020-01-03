@@ -1,7 +1,7 @@
 <?php
 namespace Drupal\nfb_washington\form_factory;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Core\StringTranslation\TranslationInterface;
+
 class base
 {
     use StringTranslationTrait; // use translation trait for form titles and drupal translate
@@ -14,6 +14,7 @@ class base
     public $event; // event that triggers the ajax
     public $prefix; // div wrapper beginning
     public $suffix; // close div
+    public $representative_data;
     public function get_element_id()
     {return $this->element_id;}
     public function get_element_title()
