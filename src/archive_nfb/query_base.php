@@ -28,7 +28,7 @@ class query_base
         $password = 'E7kr0129M!';
     }
     public function get_house_rep_for_state($state, &$result)
-    { $year = date('Y'); $year = '2019';
+    { $year = date('Y');
     $this->establish_connection();
     $query = "SELECT
         firstname, lastname, state, district, seminar_id
@@ -41,7 +41,7 @@ class query_base
     }
     public function find_meeting_query($sem_id, &$array)
     {
-        $year = date('Y'); $year = '2019';
+        $year = date('Y');
         $this->establish_connection();
         $query =  "select activity_id, activity_date, activity_time, activity_location, nfb_contact_name, nfb_contact_phone from nfb_new.aaxmarwash_activities
     where year = '".$year."' and aseminar_id = '".$sem_id."';";
@@ -66,7 +66,7 @@ class query_base
     }
     public function get_issue_name($rank, &$issue)
     {
-        $year = '2019'; //date('Y');
+        $year = date('Y');
         $this->establish_connection();
         $test = $this->sql_connection->query("select issue from nfb_new.aaxmarwash_issues
         where year = '".$year."' and rank = '".$rank."';");

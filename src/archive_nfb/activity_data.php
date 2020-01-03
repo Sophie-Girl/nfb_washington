@@ -6,7 +6,7 @@ class activity_data extends representative_data
 {
     public function find_rep_name($sem_id, &$rep_name)
     {
-        $this->establish_connection(); $year = '2019'; // date('Y');
+        $this->establish_connection(); $year =  date('Y');
         $test = $this->sql_connection->query("Select firstname, lastname from nfb_new.aaxmarwash_members where year = '".$year."' and seminar_id = '".$sem_id."';");
         if($test){$result = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;
         $rep_name = $result['0']['firstname']." ".$result['0']['lastname'];}
