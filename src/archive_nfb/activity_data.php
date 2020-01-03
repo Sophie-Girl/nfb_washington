@@ -179,6 +179,7 @@ class activity_data extends representative_data
         $this->update_contact_person_query($params);
         $this->update_date_query($params);
         $this->update_contact_phone($params);
+        $this->get_updated_rep_name($params);
     }
 
 }
