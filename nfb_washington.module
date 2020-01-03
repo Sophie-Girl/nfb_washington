@@ -3,3 +3,16 @@
 * @file
 * A description of what your module does.
 */
+function nfb_washington_mail($key, &$message, $params)
+{
+    switch ($key) {
+        case 'nfb_wash_meeting_rating':
+            $message['subject'] = $params['subject'];
+            $message['body'][] = $params['message'];
+            break;
+        case 'nfb_washington_meeting_update':
+            $message['subject'] = $params['subject'];
+            $message['body'][] = $params['message'];
+            break;
+    }
+}

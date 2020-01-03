@@ -10,7 +10,7 @@ class admin_notification extends base
         $this->set_new_meeting_body($form_state, $params);
         $mailManager = \Drupal::service('plugin.manager.mail');
         $module = 'nfb_washington';
-        $key = 'meeting_update';
+        $key = 'nfb_washington_meeting_update';
         $to = $recipient_email;
         $send = true;
         $params['message'] = $this->get_body();
@@ -25,7 +25,7 @@ class admin_notification extends base
         $this->set_ranking_email_body($form_state, $params);
         $mailManager = \Drupal::service('plugin.manager.mail');
         $module = 'nfb_washington';
-        $key = 'meeting_update';
+        $key = 'nfb_wash_meeting_rating';
         $to = $params['staff_email'];
         $send = true;
         $params['message'] = $this->get_body();
