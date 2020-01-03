@@ -53,10 +53,11 @@ class admin_notification extends base
         State: ".$form_state->getValue('select_state').PHP_EOL."
         Elected Official: ".$params['rep_name']. PHP_EOL."
         Issue 1 Rating: ".$form_state->getValue('issue_1_ranking'). PHP_EOL."
-        Issue 1 Comment: ".$params['comment1'].PHP_EOL."
+        Issue 1 Comment: ".$params['comment_1'].PHP_EOL."
         Issue 2 Rating: ".$form_state->getValue('issue_2_ranking').PHP_EOL."
-        Issue 2 Comment: ".$params['comment2'].PHP_EOL. "
-        Issue 3 Rating: ".$form_state->getValue('issue_2_ranking').PHP_EOL."
+        Issue 2 Comment: ".$params['comment_2'].PHP_EOL. "
+        Issue 3 Rating: ".$form_state->getValue('issue_3_ranking').PHP_EOL."
+        Issue 3 Comment:".$params['comment_3'].PHP_EOL."
         Person Reporting: ".$form_state->getValue('nfb_civicrm_f_name_1')." ".$form_state->getValue('nfb_civicrm_l_name_1').PHP_EOL."
         Reporting Person Phone: ".$form_state->getValue('nfb_civicrm_phone_1');
     }
