@@ -78,7 +78,7 @@ class  meeting_backend extends base
         $params['update_date'] = date('m/d/Y');
         $params['year'] = '2019';//date('Y');
         $params['staff_lead'] = 'Kyle Walls';
-        $params['staff_email'] = 'sconnell@nfb.org';
+        $params['staff_email'] = 'kwalls@nfb.org';
     }
     public function new_meeting_params(FormStateInterface $form_state, &$params)
     {
