@@ -121,8 +121,11 @@ class activity_data extends representative_data
             $sem_id = $data['0']['aseminar_id'];
             $this->find_rep_name($sem_id, $rep_name);
             $params['rep_name'] = $rep_name;
+            $params['district'] = substr($sem_id, 2,10);
         }
-        else {$rep_name = ''; $params['rep_name'];}
+        else {$rep_name = ''; $params['rep_name'];
+            $params['rep_name'] = '';
+        $params['district'] = '';}
 
         $this->sql_connection = null;
     }

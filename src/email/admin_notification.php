@@ -14,7 +14,7 @@ class admin_notification extends base
         $to = $recipient_email;
         $send = true;
         $params['message'] = $this->get_body();
-        $params['subject'] = $this->get_subject();
+        $params['subject'] = "A Meeting Has Been created or Updated";
         $langcode = \Drupal::currentUser()->getPreferredLangcode();
         $result = $mailManager->mail($module, $key, $to, $langcode, $params, $send);
     }
@@ -29,7 +29,7 @@ class admin_notification extends base
         $to = $params['staff_email'];
         $send = true;
         $params['message'] = $this->get_body();
-        $params['subject'] = $this->get_subject();
+        $params['subject'] = "A New Rating Has Been Submitted";
         $langcode = \Drupal::currentUser()->getPreferredLangcode();
         $result = $mailManager->mail($module, $key, $to, $langcode, $params, $send);
     }
@@ -41,7 +41,7 @@ class admin_notification extends base
         Elected Official: ".$params['rep_name'].PHP_EOL. "
         State: ".$form_state->getValue('select_state').PHP_EOL."
         District/Seniority: ".$params['district'].PHP_EOL."
-        Meeting Date: ".$form_state->getValue('meeting_date').PHP_EOL."
+        Meeting Date: ".$form_state->getValue('meeting_day').PHP_EOL."
         Meeting Time: ".$form_state->getValue('meeting_time').PHP_EOL. "
         Meeting Location: ".$form_state->getValue('meeting_location').PHP_EOL."
         NFB Contact Person: ".$form_state->getValue('nfb_civicrm_f_name_1')." ".$form_state->getValue('nfb_civicrm_l_name_1').PHP_EOL."
