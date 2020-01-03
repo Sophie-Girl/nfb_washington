@@ -5,7 +5,7 @@ nfb_washington_new_meeting:
     _title: 'NFB Washington Seminar: New Meeting'
   requirements:
     _permission: 'access content'
-    _role: 'administrator + nfb_washington_admin'
+    _role: 'administrator + nfb_washington_user'
 nfb_washington_update_meeting:
   path: 'nfb-washington/update-meeting'
   defaults:
@@ -13,7 +13,7 @@ nfb_washington_update_meeting:
     _title: 'NFB Washington Seminar: Update Meeting'
   requirements:
     _permission: 'access content'
-    _role: 'administrator + nfb_washington_admin'
+    _role: 'administrator + nfb_washington_user'
 nfb_washington_rate_issue:
   path: 'nfb-washington/rate-meeting'
   defaults:
