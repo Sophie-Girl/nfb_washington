@@ -26,6 +26,50 @@ class update_form_ajax_test extends markup_elements
           '#required' => TRUE,
         ); $this->representative_data = null;
     }
+    public function update_contact_phone_record(&$form, $form_state)
+    {
+        $this->representative_data = new representative_data();
+        $category = 'nfb_contact_phone';
+        $this->representative_data->get_rep_data_update($form_state, $category, $text);
+        $form['meeting_data']['nfb_civicrm_phone_1'] = array(
+            '#type' => 'textfield',
+            '#title' => $this->t("Contact Person Phone"),
+            '#value' =>  $text,
+            '#size' => 20,
+            '#required' => TRUE,
+        ); $this->representative_data = null;
+    }
+    public function update_meeting_location(&$form, $form_state)
+    {
+        $this->representative_data = new representative_data();
+        $category = 'activity_location';
+        $this->representative_data->get_rep_data_update($form_state, $category, $text);
+        $form['meeting_data']['meeting_location'] = array(
+            '#type' => 'textfield',
+            '#title' => $this->t("Meeting Location"),
+            '#value' =>  $text,
+            '#size' => 20,
+            '#required' => TRUE,
+        ); $this->representative_data = null;
+    }
+    public function update_meeting_date(&$form, $form_state)
+    {
+        $this->representative_data = new representative_data();
+        $category = 'activity_location';
+        $this->representative_data->get_rep_data_update($form_state, $category, $text);
+        $form['meeting_data']['meeting_day'] = array(
+            '#type'  => 'date',
+            '#title' => $this->t("Meeting Date"),
+            '#format' => "'m/d/Y'",
+            '#required' => TRUE,
+            '#value' => $text,
+            '#date_year_range' => '-0: +0',
+            '#date_date_form' => "'m/d/Y'",
+            '#min' =>   '2/1/2020',
+            '#max' => '2/28/2020',
+        ); $this->representative_data = null;
+    }
+
     public function meeting_time_update_element(&$form, $form_state)
     {
         $this->meeting_time_conversion($form_state, $text); $this->time_options();
