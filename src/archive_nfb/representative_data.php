@@ -87,7 +87,7 @@ class representative_data extends query_base
     else {$meeting_status = "Scheduled";}}
     public function convert_time($rep, &$meeting_time)
     {
-        \Drupal::logger('nfb_washington')->notice(" time is ".$rep['meeting_time']);
+
         if($rep['meeting_time'] != ''){
             if(strlen($rep['meeting_time']) == 4){
         $hour = substr($rep['meeting_time'], 0, 2);}
@@ -106,7 +106,7 @@ class representative_data extends query_base
 
         $meeting_time =  $hour.":".$min." ".$am_pm;}
         else {$meeting_time = '';}
-        \Drupal::logger('nfb_washington')->notice($meeting_time);
+
     }
     public function convert_district($rep, &$district)
     {

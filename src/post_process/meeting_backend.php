@@ -70,8 +70,6 @@ class  meeting_backend extends base
             $hour = substr($time, 0, 1);
         $min = substr($time, 2,2);}
             else { $min = substr($time, 3,2);}}
-        \Drupal::logger('nfb_washington')->notice($time);
-        \Drupal::logger('nfb_washington')->notice($hour.$min);
         $params['time'] = $hour.$min;
     }
     public function district_data(FormStateInterface $form_state, &$params)
