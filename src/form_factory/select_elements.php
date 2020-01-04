@@ -53,9 +53,9 @@ class select_elements extends textfield_elements
             '#ajax' => array(
                 'callback' => $this->get_callback(),
                 'wrapper' => $this->get_wrapper(),
-                'event' => 'change',
+                'event' => 'change',),
             '#suffix' => $this->get_suffix(),
-        ));
+        );
     }
     public function rankings_options()
     {
