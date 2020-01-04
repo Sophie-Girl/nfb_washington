@@ -59,11 +59,14 @@ class  meeting_backend extends base
         if(strpos($time, 'PM') > 0)
         {   $hour = substr($time, 0, 2);
             if((int)$hour != 12)
-            {$hour = (int)$hour + 12;}}
+            {$hour = (int)$hour + 12;
+                $min = substr($time, 3, 2);}}
         elseif(substr($time, 0, 2) == '12')
-        {$hour = 00;}
-        else{$hour = substr($time, 0, 2);}
-        $min = substr($time, 3, 2);
+        {$hour = 00;
+            $min = substr($time, 3, 2);}
+        else{$hour = substr($time, 0, 1);
+        $min = substr($time, 2,2);}
+
         $params['time'] = $hour.$min;
     }
     public function district_data(FormStateInterface $form_state, &$params)
