@@ -89,7 +89,9 @@ class representative_data extends query_base
     {
         \Drupal::logger('nfb_washington')->notice(" time is ".$rep['meeting_time']);
         if($rep['meeting_time'] != ''){
-        $hour = substr($rep['meeting_time'], 0, 2);
+            if(strlen($rep['meeting_time']) == 4){
+        $hour = substr($rep['meeting_time'], 0, 2);}
+            else {$hour = substr($rep['meeting_time'], 0,1);}
             if((int)$hour > 12){
         $am_pm = 'PM'; $hour = (int)$hour - 12;
                 $min = substr($rep['meeting_time'],2,2);
