@@ -87,7 +87,7 @@ class update_form_ajax_test extends markup_elements
     {
         $category = "activity_time"; $this->representative_data = new representative_data();
         $this->representative_data->get_rep_data_update($form_state, $category, $text);
-        if($text != "Error" && $text != 'N/A')
+        if($text != "Error" && $text != '')
         {
             if(strlen($text) == 4)
             {$hour = substr($text,0,2);
@@ -107,7 +107,7 @@ class update_form_ajax_test extends markup_elements
     }
     public function date_converison(&$text)
     {
-        if($text !="N/A" && $text !="Error")
+        if($text !="" && $text !="Error")
         { $text = date('m/d/Y', $text);}
         else{ $text = "";}
         \drupal::logger('nfb_washington')->notice("Test ". $text);

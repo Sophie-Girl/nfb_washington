@@ -141,7 +141,7 @@ class representative_data extends query_base
             select ".$category." from  aaxmarwash_activities where activity_id = '".$form_state->getValue('select_rep')."'");
             if($test) { $result = $test->fetch_all(MYSQLI_ASSOC);
             $text = $result['0'][$category];} else {$text = "Error";}
-        } else $text ="N/A";
+        } else $text ="";
     }
 
 }
