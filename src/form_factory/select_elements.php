@@ -155,7 +155,7 @@ class select_elements extends textfield_elements
     $this->options = $options;
     }
     public function state_options()
-    {   $options[''] = "Select";
+    {
         $this->set_up_civi($result);
         $this->set_state_options($result, $options);
         $this->options = $options;

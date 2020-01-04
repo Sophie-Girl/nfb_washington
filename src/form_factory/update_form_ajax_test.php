@@ -33,7 +33,7 @@ class update_form_ajax_test extends markup_elements
             '#type' => 'select',
             '#title' => "Meeting Time",
             '#options' => $this->get_element_options(),
-            '#default_value' => $text,
+            '#value' => $text,
             '#required' => TRUE,
         );
     }
@@ -58,6 +58,6 @@ class update_form_ajax_test extends markup_elements
             else {$am_pm = "AM";}
             $text = $hour.":".$min." ".$am_pm;
         }
-        else {$text = "";}$this->representative_data = null;
+        else {$text = '';}$this->representative_data = null;
     }
 }
