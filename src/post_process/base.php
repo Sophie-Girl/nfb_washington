@@ -23,10 +23,10 @@ class base {
         $this->civi_bridge = new processes($this->civi_query, $this->civi_repo);
         $this->archive_nfb = new activity_data();
     }
-    public function set_email_meeting_body(FormStateInterface $form_state, $params)
+    public function set_email_meeting_body(FormStateInterface $form_state, $params, $meeting_type)
     {
         $this->email = new admin_notification();
-        $this->email->meeting_details($form_state, $params);
+        $this->email->meeting_details($form_state, $params, $meeting_type);
         $this-> email = null;
     }
     public function set_ranking_email_body(FormStateInterface $form_state, $params)

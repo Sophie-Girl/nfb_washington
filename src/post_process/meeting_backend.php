@@ -8,29 +8,32 @@ class  meeting_backend extends base
     public function meeting_person(FormStateInterface $form_state)
     {
         $this->dependency_injection($form_state);
-        $this->database_mapping($form_state, $params);
+        $this->database_mapping($form_state, $params, $meeting_type);
         $this->archive_nfb = new activity_data();
         $this->district_data($form_state, $params);
         $this->archive_nfb->params_switch($form_state, $params);
-        $this->set_email_meeting_body($form_state, $params);
+        $this->set_email_meeting_body($form_state, $params, $meeting_type);
     }
     public function rating_backend(FormStateInterface $form_state)
     {
         $this->dependency_injection($form_state);
-        $this->database_mapping($form_state, $params);
+        $this->database_mapping($form_state, $params, $meeting_type);
         $this->district_data($form_state, $params);
         $this->archive_nfb = new activity_data();
         $this->archive_nfb->params_switch($form_state, $params);
         $this->set_ranking_email_body($form_state, $params);
     }
-    public function database_mapping(FormStateInterface $form_state, &$params)
+    public function database_mapping(FormStateInterface $form_state, &$params, &$meeting_type)
     {
         if($form_state->getFormObject()->getFormId() == 'washington_sem_new_meeting')
-        {  $this->new_meeting_params($form_state, $params);}
+        {  $this->new_meeting_params($form_state, $params);
+        $meeting_type = "new meeting has been scheduled";}
         elseif($form_state->getFormObject()->getFormId() == 'wash_sem_update_meeting')
-        { $this->update_meeting($form_state, $params);}
+        { $this->update_meeting($form_state, $params);
+        $meeting_type = "meeting has been updated";}
         elseif($form_state->getFormObject()->getFormId() == "wash_sem_issue_rank")
-        {$this->ranking_params_set_up($form_state, $params);}
+        {$this->ranking_params_set_up($form_state, $params);
+        $meeting_type = '';}
         else {die;}
     }
     public function new_meeting_database_map(FormStateInterface $form_state, &$params)
@@ -59,6 +62,7 @@ class  meeting_backend extends base
             {$hour = (int)$hour + 12;}}
         elseif(substr($time, 0, 2) == '12')
         {$hour = 00;}
+        else{$hour = substr($time, 0, 2);}
         $min = substr($time, 3, 2);
         $params['time'] = $hour.$min;
     }

@@ -4,10 +4,10 @@ use Drupal\Core\Form\FormStateInterface;
 
 class admin_notification extends base
 {
-    public function meeting_details(FormStateInterface $form_state, $params)
+    public function meeting_details(FormStateInterface $form_state, $params, $meeting_type)
     {
         $recipient_email = $params['staff_email'];
-        $this->set_new_meeting_body($form_state, $params);
+        $this->set_new_meeting_body($form_state, $params, $meeting_type);
         $mailManager = \Drupal::service('plugin.manager.mail');
         $module = 'nfb_washington';
         $key = 'nfb_washington_meeting_update';
@@ -33,10 +33,10 @@ class admin_notification extends base
         $langcode = \Drupal::currentUser()->getPreferredLangcode();
         $result = $mailManager->mail($module, $key, $to, $langcode, $params, $send);
     }
-    public function set_new_meeting_body(FormStateInterface $form_state, $params)
+    public function set_new_meeting_body(FormStateInterface $form_state, $params, $meeting_type)
     { $year = date('Y');
         $this->body = "
-        A new meeting has been scheduled for the ".$year." Washington seminar. 
+        A ".$meeting_type." for the ".$year." Washington seminar. 
         The details are below".PHP_EOL."
         Elected Official: ".$params['rep_name'].PHP_EOL. "
         State: ".$form_state->getValue('select_state').PHP_EOL."
