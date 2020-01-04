@@ -87,6 +87,7 @@ class representative_data extends query_base
     else {$meeting_status = "Scheduled";}}
     public function convert_time($rep, &$meeting_time)
     {
+        \Drupal::logger('nfb_washington')->notice($rep['meeting_time']);
         if($rep['meeting_time'] != ''){
         $hour = substr($rep['meeting_time'], 0, 2);
             if((int)$hour > 12){
@@ -99,7 +100,7 @@ class representative_data extends query_base
             $min = substr($rep['meeting_time'],1,2);
         }
         else { $min = substr($rep['meeting_time'],2,2);}}
-       
+
         $meeting_time =  $hour.":".$min." ".$am_pm;}
         else {$meeting_time = '';}
     }
