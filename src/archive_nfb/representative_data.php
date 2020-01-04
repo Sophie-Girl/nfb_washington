@@ -1,5 +1,7 @@
 <?php
 Namespace Drupal\nfb_washington\archive_nfb;
+use Drupal\Core\Form\FormStateInterface;
+
 class representative_data extends query_base
 {
     public $rep_result;
@@ -130,6 +132,16 @@ class representative_data extends query_base
         if($rep['district'] == '')
         {$district = strtoupper(substr($rep['seminar_id'], 2,9))." Senator";}
         else {$district = $rep['district'];}
+    }
+    public function get_rep_data_update(FormStateInterface $form_state, $category, &$text)
+    {
+        if($form_state->getValue('select_rep') != '')
+        {
+            $this->establish_connection(); $test = $this->sql_connection->query("
+            select ".$category." from  aaxmarwash_activities where activity_id = '".$form_state->getValue('select_rep')."'");
+            if($test) { $result = $test->fetch_all(MYSQLI_ASSOC);
+            $text = $result['0'][$category];} else {$text = "Error";}
+        } else $text ="N/A";
     }
 
 }
