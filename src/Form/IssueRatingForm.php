@@ -25,6 +25,7 @@ class IssueRatingForm extends FormBase
        $this->post_process = new meeting_backend();
        $this->post_process->rating_backend($form_state);
        $this->post_process = null;
+       drupal_set_message($this->t("Rating Submitted"), 'status');
     }
     public function staterep_refresh(&$form, $form_state)
     {

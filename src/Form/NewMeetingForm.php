@@ -23,6 +23,7 @@ class NewMeetingForm extends FormBase
         $this->post_process = new meeting_backend();
         $this->post_process->meeting_person($form_state);
         $this->post_process = null;
+        drupal_set_message($this->t("New Meeting Created"), 'status');
     }
     public function validateForm(array &$form, FormStateInterface $form_state)
     {
