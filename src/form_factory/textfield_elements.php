@@ -49,7 +49,7 @@ class textfield_elements extends base
     public function comment_element_data_set(&$form, $form_state) // builds the comment fields. Needs to have id and title set before use.
     {   $this->type = 'textarea';
         $this->min = '1'; $this->max = '500';
-        $this->required = 'FALSE'; $this->size = '240';
+        $this->required = 'false'; $this->size = '240';
         $this->build_static_textfield($form, $form_state);}
     public function meeting_comment_element(&$form, $form_state)
     {   $this->element_id = 'meeting_comment'; $this->title = 'Meeting Notes';
