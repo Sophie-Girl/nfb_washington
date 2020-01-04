@@ -18,12 +18,14 @@ class form_factory extends update_form_ajax_test
     {
         $this->state_ajax_select_element($form, $form_state);
         $this->update_state_rep_meeting_select_elements($form, $form_state);
-        $this->contact_first_name_element($form, $form_state);
+     /*   $this->contact_first_name_element($form, $form_state);
         $this->contact_last_name_element($form, $form_state);
         $this->contact_email_element($form, $form_state);
         $this->meeting_day_element($form, $form_state);
         $this->meeting_time_element($form, $form_state);
-        $this->meeting_comments_element($form, $form_state);
+        $this->meeting_comments_element($form, $form_state); */
+        $this->feild_set($formm, $form_state);
+        $this->update_first_name($form, $form_state);
         $this->build_confirmation_checkbox($form, $form_state);
         $this->conditional_submit($form, $form_state);
     }
