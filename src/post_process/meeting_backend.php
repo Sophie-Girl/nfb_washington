@@ -57,9 +57,11 @@ class  meeting_backend extends base
         $params['date'] = $form_state->getValue('meeting_day');
         $time = $form_state->getValue('meeting_time');
         if(strpos($time, 'PM') > 0)
-        {   $hour = substr($time, 0, 2);
+        {
+            $hour = substr($time, 0, 2);
             if((int)$hour != 12)
             {$hour = (int)$hour + 12;
+            \Drupal::logger('nfb_washington_debug')->notice($hour);
                 $min = substr($time, 3, 2);}}
         elseif(substr($time, 0, 2) == '12')
         {$hour = 00;
