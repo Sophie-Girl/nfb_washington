@@ -64,8 +64,12 @@ class  meeting_backend extends base
         elseif(substr($time, 0, 2) == '12')
         {$hour = 00;
             $min = substr($time, 3, 2);}
-        else{$hour = substr($time, 0, 1);
+        elseif (strpos($time, 'AM') > 0)
+        {    $hour = substr($time, 0, 2);
+            if((int)$hour < 10){
+            $hour = substr($time, 0, 1);
         $min = substr($time, 2,2);}
+            else { $min = substr($time, 3,2);}}
         \Drupal::logger('nfb_washington')->notice($time);
         \Drupal::logger('nfb_washington')->notice($hour.$min);
         $params['time'] = $hour.$min;

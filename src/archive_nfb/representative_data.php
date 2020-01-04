@@ -90,9 +90,16 @@ class representative_data extends query_base
         if($rep['meeting_time'] != ''){
         $hour = substr($rep['meeting_time'], 0, 2);
             if((int)$hour > 12){
-        $am_pm = 'PM'; $hour = (int)$hour - 12;}
-        else {$am_pm = 'AM';}
-        $min = substr($rep['meeting_time'],2,2);
+        $am_pm = 'PM'; $hour = (int)$hour - 12;
+                $min = substr($rep['meeting_time'],2,2);}
+        else {$am_pm = 'AM';
+        if((int)($hour) >10)
+        {
+            $hour = substr($rep['meeting_time'], 0,1);
+            $min = substr($rep['meeting_time'],1,2);
+        }
+        else { $min = substr($rep['meeting_time'],2,2);}}
+       
         $meeting_time =  $hour.":".$min." ".$am_pm;}
         else {$meeting_time = '';}
     }
