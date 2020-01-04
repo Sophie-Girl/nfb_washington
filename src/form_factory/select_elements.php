@@ -42,6 +42,21 @@ class select_elements extends textfield_elements
             '#suffix' => $this->get_suffix(),
         );
     }
+    public function build_wrapped_ajax_select(&$form, $form_state, $options)
+    {
+        $form[$this->get_element_id()] = array(
+            '#prefix' => $this->get_prefix(),
+            '#type' => $this->get_element_type(),
+            '#title' => $this->t($this->get_element_title()), // do not stack translation trait elements
+            '#options' => $options,
+            '#required' => $this->get_element_required_status(),
+            '#ajax' => array(
+                'callback' => $this->get_callback(),
+                'wrapper' => $this->get_wrapper(),
+                'event' => 'change',
+            '#suffix' => $this->get_suffix(),
+        ));
+    }
     public function rankings_options()
     {
         $this->options = array(
@@ -129,8 +144,9 @@ class select_elements extends textfield_elements
         $this->options = $options; $this->prefix = "<div id='rep_wrapper'>";
         $this->element_id = 'select_rep'; $this->type = 'select';
         $this->title = "Select Elected Official"; $this->required = TRUE;
-        $this->suffix = "</div>";
-        $this->build_ajax_wrapped_select($form, $form_state, $options);
+        $this->suffix = "</div>"; $this->callback = '::data__refresh';
+        $this->wrapper = 'data_wrapper';
+        $this->build_wrapped_ajax_select($form, $form_state, $options);
     }
     public function time_options()
     { $this->am_options($options);

@@ -21,12 +21,35 @@ class textfield_elements extends base
             '#max' => $this->get_element_max(),
             '#size' => $this->get_element_size(),
             '#required' => $this->get_element_required_status(),);}
+    public function build_prefix_textfield(&$form, $form_state)
+    {
+        $form[$this->get_element_id()] = array(
+            '#prefix' => $this->get_prefix(),
+            '#type' =>  $this->get_element_type(),
+            '#title' => $this->t($this->get_element_title()),
+            '#min' => $this->get_element_min(),
+            '#max' => $this->get_element_max(),
+            '#size' => $this->get_element_size(),
+            '#required' => $this->get_element_required_status(),);
+    }
+    public function build_suffix_textfield(&$form, $form_state)
+    {
+        $form[$this->get_element_id()] = array(
+            '#suffix' => $this->get_suffix(),
+            '#type' =>  $this->get_element_type(),
+            '#title' => $this->t($this->get_element_title()),
+            '#min' => $this->get_element_min(),
+            '#max' => $this->get_element_max(),
+            '#size' => $this->get_element_size(),
+            '#required' => $this->get_element_required_status(),);
+    }
     public function contact_first_name_element(&$form, $form_state)
     {   $this->type = 'textfield'; $this->title = "Point of Contact First Name";
         $this->min = '1'; $this->max = '30';
         $this->size = '20'; $this->required = TRUE;
         $this->element_id = 'nfb_civicrm_f_name_1';
-        $this->build_static_textfield($form, $form_state);}
+        $this->prefix = "<div id='data_wrapper'>";
+        $this->build_prefix_textfield($form, $form_state);}
     public function contact_last_name_element(&$form, $form_state)
     {   $this->type = 'textfield'; $this->title = "Point of Contact Last Name";
         $this->min = '1'; $this->max = '30';
@@ -76,6 +99,7 @@ class textfield_elements extends base
      {  $this->element_id = "meeting_location"; $this->type = 'textfield';
         $this->title = "Meeting Location"; $this->size = '20';
         $this->min = '0'; $this->max = '200'; $this->required = TRUE;
-         $this->build_static_textfield($form, $form_state);
+        $this->suffix = "</div>";
+         $this->build_suffix_textfield($form, $form_state);
      }
 }
