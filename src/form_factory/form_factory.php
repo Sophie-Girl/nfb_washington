@@ -24,7 +24,7 @@ class form_factory extends update_form_ajax_test
         $this->meeting_day_element($form, $form_state);
         $this->meeting_time_element($form, $form_state);
         $this->meeting_comments_element($form, $form_state); */
-        $this->feild_set($formm, $form_state);
+        $this->field_set($form, $form_state);
         $this->update_first_name($form, $form_state);
         $this->build_confirmation_checkbox($form, $form_state);
         $this->conditional_submit($form, $form_state);

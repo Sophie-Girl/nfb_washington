@@ -2,7 +2,7 @@
 Namespace Drupal\nfb_washington\form_factory;
 class update_form_ajax_test extends markup_elements
 {
-    public function feild_set(&$form, $form_state)
+    public function field_set(&$form, $form_state)
     {
         $form['meeting_data'] = array(
          '#prefix' => "<div id = 'data_wrapper'>",
@@ -17,7 +17,7 @@ class update_form_ajax_test extends markup_elements
         else {$text = "";}
         $form['meeting_data']['nfb_civicrm_f_name_1'] = array(
           '#type' => 'textfield',
-          '#itle' => $this->t("Contact Person Name"),
+          '#title' => $this->t("Contact Person Name"),
           '#value' =>   $text,
           '#size' => 20,
           '#required' => TRUE,

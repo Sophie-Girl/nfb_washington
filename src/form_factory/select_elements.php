@@ -144,7 +144,7 @@ class select_elements extends textfield_elements
         $this->options = $options; $this->prefix = "<div id='rep_wrapper'>";
         $this->element_id = 'select_rep'; $this->type = 'select';
         $this->title = "Select Elected Official"; $this->required = TRUE;
-        $this->suffix = "</div>"; $this->callback = '::data__refresh';
+        $this->suffix = "</div>"; $this->callback = '::data_refresh';
         $this->wrapper = 'data_wrapper';
         $this->build_wrapped_ajax_select($form, $form_state, $options);
     }
