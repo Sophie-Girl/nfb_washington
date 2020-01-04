@@ -263,7 +263,7 @@ class select_elements extends textfield_elements
         $options["10:15 PM"] = "10:15 PM";
         $options["10:30 PM"] = "10:30 PM";
         $options["10:45 PM"] = "10:45 PM";
-        $options["11:00 PM"] =  "1:00 PM";
+        $options["11:00 PM"] =  "11:00 PM";
         $options["11:15 PM"] = "11:15 PM";
         $options["11:30 PM"] = "11:30 PM";
         $options["11:45 PM"] = "11:45 PM";
