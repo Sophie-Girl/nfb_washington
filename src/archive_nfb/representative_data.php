@@ -27,7 +27,6 @@ class representative_data extends query_base
     {
         $this->create_new_meeting_options($form_state, $options);
         if ($form_state->getValue('select_state')) {
-            \drupal::logger('nfb_washington')->notice(print_r($options, true));
         }
     }
 

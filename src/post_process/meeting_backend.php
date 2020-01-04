@@ -49,7 +49,6 @@ class  meeting_backend extends base
     public function update_meeting_database_map(FormStateInterface $form_state, &$params)
     {
         $params['meeting_id'] = $form_state->getValue('select_rep');
-        \Drupal::logger('nfb_washington_debug')->notice($params['meeting_id']);
         $params['location'] = $form_state->getValue('meeting_location');
     }
     public function meeting_time_conversion(FormStateInterface $form_state, &$params)
