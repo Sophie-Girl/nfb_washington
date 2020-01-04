@@ -49,10 +49,27 @@ class representative_data extends query_base
              $this->convert_meeting($rep, $meeting_status);
              $this->convert_time($rep, $meeting_time);
              $this->convert_district($rep, $district);
-         $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$district."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$meeting_time."</th><th>".$rep['meeting_location']."</th><th>".$rep['contact_person']."</th><th>".$rep['contact_phone']."</th></tr>";
+             $this->meeting_location($rep, $meeting_location);
+             $this->convert_contact_info($rep, $contact_person,$contact_phone);
+         $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$district."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$meeting_time."</th><th>".$meeting_location."</th><th>".$contact_person."</th><th>".$contact_phone."</th></tr>";
      }}
      $markup = $markup."</table>";
      \Drupal::logger('nfb_washington')->notice($markup);
+    }
+    public function meeting_location($rep, &$meeting_location)
+    {
+        if ($rep['meeting_location'] == "")
+        {
+            $meeting_location = "N/A";
+        }
+        else $meeting_location = $rep['meeting_location'];
+    }
+    public function convert_contact_info($rep, &$contact_person, &$contact_phone)
+    {
+        if($rep['contact_person'] == "")
+        {$contact_person = "N/A";
+        $contact_phone = "N/A";}
+        else {$contact_person = $rep['contact_person']; $contact_phone = $rep['contact_phone'];}
     }
     public function build_state_array($form_state)
     {
@@ -105,7 +122,7 @@ class representative_data extends query_base
         else { $min = substr($rep['meeting_time'],2,2);}}
 
         $meeting_time =  $hour.":".$min." ".$am_pm;}
-        else {$meeting_time = '';}
+        else {$meeting_time = 'N/A';}
 
     }
     public function convert_district($rep, &$district)
