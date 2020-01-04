@@ -33,10 +33,10 @@ class UpdateMeetingForm extends FormBase
     }
     public function staterep_refresh(&$form, $form_state)
     {
-        return $form['select_rep'];
+        return $form;
     }
     public function data_refresh(&$form,$form_state)
     {
-        drupal_set_message("ajax fired", 'status');
+        
     }
 }
