@@ -94,6 +94,7 @@ class representative_data extends query_base
         else {$am_pm = 'AM';}
         $min = substr($rep['meeting_time'],2,2);
         $meeting_time =  $hour.":".$min." ".$am_pm;}
+        else {$meeting_time = '';}
     }
     public function convert_district($rep, &$district)
     {
