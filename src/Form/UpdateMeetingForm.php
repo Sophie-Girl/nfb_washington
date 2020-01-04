@@ -38,5 +38,6 @@ class UpdateMeetingForm extends FormBase
     public function data_refresh(&$form,$form_state)
     {
         $form_state['nfb_civicrm_f_name_1']['#value'] = "Test";
+        return $form['nfb_civicrm_f_name_1'].$form['nfb_civicrm_l_name_1'];
     }
 }
