@@ -149,12 +149,13 @@ class select_elements extends textfield_elements
         $this->build_wrapped_ajax_select($form, $form_state, $options);
     }
     public function time_options()
-    { $this->am_options($options);
+    {
+        $this->am_options($options);
     $this->pm_options($options);
     $this->options = $options;
     }
     public function state_options()
-    {
+    {   $options[''] = "Select";
         $this->set_up_civi($result);
         $this->set_state_options($result, $options);
         $this->options = $options;
