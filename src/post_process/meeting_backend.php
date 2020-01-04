@@ -87,6 +87,9 @@ class  meeting_backend extends base
         $params['contact_name'] = $form_state->getValue('nfb_civicrm_f_name_1')." ".$form_state->getValue('nfb_civicrm_l_name_1');
         $params['contact_phone'] = $form_state->getValue('nfb_civicrm_phone_1');
     }
+    public function update_contact_person(FormStateInterface $form_state, &$params)
+    {   $params['contact_name'] = $form_state->getValue('nfb_civicrm_f_name_1');
+        $params['contact_phone'] = $form_state->getValue('nfb_civicrm_phone_1');}
     public function user_and_meta_data(&$params)
     {
         $params['uid'] = \Drupal::currentUser()->id();
@@ -107,7 +110,7 @@ class  meeting_backend extends base
         $this->update_meeting_database_map($form_state, $params);
         $this->meeting_time_conversion($form_state, $params);
         $this->meeting_time_conversion($form_state, $params);
-        $this->contact_person($form_state, $params);
+        $this->update_contact_person($form_state, $params);
         $this->user_and_meta_data($params);
     }
     public function issue_switch(&$issue)

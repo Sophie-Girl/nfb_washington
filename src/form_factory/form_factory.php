@@ -65,4 +65,5 @@ class form_factory extends update_form_ajax_test
                     [':input[name="confirm"]' => ['checked' => true]]],],
         );
     }
+
 }

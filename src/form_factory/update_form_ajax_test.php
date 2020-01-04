@@ -57,6 +57,7 @@ class update_form_ajax_test extends markup_elements
         $this->representative_data = new representative_data();
         $category = 'activity_location';
         $this->representative_data->get_rep_data_update($form_state, $category, $text);
+        $this->date_converison($text);
         $form['meeting_data']['meeting_day'] = array(
             '#type'  => 'date',
             '#title' => $this->t("Meeting Date"),
@@ -103,5 +104,13 @@ class update_form_ajax_test extends markup_elements
             $text = $hour.":".$min." ".$am_pm;
         }
         else {$text = '';}$this->representative_data = null;
+    }
+    public function date_converison(&$text)
+    {
+        if($text !="N/A" && $text !="Error")
+        { $text = date('m/d/Y', $text);}
+        else{ $text = "";}
+        \drupal::logger('nfb_washington')->notice("Test ". $text);
+
     }
 }
