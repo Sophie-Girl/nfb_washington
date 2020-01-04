@@ -54,16 +54,11 @@ class update_form_ajax_test extends markup_elements
     }
     public function update_meeting_date(&$form, $form_state)
     {
-        $this->representative_data = new representative_data();
-        $category = 'activity_location';
-        $this->representative_data->get_rep_data_update($form_state, $category, $text);
-        $this->date_converison($text);
         $form['meeting_data']['meeting_day'] = array(
             '#type'  => 'date',
             '#title' => $this->t("Meeting Date"),
             '#format' => "'m/d/Y'",
             '#required' => TRUE,
-            '#value' => $text,
             '#date_year_range' => '-0: +0',
             '#date_date_form' => "'m/d/Y'",
             '#min' =>   '2/1/2020',
@@ -105,12 +100,5 @@ class update_form_ajax_test extends markup_elements
         }
         else {$text = '';}$this->representative_data = null;
     }
-    public function date_converison(&$text)
-    {
-        if($text !="" && $text !="Error")
-        { $text = date('m/d/Y', $text);}
-        else{ $text = "";}
-        \drupal::logger('nfb_washington')->notice("Test ". $text);
 
-    }
 }
