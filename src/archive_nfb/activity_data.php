@@ -87,7 +87,7 @@ class activity_data extends representative_data
             where activity_id = '" . $params['meeting_id'] . "';";
         $result = $this->sql_connection->query($query);
         if (!$result) {
-            \Drupal::logger('nfb_washington')->notice("Something Is wrong:");
+            \Drupal::logger('nfb_washington')->notice("Something is wrong: Update MOC Staff NAme");
         }
         $this->sql_connection = null;
     }
