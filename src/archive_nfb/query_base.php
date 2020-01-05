@@ -43,7 +43,7 @@ class query_base
     {
         $year = date('Y');
         $this->establish_connection();
-        $query =  "select activity_id, activity_date, activity_time, activity_location, nfb_contact_name, nfb_contact_phone from nfb_new.aaxmarwash_activities
+        $query =  "select activity_id, activity_date, activity_time, activity_location, nfb_contact_name, nfb_contact_phone, contact_expected from nfb_new.aaxmarwash_activities
     where year = '".$year."' and aseminar_id = '".$sem_id."';";
         $test = $this->sql_connection->query($query);
         if($test){
@@ -54,6 +54,7 @@ class query_base
             $array[$sem_id]['meeting_location'] = $meeting['0']['activity_location'];
             $array[$sem_id]['contact_person'] = $meeting['0']['nfb_contact_name'];
             $array[$sem_id]['contact_phone'] =  $meeting['0']['nfb_contact_phone'];
+            $array[$sem_id]['rep_expected'] = $meeting['0']['contact_expected'];
             unset($meeting);}
          else {
              $array[$sem_id]['meeting_id']= "";
@@ -62,6 +63,7 @@ class query_base
              $array[$sem_id]['meeting_location'] = "";
              $array[$sem_id]['contact_phone'] = '';
              $array[$sem_id]['contact_phone'] = "";
+             $array[$sem_id]['rep_expected'] = '';
          } unset($test); $this->sql_connection = null;
     }
     public function get_issue_name($rank, &$issue)

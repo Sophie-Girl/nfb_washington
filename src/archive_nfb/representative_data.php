@@ -43,7 +43,7 @@ class representative_data extends query_base
     {
      $this->build_state_array($form_state); $markup = "<p>".$form_state->getValue('select_state')." Representatives</p>
     <table>
-    <t><th>Representative Name:</th><th>State:</th><th>District:</th><th>Meeting Status:</th><th>Meeting Time:</th><th>Meeting Location:</th><th>Contact Person:</th><th>Contact Phone:</th></tr>
+    <t><th>Representative Name:</th><th>State:</th><th>District:</th><th>Meeting Status:</th><th>Meeting Time:</th><th>Meeting Location:</th><th>Attending In Person</th><th>Contact Person:</th><th>Contact Phone:</th></tr>
     ";
      foreach ($this->get_rep_result() as $rep){
          if($form_state->getValue('select_state') != ''){
@@ -51,8 +51,9 @@ class representative_data extends query_base
              $this->convert_time($rep, $meeting_time);
              $this->convert_district($rep, $district);
              $this->meeting_location($rep, $meeting_location);
+             $this->yes_no_conversion($rep, $expected);
              $this->convert_contact_info($rep, $contact_person,$contact_phone);
-         $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$district."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$meeting_time."</th><th>".$meeting_location."</th><th>".$contact_person."</th><th>".$contact_phone."</th></tr>";
+         $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$district."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$meeting_time."</th><th>".$meeting_location."</th><th>".$expected."</th><th>".$contact_person."</th><th>".$contact_phone."</th></tr>";
      }}
      $markup = $markup."</table>";
      \Drupal::logger('nfb_washington')->notice($markup);
@@ -64,6 +65,14 @@ class representative_data extends query_base
             $meeting_location = "N/A";
         }
         else $meeting_location = $rep['meeting_location'];
+    }
+    public function yes_no_conversion($rep, &$expected)
+    {
+        if($rep['rep_expected'] != '')
+        {
+            if($rep['rep_expected'] == '1')
+            {$expected = "Yes";}else {$expected = "No";}
+        } else{$expected = "N/A";}
     }
     public function convert_contact_info($rep, &$contact_person, &$contact_phone)
     {
