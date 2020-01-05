@@ -93,7 +93,7 @@ class update_form_ajax_test extends markup_elements
         $this->get_yes_no_text($f0rm_state, $text);
         $form['meeting_data']['attendance'] = array(
             '#type' => 'select',
-            '#title' => "Meeting Time",
+            '#title' => "Is this member attending the meeting?",
             '#options' => array(
                 '1' => 'Yes',
                 '0' => 'No',

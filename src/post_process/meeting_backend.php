@@ -50,6 +50,7 @@ class  meeting_backend extends base
     {
         $params['meeting_id'] = $form_state->getValue('select_rep');
         $params['location'] = $form_state->getValue('meeting_location');
+        $params['rep_attend'] = $form_state->getValue('attendance');
     }
     public function meeting_time_conversion(FormStateInterface $form_state, &$params)
     {
