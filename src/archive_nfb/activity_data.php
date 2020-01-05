@@ -71,11 +71,11 @@ class activity_data extends representative_data
         $this->update_meeting_day_query($params);
         $this->update_meeting_time_query($params);
         $this->update_meeting_location_query($params);
+        $this->update_attendance($params);
+        $this->update_lead_Staff($params);
         $this->update_contact_person_query($params);
         $this->update_contact_phone($params);
         $this->update_date_query($params);
-        $this->update_attendance($params);
-        $this->update_lead_Staff($params);
         $this->get_updated_rep_name($params);
 
     }
@@ -86,9 +86,11 @@ class activity_data extends representative_data
             set  lead_staff_name = '" . $params['moc_contact'] . "'
             where activity_id = '" . $params['meeting_id'] . "';";
         $result = $this->sql_connection->query($query);
+
         if (!$result) {
             \Drupal::logger('nfb_washington')->notice("Something is wrong: Update MOC Staff NAme");
         }
+        \Drupal::logger('nfb_washington')->notice($query);
         $this->sql_connection = null;
     }
     public function update_meeting_day_query($params)
