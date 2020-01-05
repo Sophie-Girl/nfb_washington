@@ -66,7 +66,7 @@ class query_base
              $array[$sem_id]['rep_expected'] = '';
          } unset($test); $this->sql_connection = null;
     }
-    public function get_issue_name($rank, &$issue)
+    public function get_issue_name($rank, &$issue, &$id)
     {
         $year = date('Y');
         $this->establish_connection();

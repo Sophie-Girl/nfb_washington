@@ -80,19 +80,19 @@ class textfield_elements extends base
     public function issue_1_comment_element(&$form, $form_state)
     {   $this->element_id = 'issue_1_comment';
         $this->representative_data = new representative_data();
-        $rank = 1; $this->representative_data->get_issue_name($rank, $issue);
+        $rank = 1; $this->representative_data->get_issue_name($rank, $issue, $id);
         $this->title = 'Comments on Reception to '.$issue;
         $this->comment_element_data_set($form, $form_state);}
     public function issue_2_comment_element(&$form, $form_state)
     {   $this->element_id = 'issue_2_comment';
         $this->representative_data = new representative_data();
-        $rank = 2; $this->representative_data->get_issue_name($rank, $issue);
+        $rank = 2; $this->representative_data->get_issue_name($rank, $issue, $id);
         $this->title = 'Comments on Reception to '.$issue;
         $this->comment_element_data_set($form, $form_state);}
     public function issue_3_comment_element(&$form, $form_state)
     {   $this->element_id = 'issue_3_comment';
         $this->representative_data = new representative_data();
-        $rank = 2; $this->representative_data->get_issue_name($rank, $issue);
+        $rank = 2; $this->representative_data->get_issue_name($rank, $issue, $id);
         $this->title = 'Comments on Reception to '.$issue;
         $this->comment_element_data_set($form, $form_state);}
      public function meeting_comments_element(&$form, $form_state)
