@@ -214,7 +214,7 @@ class activity_data extends representative_data
     {
         $this->establish_connection(); $year = date('Y');
         $test = $this->sql_connection->query("select activity_id from nfb_new.aaxmarwash_activities
-        where year = '".$year."' and seminar_id = '".$params['seminar_id']."';");
+        where year = '".$year."' and aseminar_id = '".$params['seminar_id']."';");
         if($test)
         {$result = $test->fetch_all(MYSQLI_ASSOC);
             $params['activity_id'] = $result['0']['member_id'];}
