@@ -286,6 +286,7 @@ class activity_data extends representative_data
         $rank = '3';
         $this->get_issue_name($rank, $issue, $id);
         $params['issue_3_id'] = $id;
+        \drupal::logger('nfb_washington')->notice(print_r($params, true));
     }
 
     public function issue_link(&$params)
