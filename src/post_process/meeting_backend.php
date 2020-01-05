@@ -43,7 +43,7 @@ class  meeting_backend extends base
         $params['activity_name'] = "Meeting with ".$rep_name;
         $params['rep_name'] = $rep_name;
         $params['seminar_id'] = $form_state->getValue('select_rep');
-
+        $params['rep_attend'] = $form_state->getValue('attendance');
         $params['location'] = $form_state->getValue('meeting_location');
     }
     public function update_meeting_database_map(FormStateInterface $form_state, &$params)
@@ -96,6 +96,7 @@ class  meeting_backend extends base
         $params['year'] = date('Y');
         $params['staff_lead'] = 'Kyle Walls';
         $params['staff_email'] = 'kwalls@nfb.org';
+
     }
     public function new_meeting_params(FormStateInterface $form_state, &$params)
     {

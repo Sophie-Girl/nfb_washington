@@ -62,6 +62,7 @@ class activity_data extends representative_data
         $this->update_contact_phone($params);
         $this->update_date_query($params);
        $this->get_updated_rep_name($params);
+       $this->update_attendance($params);
     }
     public function update_meeting_day_query($params)
     {
@@ -183,6 +184,13 @@ class activity_data extends representative_data
         $this->update_date_query($params);
         $this->update_contact_phone($params);
         $this->get_updated_rep_name($params);
+    }
+    public function update_attendance(&$params)
+    {
+        $this->establish_connection();
+        $this->sql_connection->query("update nfb_new.aaxmarwash_activities
+        set contact_expected = '".$params['rep_attend']."' where activity_id = '".$params['meeting_id']."';");
+        $this->sql_connection = null;
     }
 
 }

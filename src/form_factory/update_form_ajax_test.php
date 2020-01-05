@@ -109,8 +109,8 @@ class update_form_ajax_test extends markup_elements
         $this->representative_data->get_rep_data_update($form_state, $category, $text);
         if($text != "" && $text != "Error")
         {
-            if($text = '1'){$text = "Yes";}
-            else{$text = "No";}
+            if($text = '1'){$text = "1";}
+            else{$text = "0";}
         }
         else {$text ="";} $this->representative_data = null;
     }
