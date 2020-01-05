@@ -50,10 +50,6 @@ class select_elements extends textfield_elements
             '#title' => $this->t($this->get_element_title()), // do not stack translation trait elements
             '#options' => $options,
             '#required' => $this->get_element_required_status(),
-            '#ajax' => array(
-                'callback' => $this->get_callback(),
-                'wrapper' => $this->get_wrapper(),
-                'event' => 'change',),
             '#suffix' => $this->get_suffix(),
         );
     }
