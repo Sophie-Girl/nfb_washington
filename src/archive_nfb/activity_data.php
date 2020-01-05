@@ -41,6 +41,7 @@ class activity_data extends representative_data
        $result =  $this->sql_connection->query($query);
         if(!$result) {\Drupal::logger('nfb_washington')->notice("Something Is wrong:");}
         $this->sql_connection = null;
+        $this->link_file($params);
     }
     public function update_date_query(&$params)
     {
@@ -191,6 +192,44 @@ class activity_data extends representative_data
         $this->sql_connection->query("update nfb_new.aaxmarwash_activities
         set contact_expected = '".$params['rep_attend']."' where activity_id = '".$params['meeting_id']."';");
         $this->sql_connection = null;
+    }
+    public function get_rep_id_for_link(&$params)
+    {
+        $this->establish_connection(); $year = date('Y');
+        $test = $this->sql_connection->query("select member_id from nfb_new.aaxmarwash_members
+    where year = '".$year."' and seminar_id = '".$params['seminar_id']."';");
+        if($test)
+        {$result = $test->fetch_all(MYSQLI_ASSOC);
+        $params['legislator_id'] = $result['0']['member_id'];}
+        else{$params['legislator_id'] = "null";}
+        $this->sql_connection = null;
+    }
+    public function link_file(&$params)
+    {
+        $this->get_activity_idfor_link($params);
+        $this->get_rep_id_for_link($params);
+        $this->insert_link($params);
+    }
+    public function get_activity_idfor_link(&$params)
+    {
+        $this->establish_connection(); $year = date('Y');
+        $test = $this->sql_connection->query("select activity_id from nfb_new.aaxmarwash_activities
+        where year = '".$year."' and seminar_id = '".$params['seminar_id']."';");
+        if($test)
+        {$result = $test->fetch_all(MYSQLI_ASSOC);
+            $params['activity_id'] = $result['0']['member_id'];}
+        else{$params['activity_id'] = "null";}
+        $this->sql_connection = null;
+    }
+    public function insert_link(&$params)
+    {   $year = date('Y');
+        if($params['activity_id']  != "null" && $params['legislator_id'] != "null")
+        {
+            $this->establish_connection();
+            $this->sql_connection->query("insert into nfb_new.aaxmarwash_linkactivity (year, activity_id, table_name, tabl_id)
+        values ('".$year."', '".$params['activity_id']."', 'aaxmarwash_members', '".$params['legislator_id']."');");
+
+        }
     }
 
 }
