@@ -230,7 +230,6 @@ class activity_data extends representative_data
         values ('".$year."', '".$params['activity_id']."', 'aaxmarwash_members', '".$params['legislator_id']."');");
             if(!$result) {\Drupal::logger('nfb_washington')->notice("Something Is wrong:");}
         }
-        \drupal::logger('nfb_washington')->notice(print_r($params, true));
     }
 
 }
