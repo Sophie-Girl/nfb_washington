@@ -36,7 +36,7 @@ class activity_data extends representative_data
         $query = "insert into nfb_new.aaxmarwash_activities (year, uid, last_updated, activity_date, activity_time,
     activity_location, activity, contact_expected, lead_staff_name, lead_staff_email, nfb_contact_name, nfb_contact_phone, aseminar_id)
     values('".$params['year']."','".$params['uid']."','".$params['update_date']."','".$params['date']."','".$params['time']."',
-    '".$params['location']."','".$params['activity_name']."','".$params['rep_expected']."','".$params['staff_lead']."','".$params['staff_email']."','".$params['contact_name']."',
+    '".$params['location']."','".$params['activity_name']."','".$params['rep_attend']."','".$params['staff_lead']."','".$params['staff_email']."','".$params['contact_name']."',
     '".$params['contact_phone']."', '".$params['seminar_id']."')";
        $result =  $this->sql_connection->query($query);
         if(!$result) {\Drupal::logger('nfb_washington')->notice("Something Is wrong:");}
