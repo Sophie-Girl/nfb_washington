@@ -136,6 +136,7 @@ class activity_data extends representative_data
     }
     public function update_attendance(&$params)
     {
+        \drupal::logger('nfb_washington_debug_update')->notice($params['rep_attend']." ".$params['meeting_id']);
         $this->establish_connection();
         $query = "update nfb_new.aaxmarwash_activities
         set contact_expected = '" . $params['rep_attend'] . "' 
