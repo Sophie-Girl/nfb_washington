@@ -37,7 +37,7 @@ class update_form_ajax_test extends markup_elements
         $form['meeting_data']['moc_contact'] = array(
             '#type' => 'textfield',
             '#title' => $this->t("Member of Congress Contact Person"),
-            '#value' => $text,
+            '#default_value' => $text,
             '#size' => 20,
             '#required' => false,
         );
@@ -51,7 +51,7 @@ class update_form_ajax_test extends markup_elements
         $form['meeting_data']['nfb_civicrm_phone_1'] = array(
             '#type' => 'textfield',
             '#title' => $this->t("Contact Person Phone"),
-            '#value' => $text,
+            '#default_value' => $text,
             '#size' => 20,
             '#required' => TRUE,
         );
@@ -66,7 +66,7 @@ class update_form_ajax_test extends markup_elements
         $form['meeting_data']['meeting_location'] = array(
             '#type' => 'textfield',
             '#title' => $this->t("Meeting Location"),
-            '#value' => $text,
+            '#default_value' => $text,
             '#size' => 20,
             '#required' => TRUE,
         );
@@ -96,7 +96,7 @@ class update_form_ajax_test extends markup_elements
             '#type' => 'select',
             '#title' => "Meeting Time",
             '#options' => $this->get_element_options(),
-            '#value' => $text,
+            '#defualt_value' => $text,
             '#required' => TRUE,
         );
     }
@@ -111,7 +111,7 @@ class update_form_ajax_test extends markup_elements
                 '1' => 'Yes',
                 '0' => 'No',
             ),
-            '#value' => $text,
+            '#default_value' => $text,
             '#required' => TRUE,
         );
     }
