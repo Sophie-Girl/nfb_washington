@@ -13,6 +13,7 @@ class form_factory extends update_form_ajax_test
         $this->meeting_time_element($form, $form_state);
         $this->meeting_comments_element($form, $form_state);
         $this->new_attendance_element($form, $form_state);
+        $this->MOC_contact_element($form, $form_state);
         $this->submit_button($form, $form_state);
     }
     public function build_update_meeting_form(&$form, $form_state)

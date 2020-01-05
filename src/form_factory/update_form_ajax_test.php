@@ -29,7 +29,20 @@ class update_form_ajax_test extends markup_elements
         );
         $this->representative_data = null;
     }
-
+    public function update_MOC_contact(&$form, $form_state)
+    {
+        $this->representative_data = new representative_data();
+        $category = 'lead_staff_name';
+        $this->representative_data->get_rep_data_update($form_state, $category, $text);
+        $form['meeting_data']['moc_contact'] = array(
+            '#type' => 'textfield',
+            '#title' => $this->t("Member of Congress Contact Person"),
+            '#value' => $text,
+            '#size' => 20,
+            '#required' => false,
+        );
+        $this->representative_data = null;
+    }
     public function update_contact_phone_record(&$form, $form_state)
     {
         $this->representative_data = new representative_data();
