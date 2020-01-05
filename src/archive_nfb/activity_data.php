@@ -282,7 +282,7 @@ class activity_data extends representative_data
         $params['issue_1_id'] = $id;
         $rank = '2';
         $this->get_issue_name($rank, $issue, $id);
-        $params['issue_1_id'] = $id;
+        $params['issue_2_id'] = $id;
         $rank = '3';
         $this->get_issue_name($rank, $issue, $id);
         $params['issue_3_id'] = $id;
