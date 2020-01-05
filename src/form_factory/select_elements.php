@@ -172,6 +172,18 @@ class select_elements extends textfield_elements
         );
         $this->civicrm->civi_query($result);
     }
+    public function new_attendance_element(&$form, $form_state)
+    {
+        $form['attendance'] = array(
+            '#type' => 'select',
+            '#title' => "Is this member attending the meeting?",
+            '#options' => array(
+                '1' => 'Yes',
+                '0' => 'No',
+            ),
+            '#required' => TRUE,
+        );
+    }
      public function set_state_options($result, &$options)
      {
          foreach($result['values'] as $state)

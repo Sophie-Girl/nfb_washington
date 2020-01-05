@@ -88,9 +88,9 @@ class update_form_ajax_test extends markup_elements
         );
     }
 
-    public function update_expectend_attedence(&$form, $f0rm_state)
+    public function update_expectend_attedence(&$form, $form_state)
     {
-        $this->get_yes_no_text($f0rm_state, $text);
+        $this->get_yes_no_text($form_state, $text);
         $form['meeting_data']['attendance'] = array(
             '#type' => 'select',
             '#title' => "Is this member attending the meeting?",
