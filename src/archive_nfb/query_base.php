@@ -70,10 +70,12 @@ class query_base
     {
         $year = date('Y');
         $this->establish_connection();
-        $test = $this->sql_connection->query("select issue from nfb_new.aaxmarwash_issues
+        $test = $this->sql_connection->query("select issue, issue_id from nfb_new.aaxmarwash_issues
         where year = '".$year."' and rank = '".$rank."';");
         if($test){ $result = $test->fetch_all(MYSQLI_ASSOC);
-        $issue = $result['0']['issue'];} else{ $issue = "issue ".$rank;}
+        $issue = $result['0']['issue'];
+        $id = $result['0']['issue_id'];} else{ $issue = "issue ".$rank;
+        }
 
     }
     public function error_message()
