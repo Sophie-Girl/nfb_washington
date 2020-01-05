@@ -81,7 +81,7 @@ class select_elements extends textfield_elements
         $this->type = 'select';
         $this->representative_data =  new representative_data();
         $rank = 2;
-        $this->representative_data->get_issue_name($rank, $issue);
+        $this->representative_data->get_issue_name($rank, $issue, $id);
         $this->title = $issue." Rating";
         $this->required = True;
         $this->build_Static_select_box($form, $form_state);
@@ -93,7 +93,7 @@ class select_elements extends textfield_elements
         $this->type = 'select';
         $this->representative_data =  new representative_data();
         $rank = 3;
-        $this->representative_data->get_issue_name($rank, $issue);
+        $this->representative_data->get_issue_name($rank, $issue, $id);
         $this->title = $issue." Rating";
         $this->required = True;
         $this->build_Static_select_box($form, $form_state);
