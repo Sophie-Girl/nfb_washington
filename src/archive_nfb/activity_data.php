@@ -74,9 +74,10 @@ class activity_data extends representative_data
         $this->update_contact_person_query($params);
         $this->update_contact_phone($params);
         $this->update_date_query($params);
-        $this->get_updated_rep_name($params);
         $this->update_attendance($params);
         $this->update_lead_Staff($params);
+        $this->get_updated_rep_name($params);
+
     }
     public function update_lead_Staff(&$params)
     {
@@ -100,7 +101,6 @@ class activity_data extends representative_data
         if (!$result) {
             \Drupal::logger('nfb_washington')->notice("Something Is wrong:");
         } else {
-            \Drupal::logger('nfb_washington')->notice(print_r($result, true));
         }
         $this->sql_connection = null;
     }
@@ -135,7 +135,14 @@ class activity_data extends representative_data
         $this->sql_connection->query($query);
         $this->sql_connection = null;
     }
+    public function update_attendance(&$params)
+    {
+        $this->establish_connection();
+        $this->sql_connection->query("update nfb_new.aaxmarwash_activities
 
+        set contact_expected = '" . $params['rep_attend'] . "' where activity_id = '" . $params['meeting_id'] . "';");
+        $this->sql_connection = null;
+    }
     public function update_contact_phone($params)
     {
         $this->establish_connection();
@@ -229,13 +236,7 @@ class activity_data extends representative_data
         $this->get_updated_rep_name($params);
     }
 
-    public function update_attendance(&$params)
-    {
-        $this->establish_connection();
-        $this->sql_connection->query("update nfb_new.aaxmarwash_activities
-        set contact_expected = '" . $params['rep_attend'] . "' where activity_id = '" . $params['meeting_id'] . "';");
-        $this->sql_connection = null;
-    }
+
 
     public function get_rep_id_for_link(&$params)
     {
