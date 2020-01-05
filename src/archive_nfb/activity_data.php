@@ -226,7 +226,7 @@ class activity_data extends representative_data
         if($params['activity_id']  != "null" && $params['legislator_id'] != "null")
         {
             $this->establish_connection();
-            $result = $this->sql_connection->query("insert into nfb_new.aaxmarwash_linkactivity (year, activity_id, table_name, tabl_id)
+            $result = $this->sql_connection->query("insert into nfb_new.aaxmarwash_linkactivity (year, activity_id, table_name, table_id)
         values ('".$year."', '".$params['activity_id']."', 'aaxmarwash_members', '".$params['legislator_id']."');");
             if(!$result) {\Drupal::logger('nfb_washington')->notice("Something Is wrong:");}
         }
