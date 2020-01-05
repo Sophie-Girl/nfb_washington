@@ -292,11 +292,11 @@ class activity_data extends representative_data
     {   $this->get_issue_id($params);
         $this->establish_connection();  $year = date("Y");
         $this->sql_connection->query("insert into nfb_new.aaxmarwash_linkissue (year, issue_id, table_name, table_id)
-    value ('".$year."','".$params['issue_1_id']."','aaxmarwash_members', '".$params['member_id']."');");
+    value ('".$year."','".$params['issue_1_id']."','aaxmarwash_members', '".$params['legislator_id']."');");
         $this->sql_connection->query("insert into nfb_new.aaxmarwash_linkissue (year, issue_id, table_name, table_id)
-    value ('".$year."','".$params['issue_2_id']."','aaxmarwash_members', '".$params['member_id']."');");
+    value ('".$year."','".$params['issue_2_id']."','aaxmarwash_members', '".$params['legislator_id']."');");
         $this->sql_connection->query("insert into nfb_new.aaxmarwash_linkissue (year, issue_id, table_name, table_id)
-    value ('".$year."','".$params['issue_3_id']."','aaxmarwash_members', '".$params['member_id']."');");
+    value ('".$year."','".$params['issue_3_id']."','aaxmarwash_members', '".$params['legislator_id']."');");
 
     }
 
