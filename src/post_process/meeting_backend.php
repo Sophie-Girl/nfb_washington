@@ -45,12 +45,14 @@ class  meeting_backend extends base
         $params['seminar_id'] = $form_state->getValue('select_rep');
         $params['rep_attend'] = $form_state->getValue('attendance');
         $params['location'] = $form_state->getValue('meeting_location');
+        $params['moc_contact'] = $form_state->getValue('moc_contact');
     }
     public function update_meeting_database_map(FormStateInterface $form_state, &$params)
     {
         $params['meeting_id'] = $form_state->getValue('select_rep');
         $params['location'] = $form_state->getValue('meeting_location');
         $params['rep_attend'] = $form_state->getValue('attendance');
+        $params['moc_contact'] = $form_state->getValue('moc_contact');
     }
     public function meeting_time_conversion(FormStateInterface $form_state, &$params)
     {

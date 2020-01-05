@@ -28,6 +28,7 @@ class form_factory extends update_form_ajax_test
         $this->meeting_time_update_element($form, $form_state);
         $this->build_confirmation_checkbox($form, $form_state);
         $this->update_expectend_attedence($form, $form_state);
+        $this->update_MOC_contact($form, $form_state);
         $this->conditional_submit($form, $form_state);
     }
     public function build_rating_form(&$form, $form_state)

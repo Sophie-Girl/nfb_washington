@@ -39,9 +39,9 @@ class activity_data extends representative_data
     {
         $this->establish_connection();
         $query = "insert into nfb_new.aaxmarwash_activities (year, uid, last_updated, activity_date, activity_time,
-    activity_location, activity, contact_expected, lead_staff_name, lead_staff_email, nfb_contact_name, nfb_contact_phone, aseminar_id)
+    activity_location, activity, contact_expected, lead_staff_name, nfb_contact_name, nfb_contact_phone, aseminar_id)
     values('" . $params['year'] . "','" . $params['uid'] . "','" . $params['update_date'] . "','" . $params['date'] . "','" . $params['time'] . "',
-    '" . $params['location'] . "','" . $params['activity_name'] . "','" . $params['rep_attend'] . "','" . $params['staff_lead'] . "','" . $params['staff_email'] . "','" . $params['contact_name'] . "',
+    '" . $params['location'] . "','" . $params['activity_name'] . "','" . $params['rep_attend'] . "','" . $params['moc_contact'] . "','" . $params['contact_name'] . "',
     '" . $params['contact_phone'] . "', '" . $params['seminar_id'] . "')";
         $result = $this->sql_connection->query($query);
         if (!$result) {
@@ -76,8 +76,20 @@ class activity_data extends representative_data
         $this->update_date_query($params);
         $this->get_updated_rep_name($params);
         $this->update_attendance($params);
+        $this->update_lead_Staff($params);
     }
-
+    public function update_lead_Staff(&$params)
+    {
+        $this->establish_connection();
+        $query = "update nfb_new.aaxmarwash_activities
+            set  lead_staff_name = '" . $params['moc_contact'] . "'
+            where activity_id = '" . $params['meeting_id'] . "';";
+        $result = $this->sql_connection->query($query);
+        if (!$result) {
+            \Drupal::logger('nfb_washington')->notice("Something Is wrong:");
+        }
+        $this->sql_connection = null;
+    }
     public function update_meeting_day_query($params)
     {
         $this->establish_connection();
