@@ -217,7 +217,7 @@ class activity_data extends representative_data
         where year = '".$year."' and aseminar_id = '".$params['seminar_id']."';");
         if($test)
         {$result = $test->fetch_all(MYSQLI_ASSOC);
-            $params['activity_id'] = $result['0']['member_id'];}
+            $params['activity_id'] = $result['0']['activity_id'];}
         else{$params['activity_id'] = "null";}
         $this->sql_connection = null;
     }
