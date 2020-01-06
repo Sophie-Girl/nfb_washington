@@ -38,9 +38,9 @@ class activity_data extends representative_data
     public function new_meeting_query($params)
     {
         $this->establish_connection();
-        $query = "insert into nfb_new.aaxmarwash_activities (year, uid, last_updated, activity_date, activity_time,
+        $query = "insert into nfb_new.aaxmarwash_activities (year, uid, last_updated, activity_date, activity_type, activity_time,
     activity_location, activity, contact_expected, lead_staff_name, nfb_contact_name, nfb_contact_phone, aseminar_id)
-    values('" . $params['year'] . "','" . $params['uid'] . "','" . $params['update_date'] . "','" . $params['date'] . "','" . $params['time'] . "',
+    values('" . $params['year'] . "','" . $params['uid'] . "','" . $params['update_date'] . "','" . $params['date'] . "','marchwash', '" . $params['time'] . "',
     '" . $params['location'] . "','" . $params['activity_name'] . "','" . $params['rep_attend'] . "','" . $params['moc_contact'] . "','" . $params['contact_name'] . "',
     '" . $params['contact_phone'] . "', '" . $params['seminar_id'] . "')";
         $result = $this->sql_connection->query($query);
