@@ -57,7 +57,6 @@ class representative_data extends query_base
          $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$district."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$meeting_time."</th><th>".$meeting_location."</th><th>".$expected."</th><th>".$rep['moc_contact']."</th><th>".$contact_person."</th><th>".$contact_phone."</th></tr>";
      }}
      $markup = $markup."</table>";
-     \Drupal::logger('nfb_washington')->notice($markup);
     }
     public function meeting_location($rep, &$meeting_location)
     {
@@ -97,7 +96,6 @@ class representative_data extends query_base
         $this->find_meeting($result, $array);
         unset($result);}
         $this->rep_result = $array; unset($array);
-        \drupal::logger('nfb_washington')->notice(memory_get_usage());
 
     }
     public function find_meeting($result, &$array)
