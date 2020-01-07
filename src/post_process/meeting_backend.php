@@ -62,11 +62,13 @@ class  meeting_backend extends base
         {
 
             $hour = substr($time, 0, 2);
+            $min = substr($time, 3, 2);
             if((int)$hour != 12)
             {$hour = (int)$hour + 12;
             if(strlen($time)== 8){
                 $min = substr($time, 3, 2);}
             else {$min = substr($time,2,2);}}
+
         }
         elseif(substr($time, 0, 2) == '12')
         {$hour = 00;
