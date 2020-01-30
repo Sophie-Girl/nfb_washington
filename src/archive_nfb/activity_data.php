@@ -49,7 +49,7 @@ class activity_data extends representative_data
         }
         $this->sql_connection = null;
         $this->link_file($params);
-        $this->issue_link($params);
+      // $this->issue_link($params); taken out once the issues were relinked
     }
 
     public function update_date_query(&$params)
