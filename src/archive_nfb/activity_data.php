@@ -20,7 +20,6 @@ class activity_data extends representative_data
 
     public function params_switch(FormStateInterface $form_state, &$params)
     {
-        \Drupal::logger('nfb_washington')->notice($form_state->getFormObject()->getFormId());
         switch ($form_state->getFormObject()->getFormId()) {
             case 'washington_sem_new_meeting':
                 $this->new_meeting_query($params);
@@ -303,7 +302,6 @@ class activity_data extends representative_data
         $rank = '3';
         $this->get_issue_name($rank, $issue, $id);
         $params['issue_3_id'] = $id;
-        \drupal::logger('nfb_washington')->notice(print_r($params, true));
     }
 
     public function issue_link(&$params)
