@@ -89,7 +89,7 @@ class activity_data extends representative_data
         if (!$result) {
             \Drupal::logger('nfb_washington')->notice("Something is wrong: Update MOC Staff NAme");
         }
-        \Drupal::logger('nfb_washington')->notice($query);
+
         $this->sql_connection = null;
     }
     public function update_meeting_day_query($params)
@@ -137,7 +137,7 @@ class activity_data extends representative_data
     }
     public function update_attendance(&$params)
     {
-        \drupal::logger('nfb_washington_debug_update')->notice($params['rep_attend']." ".$params['meeting_id']);
+
         $this->establish_connection();
         $query = "update nfb_new.aaxmarwash_activities
         set contact_expected = '" . $params['rep_attend']. "' 
