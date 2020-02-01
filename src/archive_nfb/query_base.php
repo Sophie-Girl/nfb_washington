@@ -32,7 +32,7 @@ class query_base
     $this->establish_connection();
     $query = "SELECT
         firstname, lastname, state, district, seminar_id
-        FROM nfb_new.aaxmarwash_members where year = '".$year."' and state = '".$state."';";
+        FROM nfb_new.aaxmarwash_members where year = '".$year."' and state = '".$state."' and in_office != '0';";
     $test = $this->sql_connection->query($query);
         if($test){
     $result = $test->fetch_all(MYSQLI_ASSOC);$this->sql_connection = null;
