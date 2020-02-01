@@ -132,6 +132,7 @@ class representative_data extends query_base
         if((int)($hour) < 10)
         {
             $hour = substr($rep['meeting_time'], 0,1);
+            if((int)$hour == 0){$hour = 12;}
             $min = substr($rep['meeting_time'],1,2);
         }
         else { $min = substr($rep['meeting_time'],2,2);}}

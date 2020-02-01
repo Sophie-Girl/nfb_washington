@@ -71,7 +71,7 @@ class  meeting_backend extends base
 
         }
         elseif(substr($time, 0, 2) == '12')
-        {$hour = 00;
+        {$hour = 0;
             $min = substr($time, 3, 2);}
         elseif (strpos($time, 'AM') > 0)
         {    $hour = substr($time, 0, 2);
@@ -79,6 +79,7 @@ class  meeting_backend extends base
             $hour = substr($time, 0, 1);
         $min = substr($time, 2,2);}
             else { $min = substr($time, 3,2);}}
+        \Drupal::logger('nfb_washington_debug')->notice($hour.$min);
         $params['time'] = $hour.$min;
     }
     public function district_data(FormStateInterface $form_state, &$params)
