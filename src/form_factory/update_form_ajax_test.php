@@ -23,7 +23,6 @@ class update_form_ajax_test extends markup_elements
         $form['meeting_data']['nfb_contact_name'] = array(
             '#type' => 'textfield',
             '#title' => $this->t("Contact Person Name"),
-            '#value' => $text,
             '#size' => 20,
             '#required' => TRUE,
         );
