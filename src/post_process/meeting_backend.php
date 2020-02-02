@@ -93,7 +93,8 @@ class  meeting_backend extends base
         $params['contact_phone'] = $form_state->getValue('nfb_civicrm_phone_1');
     }
     public function update_contact_person(FormStateInterface $form_state, &$params)
-    {   $params['contact_name'] = $form_state->getValue('nfb_civicrm_f_name_1');
+    {   \drupal::logger('nfb_washington_debug')->notice("Field value is ".$form_state->getValue('nfb_civicrm_f_name_1'));
+        $params['contact_name'] = $form_state->getValue('nfb_civicrm_f_name_1');
         $params['contact_phone'] = $form_state->getValue('nfb_civicrm_phone_1');}
     public function user_and_meta_data(&$params)
     {
