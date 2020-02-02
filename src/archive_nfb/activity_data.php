@@ -132,7 +132,8 @@ class activity_data extends representative_data
         $query = "update nfb_new.aaxmarwash_activities
             set nfb_contact_name = '" . $params['contact_name'] . "'
             where activity_id = '" . $params['meeting_id'] . "';";
-        $this->sql_connection->query($query);
+        $result = $this->sql_connection->query($query);
+        if(!$result){ \Drupal::logger('nfb_washington_debug')->notice("Something is wrong: update contact person");}
         $this->sql_connection = null;
     }
     public function update_attendance(&$params)
