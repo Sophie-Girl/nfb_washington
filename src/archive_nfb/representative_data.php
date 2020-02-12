@@ -43,7 +43,7 @@ class representative_data extends query_base
     {
      $this->build_state_array($form_state); $markup = "<p>".$form_state->getValue('select_state')." Representatives</p>
     <table>
-    <t><th>Representative Name:</th><th>State:</th><th>District:</th><th>Meeting Status:</th><th>Meeting Time:</th><th>Meeting Location:</th><th>Attending In Person</th><th>Member of Congress Contact</th><th>Contact Person:</th><th>Contact Phone:</th></tr>
+    <tr><th>Representative Name:</th><th>State:</th><th>District:</th><th>Meeting Status:</th><th>Meeting Time:</th><th>Meeting Location:</th><th>Attending In Person</th><th>Member of Congress Contact</th><th>Contact Person:</th><th>Contact Phone:</th></tr>
     ";
      foreach ($this->get_rep_result() as $rep){
          if($form_state->getValue('select_state') != ''){
@@ -54,7 +54,7 @@ class representative_data extends query_base
              $this->yes_no_conversion($rep, $expected);
              $this->member_of_congress_contact($rep);
              $this->convert_contact_info($rep, $contact_person,$contact_phone);
-         $markup = $markup."<tr><th>".$rep['first_name']." ".$rep['last_name']."</th><th>".$rep['state']."</th><th>".$district."</th><th>".$meeting_status."</th><th>".$rep['meeting_date']." ".$meeting_time."</th><th>".$meeting_location."</th><th>".$expected."</th><th>".$rep['moc_contact']."</th><th>".$contact_person."</th><th>".$contact_phone."</th></tr>";
+         $markup = $markup."<tr><td>".$rep['first_name']." ".$rep['last_name']."</td><td>".$rep['state']."</td><td>".$district."</td><td>".$meeting_status."</td><td>".$rep['meeting_date']." ".$meeting_time."</td><td>".$meeting_location."</td><td>".$expected."</td><td>".$rep['moc_contact']."</td><td>".$contact_person."</td><td>".$contact_phone."</td></tr>";
      }}
      $markup = $markup."</table>";
     }
