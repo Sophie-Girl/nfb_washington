@@ -30,3 +30,11 @@ nfb_washington_home_form:
   requirements:
     _permission: 'access content'
     _role: 'administrator + nfb_washington_user'
+nfb_washington_update_rate_issue:
+  path: 'nfb-washington/Update-rating'
+  defaults:
+    _form: 'Drupal\nfb_washington\Form\IssueRatingForm'
+    _title: 'NFB Washington Seminar: Rate a Meeting'
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator + nfb_washington_user'
