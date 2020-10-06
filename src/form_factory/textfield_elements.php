@@ -106,7 +106,7 @@ class textfield_elements extends base
      {
          $this->element_id = 'moc_contact'; $this->title = "Member of Congress Contact";
          $this->size = '20'; $this->min = '0'; $this->max = '200';
-         $this->required = false; $this->type;
+         $this->required = false; $this->type = 'textfield';
          $this->build_static_textfield($form, $form_State);
      }
 }
