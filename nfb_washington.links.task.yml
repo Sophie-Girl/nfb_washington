@@ -15,6 +15,6 @@ nfb_washington.rate:
   title: 'Enter Rating'
   base_route: nfb_washington.seminar
 nfb_washington.update_rate:
-    route_name: nfb_washington_update_rate_issue
-    title: 'Update Rating'
-    base_route: nfb_washington.seminar
+  route_name: nfb_washington_update_rate_issue
+  title: 'Update Rating'
+  base_route: nfb_washington.seminar
