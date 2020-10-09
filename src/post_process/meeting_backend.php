@@ -47,6 +47,17 @@ class  meeting_backend extends base
         $params['location'] = $form_state->getValue('meeting_location');
         $params['moc_contact'] = $form_state->getValue('moc_contact');
     }
+    public function new_meeting_rating_only_database_map(FormStateInterface $form_state, &$params)
+    {   $this->archive_nfb = new activity_data();
+        $sem_id = $form_state->getValue('select_rep');
+        $this->archive_nfb->find_rep_name($sem_id, $rep_name);
+        $params['activity_name'] = "Meeting with ".$rep_name;
+        $params['rep_name'] = $rep_name;
+        $params['seminar_id'] = $form_state->getValue('select_rep');
+        $params['issue1'] =  $form_state->getValue('issue_1_ranking');
+        $params['issue2'] =  $form_state->getValue("issue_2_ranking");
+        $params['issue3'] =  $form_state->getValue("issue_3_ranking");
+    }
     public function update_meeting_database_map(FormStateInterface $form_state, &$params)
     {
         $params['meeting_id'] = $form_state->getValue('select_rep');
@@ -101,7 +112,6 @@ class  meeting_backend extends base
         $params['uid'] = \Drupal::currentUser()->id();
         $params['update_date'] = date('m/d/Y');
         $params['year'] = date('Y');
-        $params['staff_lead'] = 'Kyle Walls';
         $params['staff_email'] = 'kwalls@nfb.org';
 
     }
