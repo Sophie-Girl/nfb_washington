@@ -22,6 +22,23 @@ class representative_data extends query_base
             }
         }
     }
+    public function create_new_rating_options($form_state, &$options)
+    {
+        $this->build_state_array($form_state);
+        $options = [];
+        if ($form_state->getValue('select_state')) {
+            foreach ($this->get_rep_result() as $rep) {
+                if ( $form_state->getValue('select_state') == $rep['state']) {
+
+                    $options[$rep['seminar_id']] = $rep['first_name'] . " " . $rep["last_name"] . " " . $rep['state'] . " District " . $rep['district'];
+                }
+            }
+        }
+    }
+    public function rating_form_options(&$options)
+    {
+
+    }
 
     public function new_meeting_options_element($form_state, &$options)
     {
@@ -157,5 +174,23 @@ class representative_data extends query_base
             $text = $result['0'][$category];} else {$text = "Error";}
         } else $text ="";
     }
+    public function build_issue_array($form_state)
+    {
+        $state = $form_state->getValue('select_state');
+        unset($form_state);
+        if ($state = "")
+        {$array = [];}
+        else {
+            $this->get_house_rep_for_state($state, $result);
+            $sem_id = $rep['seminar_id'];
+            $array[$sem_id]['first_name'] = $rep['firstname'];
+            $array[$sem_id]['last_name'] = $rep['lastname'];
+            $array[$sem_id]['seminar_id'] = $rep['seminar_id'];
+            $array[$sem_id]['district'] = $rep['district'];
+            $array[$sem_id]['state'] = $rep['state'];
+        }
+
+    }
+
 
 }

@@ -56,6 +56,11 @@ class query_base
             $array[$sem_id]['contact_phone'] =  $meeting['0']['nfb_contact_phone'];
             $array[$sem_id]['rep_expected'] = $meeting['0']['contact_expected'];
             $array[$sem_id]['moc_contact'] = $meeting['0']['lead_staff_name'];
+            if($meeting['issue1'])
+            {
+                $array[$sem_id]['issue1'] =$meeting['0']['issue1'];
+            }
+            $array[$sem_id]
             unset($meeting);}
          else {
              $array[$sem_id]['meeting_id']= "";
@@ -83,5 +88,6 @@ class query_base
     public function error_message()
     {
     }
+
 
 }
