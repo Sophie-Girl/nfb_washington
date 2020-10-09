@@ -60,6 +60,15 @@ class query_base
             {
                 $array[$sem_id]['issue1'] =$meeting['0']['issue1'];
             }
+            else {$array[$sem_id]['issue1'] = "no rating";}
+            if($meeting['issue2'])
+            {
+                $array[$sem_id]['issue2'] =$meeting['0']['issue2'];
+            }else {$array[$sem_id]['issue2'] = "no rating";}
+            if($meeting['issue2'])
+            {
+                $array[$sem_id]['issue3'] =$meeting['0']['issue3'];
+            }else {$array[$sem_id]['issue3'] = "no rating";}
 
             unset($meeting);}
          else {
@@ -71,6 +80,9 @@ class query_base
              $array[$sem_id]['contact_phone'] = "";
              $array[$sem_id]['rep_expected'] = '';
              $array[$sem_id]['moc_contact'] = "";
+             $array[$sem_id]['issue1'] = "no rating";
+             $array[$sem_id]['issue2'] = "no rating";
+             $array[$sem_id]['issue3'] = "no rating";
          } unset($test); $this->sql_connection = null;
     }
     public function get_issue_name($rank, &$issue, &$id)

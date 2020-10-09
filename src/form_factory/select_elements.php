@@ -144,6 +144,28 @@ class select_elements extends textfield_elements
         $this->wrapper = 'data_wrapper';
         $this->build_wrapped_ajax_select($form, $form_state, $options);
     }
+    public function new_ranking_select_element(&$form, $form_state)
+    {   $this->representative_data = new representative_data();
+        $this->representative_data->create_new_rating_options($form_state, $options);
+        $this->representative_data = null;
+        $this->options = $options; $this->prefix = "<div id='rep_wrapper'>";
+        $this->element_id = 'select_rep'; $this->type = 'select';
+        $this->title = "Select Elected Official"; $this->required = TRUE;
+        $this->suffix = "</div>"; $this->callback = '::data_refresh';
+        $this->wrapper = 'data_wrapper';
+        $this->build_wrapped_ajax_select($form, $form_state, $options);
+    }
+    public function update_ranking_select_element(&$form, $form_state)
+    {   $this->representative_data = new representative_data();
+        $this->representative_data->create_update_rating_options($form_state, $options);
+        $this->representative_data = null;
+        $this->options = $options; $this->prefix = "<div id='rep_wrapper'>";
+        $this->element_id = 'select_rep'; $this->type = 'select';
+        $this->title = "Select Elected Official"; $this->required = TRUE;
+        $this->suffix = "</div>"; $this->callback = '::data_refresh';
+        $this->wrapper = 'data_wrapper';
+        $this->build_wrapped_ajax_select($form, $form_state, $options);
+    }
     public function time_options()
     {
         $this->am_options($options);

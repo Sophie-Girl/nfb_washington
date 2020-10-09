@@ -28,16 +28,27 @@ class representative_data extends query_base
         $options = [];
         if ($form_state->getValue('select_state')) {
             foreach ($this->get_rep_result() as $rep) {
-                if ( $form_state->getValue('select_state') == $rep['state']) {
+                if ( $form_state->getValue('select_state') == $rep['state'] && $rep['issue1'] == "no rating"
+                && $rep['issue2'] == "no rating"    && $rep['issue3'] == "no rating") {
 
                     $options[$rep['seminar_id']] = $rep['first_name'] . " " . $rep["last_name"] . " " . $rep['state'] . " District " . $rep['district'];
                 }
             }
         }
     }
-    public function rating_form_options(&$options)
+    public function  create_update_rating_options($form_state, &$options)
     {
-
+        $this->build_state_array($form_state);
+        $options = [];
+        if ($form_state->getValue('select_state')) {
+            foreach ($this->get_rep_result() as $rep) {
+                if ( $form_state->getValue('select_state') == $rep['state'] && $rep['issue1'] != "no rating"
+            ||   $form_state->getValue('select_state') == $rep['state'] && $rep['issue2'] != "no rating" ||
+                    $form_state->getValue('select_state') == $rep['state']    && $rep['issue3'] != "no rating") {
+                    $options[$rep['seminar_id']] = $rep['first_name'] . " " . $rep["last_name"] . " " . $rep['state'] . " District " . $rep['district'];
+                }
+            }
+        }
     }
 
     public function new_meeting_options_element($form_state, &$options)
@@ -180,15 +191,7 @@ class representative_data extends query_base
         unset($form_state);
         if ($state = "")
         {$array = [];}
-        else {
-            $this->get_house_rep_for_state($state, $result);
-            $sem_id = $rep['seminar_id'];
-            $array[$sem_id]['first_name'] = $rep['firstname'];
-            $array[$sem_id]['last_name'] = $rep['lastname'];
-            $array[$sem_id]['seminar_id'] = $rep['seminar_id'];
-            $array[$sem_id]['district'] = $rep['district'];
-            $array[$sem_id]['state'] = $rep['state'];
-        }
+
 
     }
 

@@ -34,7 +34,22 @@ class form_factory extends update_form_ajax_test
     public function build_rating_form(&$form, $form_state)
     {
         $this->state_ajax_select_element($form, $form_state);
-        $this->update_state_rep_meeting_select_elements($form, $form_state);
+        $this->new_ranking_select_element($form, $form_state);
+        $this->contact_first_name_element($form, $form_state);
+        $this->contact_last_name_element($form, $form_state);
+        $this->contact_email_element($form, $form_state);
+        $this->issue_1_ranking_element($form, $form_state);
+        $this->issue_1_comment_element($form, $form_state);
+        $this->issue_2_ranking_element($form, $form_state);
+        $this->issue_2_comment_element($form, $form_state);
+        $this->issue_3_ranking_element($form, $form_state);
+        $this->issue_3_comment_element($form, $form_state);
+        $this->submit_button($form, $form_state);
+    }
+    public function build_update_rating_form(&$form, $form_state)
+    {
+        $this->state_ajax_select_element($form, $form_state);
+        $this->update_ranking_select_element($form, $form_state);
         $this->contact_first_name_element($form, $form_state);
         $this->contact_last_name_element($form, $form_state);
         $this->contact_email_element($form, $form_state);
