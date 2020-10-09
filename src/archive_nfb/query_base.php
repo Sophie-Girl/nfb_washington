@@ -56,16 +56,16 @@ class query_base
             $array[$sem_id]['contact_phone'] =  $meeting['0']['nfb_contact_phone'];
             $array[$sem_id]['rep_expected'] = $meeting['0']['contact_expected'];
             $array[$sem_id]['moc_contact'] = $meeting['0']['lead_staff_name'];
-            if($meeting['issue1'])
+            if($meeting['0']['issue1'])
             {
                 $array[$sem_id]['issue1'] =$meeting['0']['issue1'];
             }
             else {$array[$sem_id]['issue1'] = "no rating";}
-            if($meeting['issue2'])
+            if($meeting['0']['issue2'])
             {
                 $array[$sem_id]['issue2'] =$meeting['0']['issue2'];
             }else {$array[$sem_id]['issue2'] = "no rating";}
-            if($meeting['issue2'])
+            if($meeting['0']['issue3'])
             {
                 $array[$sem_id]['issue3'] =$meeting['0']['issue3'];
             }else {$array[$sem_id]['issue3'] = "no rating";}
