@@ -18,7 +18,7 @@ class UpdateRatingForm extends FormBase
     public function buildForm(array $form, FormStateInterface $form_state)
     {
         $this->form_factory = new form_factory();
-        $this->form_factory->build_rating_form($form, $form_state);
+        $this->form_factory->build_update_rating_form($form, $form_state);
         $this->form_factory = null;
         return $form;
     }
