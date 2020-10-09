@@ -28,6 +28,7 @@ class representative_data extends query_base
         $options = [];
         if ($form_state->getValue('select_state')) {
             foreach ($this->get_rep_result() as $rep) {
+                \drupal::logger("nfb_washington")->notice(print_r($rep, 1));
                 if ( $form_state->getValue('select_state') == $rep['state'] && $rep['issue1'] == "no rating"
                 && $rep['issue2'] == "no rating"    && $rep['issue3'] == "no rating") {
 
