@@ -60,7 +60,7 @@ class query_base
             {
                 $array[$sem_id]['issue1'] =$meeting['0']['issue1'];
             }
-            $array[$sem_id]
+
             unset($meeting);}
          else {
              $array[$sem_id]['meeting_id']= "";
