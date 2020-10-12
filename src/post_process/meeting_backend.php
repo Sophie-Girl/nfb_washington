@@ -164,12 +164,31 @@ class  meeting_backend extends base
     }
     public function ranking_params_set_up(FormStateInterface $form_state, &$params)
     {
-        $params['meeting_id'] = $form_state->getValue('select_rep');
+        $sem_id = $form_state->getValue('select_rep');
+        $archive = new activity_data();
+        $archive->find_meeting_query($sem_id, $array);
+        if($array['meeting_id'] == '')
+        {$this->new_meeting_at_rating($form_state, &$params);}
+        else {$params['$sem_id'] = $array['meeting_id'];}
         $this->contact_person($form_state, $params);
         $this->set_issues($form_state, $params);
         $this->set_comments($form_state, $params);
         $this->user_and_meta_data($params);
     }
+    public function new_meeting_at_rating($form_state, &$params)
+    {
+        $this->archive_nfb = new activity_data();
+        $sem_id = $form_state->getValue('select_rep');
+        $this->archive_nfb->find_rep_name($sem_id, $rep_name);
+        $params['activity_name'] = "Meeting with ".$rep_name;
+        $params['rep_name'] = $rep_name;
+        $params['seminar_id'] = $form_state->getValue('select_rep');
+        $params['issue1'] =  $form_state->getValue('issue_1_ranking');
+        $params['issue2'] =  $form_state->getValue("issue_2_ranking");
+        $params['issue3'] =  $form_state->getValue("issue_3_ranking");
+    }
+
+
 
 
 }
