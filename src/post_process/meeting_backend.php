@@ -168,7 +168,7 @@ class  meeting_backend extends base
         $archive = new activity_data();
         $archive->find_meeting_query($sem_id, $array);
         if($array['meeting_id'] == '')
-        {$this->new_meeting_at_rating($form_state, &$params);}
+        {$this->new_meeting_at_rating($form_state, $params);}
         else {$params['$sem_id'] = $array['meeting_id'];}
         $this->contact_person($form_state, $params);
         $this->set_issues($form_state, $params);
@@ -186,6 +186,10 @@ class  meeting_backend extends base
         $params['issue1'] =  $form_state->getValue('issue_1_ranking');
         $params['issue2'] =  $form_state->getValue("issue_2_ranking");
         $params['issue3'] =  $form_state->getValue("issue_3_ranking");
+        $params['uid'] = \Drupal::currentUser()->id();
+        $params['update_date'] = date('m/d/Y');
+        $params['year'] = date('Y');
+        $params['staff_email'] = 'kwalls@nfb.org';
     }
 
 
