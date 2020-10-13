@@ -28,7 +28,9 @@ class activity_data extends representative_data
                 $this->update_meeting_query($params);
                 break;
             case "wash_sem_issue_rank":
-                $this->issue_rating_queries($params);
+                if($params['meeting_id'] != ''){
+                $this->issue_rating_queries($params);}
+
                 break;
 
         }
@@ -49,6 +51,22 @@ class activity_data extends representative_data
         $this->sql_connection = null;
         $this->link_file($params);
       // $this->issue_link($params); taken out once the issues were relinked
+    }
+    public function new_rating_only_meeting_query($params)
+    {
+        $this->establish_connection();
+        $query = "insert into nfb_new.aaxmarwash_activities (year, uid, last_updated, activity_date, activity_type, activity_time,
+    issue1, issue2, issue3, comment1, comment2, comment3, aseminar_id)
+    values('" . $params['year'] . "','" . $params['uid'] . "','" . $params['update_date'] . "','" . $params['date'] . "','marchwash', '" . $params['time'] . "',
+    '" . $params['activity_name'] . "','" . $params['issue1'] . "','" . $params['issue2'] . "','" . $params['issue3'] . "',  '" . $params['comment1'] . "'   '" . $params['comment2'] . "'
+    '" . $params['comment3'] . "', '" . $params['rep_id'] . "')";
+        $result = $this->sql_connection->query($query);
+        if (!$result) {
+            \Drupal::logger('nfb_washington')->notice("Something Is wrong:");
+        }
+        $this->sql_connection = null;
+        $this->link_file($params);
+        // $this->issue_link($params); taken out once the issues were relinked
     }
 
     public function update_date_query(&$params)
