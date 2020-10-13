@@ -169,11 +169,13 @@ class  meeting_backend extends base
         $archive->find_meeting_query($sem_id, $array);
         if($array['meeting_id'] == '')
         {$this->new_meeting_at_rating($form_state, $params);}
-        else {$params['$sem_id'] = $array['meeting_id'];}
+        else {$params['$sem_id'] = $array['meeting_id'];
+        $archive->find_rep_name($sem_id, $rep_name);
+        $params['rep_name'] = $rep_name;
         $this->contact_person($form_state, $params);
         $this->set_issues($form_state, $params);
         $this->set_comments($form_state, $params);
-        $this->user_and_meta_data($params);
+        $this->user_and_meta_data($params);}
     }
     public function new_meeting_at_rating($form_state, &$params)
     {
@@ -186,6 +188,9 @@ class  meeting_backend extends base
         $params['issue1'] =  $form_state->getValue('issue_1_ranking');
         $params['issue2'] =  $form_state->getValue("issue_2_ranking");
         $params['issue3'] =  $form_state->getValue("issue_3_ranking");
+        $params['comment_1'] = $form_state->getValue('issue_1_comment');
+        $params['comment_2'] = $form_state->getValue('issue_2_comment');
+        $params['comment_3'] = $form_state->getValue('issue_3_comment');
         $params['uid'] = \Drupal::currentUser()->id();
         $params['update_date'] = date('m/d/Y');
         $params['year'] = date('Y');
