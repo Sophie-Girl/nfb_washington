@@ -32,7 +32,11 @@ class activity_data extends representative_data
                 $this->issue_rating_queries($params);}
                 else {$this->new_rating_only_meeting_query($params);}
                 break;
-
+            case "wash_sem_update_issue_rank":
+                if($params['meeting_id'] != ''){
+                    $this->issue_rating_queries($params);}
+                else {$this->new_rating_only_meeting_query($params);}
+                break;
         }
     }
 

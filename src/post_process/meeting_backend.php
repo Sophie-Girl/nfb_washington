@@ -34,7 +34,9 @@ class  meeting_backend extends base
         elseif($form_state->getFormObject()->getFormId() == "wash_sem_issue_rank")
         {$this->ranking_params_set_up($form_state, $params);
         $meeting_type = 'rating entered';}
-
+        elseif($form_state->getFormObject()->getFormId() == "wash_sem_update_issue_rank")
+        {$this->ranking_params_set_up($form_state, $params);
+            $meeting_type = 'rating entered';}
         else {die;}
     }
     public function new_meeting_database_map(FormStateInterface $form_state, &$params)
