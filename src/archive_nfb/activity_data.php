@@ -30,7 +30,7 @@ class activity_data extends representative_data
             case "wash_sem_issue_rank":
                 if($params['meeting_id'] != ''){
                 $this->issue_rating_queries($params);}
-
+                else {$this->new_rating_only_meeting_query($params);}
                 break;
 
         }

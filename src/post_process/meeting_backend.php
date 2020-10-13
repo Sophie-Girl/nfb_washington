@@ -33,7 +33,8 @@ class  meeting_backend extends base
         $meeting_type = "meeting has been updated";}
         elseif($form_state->getFormObject()->getFormId() == "wash_sem_issue_rank")
         {$this->ranking_params_set_up($form_state, $params);
-        $meeting_type = '';}
+        $meeting_type = 'rating entered';}
+
         else {die;}
     }
     public function new_meeting_database_map(FormStateInterface $form_state, &$params)
@@ -169,7 +170,7 @@ class  meeting_backend extends base
         $archive->find_meeting_query($sem_id, $array);
         if($array['meeting_id'] == '')
         {$this->new_meeting_at_rating($form_state, $params);}
-        else {$params['$sem_id'] = $array['meeting_id'];
+        else {$params['seminar_id'] = $array['meeting_id'];
         $archive->find_rep_name($sem_id, $rep_name);
         $params['rep_name'] = $rep_name;
         $this->contact_person($form_state, $params);
