@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class MeetingAjaxControler extends ControllerBase
+class MeetingAjaxController extends ControllerBase
 {
     public $archive;
     public $rep_id;
