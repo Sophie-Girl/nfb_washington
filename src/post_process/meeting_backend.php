@@ -172,7 +172,7 @@ class  meeting_backend extends base
         $archive->find_meeting_query($sem_id, $array);
         if($array['meeting_id'] == '')
         {$this->new_meeting_at_rating($form_state, $params);}
-        else {$params['seminar_id'] = $array['meeting_id'];
+        else {$params['seminar_id'] = $sem_id;
         $archive->find_rep_name($sem_id, $rep_name);
         $params['rep_name'] = $rep_name;
         $this->contact_person($form_state, $params);
