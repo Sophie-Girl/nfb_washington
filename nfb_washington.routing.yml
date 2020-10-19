@@ -38,3 +38,19 @@ nfb_washington_update_rate_issue:
   requirements:
     _permission: 'access content'
     _role: 'administrator + nfb_washington_user'
+nfb_washington.meeting_ajax:
+  path: '/nfb_cwashington/ajax/meeting'
+  defaults:
+    _controller: '\Drupal\nfb_washington\Controller\MeetingAjaxController::content'
+    _title: 'ajax'
+  requirements:
+    _permission: 'access content'
+      _title: 'NFB Washington Seminar: Update a Rating'
+nfb_washington.raitng_ajax:
+  path: '/nfb_contribution/ajax/rating'
+  defaults:
+    _controller: '\Drupal\nfb_washington\Controller\RatingAjaxController::content'
+    _title: 'ajax'
+  requirements:
+    _permission: 'access content'
+      _title: 'NFB Washington Seminar: Update a Rating'
