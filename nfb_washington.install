@@ -1,0 +1,189 @@
+<?php
+
+use Drupal\Core\Database\Database;
+
+class database_functions
+{
+    public function table_test($table_name) // check if table exists already and drops it if it does
+    {
+        if (db_table_exists($table_name)) {
+            \Drupal::logger('nfb_contribution_install')->notice("Dropping Table " . $table_name);
+            db_drop_table($table_name);
+        }
+    }
+    public function create_table($schema, $table_name)
+    {
+        $query = Database::getConnection()->schema();
+        $query->createTable($table_name, $schema[$table_name]);
+    }
+
+}
+class member_table extends  database_functions
+{
+    public function set_up_member_table()
+    {
+        $table_name = 'nfb_washington_members';
+        $this->table_test($table_name);
+        $this->build_member_table($table_name, $schema);
+        $schema[$table_name]['description'] = "Table for members of congress";
+        $schema[$table_name]['primary key'] = ['member_id'];
+        $this->create_table($schema, $table_name);
+    }
+    public function  build_member_table($table_name, &$schema)
+    {
+        $schema[$table_name]['fields']['member_id'] = array(
+            'type'=> 'serial',
+            'size' => 'big',
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+            'description' => 'Primary Key: member id'
+        );
+        $schema[$table_name]['fields']['civicrm_contact_id'] = array(
+            'type'=> 'int',
+            'size' => 'big',
+            'default' => '0',
+            'not null' => TRUE,
+            'description' => 'Link to Civi Contact data'
+        );
+        $schema[$table_name]['fields']['district'] = array(
+            'type'=> 'int',
+            'size' => 'big',
+            'default' => '0',
+            'not null' => False,
+            'description' => 'District Number: Null for senators'
+        );
+        $schema[$table_name]['fields']['rank'] = array(
+            'type'=> 'int',
+            'size' => 'tiny',
+            'default' => '0',
+            'not null' => False,
+            'description' => 'Senator Rank: Null is for House reps. 1 for Senior 2 for Junior'
+        );
+        $schema[$table_name]['fields']['active'] = array(
+            'type'=> 'int',
+            'size' => 'tiny',
+            'default' => '0',
+            'not null' => TRUE,
+            'description' => 'True or false on whether representative is currently in congress'
+        );
+        $schema[$table_name]['fields']['state'] = array(
+            'type' => 'varchar',
+            'length' => 2,
+            'not null' => TRUE,
+            'default' => '',
+            'description' => 'State abbreviation',
+        );
+        $schema[$table_name]['fields']['propublica_id'] = array(
+            'type' => 'varchar',
+            'length' => 64,
+            'not null' => TRUE,
+            'default' => '',
+            'description' => 'ID that propublica is current.ly using for that member of congress',
+        );
+
+    }
+}
+class meeting_table  extends  member_table
+{
+    public function set_up_meeting_table()
+    {
+        $table_name = 'nfb_washington_activities';
+        $this->table_test($table_name);
+        $this->activity_schema($table_name, $schema);
+        $schema[$table_name]['description'] = "Table for meetings and other washington seminar activities";
+        $schema[$table_name]['primary key'] = ['activity_id'];
+        $this->create_table($schema, $table_name);
+    }
+    public function activity_schema($table_name, &$schema)
+    {
+        $schema[$table_name]['fields']['activity_id'] = array(
+            'type'=> 'serial',
+            'size' => 'big',
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+            'description' => 'Primary Key: activity id'
+        );
+        $schema[$table_name]['fields']['member_id'] = array(
+            'type'=> 'int',
+            'size' => 'big',
+            'default' => '0',
+            'not null' => TRUE,
+            'description' => 'Link to member ID'
+        );
+        $schema[$table_name]['fields']['type'] = array(
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => 'Meeting',
+            'not null' => TRUE,
+            'description' => 'Activity type'
+        );
+        $schema[$table_name]['fields']['date'] = array(
+            'type'=> 'varchar',
+            'length' => '16',
+            'default' => '1/1/20',
+            'not null' => TRUE,
+            'description' => 'Activity date'
+        );
+        $schema[$table_name]['fields']['time'] = array(
+            'type'=> 'varchar',
+            'length' => '8',
+            'default' => '12:00 AM',
+            'not null' => TRUE,
+            'description' => 'Activity time'
+        );
+        $schema[$table_name]['fields']['description'] = array(
+            'type'=> 'varchar',
+            'length' => '256',
+            'default' => '',
+            'not null' => TRUE,
+            'description' => 'Activity description'
+        );
+        $schema[$table_name]['fields']['location'] = array(
+            'type'=> 'varchar',
+            'length' => '500',
+            'default' => '',
+            'not null' => TRUE,
+            'description' => 'Activity location'
+        );
+        $schema[$table_name]['fields']['m_o_c_contact'] = array(
+            'type'=> 'varchar',
+            'length' => '500',
+            'default' => '',
+            'not null' => TRUE,
+            'description' => 'Activity contact for member of congress'
+        );
+        $schema[$table_name]['fields']['nfb_contact'] = array(
+            'type'=> 'varchar',
+            'length' => '500',
+            'default' => '',
+            'not null' => TRUE,
+            'description' => 'Activity contact for nfb'
+        );
+        $schema[$table_name]['fields']['nfb_phone'] = array(
+            'type'=> 'varchar',
+            'length' => '12',
+            'default' => '',
+            'not null' => TRUE,
+            'description' => 'Phone number for the nfb contact'
+        );
+        $schema[$table_name]['fields']['year'] = array(
+            'type'=> 'int',
+            'size' => 'big',
+            'default' => '2020',
+            'not null' => TRUE,
+            'description' => 'Link to member ID'
+        );
+    }
+}
+class issue_table extends meeting_table
+{
+    public function set_up_issue_table()
+    {
+        $table_name = 'nfb_washington_issues';
+        $this->table_test($table_name);
+        $this->activity_schema($table_name, $schema);
+        $schema[$table_name]['description'] = "Table for Issues";
+        $schema[$table_name]['primary key'] = ['issue_id'];
+        $this->create_table($schema, $table_name);
+    }
+}
