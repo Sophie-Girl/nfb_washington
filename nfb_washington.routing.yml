@@ -45,7 +45,7 @@ nfb_washington.meeting_ajax:
     _title: 'ajax'
   requirements:
     _permission: 'access content'
-      _title: 'NFB Washington Seminar: Update a Rating'
+    _role: 'administrator + nfb_washington_user'
 nfb_washington.raitng_ajax:
   path: '/nfb_contribution/ajax/rating'
   defaults:
@@ -53,4 +53,4 @@ nfb_washington.raitng_ajax:
     _title: 'ajax'
   requirements:
     _permission: 'access content'
-      _title: 'NFB Washington Seminar: Update a Rating'
+    _role: 'administrator + nfb_washington_user'
