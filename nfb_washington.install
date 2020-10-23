@@ -567,7 +567,7 @@ class configuration_table extends comittee_memberhsip_table
 {
     public function set_up_configuration_table()
     {
-        $table_name = 'nfb_washington_committee_mem';
+        $table_name = 'nfb_washington_config';
         $this->table_test($table_name);
         $this->configuration_schema($table_name, $schema);
         $schema[$table_name]['description'] = "Table for settings";
