@@ -14,5 +14,8 @@ class base
         {
             $this->result = $sql->fetchAllAssoc($key);
         }
+        else {
+            $this->result = "error";
+        }
     }
 }
