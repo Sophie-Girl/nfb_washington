@@ -2,7 +2,7 @@
 Namespace Drupal\nfb_washington\verification;
 use Drupal\nfb_washington\database\base;
 
-class  verification
+class  api_key_check
 {
     public $apikey;
     public function get_apikey()
