@@ -569,8 +569,8 @@ class configuration_table extends comittee_memberhsip_table
     {
         $table_name = 'nfb_washington_committee_mem';
         $this->table_test($table_name);
-        $this->com_mem_schema($table_name, $schema);
-        $schema[$table_name]['description'] = "Table for committee memberships";
+        $this->configuration_schema($table_name, $schema);
+        $schema[$table_name]['description'] = "Table for settings";
         $schema[$table_name]['primary key'] = ['config_id'];
         $this->create_table($schema, $table_name);
     }
@@ -621,3 +621,13 @@ class configuration_table extends comittee_memberhsip_table
 
     }
 }
+$install = new configuration_table();
+$install->set_up_member_table();
+$install->set_up_meeting_table();
+$install->set_up_issue_table();
+$install->set_up_rating_table();
+$install->set_up_note_table();
+$install->set_up_note_link_table();
+$install->set_up_committee_table();
+$install->set_up_committee_membership_table();
+$install->set_up_configuration_table();
