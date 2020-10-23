@@ -173,6 +173,26 @@ class meeting_table  extends  member_table
             'not null' => TRUE,
             'description' => 'Link to member ID'
         );
+        $schema[$table_name]['fields']['created_user'] = array(
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => '',
+            'not null' => False,
+            'description' => 'who made the note'
+        );
+        $schema[$table_name]['fields']['last_modified_user'] = array(
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => '',
+            'not null' => False,
+            'description' => 'who made the note'
+        );
+        $schema[$table_name]['foreign keys'] = array(
+            'nfb_washington_members' => array(
+                'table' => 'nfb_washington_members',
+                'columns' => array('member_id' => 'member_id')
+            )
+        );
     }
 }
 class issue_table extends meeting_table
@@ -181,9 +201,423 @@ class issue_table extends meeting_table
     {
         $table_name = 'nfb_washington_issues';
         $this->table_test($table_name);
-        $this->activity_schema($table_name, $schema);
+        $this->issue_schema($table_name, $schema);
         $schema[$table_name]['description'] = "Table for Issues";
         $schema[$table_name]['primary key'] = ['issue_id'];
         $this->create_table($schema, $table_name);
+    }
+    public function issue_schema($table_name, &$schema)
+    {
+        $schema[$table_name]['fields']['issue_id'] = array(
+            'type'=> 'serial',
+            'size' => 'big',
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+            'description' => 'Primary Key: issue id'
+        );
+        $schema[$table_name]['fields']['name'] = array(
+            'type'=> 'varchar',
+            'length' => '256',
+            'default' => '',
+            'not null' => TRUE,
+            'description' => 'Issue name'
+        );
+        $schema[$table_name]['fields']['bill_id'] = array(
+            'type'=> 'varchar',
+            'length' => '256',
+            'default' => '',
+            'not null' => TRUE,
+            'description' => 'Bill ID'
+        );
+        $schema[$table_name]['fields']['bill_slug'] = array(
+            'type'=> 'varchar',
+            'length' => '256',
+            'default' => '',
+            'not null' => TRUE,
+            'description' => 'Bill slug for Propublica'
+        );
+        $schema[$table_name]['fields']['year'] = array(
+            'type' => 'int',
+            'size' => 'big',
+            'default' => '2020',
+            'not null' => TRUE,
+            'description' => 'year the issue is active for'
+        );
+        $schema[$table_name]['fields']['civicrm_id'] = array(
+            'type' => 'int',
+            'size' => 'big',
+            'default' => '0',
+            'not null' => TRUE,
+            'description' => 'link to civicrm for bill tracking info'
+        );
+        $schema[$table_name]['fields']['created_user'] = array(
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => '',
+            'not null' => False,
+            'description' => 'who made the note'
+        );
+        $schema[$table_name]['fields']['last_modified_user'] = array(
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => '',
+            'not null' => False,
+            'description' => 'who made the note'
+        );
+        $schema[$table_name]['fields']['primary']= array(
+            'type' => 'int',
+            'size' =>  'tiny',
+            'default' => '0',
+            'not null' => true,
+            'description' => 'boolean for if the  issue is the frist time this issue has comite up'
+        );
+        $schema[$table_name]['fields']['primary_issue_id'] = array(
+            'type' => 'int',
+            'size' => 'big',
+            'default' => '0',
+            'not null' => false,
+            'description' => 'if primary is not true, then what is the first time the issue has come up'
+        );
+    }
+}
+class rating_table extends issue_table
+{
+    public function set_up_rating_table()
+    {
+        $table_name = 'nfb_washington_issues';
+        $this->table_test($table_name);
+        $this->ratings_schema($table_name, $schema);
+        $schema[$table_name]['description'] = "Table for ratings";
+        $schema[$table_name]['primary key'] = ['rating_id'];
+        $this->create_table($schema, $table_name);
+    }
+    public function ratings_schema($table_name, &$schema)
+    {
+        $schema[$table_name]['fields']['rating_id'] = array(
+            'type'=> 'serial',
+            'size' => 'big',
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+            'description' => 'Primary Key: rating id'
+        );
+        $schema[$table_name]['fields']['activity_id'] = array(
+          'type' => 'int',
+          'size' => 'big',
+          'default' => null,
+          'not null' => False,
+          'description' => 'FK toactivity'
+        );
+        $schema[$table_name]['fields']['member_id'] = array(
+            'type' => 'int',
+            'size' => 'big',
+            'default' => '0',
+            'not null' => true,
+            'description' => 'FK to member'
+        );
+        $schema[$table_name]['fields']['issue_id'] = array(
+            'type' => 'int',
+            'size' => 'big',
+            'default' => '0',
+            'not null' => true,
+            'description' => 'FK to issue'
+        );
+        $schema[$table_name]['fields']['rating'] = array(
+            'type'=> 'varchar',
+            'length' => '4',
+            'default' => '',
+            'not null' => TRUE,
+            'description' => 'Rating '
+        );
+        $schema[$table_name]['fields']['comment'] = array(
+            'type'=> 'varchar',
+            'length' => '500',
+            'default' => '',
+            'not null' => False,
+            'description' => 'Rating comments'
+        );
+        $schema[$table_name]['fields']['created_user'] = array(
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => '',
+            'not null' => False,
+            'description' => 'who made the note'
+        );
+        $schema[$table_name]['fields']['last_modified_user'] = array(
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => '',
+            'not null' => False,
+            'description' => 'who made the note'
+        );
+        $schema[$table_name]['foreign keys'] = array(
+            'nfb_washington_members' => array(
+                'table' => 'nfb_washington_members',
+                'columns' => array('member_id' => 'member_id')
+            ),
+            'nfb_washington_activities' => array(
+                'table' => 'nfb_washington_activities',
+                'columns' => array('activity_id' => 'activity_id')
+            ),
+            'nfb_washington_issues' => array(
+                'table' => 'nfb_washington_issues',
+                'columns' => array('issue_id' => 'issue_id')
+            )
+        );
+
+    }
+}
+class note_table extends rating_table
+{
+    public function set_up_note_table()
+    {
+        $table_name = 'nfb_washington_note';
+        $this->table_test($table_name);
+        $this->note_schema($table_name, $schema);
+        $schema[$table_name]['description'] = "Table for notes";
+        $schema[$table_name]['primary key'] = ['note_id'];
+        $this->create_table($schema, $table_name);
+    }
+    public function note_schema($table_name, &$schema)
+    {
+        $schema[$table_name]['fields']['note_id'] = array(
+        'type'=> 'serial',
+        'size' => 'big',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary Key: note id'
+    );
+        $schema[$table_name]['fields']['note'] = array(
+            'type'=> 'varchar',
+            'length' => '500',
+            'default' => '',
+            'not null' => False,
+            'description' => 'Rating comments'
+        );
+        $schema[$table_name]['fields']['created_user'] = array(
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => '',
+            'not null' => False,
+            'description' => 'who made the note'
+        );
+        $schema[$table_name]['fields']['last_modified_user'] = array(
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => '',
+            'not null' => False,
+            'description' => 'who made the note'
+        );
+        $schema[$table_name]['fields']['year']= array(
+          'type' => 'int',
+          'size' =>  'big',
+          'default' => '2020',
+          'not null' => true,
+            'description' => 'year note is active'
+        );
+    }
+}
+class note_link extends  note_table
+{
+    public function set_up_note_link_table()
+    {
+        $table_name = 'nfb_washington_note_link';
+        $this->table_test($table_name);
+        $this->link_schema($table_name, $schema);
+        $schema[$table_name]['description'] = "Table ftha links  notes as a one to many";
+        $schema[$table_name]['primary key'] = ['link_id'];
+        $this->create_table($schema, $table_name);
+    }
+    public function link_schema($table_name, &$schema)
+    {
+        $schema[$table_name]['fields']['link_id'] = array(
+            'type'=> 'serial',
+            'size' => 'big',
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+            'description' => 'Primary Key: link id'
+        );
+        $schema[$table_name]['fields']['table_name'] = array(
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => '',
+            'not null' => False,
+            'description' => 'who made the note'
+        );
+        $schema[$table_name]['fields']['entity_id']= array(
+            'type' => 'int',
+            'size' =>  'big',
+            'default' => '0',
+            'not null' => true,
+            'description' => 'id for whatever committee, member, or other entity the note is attached to'
+        );
+        $schema[$table_name]['fields']['note_id']= array(
+            'type' => 'int',
+            'size' =>  'big',
+            'default' => '0',
+            'not null' => true,
+            'description' => 'id for the note'
+        );
+    }
+}
+class committee_table extends note_link
+{
+    public function set_up_committee_table()
+    {
+        $table_name = 'nfb_washington_committee';
+        $this->table_test($table_name);
+        $this->committee_schema($table_name, $schema);
+        $schema[$table_name]['description'] = "Table for committees";
+        $schema[$table_name]['primary key'] = ['committee_id'];
+        $this->create_table($schema, $table_name);
+    }
+    public function  committee_schema($table_name, &$schema)
+    {
+        $schema[$table_name]['fields']['committee_id'] = array(
+            'type'=> 'serial',
+            'size' => 'big',
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+            'description' => 'Primary Key: committe_id'
+        );
+        $schema[$table_name]['fields']['propublica_id']= array(
+            'type' => 'int',
+            'size' =>  'big',
+            'default' => '0',
+            'not null' => true,
+            'description' => 'id used in propublica'
+        );
+        $schema[$table_name]['fields']['committee_name'] = array(
+            'type'=> 'varchar',
+            'length' => '256',
+            'default' => '',
+            'not null' => true,
+            'description' => 'committee name'
+        );
+        $schema[$table_name]['fields']['chamber'] = array(
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => '',
+            'not null' => true,
+            'description' => 'committee chamber'
+        );
+        $schema[$table_name]['fields']['active']= array(
+            'type' => 'int',
+            'size' =>  'tiny',
+            'default' => '0',
+            'not null' => true,
+            'description' => 'boolean for if the committee is still in use by congress'
+        );
+    }
+}
+class comittee_memberhsip_table extends committee_table
+{
+    public function set_up_committee_membership_table()
+    {
+        $table_name = 'nfb_washington_committee_mem';
+        $this->table_test($table_name);
+        $this->com_mem_schema($table_name, $schema);
+        $schema[$table_name]['description'] = "Table for committee memberships";
+        $schema[$table_name]['primary key'] = ['com_mem_id'];
+        $this->create_table($schema, $table_name);
+    }
+    public function  com_mem_schema($table_name, &$schema)
+    {
+        $schema[$table_name]['fields']['com_mem_id'] = array(
+            'type'=> 'serial',
+            'size' => 'big',
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+            'description' => 'Primary Key: committe member id'
+        );
+        $schema[$table_name]['fields']['committee_id']= array(
+            'type' => 'int',
+            'size' =>  'big',
+            'default' => '0',
+            'not null' => true,
+            'description' => 'id for the committed'
+        );
+        $schema[$table_name]['fields']['member_id']= array(
+            'type' => 'int',
+            'size' =>  'big',
+            'default' => '0',
+            'not null' => true,
+            'description' => 'id for the member'
+        );
+        $schema[$table_name]['fields']['active']= array(
+            'type' => 'int',
+            'size' =>  'tiny',
+            'default' => '0',
+            'not null' => true,
+            'description' => 'bolean for active relationship'
+        );
+        $schema[$table_name]['foreign keys'] = array(
+            'nfb_washington_members' => array(
+                'table' => 'nfb_washington_members',
+                'columns' => array('member_id' => 'member_id')
+            ),
+            'nfb_washington_committee' => array(
+                'table' => 'nfb_washington_committee',
+                'columns' => array('committee_id' => 'committee_id')
+            ),
+        );
+
+    }
+}
+class configuration_table extends comittee_memberhsip_table
+{
+    public function set_up_configuration_table()
+    {
+        $table_name = 'nfb_washington_committee_mem';
+        $this->table_test($table_name);
+        $this->com_mem_schema($table_name, $schema);
+        $schema[$table_name]['description'] = "Table for committee memberships";
+        $schema[$table_name]['primary key'] = ['config_id'];
+        $this->create_table($schema, $table_name);
+    }
+    public function  configuration_schema($table_name, &$schema)
+    {
+        $schema[$table_name]['fields']['config_id'] = array(
+            'type'=> 'serial',
+            'size' => 'big',
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+            'description' => 'Primary Key: configuration id'
+        );
+        $schema[$table_name]['fields']['setting'] = array(
+            'type'=> 'varchar',
+            'length' => '256',
+            'default' => '',
+            'not null' => true,
+            'description' => 'setting name'
+        );
+        $schema[$table_name]['fields']['value'] = array(
+            'type'=> 'varchar',
+            'length' => '256',
+            'default' => '',
+            'not null' => true,
+            'description' => ' name'
+        );
+        $schema[$table_name]['fields']['active']= array(
+            'type' => 'int',
+            'size' =>  'tiny',
+            'default' => '0',
+            'not null' => true,
+            'description' => 'bolean for active relationship'
+        );
+        $schema[$table_name]['fields']['created_user'] = array(
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => '',
+            'not null' => False,
+            'description' => 'who made the note'
+        );
+        $schema[$table_name]['fields']['last_modified_user'] = array(
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => '',
+            'not null' => False,
+            'description' => 'who made the note'
+        );
+
     }
 }
