@@ -18,7 +18,7 @@ class AdminHomeForm extends FormBase
        $this->verify_api_key($form, $form_state);
        if($this->verification->get_status() == "false")
        {
-           return $form;
+          \dRupal::logger('nfb_washington')->notice("I did the thing okay ");
        }
        else {
            //todo build form
