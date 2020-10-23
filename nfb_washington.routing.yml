@@ -39,7 +39,7 @@ nfb_washington_update_rate_issue:
     _permission: 'access content'
     _role: 'administrator + nfb_washington_user'
 nfb_washington.meeting_ajax:
-  path: '/nfb_washington/ajax/meeting'
+  path: 'nfb_washington/ajax/meeting'
   defaults:
     _controller: '\Drupal\nfb_washington\Controller\MeetingAjaxController::content'
     _title: 'ajax'
@@ -47,10 +47,18 @@ nfb_washington.meeting_ajax:
     _permission: 'access content'
     _role: 'administrator + nfb_washington_user'
 nfb_washington.raitng_ajax:
-  path: '/nfb_washington/ajax/rating'
+  path: 'nfb_washington/ajax/rating'
   defaults:
     _controller: '\Drupal\nfb_washington\Controller\RatingAjaxController::content'
     _title: 'ajax'
   requirements:
     _permission: 'access content'
     _role: 'administrator + nfb_washington_user'
+nfb_washington_admin_home:
+  path: 'nfb_washington/admin'
+  defaults:
+    _form: '\Drupal\nfb_washington\Form\AdminHomeForm'
+    _title: 'NFB Washington Administration'
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator + nfb_washington_admin'
