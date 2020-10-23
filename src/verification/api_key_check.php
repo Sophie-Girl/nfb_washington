@@ -18,13 +18,12 @@ class  api_key_check
         $query = "select * from nfb_washington_config where setting = 'pp_id' and active = '0';";
         $key = 'config_id';
         $this->database->select_query($query, $key);
+        \Drupal::logger('nfb_washington')->notice("I rna the query");
         if($this->database->get_result() != "error"){
         foreach($this->database->get_result() as $setting)
         {
-
             $api_key = $setting['value'];
         }}
-
         $this->apikey = $api_key;
     }
     public function  api_key_validation(&$form, &$form_state)
