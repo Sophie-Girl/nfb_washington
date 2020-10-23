@@ -15,7 +15,7 @@ class  api_key_check
     {
         $api_key = null;
         $this->database = new base();
-        $query = 'select * from nfb_washington_config where setting = "pp_id" and active = "0";';
+        $query = "select * from nfb_washington_config where setting = 'pp_id' and active = '0';";
         $key = 'config_id';
         $this->database->select_query($query, $key);
         foreach($this->database->get_result() as $setting)
