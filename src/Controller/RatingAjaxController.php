@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class RatingAjxController extends ControllerBase
+class RatingAjaxController extends ControllerBase
 {
  public $archive;
  public $rep_id;
