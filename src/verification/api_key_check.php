@@ -31,8 +31,8 @@ class  api_key_check
         $this->api_key_ckeck();
         if($this->get_apikey() == null)
         {$form['warning_markup'] =array(
-          'type' => 'item',
-          'markup' => "<h2 style='color: red'> No Propublica API-key Set</h2>
+          '#type' => 'item',
+          '#markup' => "<h2 style='color: red'> No Propublica API-key Set</h2>
 <p>There is no Propublica API key set. u cannot pull data from Propublica to populate/update 
 Members of Congress, Issues/Bills, Committees and membership, etc. Please Visit <a href='/nfb_washington/admin/configuration'>the 
 NFB Washington configuration page</a> to add or update one. </p>"
