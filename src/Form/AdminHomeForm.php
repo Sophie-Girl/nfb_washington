@@ -30,6 +30,7 @@ class AdminHomeForm extends FormBase
     public function verify_api_key(&$form, $form_state)
     {
         $this->verification = new api_key_check();
+        \drupal::logger('nfb_washington')->notice("i am about to run the query");
         $this->verification->api_key_validation($form,$form_state);
     }
 }
