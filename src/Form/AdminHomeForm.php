@@ -10,10 +10,11 @@ class AdminHomeForm extends FormBase
     public $verification;
     public function getFormId()
     {
-        return 'nfb_washington_admin_home';
+        return 'nfb_wash_admin_home';
     }
     public function buildForm(array $form, FormStateInterface $form_state)
     {
+        \drupal::logger('nfb_washington')->notice("i get to the form");
        $this->verify_api_key($form, $form_state);
        if($this->verification->get_status() == "false")
        {
