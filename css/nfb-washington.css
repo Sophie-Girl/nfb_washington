@@ -1,6 +1,6 @@
 .admin_alert
 {
-    color: rgba(200, 0, 0, .3);
+    background: rgba(200, 0, 0, .3);
 
-    background: red;
+    color: firebrick;
 }
