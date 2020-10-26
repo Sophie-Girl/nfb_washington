@@ -2,6 +2,7 @@
 Namespace Drupal\nfb_washington\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\nfb_washington\form_factory\admin\admin_home;
 use Drupal\nfb_washington\verification\api_key_check;
 
 class AdminHomeForm extends FormBase
@@ -16,6 +17,8 @@ class AdminHomeForm extends FormBase
     {
         $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
        $this->verify_api_key($form, $form_state);
+       $factory = new admin_home();
+       $factory->build_form_markups($form, $form_state);
        return $form;
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
