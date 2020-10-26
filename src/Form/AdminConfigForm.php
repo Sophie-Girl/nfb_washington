@@ -16,7 +16,7 @@ class AdminConfigForm extends FormBase
     {
        $this->verification = new api_key_check();
        $this->verification->api_key_validation($form, $form_state);
-
+       return $form;
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
