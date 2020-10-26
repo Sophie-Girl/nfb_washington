@@ -62,3 +62,11 @@ nfb_washington_admin_home:
   requirements:
     _permission: 'access content'
     _role: 'administrator + nfb_washington_admin'
+nfb_washington_admin_config:
+  path: 'nfb_washington/admin/config'
+  defaults:
+    _form: '\Drupal\nfb_washington\Form\AdminConfigForm'
+    _title: 'NFB Washington Configuration'
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator + nfb_washington_admin'
