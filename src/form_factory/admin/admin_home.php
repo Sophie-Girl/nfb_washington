@@ -23,21 +23,21 @@ class admin_home
         $form['committee_markup'] = array(
             '#type' => "item",
             '#markup' => "<h3>Committees</h3>
-<p class='right-side'> Import committewes, find members, update membership. <spn><a href='/nfb_washington/admin/committee' class='button-3'></a> </spn></p>");
+<p class='right-side'> Import committewes, find members, update membership. <span><a href='/nfb_washington/admin/committee' class='button-3'></a> </span></p>");
     }
     public function issues_markup(&$form, $form_state)
     {
         $form['issue_markup'] = array(
             '#type' => "item",
             '#markup' => "<h3>Issues</h3>
-<p class='right-side'> Create and edit issues, link issues to past issues. <spn><a href='/nfb_washington/admin/issue' class='button-1'></a> </spn></p>");
+<p class='right-side'> Create and edit issues, link issues to past issues. <span><a href='/nfb_washington/admin/issue' class='button-1'></a> </span></p>");
     }
     public function note_markup(&$form, $form_state)
     {
         $form['notes_markup'] = array(
             '#type' => "item",
             '#markup' => "<h3>Notes</h3>
-<p class='right-side'> Create and link notes. <spn><a href='/nfb_washington/admin/notes' class='button-2'></a> </spn></p>");
+<p class='right-side'> Create and link notes. <span><a href='/nfb_washington/admin/notes' class='button-2'></a> </span></p>");
     }
     public function build_form_markups(&$form, $form_state)
     {
