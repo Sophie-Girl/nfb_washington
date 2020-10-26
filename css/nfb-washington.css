@@ -85,3 +85,11 @@
     background-color: #f3642a;
     text-decoration: none;
 }
+.right-side
+{
+
+}
+.right-side span
+{
+    float: right; text-align: right;
+}
