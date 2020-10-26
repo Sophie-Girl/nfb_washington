@@ -14,15 +14,8 @@ class AdminHomeForm extends FormBase
     }
     public function buildForm(array $form, FormStateInterface $form_state)
     {
-        \drupal::logger('nfb_washington')->notice("i get to the form");
+        $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
        $this->verify_api_key($form, $form_state);
-       if($this->verification->get_status() == "false")
-       {
-          \dRupal::logger('nfb_washington')->notice("I did the thing okay ");
-       }
-       else {
-           //todo build form
-       }
        return $form;
     }
     public function submitForm(array &$form, FormStateInterface $form_state)

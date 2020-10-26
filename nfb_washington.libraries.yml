@@ -1,0 +1,5 @@
+nfb-washington:
+  version: 1.x
+  css:
+    theme:
+      css/nfb-washington.css: {}
