@@ -1,5 +1,6 @@
 .admin_alert
 {
-    color: red;
-    background: rgba(175, 40, 50, 50);;
+    color: rgba(200, 0, 0, .3);
+
+    background: red;
 }
