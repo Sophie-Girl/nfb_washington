@@ -18,4 +18,14 @@ class base
             $this->result = "error";
         }
     }
+    public function update_query($query)
+    {
+        $this->database = \Drupal::database();
+        $this->result =  $this->database->query($query)->execute();
+    }
+    public function insert_query($table, $fields)
+    {
+        $this->database = \Drupal::database();
+        $this->result = $this->database->insert($table)->fields($fields)->execute();
+    }
 }
