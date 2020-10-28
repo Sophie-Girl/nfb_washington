@@ -28,7 +28,9 @@ Class admin_config
         $query = "select * from nfb_washington_config where setting = 'pp_id' and value = '".$this->get_api_key_value()."' ;";
         $key = "value";
         $this->database->select_query($query, $key);
-        if($this->database->get_result() != "error") {}
+        if($this->database->get_result() != "error") {
+            $this->insert_new_row();
+        }
         else {
 
             }
@@ -40,6 +42,15 @@ Class admin_config
     }
     public function insert_new_row()
     {
-
+        $table = "nfb_washington_config";
+        $fields = array(
+            'setting' => "pp_id",
+            'value' => $this->get_api_key_value(),
+            "active" => "0",
+            "created_user" => \Drupal::currentUser()->getAccountName(),
+            "last_modified_user" => \Drupal::currentUser()->getAccountName(),
+        );
+        $this->database = new base();
+        $this->database->insert_query($table, $fields);
     }
 }
