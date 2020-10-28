@@ -76,7 +76,7 @@ Class admin_config_backend
         $query = "select * from nfb_washington_config where setting = 'congress_number' and value = '".$this->get_congress_number_value()."';";
         $key = "value";
         $this->database->select_query($query, $key);
-        if($this->database->get_result() == "error")
+        if($this->database->get_result() == "error" || $this->database->get_result() == array())
         {
             $this->insert_congress_number();
         }
