@@ -42,7 +42,7 @@ For information on th eAPi please visit their website <a href='https://projects.
         $this->Congress_Number($form, $form_state);
         $form['submit'] = array(
             '#type' => 'submit',
-            '#value' => $this->t('Submit'),);
+            '#value' => "Submit",);
     }
 
 }
