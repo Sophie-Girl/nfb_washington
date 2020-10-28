@@ -14,6 +14,7 @@ class AdminMemberForm extends FormBase
     public function buildForm(array $form, FormStateInterface $form_state)
     {
         $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
+        $this->api_verification($form, $form_state);
 
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
