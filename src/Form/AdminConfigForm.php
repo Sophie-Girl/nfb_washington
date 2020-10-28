@@ -28,6 +28,7 @@ class AdminConfigForm extends FormBase
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
+        \Drupal::logger("nfb_washington")->notice("The fuck is going on?");
         $this->backend = new admin_config_backend();
         $this->backend->admin_config_form_backend($form_state);
     }
