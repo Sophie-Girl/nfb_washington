@@ -13,6 +13,7 @@ class  congress_number_check
         if($this->get_congress() == null)
         {$this->congress_number_not_found($form, $form_state);}
         else{ $this->congress_number_markup($form, $form_state);}
+        \Drupal::logger("nfb_washington_debug")->notice(print_r($form, true));
     }
     public function congress_number_check()
     {
