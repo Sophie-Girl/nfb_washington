@@ -37,8 +37,9 @@ Class admin_config_backend
         $this->database = new base();
         $query = "select * from nfb_washington_config where setting = 'pp_id' and value = '".$this->get_api_key_value()."' ;";
         $key = "value";
-        $this->database->select_query($query, $key);
         \Drupal::logger("nfb_Washington")->notice("I am getting here");
+        $this->database->select_query($query, $key);
+        \Drupal::logger("nfb_Washington")->notice("I am getting past the query");
         if($this->database->get_result() == "error") {
             \Drupal::logger("nfb_Washington")->notice("I am getting here");
             $this->insert_new_row();
