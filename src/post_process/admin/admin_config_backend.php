@@ -13,6 +13,11 @@ Class admin_config_backend
     public function get_congress_number_value()
     {Return $this->congress_number_value;}
     public $database;
+    public $user_name;
+    public function get_user_name()
+    {
+        return $this->user_name;
+    }
     public function admin_config_form_backend(FormStateInterface $form_state)
     {
         $this->set_form_values($form_state);
@@ -23,6 +28,9 @@ Class admin_config_backend
     {
         $this->api_key_value = $form_state->getValue("api_key");
         $this->congress_number_value = $form_state->getValue("congress_number");
+    }
+    public function set_user_name(){
+        $user = \drupal::currentUser()->getUsername();
     }
     public function find_existing_api_key()
     {
@@ -52,8 +60,8 @@ Class admin_config_backend
             'setting' => "pp_id",
             'value' => $this->get_api_key_value(),
             "active" => "0",
-            "created_user" => \Drupal::currentUser()->getAccountName(),
-            "last_modified_user" => \Drupal::currentUser()->getAccountName(),
+            "created_user" => \drupal::currentUser()->getUsername(),
+            "last_modified_user" => \drupal::currentUser()->getUsername(),
         );
         $this->database = new base();
         $this->database->insert_query($table, $fields);
@@ -80,8 +88,8 @@ Class admin_config_backend
             'setting' => "congress_number",
             'value' => $this->get_congress_number_value(),
             "active" => "0",
-            "created_user" => \Drupal::currentUser()->getAccountName(),
-            "last_modified_user" => \Drupal::currentUser()->getAccountName(),
+            "created_user" => \drupal::currentUser()->getUsername(),
+            "last_modified_user" => \drupal::currentUser()->getUsername(),
         );
         $this->database = new base();
         $this->database->insert_query($table, $fields);
