@@ -12,7 +12,7 @@ For information on th eAPi please visit their website <a href='https://projects.
     }
     public function APIKey_text_Field(&$form, $form_state)
     {
-        $form['api_key'] = array(
+        $form['pp_api_key'] = array(
           '#type' => 'textfield',
            '#size' => '20',
            '#title' => "Propublica API Key (Required to pull Congressional data)",
