@@ -41,12 +41,12 @@ Class admin_config_backend
         $this->database->select_query($query, $key);
         \Drupal::logger("nfb_Washington")->notice("I am getting past the query");
         if($this->database->get_result() == "error") {
-            \Drupal::logger("nfb_Washington")->notice("I am getting here");
+            \Drupal::logger("nfb_Washington")->notice("I am getting the inseert");
             $this->insert_new_row();
         }
         else
             {
-                \Drupal::logger("nfb_Washington")->notice("I am getting here");
+                \Drupal::logger("nfb_Washington")->notice("I am getting to the update");
                 $this->update_existing_api_key();;
             }
     }

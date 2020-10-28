@@ -18,7 +18,7 @@ class  api_key_check
         $query = "select * from nfb_washington_config where setting = 'pp_id' and active = '0';";
         $key = 'config_id';
         $this->database->select_query($query, $key);
-        \Drupal::logger('nfb_washington')->notice("I ran the query");
+        \Drupal::logger('nfb_washington')->notice(print_r($this->database->get_result(), true));
         if($this->database->get_result() != "error"){
         foreach($this->database->get_result() as $setting)
         {
