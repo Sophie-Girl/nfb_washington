@@ -38,11 +38,14 @@ Class admin_config_backend
         $query = "select * from nfb_washington_config where setting = 'pp_id' and value = '".$this->get_api_key_value()."' ;";
         $key = "value";
         $this->database->select_query($query, $key);
+        \Drupal::logger("nfb_Washington")->notice("I am getting here");
         if($this->database->get_result() == "error") {
+            \Drupal::logger("nfb_Washington")->notice("I am getting here");
             $this->insert_new_row();
         }
         else
             {
+                \Drupal::logger("nfb_Washington")->notice("I am getting here");
                 $this->update_existing_api_key();;
             }
     }
