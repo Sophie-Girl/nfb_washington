@@ -24,12 +24,12 @@ class AdminMemberForm extends FormBase
     {
         // TODO: Implement submitForm() method.
     }
-    public function api_verification(&$form, $form_state)
+    public function api_verification(&$form, &$form_state)
     {
         $this->verification = new api_key_check();
         $this->verification->api_key_validation($form, $form_state);
     }
-    public function congress_number_markup(&$form, $form_state)
+    public function congress_number_markup(&$form, &$form_state)
     {
         $this->verification = new congress_number_check();
         $this->verification->congress_number_verification($form, $form_state);
