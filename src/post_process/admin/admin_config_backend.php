@@ -40,7 +40,7 @@ Class admin_config_backend
         \Drupal::logger("nfb_Washington")->notice("I am getting here");
         $this->database->select_query($query, $key);
         \Drupal::logger("nfb_Washington")->notice("I am getting past the query");
-        if($this->database->get_result() == "error") {
+        if($this->database->get_result() == array()) {
             \Drupal::logger("nfb_Washington")->notice("I am getting the inseert");
             $this->insert_new_row();
         }
