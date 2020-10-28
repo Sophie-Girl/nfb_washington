@@ -17,6 +17,7 @@ class AdminMemberForm extends FormBase
         $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
         $this->api_verification($form, $form_state);
         $this->congress_number_markup($form, $form_state);
+        \drupal::logger("nfb_Washington")->notice(print_r($form, true));
         return $form;
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
