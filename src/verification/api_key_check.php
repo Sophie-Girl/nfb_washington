@@ -22,6 +22,7 @@ class  api_key_check
         if($this->database->get_result() != "error"){
         foreach($this->database->get_result() as $setting)
         {
+            $setting = get_object_vars($setting);
             $api_key = $setting['value'];
         }}
         $this->apikey = $api_key;
