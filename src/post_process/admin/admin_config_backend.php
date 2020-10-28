@@ -41,7 +41,7 @@ Class admin_config_backend
         $this->database->select_query($query, $key);
         \Drupal::logger("nfb_Washington")->notice("I am getting past the query");
         if($this->database->get_result() == array()) {
-            \Drupal::logger("nfb_Washington")->notice("I am getting the inseert");
+            \Drupal::logger("nfb_Washington")->notice("I am getting the insert");
             $this->insert_new_row();
         }
         else
