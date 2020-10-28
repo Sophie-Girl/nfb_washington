@@ -40,6 +40,9 @@ For information on th eAPi please visit their website <a href='https://projects.
         $this->API_key_markup($form, $form_state);
         $this->APIKey_text_Field($form, $form_state);
         $this->Congress_Number($form, $form_state);
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => $this->t('Submit'),);
     }
 
 }

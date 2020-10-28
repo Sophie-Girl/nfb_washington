@@ -21,9 +21,7 @@ class AdminConfigForm extends FormBase
        $this->verification = new api_key_check(); $this->factory =  new admin_config();
        $this->verification->api_key_validation($form, $form_state);
        $this->factory->build_form_array($form, $form_state);
-        $form['submit'] = array(
-            '#type' => 'submit',
-            '#value' => $this->t('Submit'),);
+
        return $form;
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
