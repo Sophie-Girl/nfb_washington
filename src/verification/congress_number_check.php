@@ -22,6 +22,7 @@ class  congress_number_check
         $key = 'config_id';
         $this->database = new base();
         $this->database->select_query($query, $key);
+        \Drupal::logger("nfb_washington")->notice(print_r($this->database->get_result(), true));
         if($this->database->get_result() == "error"|| $this->database->get_result() == array())
         {
             foreach($this->database->get_result() as $setting)
@@ -44,7 +45,7 @@ class  congress_number_check
     {
         $form['congress_number_markup'] = array(
           '#type' => "item",
-           '#makrup' => "<p class = 'admin_alert'><b>No Congress number set. Please visit <a href='nfb_washington/admin/configuration'>the configuration page</a> </b></p>",
+           '#markup' => "<p class = 'admin_alert'><b>No Congress number set. Please visit <a href='nfb_washington/admin/configuration'>the configuration page</a> </b></p>",
         );
     }
 }
