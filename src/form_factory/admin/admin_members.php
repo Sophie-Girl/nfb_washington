@@ -17,7 +17,7 @@ class admin_members
             '#required' => true,
             '#options' => array(
               "initial_upload" => "Import New Congress",
-              "maintenance" => "Maintain current Congressional records"
+              "maintenance" => "Maintain Current Congressional Records"
             ),
             "#ajax" => array(
                 "event" => "change",
@@ -44,12 +44,12 @@ class admin_members
         if($form_state->getValue("members_mode")== "")
         {$markup = "<p>Please select a mode</p>";}
         elseif($form_state->getValue("members_mode")== "initial_upload")
-        {$markup = "<p><b>Initial Upload:</b> This will upload new members of congress, 
+        {$markup = "<p><b>Import New Congress:</b> This will upload new members of congress, 
            while removing any members form the previous congress who resigned, did not 
            win reelection, or left office under other circumstances. Should be run after 
            the election of a new congress</p>";}
         else {
-            $markup = "<p><b>Maintenance:</b> Checks the current congress for any members hwo have left 
+            $markup = "<p><b>Maintain Current Congressional Records:</b> Checks the current congress for any members hwo have left 
             Congress. As well as important any people who have entered office due to special elections, 
             or other means. </p>";
         }
