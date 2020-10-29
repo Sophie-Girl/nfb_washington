@@ -76,6 +76,7 @@ Class admin_config_backend
         $query = "select * from nfb_washington_config where setting = 'congress_number' and value = '".$this->get_congress_number_value()."';";
         $key = "value";
         $this->database->select_query($query, $key);
+        \drupal::logger("nfb_washington")->notice(print_r($this->database->get_result(), true));
         if($this->database->get_result() == "error" || $this->database->get_result() == array())
         {
             \drupal::logger("nfb_washington")->notice("I am inserting congress number");
