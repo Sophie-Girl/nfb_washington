@@ -22,6 +22,7 @@ class AdminMemberForm extends FormBase
         $this->factory = new admin_members();
         $this->factory->build_form_array($form, $form_state);
         $this->factory = null;
+        \drupal::logger("nfb_washington")->notice(print_r($form, true));
         return $form;
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
@@ -42,7 +43,7 @@ class AdminMemberForm extends FormBase
     }
     public function markup_refresh(&$form, $form_state)
     {
-        \Drupal::logger("nfb_Washington_ajax")->notice("I am firing");
+
         return$form['mode_explain'];
     }
 }
