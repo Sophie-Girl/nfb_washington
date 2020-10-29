@@ -41,6 +41,7 @@ class admin_members
     }
     public function markup_choice(FormStateInterface &$form_state)
     {
+        \drupal::logger("nfb_washington")->notice($form_state->getValue("members_mode"));
         if($form_state->getValue("members_mode'")== "")
         {$markup = "<p>Please select a mode</p>";}
         elseif($form_state->getValue("members_mode'")== "initial_upload")
