@@ -25,9 +25,7 @@ class admin_members
                 'wrapper' => "explain_markup"
             )
         );
-        $form['submit'] = array(
-            '#type' => 'submit',
-            '#value' => "Submit",);
+
     }
     public function build_markup(&$form, FormStateInterface &$form_state)
     {
@@ -37,6 +35,9 @@ class admin_members
           '#markup' => $this->markup_choice($form_state),
           "#suffix" => "</div>",
         );
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => "Submit",);
     }
     public function markup_choice(FormStateInterface &$form_state)
     {
