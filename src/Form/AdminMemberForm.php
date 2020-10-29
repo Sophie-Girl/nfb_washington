@@ -21,6 +21,7 @@ class AdminMemberForm extends FormBase
         $this->congress_number_markup($form, $form_state);
         $this->factory = new admin_members();
         $this->factory->build_form_array($form, $form_state);
+        $this->factory = null;
         return $form;
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
@@ -31,11 +32,13 @@ class AdminMemberForm extends FormBase
     {
         $this->verification = new api_key_check();
         $this->verification->api_key_validation($form, $form_state);
+        $this->verification = null;
     }
     public function congress_number_markup(&$form, &$form_state)
     {
         $this->verification = new congress_number_check();
         $this->verification->congress_number_verification($form, $form_state);
+        $this->verification = null;
     }
     public function refresh(&$form, $form_state)
     {
