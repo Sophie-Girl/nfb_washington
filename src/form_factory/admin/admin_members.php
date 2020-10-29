@@ -20,9 +20,9 @@ class admin_members
               "maintenance" => "Maintain current Congressional records"
             ),
             "#ajax" => array(
-                "event" => "change",
-                "callback" => 'markup_refresh',
-                'wrapper' => "explain_markup"
+                "#event" => "change",
+                "#callback" => 'markup_refresh',
+                '#wrapper' => "explain_markup"
             )
         );
 
