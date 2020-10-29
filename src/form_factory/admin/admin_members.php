@@ -50,7 +50,7 @@ class admin_members
            the election of a new congress</p>";}
         else {
             $markup = "<p><b>Maintenance:</b> Checks the current congress for any members hwo have left 
-            Congress. As well as important any people who ahve entered office due to special elections, 
+            Congress. As well as important any people who have entered office due to special elections, 
             or other means. </p>";
         }
         \Drupal::logger("nfb_washington_markup_check")->notice($form_state->getValue("Value: ".$form_state->getValue("member_mode")));
