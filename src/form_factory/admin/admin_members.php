@@ -21,7 +21,7 @@ class admin_members
             ),
             "#ajax" => array(
                 "event" => "change",
-                "callback" => 'refresh',
+                "callback" => 'markup_refresh',
                 'wrapper' => "explain_markup"
             )
         );

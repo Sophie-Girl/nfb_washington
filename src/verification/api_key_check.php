@@ -25,6 +25,7 @@ class  api_key_check
             $api_key = $setting['value'];
         }}
         $this->apikey = $api_key;
+        $this->database = null;
     }
     public function  api_key_validation(&$form, &$form_state)
     {

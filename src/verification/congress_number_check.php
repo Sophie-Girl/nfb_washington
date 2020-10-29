@@ -31,6 +31,7 @@ class  congress_number_check
             }
         }
         $this->congress_number = $congress_number;
+        $this->database = null;
     }
     public function congress_number_markup(&$form, $form_state)
     {
