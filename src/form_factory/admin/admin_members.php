@@ -20,9 +20,9 @@ class admin_members
               "maintenance" => "Maintain current Congressional records"
             ),
             "#ajax" => array(
-                "#event" => "change",
-                "#callback" => 'markup_refresh',
-                '#wrapper' => "explain_markup"
+                "event" => "change",
+                "callback" => 'markup_refresh',
+                'wrapper' => "explain_markup"
             )
         );
 
@@ -53,6 +53,7 @@ class admin_members
             Congress. As well as important any people who ahve entered office due to special elections, 
             or other means. </p>";
         }
+        \Drupal::logger("nfb_washington_markup_check")->notice($markup);
         return $markup;
     }
 }

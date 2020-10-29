@@ -41,9 +41,8 @@ class AdminMemberForm extends FormBase
         $this->verification->congress_number_verification($form, $form_state);
         $this->verification = null;
     }
-    public function markup_refresh(&$form, $form_state)
+    public function markup_refresh(array &$form, FormStateInterface $form_state)
     {
-
-        return$form['mode_explain'];
+        return $form['mode_explain'];
     }
 }
