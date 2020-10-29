@@ -41,9 +41,9 @@ class admin_members
     }
     public function markup_choice(FormStateInterface $form_state)
     {
-        if($form_state->getValue("members_mode'")== "")
+        if($form_state->getValue("members_mode")== "")
         {$markup = "<p>Please select a mode</p>";}
-        elseif($form_state->getValue("members_mode'")== "initial_upload")
+        elseif($form_state->getValue("members_mode")== "initial_upload")
         {$markup = "<p><b>Initial Upload:</b> This will upload new members of congress, 
            while removing any members form the previous congress who resigned, did not 
            win reelection, or left office under other circumstances. Should be run after 
