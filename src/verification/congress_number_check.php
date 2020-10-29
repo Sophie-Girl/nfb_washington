@@ -22,8 +22,7 @@ class  congress_number_check
         $key = 'config_id';
         $this->database = new base();
         $this->database->select_query($query, $key);
-        \Drupal::logger("nfb_washington")->notice(print_r($this->database->get_result(), true));
-        if($this->database->get_result() == "error"|| $this->database->get_result() == array())
+        if($this->database->get_result() != "error"|| $this->database->get_result() != array())
         {
             foreach($this->database->get_result() as $setting)
             {

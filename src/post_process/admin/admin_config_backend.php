@@ -37,16 +37,14 @@ Class admin_config_backend
         $this->database = new base();
         $query = "select * from nfb_washington_config where setting = 'pp_id' and value = '".$this->get_api_key_value()."' ;";
         $key = "value";
-        \Drupal::logger("nfb_Washington")->notice("I am getting here");
         $this->database->select_query($query, $key);
-        \Drupal::logger("nfb_Washington")->notice("I am getting past the query");
+
         if($this->database->get_result() == "error" || $this->database->get_result() ==  array()) {
-            \Drupal::logger("nfb_Washington")->notice("I am getting the insert");
+
             $this->insert_new_row();
         }
         else
             {
-                \Drupal::logger("nfb_Washington")->notice("I am getting to the update");
                 $this->update_existing_api_key();;
             }
     }
@@ -76,10 +74,8 @@ Class admin_config_backend
         $query = "select * from nfb_washington_config where setting = 'congress_number' and value = '".$this->get_congress_number_value()."';";
         $key = "value";
         $this->database->select_query($query, $key);
-        \drupal::logger("nfb_washington")->notice(print_r($this->database->get_result(), true));
         if($this->database->get_result() == "error" || $this->database->get_result() == array())
         {
-            \drupal::logger("nfb_washington")->notice("I am inserting congress number");
             $this->insert_congress_number();
         }
         else
