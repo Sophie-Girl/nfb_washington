@@ -37,7 +37,7 @@ class AdminMemberForm extends FormBase
         $this->verification = new congress_number_check();
         $this->verification->congress_number_verification($form, $form_state);
     }
-    public function refresh(&$form, &$form_state)
+    public function refresh(&$form, $form_state)
     {
         \Drupal::logger("nfb_Washington_ajax")->notice("I am firing");
         return$form['mode_explain'];

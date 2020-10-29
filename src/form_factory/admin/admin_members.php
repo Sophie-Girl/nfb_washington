@@ -4,12 +4,12 @@ use Drupal\core\form\FormStateInterface;
 
 class admin_members
 {
-    public function build_form_array(&$form, FormStateInterface &$form_state)
+    public function build_form_array(&$form, FormStateInterface $form_state)
     {
         $this->build_mode_select($form, $form_state);
         $this->build_markup($form, $form_state);
     }
-    public function build_mode_select(&$form, FormStateInterface &$form_state)
+    public function build_mode_select(&$form, FormStateInterface $form_state)
     {
         $form['members_mode']= array(
             '#type' => "select",
@@ -27,7 +27,7 @@ class admin_members
         );
 
     }
-    public function build_markup(&$form, FormStateInterface &$form_state)
+    public function build_markup(&$form, FormStateInterface $form_state)
     {
         $form['mode_explain'] = array(
           "#prefix" => "<div id = 'explain_markup'>",
@@ -39,7 +39,7 @@ class admin_members
             '#type' => 'submit',
             '#value' => "Submit",);
     }
-    public function markup_choice(FormStateInterface &$form_state)
+    public function markup_choice(FormStateInterface $form_state)
     {
         \drupal::logger("nfb_washington")->notice("Value: ".$form_state->getValue("members_mode"));
         if($form_state->getValue("members_mode'")== "")
