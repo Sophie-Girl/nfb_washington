@@ -78,6 +78,7 @@ Class admin_config_backend
         $this->database->select_query($query, $key);
         if($this->database->get_result() == "error" || $this->database->get_result() == array())
         {
+            \drupal::logger("nfb_washington")->notice("I am inserting congress number");
             $this->insert_congress_number();
         }
         else
