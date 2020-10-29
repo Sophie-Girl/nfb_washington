@@ -53,7 +53,7 @@ class admin_members
             Congress. As well as important any people who ahve entered office due to special elections, 
             or other means. </p>";
         }
-        \Drupal::logger("nfb_washington_markup_check")->notice($markup);
+        \Drupal::logger("nfb_washington_markup_check")->notice($form_state->getValue($form_state->getValue("member_mode")));
         return $markup;
     }
 }
