@@ -39,6 +39,7 @@ class AdminMemberForm extends FormBase
     }
     public function markup_reset(&$form, &$form_state)
     {
+        \Drupal::logger("nfb_Washington_ajax")->notice("I am firing");
         return$form['mode_explain'];
     }
 }
