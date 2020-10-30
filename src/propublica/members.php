@@ -53,6 +53,19 @@ class members extends query_base{
     {
         $api_url = "https://api.propublica.org/congress/v1/".$this->get_congress_number()."/".$this->get_search_criteria_1()."/".$this->get_entity().".json";
         $this->api_url = $api_url;
+        $this->set_curl();
+        $this->curl_execute_set_propublica_result();
+    }
+    public function parse_member($member)
+    {
+        $this->member_first_name = $member['first_name'];
+        $this->member_middle_name = $member["middle_name"];
+        $this->member_last_name = $member["last_name"];
+        $this->member_phone_number = $member["phone"];
+        $this->member_office_address = $member['office'];
+        $this->member_district = $member["district"];
+        $this->member_rank = $member["rank"];
+
     }
 
 
