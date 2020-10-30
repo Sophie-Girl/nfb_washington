@@ -14,13 +14,16 @@ class members extends query_base{
     public $member_d_o_b;
     public $member_gender;
     public $member_active;
+    public $member_state;
+    public function get_member_state()
+    {return $this->member_state;}
     public function get_member_first_name()
     {return $this->member_first_name;}
     public function get_member_last_name()
     {return $this->member_last_name;}
     public function get_member_middle_name()
     {return $this->member_middle_name;}
-    public function member_phone_number()
+    public function get_member_phone_number()
     {return $this->member_phone_number;}
     public function  get_member_district()
     {return $this->member_district;}
@@ -64,8 +67,11 @@ class members extends query_base{
         $this->member_phone_number = $member["phone"];
         $this->member_office_address = $member['office'];
         $this->member_district = $member["district"];
-        $this->member_rank = $member["rank"];
-
+        $this->member_rank = $member["state_rank"];
+        $this->member_pp_id = $member["A000360"];
+        $this->member_d_o_b = $member["date_of_birth"];
+        $this->member_gender = $member["gender"];
+        $this->member_active = $member["in_office"];
     }
 
 
