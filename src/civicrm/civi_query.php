@@ -24,7 +24,7 @@ class civi_query
     }
     public function civi_query()
     {
-        $this->civi_result = $result = civicrm_api3($this->get_civi_entity(), $this->get_civicrm_mode(), $this->get_civicrm_params());
+        $this->civi_result  = civicrm_api3($this->get_civi_entity(), $this->get_civicrm_mode(), $this->get_civicrm_params());
     }
 
 }
