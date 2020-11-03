@@ -63,6 +63,49 @@ class drupal_member_civi_contact_link
             $this->create_congressional_civi_record();
         }
     }
+    public function address_and_phone()
+    {
+        $this->civi_query->civi_entity = "Address";
+        $this->civi_query->civi_mode = "get";
+        $this->civi_query->civi_params = array(
+            'sequential' => 1,
+            'state_province_id' => 1050,
+            'city' => "Washington",
+        );
+        $this->civi_query->civi_query();
+        if($this->civi_query->get_civicrm_result()['count'] > 0)
+        {
+            $address_id = $this->civi_query->get_civicrm_result()['values']['0']['id'];
+            $this->update_address($address_id);
+        }
+        else{
+            $this->create_address();
+        }
+    }
+    public function update_address($address_id)
+    {
+        $this->civi_query->civi_mode = "create";
+        $this->civi_query->civi_entity = "Address";
+        $this->civi_query->civi_params = array(
+            'id' => $address_id,
+            'street_address' => $this->propublica_query->get_office_address(),
+        );
+        $this->civi_query->civi_query();
+    }
+    public function create_address()
+    {
+        $this->civi_query->civi_mode = "create";
+        $this->civi_query->civi_entity = "Address";
+        $this->civi_query->civi_params = array(
+            'contact_id' => $this->get_drupal_civicrm_id(),
+            'street_address' => $this->propublica_query->get_office_address(),
+            "location_type_id" => "Work",
+            'state_province_id' => 1050,
+            'city' => "Washington",
+        );
+        $this->civi_query->civi_query();
+
+    }
     public function  update_congressional_details()
     {
         $this->civi_query->civi_entity = "Contact";
@@ -105,6 +148,11 @@ class drupal_member_civi_contact_link
         );
         $this->civi_query->civi_query();;
         $this->drupal_civicrm_id = $this->civi_query->get_civicrm_result()['id'];
+    }
+    public function Phone_number()
+    {
+        $this->civi_query->civi_entity = "Contact";
+        $this->civi_query->civi_mode = "create";
     }
 
 
