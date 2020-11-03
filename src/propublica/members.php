@@ -73,6 +73,12 @@ class members extends query_base{
         $this->member_gender = $member["gender"];
         $this->member_active = $member["in_office"];
     }
+    public function leaving_congress_query()
+    {
+        $this->api_url = "https://api.propublica.org/congress/v1/".$this->get_congress_number()."/".$this->get_search_criteria_1()."/".$this->get_entity()."/leaving.json";
+        $this->set_curl();
+        $this->curl_execute_set_propublica_result();
+    }
 
 
 
