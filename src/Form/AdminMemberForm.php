@@ -56,7 +56,7 @@ class AdminMemberForm extends FormBase
         $civi_query = new civi_query($civi);
         $propulbica = new members();
         $link = new drupal_member_civi_contact_link($civi_query, $propulbica);
-        $backend = new admin_member_backend();
+        $backend = new admin_member_backend($link);
         $backend->backend();
 
     }
