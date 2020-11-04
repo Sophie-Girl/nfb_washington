@@ -45,6 +45,20 @@ class member_table extends  database_functions
             'not null' => TRUE,
             'description' => 'Link to Civi Contact data'
         );
+        $schema[$table_name]['fields']['f_name'] = array(
+            'type' => 'varchar',
+            'length' => 64,
+            'not null' => TRUE,
+            'default' => '',
+            'description' => 'Name for civi lookup in case of merged civi_Contact',
+        );
+        $schema[$table_name]['fields']['l_name'] = array(
+            'type' => 'varchar',
+            'length' => 64,
+            'not null' => TRUE,
+            'default' => '',
+            'description' => 'Name for civi lookup in case of merged civi_Contact',
+        );
         $schema[$table_name]['fields']['district'] = array(
             'type'=> 'int',
             'size' => 'big',
@@ -52,6 +66,7 @@ class member_table extends  database_functions
             'not null' => False,
             'description' => 'District Number: Null for senators'
         );
+
         $schema[$table_name]['fields']['rank'] = array(
             'type'=> 'int',
             'size' => 'tiny',
@@ -68,7 +83,7 @@ class member_table extends  database_functions
         );
         $schema[$table_name]['fields']['state'] = array(
             'type' => 'varchar',
-            'length' => 2,
+            'length' => 8,
             'not null' => TRUE,
             'default' => '',
             'description' => 'State abbreviation',
