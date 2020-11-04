@@ -1,8 +1,13 @@
 <?php
 Namespace Drupal\nfb_washington\Form;
+use Drupal\civicrm\Civicrm;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\nfb_washington\civicrm\civi_query;
+use Drupal\nfb_washington\civicrm_drupal_link\drupal_member_civi_contact_link;
 use Drupal\nfb_washington\form_factory\admin\admin_members;
+use Drupal\nfb_washington\post_process\admin\admin_member_backend;
+use Drupal\nfb_washington\propublica\members;
 use Drupal\nfb_washington\verification\api_key_check;
 use Drupal\nfb_washington\verification\congress_number_check;
 
@@ -27,7 +32,7 @@ class AdminMemberForm extends FormBase
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        // TODO: Implement submitForm() method.
+       $this->form_backend();
     }
     public function api_verification(&$form, &$form_state)
     {
@@ -44,5 +49,15 @@ class AdminMemberForm extends FormBase
     public function markup_refresh(array &$form, FormStateInterface $form_state)
     {
         return $form['mode_explain'];
+    }
+    public function form_backend()
+    {
+        $civi= new Civicrm(); $civi->initialize();
+        $civi_query = new civi_query($civi);
+        $propulbica = new members();
+        $link = new drupal_member_civi_contact_link($civi_query, $propulbica);
+        $backend = new admin_member_backend();
+        $backend->backend();
+
     }
 }
