@@ -36,7 +36,7 @@ class drupal_member_civi_contact_link
     }
     public function general_run_through()
     {
-        foreach($this->propublica_query->get_propublica_result() as $member)
+        foreach($this->propublica_query->get_propublica_result()['results']['members'] as $member)
         {$this->propublica_query->parse_member($member);
         if($this->propublica_query->get_member_state()  != "GU" &&
             $this->propublica_query->get_member_state()  != "AS"  &&
