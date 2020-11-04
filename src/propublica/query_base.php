@@ -39,6 +39,7 @@ class query_base
         $key= "config_id"; $this->database->select_query($query, $key);
         foreach($this->database->get_result() as $api_keys)
         {
+            $api_keys = get_object_vars($api_keys);
             if($api_key == "")
             {$api_key = $api_keys['value'];
             \Drupal::logger("nfb_Washington_api_key")->notice("aPI_key ".$this->get_api_key());}
