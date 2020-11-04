@@ -40,9 +40,11 @@ class query_base
         foreach($this->database->get_result() as $api_keys)
         {
             if($api_key == "")
-            {$api_key = $api_keys['value'];}
+            {$api_key = $api_keys['value'];
+            \Drupal::logger("nfb_Washington_api_key")->notice("aPI_key ".$this->get_api_key());}
         }
         $this->api_key = $api_key;
+        \Drupal::logger("nfb_Washington_api_key")->notice("aPI_key ".$this->get_api_key());
     }
     public function  set_curl()
     {
