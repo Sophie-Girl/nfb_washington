@@ -37,7 +37,7 @@ class drupal_member_civi_contact_link
     public function general_run_through()
     {
         \drupal::logger("nfb_Washington")->notice(print_r($this->propublica_query->get_propublica_result(), true));
-        foreach($this->propublica_query->get_propublica_result()['results']['members'] as $member)
+        foreach($this->propublica_query->get_propublica_result()['results']['0']['members'] as $member)
         {$this->propublica_query->parse_member($member);
         if($this->propublica_query->get_member_state()  != "GU" &&
             $this->propublica_query->get_member_state()  != "AS"  &&
