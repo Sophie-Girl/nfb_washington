@@ -9,7 +9,7 @@ class drupal_member_civi_contact_link
     public $propublica_query;
     public $drupal_civicrm_id;
     public function  get_drupal_civicrm_id()
-    {return $this>$this->drupal_civicrm_id;}
+    {return $this->drupal_civicrm_id;}
     public function  __construct(civi_query $civi_query, members $members)
     {
         $this->civi_query = $civi_query;
