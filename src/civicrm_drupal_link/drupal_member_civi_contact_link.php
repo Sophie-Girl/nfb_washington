@@ -90,6 +90,7 @@ class drupal_member_civi_contact_link
         $this->civi_query->civi_entity = "Address";
         $this->civi_query->civi_mode = "get";
         $this->civi_query->civi_params = array(
+            'contact_id' => $this->get_drupal_civicrm_id(),
             'sequential' => 1,
             'state_province_id' => 1050,
             'city' => "Washington",
