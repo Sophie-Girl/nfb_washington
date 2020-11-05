@@ -66,9 +66,10 @@ class members extends query_base{
         $this->member_last_name = $member["last_name"];
         $this->member_phone_number = $member["phone"];
         $this->member_office_address = $member['office'];
-        $this->member_district = $member["district"];
-        $this->member_rank = $member["state_rank"];
-        $this->member_pp_id = $member["A000360"];
+        if($this->get_search_criteria_1() ==" house")
+        {$this->member_district = $member["district"];}
+        else{$this->member_rank = $member["state_rank"];}
+        $this->member_pp_id = $member["id"];
         $this->member_d_o_b = $member["date_of_birth"];
         $this->member_gender = $member["gender"];
         $this->member_active = $member["in_office"];

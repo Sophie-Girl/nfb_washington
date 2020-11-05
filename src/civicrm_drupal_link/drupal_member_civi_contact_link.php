@@ -179,6 +179,7 @@ class drupal_member_civi_contact_link
     }
     public function Phone_number()
     {
+       if($this->propublica_query->get_member_phone_number()){
         $phone = $res = preg_replace("/[^0-9]/", "", $this->propublica_query->get_member_phone_number() );
         $this->civi_query->civi_entity = "Phone";
         $this->civi_query->civi_mode = "get";
@@ -189,7 +190,7 @@ class drupal_member_civi_contact_link
         );
         $this->civi_query->civi_query();
         if($this->civi_query->get_civicrm_result()['count'] < '1')
-        {$this->create_phone();}
+        {$this->create_phone();}}
     }
     public function create_phone()
     {
