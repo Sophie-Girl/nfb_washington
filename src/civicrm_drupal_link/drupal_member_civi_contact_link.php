@@ -36,7 +36,6 @@ class drupal_member_civi_contact_link
     }
     public function general_run_through()
     {
-        \drupal::logger("nfb_Washington")->notice(print_r($this->propublica_query->get_propublica_result(), true));
         foreach($this->propublica_query->get_propublica_result()['results']['0']['members'] as $member)
         {$this->propublica_query->parse_member($member);
         if($this->propublica_query->get_member_state()  != "GU" &&
@@ -75,7 +74,6 @@ class drupal_member_civi_contact_link
         {
 
             $this->drupal_civicrm_id =  $this->civi_query->get_civicrm_result()['values']['0']['contact_id'];
-           \Drupal::logger("nfb_Washingotn")->notice("I found the contact. I'm adding gender");
             $this->convert_gender();
             $this->update_congressional_details();
 
@@ -96,7 +94,6 @@ class drupal_member_civi_contact_link
             'city' => "Washington",
         );
         $this->civi_query->civi_query();
-        \Drupal::logger("nfb_washington_address")->notice("get_Address".print_r($this->civi_query->get_civicrm_result(), true));
         if($this->civi_query->get_civicrm_result()['count'] > 0)
         {
 
@@ -145,7 +142,6 @@ class drupal_member_civi_contact_link
             'birth_date' => $this->propublica_query->get_member_d_o_b(),
             'gender_id' => $this->propublica_query->get_member_gender(),
         );
-        \drupal::logger("nfb_Washington_address")->notice("update_contact_record");
         $this->civi_query->civi_query();
     }
     public function convert_gender()
@@ -178,7 +174,6 @@ class drupal_member_civi_contact_link
         $this->civi_query->civi_query();
 
         $this->drupal_civicrm_id = $this->civi_query->get_civicrm_result()['id'];
-        \drupal::logger("nfb_Washington")->notice("create_contact_record: ". $this->civi_query->get_civicrm_result()['id']." ".$this->get_drupal_civicrm_id());
     }
     public function Phone_number()
     {
@@ -204,7 +199,6 @@ class drupal_member_civi_contact_link
             'phone' => $this->propublica_query->get_member_phone_number(),
             'location_type_id' => "Work",
         );
-        \drupal::logger("nfb_Washington")->notice("phone_record");
         $this->civi_query->civi_query();
     }
     public function active_inactive()
@@ -238,7 +232,7 @@ class drupal_member_civi_contact_link
             'contact_sub_type' => "Congressional_Representative",
             'formal_title' => $this->get_title_for_record(),
         );
-        \drupal::logger("nfb_Washington")->notice("activate_record ".print_r($this->civi_query->get_civicrm_params(), true));
+
         $this->civi_query->civi_query();
     }
     public function deactivate_record()
@@ -250,7 +244,6 @@ class drupal_member_civi_contact_link
             'contact_sub_type' => "",
             'formal_title' => $this->get_title_for_record(),
         );
-        \drupal::logger("nfb_Washington")->notice("deactivate_record");
         $this->civi_query->civi_query();
     }
     public function database_process(){
