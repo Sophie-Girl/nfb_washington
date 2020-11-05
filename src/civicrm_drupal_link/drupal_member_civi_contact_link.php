@@ -170,8 +170,9 @@ class drupal_member_civi_contact_link
             'birth_date' => $this->propublica_query->get_member_d_o_b(),
             'gender_id' =>  $this->propublica_query->get_member_gender(),
         );
-        \drupal::logger("nfb_Washington")->notice("create_record");
-        $this->civi_query->civi_query();;
+
+        $this->civi_query->civi_query();
+        \drupal::logger("nfb_Washington")->notice("create_record". print_r($this->civi_query->get_civicrm_result(), true));
         $this->drupal_civicrm_id = $this->civi_query->get_civicrm_result()['id'];
     }
     public function Phone_number()
