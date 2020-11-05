@@ -172,9 +172,9 @@ class drupal_member_civi_contact_link
         );
 
         $this->civi_query->civi_query();
-        \drupal::logger("nfb_Washington")->notice("create_record". print_r($this->civi_query->get_civicrm_result(), true));
+
         $this->drupal_civicrm_id = $this->civi_query->get_civicrm_result()['id'];
-        \drupal::logger("nfb_Washington")->notice("create_record". $this->get_drupal_civicrm_id());
+        \drupal::logger("nfb_Washington")->notice("create_record". $this->get_drupal_civicrm_id(). " ".$this->civi_query->get_civicrm_result()['id']);
     }
     public function Phone_number()
     {
