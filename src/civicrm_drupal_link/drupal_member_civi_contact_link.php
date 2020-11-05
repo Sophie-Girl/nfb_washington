@@ -95,7 +95,7 @@ class drupal_member_civi_contact_link
             'city' => "Washington",
         );
         $this->civi_query->civi_query();
-        \Drupal::logger("nfb_washington_address")->notice("get_Address".print_r($this->civi_query->civi_query(), true));
+        \Drupal::logger("nfb_washington_address")->notice("get_Address".print_r($this->civi_query->get_civicrm_result(), true));
         if($this->civi_query->get_civicrm_result()['count'] > 0)
         {
             $address_id = $this->civi_query->get_civicrm_result()['values']['0']['id'];
