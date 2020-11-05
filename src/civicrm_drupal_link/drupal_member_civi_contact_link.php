@@ -187,7 +187,7 @@ class drupal_member_civi_contact_link
             'phone_numeric' => $phone,
         );
         $this->civi_query->civi_query();
-        if($this->civi_query->get_civicrm_result()['count'] > '1')
+        if($this->civi_query->get_civicrm_result()['count'] < '1')
         {$this->create_phone();}
     }
     public function create_phone()
