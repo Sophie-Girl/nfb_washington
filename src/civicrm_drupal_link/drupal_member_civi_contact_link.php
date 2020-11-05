@@ -99,6 +99,7 @@ class drupal_member_civi_contact_link
         \Drupal::logger("nfb_washington_address")->notice("get_Address".print_r($this->civi_query->get_civicrm_result(), true));
         if($this->civi_query->get_civicrm_result()['count'] > 0)
         {
+
             $address_id = $this->civi_query->get_civicrm_result()['values']['0']['id'];
             $this->update_address($address_id);
         }
@@ -119,6 +120,7 @@ class drupal_member_civi_contact_link
     }
     public function create_address()
     {
+        \drupal::logger("nfb_Washington_Address_create")->notice("I get here");
         $this->civi_query->civi_mode = "create";
         $this->civi_query->civi_entity = "Address";
         $this->civi_query->civi_params = array(
