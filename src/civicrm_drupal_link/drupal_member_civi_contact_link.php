@@ -75,6 +75,7 @@ class drupal_member_civi_contact_link
         {
 
             $this->drupal_civicrm_id =  $this->civi_query->get_civicrm_result()['values']['0']['contact_id'];
+           \Drupal::logger("nfb_Washingotn")->notice("I found the contact. I'm adding gender");
             $this->convert_gender();
             $this->update_congressional_details();
 
