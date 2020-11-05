@@ -145,7 +145,7 @@ class drupal_member_civi_contact_link
             'birth_date' => $this->propublica_query->get_member_d_o_b(),
             'gender_id' => $this->propublica_query->get_member_gender(),
         );
-        \drupal::logger("nfb_Washington")->notice("update_contact_record");
+        \drupal::logger("nfb_Washington_address")->notice("update_contact_record");
         $this->civi_query->civi_query();
     }
     public function convert_gender()
