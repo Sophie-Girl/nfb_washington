@@ -172,9 +172,7 @@ class drupal_member_civi_contact_link
         );
 
         $this->civi_query->civi_query();
-
         $this->drupal_civicrm_id = $this->civi_query->get_civicrm_result()['id'];
-        \drupal::logger("nfb_Washington")->notice("create_record". $this->get_drupal_civicrm_id(). " ".$this->civi_query->get_civicrm_result()['id']);
     }
     public function Phone_number()
     {
@@ -233,7 +231,7 @@ class drupal_member_civi_contact_link
             'contact_sub_type' => "Congressional_Representative",
             'formal_title' => $this->get_title_for_record(),
         );
-        \drupal::logger("nfb_Washington")->notice("activate_record");
+        \drupal::logger("nfb_Washington")->notice("activate_record ".print_r($this->civi_query->get_civicrm_params(), true));
         $this->civi_query->civi_query();
     }
     public function deactivate_record()
