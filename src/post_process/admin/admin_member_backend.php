@@ -7,6 +7,7 @@ class admin_member_backend
     public $link;
     public function __construct(drupal_member_civi_contact_link $drupal_member_civi_contact_link)
     {
+        ini_set('max_execution_time', 500);
         $this->link = $drupal_member_civi_contact_link;
     }
     public function backend()
