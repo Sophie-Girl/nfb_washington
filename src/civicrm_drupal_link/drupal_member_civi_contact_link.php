@@ -335,7 +335,7 @@ class drupal_member_civi_contact_link
     public function  maintnence_database()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_members where 'propublica_id' == '".$this->propublica_query->get_member_pp_id()."';";
+        $query = "select * from nfb_washington_members where 'propublica_id' = '".$this->propublica_query->get_member_pp_id()."';";
         $key = $this->propublica_query->get_member_pp_id();
         $this->database->select_query($query, $key);
         foreach($this->database->get_result() as $member)
