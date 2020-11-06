@@ -317,7 +317,7 @@ class drupal_member_civi_contact_link
     public function find_civi_record()
     {
         $this->civi_query->civi_mode = "get";
-        $this->civi_query->civi_mode = "Contact";
+        $this->civi_query->civi_entity = "Contact";
         $this->civi_query->civi_params = array(
             'sequential' => 1,
             'contact_sub_type' => "Congressional_Representative",
@@ -327,7 +327,7 @@ class drupal_member_civi_contact_link
         $this->civi_query->civi_query();
         if($this->civi_query->get_civicrm_result()['count'] > 0)
         {
-            $this->drupal_civicrm_id = $this->civi_query->get_civicrm_result()['values']['0']['contact-id'];
+            $this->drupal_civicrm_id = $this->civi_query->get_civicrm_result()['values']['0']['contact_id'];
             $this->deactivate_record();
             $this->maintnence_database();
         }
