@@ -38,6 +38,7 @@ class drupal_member_civi_contact_link
     {
         $this->propublica_query->set_api_key();
         $this->propublica_query->set_congress_number();
+        $this->propublica_query->entity = "members";
         $this->propublica_query->search_criteria_1 = "house";
         $this->propublica_query->congress_number = (int)$this->propublica_query->get_congress_number() - 1;
         $this->propublica_query->leaving_congress_query();
@@ -51,6 +52,7 @@ class drupal_member_civi_contact_link
     {
         $this->propublica_query->set_api_key();
         $this->propublica_query->set_congress_number();
+        $this->propublica_query->entity = "members";
         $this->propublica_query->search_criteria_1 = "house";
         $this->propublica_query->leaving_congress_query();
         $this->removal_run_through();
@@ -60,6 +62,7 @@ class drupal_member_civi_contact_link
     }
     public function general_run_through()
     {
+        \Drupal::logger("nfb_Washington_pp_result")->notice("Array: ".print_r($this->propublica_query->get_propublica_result(), true));
         foreach($this->propublica_query->get_propublica_result()['results']['0']['members'] as $member)
         {$this->propublica_query->parse_member($member);
         if($this->propublica_query->get_member_state()  != "GU" &&
@@ -292,7 +295,8 @@ class drupal_member_civi_contact_link
     }
     public function removal_run_through()
     {
-        foreach($this->propublica_query->get_propublica_result()['results']['0']['members'] as $member)
+        \Drupal::logger("nfb_Washington_pp_result")->notice("Array: ".print_r($this->propublica_query->get_propublica_result(), true));
+        foreach($this->propublica_query->get_propublica_result()['result']['0']['members'] as $member)
         {$this->propublica_query->leaving_congress_parse($member);
             if($this->propublica_query->get_member_state()  != "GU" &&
                 $this->propublica_query->get_member_state()  != "AS"  &&
