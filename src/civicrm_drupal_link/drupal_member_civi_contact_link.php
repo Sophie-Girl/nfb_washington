@@ -296,7 +296,6 @@ class drupal_member_civi_contact_link
     }
     public function removal_run_through()
     {
-        \Drupal::logger("nfb_Washington_pp_result")->notice("Array: ".print_r($this->propublica_query->get_propublica_result(), true));
         foreach($this->propublica_query->get_propublica_result()['results']['0']['members'] as $member)
         {$this->propublica_query->leaving_congress_parse($member);
             if($this->propublica_query->get_member_state()  != "GU" &&
