@@ -34,7 +34,7 @@ class drupal_member_civi_contact_link
         $this->propublica_query->set_api_key();
         $this->propublica_query->set_congress_number();
         $this->propublica_query->congress_number = (int)$this->propublica_query->get_congress_number() - 1;
-        $this->propublica_query->member_query();
+        $this->propublica_query->leaving_congress_query();
     }
     public function general_run_through()
     {
@@ -258,14 +258,14 @@ class drupal_member_civi_contact_link
         {
             $member = get_object_vars($member);
             if($member['member_id'])
-            {$mem_id = $member['member_id'];}
+            {$member_id = $member['member_id'];}
         }
-        if($mem_id)
+        if($member_id)
         {
-
+            $this->update_member_record($member_id);
         }
         else{
-
+            $this->insert_new_member();
         }
     }
     public function removal_run_through()
@@ -319,11 +319,74 @@ class drupal_member_civi_contact_link
         set civicrm_contact_id = '".$this->get_drupal_civicrm_id()."'
         where member_id = '".$member_id."';";
         $this->database->update_query($query);
+        $this->convert_in_office();
+        $query = "update nfb_Washington_members
+        set active = '".$this->propublica_query->get_member_active()."'
+        where member_id = '".$member_id."';";
+        $this->database->update_query($query);
+        if($this->propublica_query->get_search_criteria_1() == "senate")
+        {
+            $query = "update nfb_Washington_members
+        set district = 'Senate'
+        where member_id = '".$member_id."';";
+            $this->database->update_query($query);
+            $query = "update nfb_Washington_members
+        set rank = '".$this->propublica_query->get_member_rank()."'
+        where member_id = '".$member_id."';";
+            $this->database->update_query($query);
+        }
+        else {
+            $query = "update nfb_Washington_members
+        set district = '".$this->propublica_query->get_member_district()."'
+        where member_id = '".$member_id."';";
+            $this->database->update_query($query);
+            $query = "update nfb_Washington_members
+        set rank = '0'
+        where member_id = '".$member_id."';";
+            $this->database->update_query($query);
+
+        }
+
     }
 
-
-
-
+    public function convert_in_office()
+    {
+        if($this->propublica_query->get_member_active() == "true")
+        {$this->propublica_query->member_active = "0";}
+        else {$this->propublica_query->member_active = "1";}
+    }
+    public function insert_new_member()
+    {
+        $this->convert_in_office();
+        if($this->propublica_query->search_criteria_1 == "house")
+        {  $fields = array(
+            "civicrm_contact_id" => $this->get_drupal_civicrm_id(),
+            "district" => $this->propublica_query->get_member_district(),
+            "rank" => "0",
+            "active" => $this->propublica_query->get_member_active(),
+            "state" => $this->propublica_query->get_member_state(),
+            "propublica_id" => $this->propublica_query->get_member_pp_id()
+        );}
+        else {
+            $fields = array(
+                "civicrm_contact_id" => $this->get_drupal_civicrm_id(),
+                "district" => "Senate",
+                "rank" => $this->propublica_query->get_member_rank(),
+                "active" => $this->propublica_query->get_member_active(),
+                "state" => $this->propublica_query->get_member_state(),
+                "propublica_id" => $this->propublica_query->get_member_pp_id());
+        }
+        $table = "nfb_washington_members";
+        $this->database = new base();
+        $this->database->insert_query($table, $fields);
+    }
+    public function deactivate_maintnence_record($member_id)
+    {
+        $query = "update nfb_Washington_members
+        set active = '0'
+        where member_id = '".$member_id."';";
+        $this->database->update_query($query);
+    }
 
 
 

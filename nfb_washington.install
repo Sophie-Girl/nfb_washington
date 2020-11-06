@@ -46,8 +46,8 @@ class member_table extends  database_functions
             'description' => 'Link to Civi Contact data'
         );
         $schema[$table_name]['fields']['district'] = array(
-            'type'=> 'int',
-            'size' => 'big',
+            'type'=> 'varchar',
+            'length' => 64,
             'default' => '0',
             'not null' => False,
             'description' => 'District Number: Null for senators'
