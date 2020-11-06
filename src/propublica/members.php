@@ -87,6 +87,7 @@ class members extends query_base{
         $this->member_middle_name = $member["middle_name"];
         $this->member_last_name = $member["last_name"];
         $this->member_pp_id = $member["id"];
+        $this->member_active = "false";
     }
 
 

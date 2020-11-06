@@ -1,6 +1,7 @@
 <?php
 Namespace Drupal\nfb_washington\civicrm_drupal_link;
 use Drupal\nfb_washington\civicrm\civi_query;
+use Drupal\nfb_washington\database\base;
 use Drupal\nfb_washington\propublica\members;
 
 class drupal_member_civi_contact_link
@@ -8,6 +9,7 @@ class drupal_member_civi_contact_link
     public $civi_query;
     public $propublica_query;
     public $drupal_civicrm_id;
+    public $database;
     public function  get_drupal_civicrm_id()
     {return $this->drupal_civicrm_id;}
     public function  __construct(civi_query $civi_query, members $members)
@@ -213,15 +215,29 @@ class drupal_member_civi_contact_link
     }
     public function get_title_for_record()
     {
-        if($this->propublica_query->get_search_criteria_1() == "house" && $this->propublica_query->get_member_state() != "DC"
-            && $this->propublica_query->get_search_criteria_1() == "house" && $this->propublica_query->get_member_state() != "PR")
-        {$title = "Representative";}
-        elseif($this->propublica_query->get_search_criteria_1() == "house" && $this->propublica_query->get_member_state() == "PR")
-        {$title = "Resident Commissioner";}
-        elseif($this->propublica_query->get_search_criteria_1() == "house" && $this->propublica_query->get_member_state() != "DC")
-        {$title = "Delegate";}
-        else {$title = "Senator";}
-        return $title;
+        if ($this->propublica_query->get_search_criteria_1() == "house" && $this->propublica_query->get_member_state() != "DC"
+            && $this->propublica_query->get_search_criteria_1() == "house" && $this->propublica_query->get_member_state() != "PR") {
+            foreach ($this->propublica_query->get_propublica_result()['results']['0']['members'] as $member) {
+                $this->propublica_query->parse_member($member);
+                if ($this->propublica_query->get_member_state() != "GU" &&
+                    $this->propublica_query->get_member_state() != "AS" &&
+                    $this->propublica_query->get_member_state() != "VI" &&
+                    $this->propublica_query->get_member_state() != "MP" &&
+                    $this->propublica_query->get_member_state() != "UM" &&
+                    $this->propublica_query->get_member_state() != "FM" &&
+                    $this->propublica_query->get_member_state() != "MH" &&
+                    $this->propublica_query->get_member_state() != "PW") {
+                    $title = "Representative";
+                } elseif ($this->propublica_query->get_search_criteria_1() == "house" && $this->propublica_query->get_member_state() == "PR") {
+                    $title = "Resident Commissioner";
+                } elseif ($this->propublica_query->get_search_criteria_1() == "house" && $this->propublica_query->get_member_state() != "DC") {
+                    $title = "Delegate";
+                } else {
+                    $title = "Senator";
+                }
+                return $title;
+            }
+        }
     }
     public function activate_record()
     {
@@ -247,8 +263,65 @@ class drupal_member_civi_contact_link
         $this->civi_query->civi_query();
     }
     public function database_process(){
+        $this->database = new base();
+        $query = "select * from nfb_washington_members where 'propublica_id' == '".$this->propublica_query->get_member_pp_id()."';";
+        $key = $this->propublica_query->get_member_pp_id();
+        $this->database->select_query($query, $key);
+        foreach($this->database->get_result() as $member)
+        {
+            $member = get_object_vars($member);
+            if($member['member_id'])
+            {$mem_id = $member['member_id'];}
+        }
+        if($mem_id)
+        {
+
+        }
+        else{
+
+        }
+    }
+    public function removal_run_through()
+    {
+        foreach($this->propublica_query->get_propublica_result()['results']['0']['members'] as $member)
+        {$this->propublica_query->leaving_congress_parse($member);
+            if($this->propublica_query->get_member_state()  != "GU" &&
+                $this->propublica_query->get_member_state()  != "AS"  &&
+                $this->propublica_query->get_member_state()  != "VI"  &&
+                $this->propublica_query->get_member_state()  != "MP" &&
+                $this->propublica_query->get_member_state()  != "UM" &&
+                $this->propublica_query->get_member_state() != "FM"&&
+                $this->propublica_query->get_member_state() != "MH" &&
+                $this->propublica_query->get_member_state() != "PW"
+            )
+            {
+                $this->find_civi_record();
+            }
+            }
+    }
+    public function find_civi_record()
+    {
+        $this->civi_query->civi_mode = "get";
+        $this->civi_query->civi_mode = "Contact";
+        $this->civi_query->civi_params = array(
+            'sequential' => 1,
+            'contact_sub_type' => "Congressional_Representative",
+            'first_name' => $this->propublica_query->get_member_first_name(),
+            'last_name' => $this->propublica_query->get_member_last_name(),
+        );
+        $this->civi_query->civi_query();
+        if($this->civi_query->get_civicrm_result()['count'] > 0)
+        {
+            $this->drupal_civicrm_id = $this->civi_query->get_civicrm_result()['values']['0']['contact-id'];
+            $this->deactivate_record();
+            $this->maintnence_database();
+        }
+    }
+    public function  maintnence_database()
+    {
 
     }
+
 
 
 
