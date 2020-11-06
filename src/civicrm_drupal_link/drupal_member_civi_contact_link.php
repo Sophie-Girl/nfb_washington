@@ -119,7 +119,6 @@ class drupal_member_civi_contact_link
     }
     public function create_address()
     {
-        \drupal::logger("nfb_Washington_Address_create")->notice("I get here");
         $this->civi_query->civi_mode = "create";
         $this->civi_query->civi_entity = "Address";
         $this->civi_query->civi_params = array(
@@ -217,16 +216,6 @@ class drupal_member_civi_contact_link
     {
         if ($this->propublica_query->get_search_criteria_1() == "house" && $this->propublica_query->get_member_state() != "DC"
             && $this->propublica_query->get_search_criteria_1() == "house" && $this->propublica_query->get_member_state() != "PR") {
-            foreach ($this->propublica_query->get_propublica_result()['results']['0']['members'] as $member) {
-                $this->propublica_query->parse_member($member);
-                if ($this->propublica_query->get_member_state() != "GU" &&
-                    $this->propublica_query->get_member_state() != "AS" &&
-                    $this->propublica_query->get_member_state() != "VI" &&
-                    $this->propublica_query->get_member_state() != "MP" &&
-                    $this->propublica_query->get_member_state() != "UM" &&
-                    $this->propublica_query->get_member_state() != "FM" &&
-                    $this->propublica_query->get_member_state() != "MH" &&
-                    $this->propublica_query->get_member_state() != "PW") {
                     $title = "Representative";
                 } elseif ($this->propublica_query->get_search_criteria_1() == "house" && $this->propublica_query->get_member_state() == "PR") {
                     $title = "Resident Commissioner";
@@ -237,8 +226,6 @@ class drupal_member_civi_contact_link
                 }
                 return $title;
             }
-        }
-    }
     public function activate_record()
     {
         $this->civi_query->civi_entity ="Contact";
@@ -321,6 +308,19 @@ class drupal_member_civi_contact_link
     {
 
     }
+    public function  update_member_record($member_id)
+    {
+        $this->database = new base();
+        $query = "update nfb_Washington_members
+        set state = '".$this->propublica_query->get_member_state()."'
+        where member_id = '".$member_id."';";
+        $this->database->update_query($query);
+        $query = "update nfb_Washington_members
+        set civicrm_contact_id = '".$this->get_drupal_civicrm_id()."'
+        where member_id = '".$member_id."';";
+        $this->database->update_query($query);
+    }
+
 
 
 
