@@ -382,7 +382,7 @@ class drupal_member_civi_contact_link
         where member_id = '".$member_id."';";
             $this->database->update_query($query);
             $query = "update nfb_Washington_members
-        set rank = '0'
+        set rank = 'House'
         where member_id = '".$member_id."';";
             $this->database->update_query($query);
 
@@ -403,7 +403,7 @@ class drupal_member_civi_contact_link
         {  $fields = array(
             "civicrm_contact_id" => $this->get_drupal_civicrm_id(),
             "district" => $this->propublica_query->get_member_district(),
-            "rank" => "0",
+            "rank" => "House",
             "active" => $this->propublica_query->get_member_active(),
             "state" => $this->propublica_query->get_member_state(),
             "propublica_id" => $this->propublica_query->get_member_pp_id()

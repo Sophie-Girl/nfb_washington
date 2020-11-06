@@ -54,8 +54,8 @@ class member_table extends  database_functions
         );
 
         $schema[$table_name]['fields']['rank'] = array(
-            'type'=> 'int',
-            'size' => 'tiny',
+            'type'=> 'varchar',
+            'length' => 64,
             'default' => '0',
             'not null' => False,
             'description' => 'Senator Rank: Null is for House reps. 1 for Senior 2 for Junior'
