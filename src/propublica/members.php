@@ -74,6 +74,7 @@ class members extends query_base{
         $this->member_d_o_b = $member["date_of_birth"];
         $this->member_gender = $member["gender"];
         $this->member_active = $member["in_office"];
+        $this->member_state = $member['state'];
     }
     public function leaving_congress_query()
     {
