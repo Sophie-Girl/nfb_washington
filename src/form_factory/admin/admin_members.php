@@ -47,11 +47,12 @@ class admin_members
         {$markup = "<p><b>Import New Congress:</b> This will upload new members of congress, 
            while removing any members form the previous congress who resigned, did not 
            win reelection, or left office under other circumstances. Should be run after 
-           the election of a new congress</p>";}
+           the election of a new congress. It first removes records who are leavig 
+           the previous congress, and then adds in the new ones</p>";}
         else {
             $markup = "<p><b>Maintain Current Congressional Records:</b> Checks the current congress for any members hwo have left 
             Congress. As well as important any people who have entered office due to special elections, 
-            or other means. </p>";
+            or other means.  Thjis should be run during a year when no general election is held the previous November</p>";
         }
         return $markup;
     }

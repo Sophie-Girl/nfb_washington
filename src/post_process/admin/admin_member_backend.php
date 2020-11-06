@@ -10,9 +10,12 @@ class admin_member_backend
         ini_set('max_execution_time', 500);
         $this->link = $drupal_member_civi_contact_link;
     }
-    public function backend()
+    public function backend($mode)
     {
-        $this->link->set_up_general_member_process();
+        if($mode == "new_congress")
+        $this->link->new_congress_run_through();
+        else
+        {$this->link->mid_congress_maint();}
     }
 
 }

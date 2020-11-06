@@ -32,7 +32,10 @@ class AdminMemberForm extends FormBase
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-       $this->form_backend();
+        if($form_state->getValue("") == "initial_upload")
+        {$mode = "new_congress";}
+        else {$mode = "maint";}
+       $this->form_backend($mode);
     }
     public function api_verification(&$form, &$form_state)
     {
@@ -50,14 +53,14 @@ class AdminMemberForm extends FormBase
     {
         return $form['mode_explain'];
     }
-    public function form_backend()
+    public function form_backend($mode)
     {
         $civi= new Civicrm(); $civi->initialize();
         $civi_query = new civi_query($civi);
         $propulbica = new members();
         $link = new drupal_member_civi_contact_link($civi_query, $propulbica);
         $backend = new admin_member_backend($link);
-        $backend->backend();
+        $backend->backend($mode);
 
     }
 }
