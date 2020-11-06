@@ -17,6 +17,11 @@ class drupal_member_civi_contact_link
         $this->civi_query = $civi_query;
         $this->propublica_query = $members;
     }
+    public function new_congress_run_through()
+    {
+        $this->set_up_old_congress_maintenance_query();
+        $this->set_up_general_member_process();
+    }
     public function set_up_general_member_process()
     {
         $this->propublica_query->set_api_key();
@@ -33,8 +38,25 @@ class drupal_member_civi_contact_link
     {
         $this->propublica_query->set_api_key();
         $this->propublica_query->set_congress_number();
+        $this->propublica_query->search_criteria_1 = "house";
         $this->propublica_query->congress_number = (int)$this->propublica_query->get_congress_number() - 1;
         $this->propublica_query->leaving_congress_query();
+        $this->removal_run_through();
+        $this->propublica_query->search_criteria_1 = "senate";
+        $this->propublica_query->leaving_congress_query();
+        $this->removal_run_through();
+
+    }
+    public function mid_congress_maint()
+    {
+        $this->propublica_query->set_api_key();
+        $this->propublica_query->set_congress_number();
+        $this->propublica_query->search_criteria_1 = "house";
+        $this->propublica_query->leaving_congress_query();
+        $this->removal_run_through();
+        $this->propublica_query->search_criteria_1 = "senate";
+        $this->propublica_query->leaving_congress_query();
+        $this->removal_run_through();
     }
     public function general_run_through()
     {
@@ -283,6 +305,7 @@ class drupal_member_civi_contact_link
             )
             {
                 $this->find_civi_record();
+                $this->maintnence_database();
             }
             }
     }
@@ -306,7 +329,18 @@ class drupal_member_civi_contact_link
     }
     public function  maintnence_database()
     {
-
+        $this->database = new base();
+        $query = "select * from nfb_washington_members where 'propublica_id' == '".$this->propublica_query->get_member_pp_id()."';";
+        $key = $this->propublica_query->get_member_pp_id();
+        $this->database->select_query($query, $key);
+        foreach($this->database->get_result() as $member)
+        {
+            $member = get_object_vars($member);
+            if($member['member_id'])
+            {$member_id = $member['member_id'];}
+        }
+        if($member_id)
+        {$this->deactivate_maintnence_record($member_id);}
     }
     public function  update_member_record($member_id)
     {
