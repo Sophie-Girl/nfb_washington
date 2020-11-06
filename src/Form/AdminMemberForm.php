@@ -27,12 +27,11 @@ class AdminMemberForm extends FormBase
         $this->factory = new admin_members();
         $this->factory->build_form_array($form, $form_state);
         $this->factory = null;
-        \drupal::logger("nfb_washington")->notice(print_r($form, true));
         return $form;
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        if($form_state->getValue("") == "initial_upload")
+        if($form_state->getValue("members_mode") == "initial_upload")
         {$mode = "new_congress";}
         else {$mode = "maint";}
        $this->form_backend($mode);
