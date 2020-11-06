@@ -277,7 +277,7 @@ class drupal_member_civi_contact_link
     }
     public function database_process(){
         $this->database = new base();
-        $query = "select * from nfb_washington_members where 'propublica_id' == '".$this->propublica_query->get_member_pp_id()."';";
+        $query = "select * from nfb_washington_members where 'propublica_id' = '".$this->propublica_query->get_member_pp_id()."';";
         $key = $this->propublica_query->get_member_pp_id();
         $this->database->select_query($query, $key);
         foreach($this->database->get_result() as $member)
@@ -421,7 +421,7 @@ class drupal_member_civi_contact_link
     }
     public function deactivate_maintnence_record($member_id)
     {
-        $query = "update nfb_Washington_members
+        $query = "update nfb_washington_members
         set active = '0'
         where member_id = '".$member_id."';";
         $this->database->update_query($query);
