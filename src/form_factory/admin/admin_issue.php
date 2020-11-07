@@ -4,15 +4,22 @@ class admin_issue
 {
     public $database;
 
-    public function issue_switch($issue)
+    public function issue_switch($issue, &$form, $form_state)
     {
        if($issue == "create")
        {
-           // todo create new issue
+          $this->create_new_issue_form($form, $form_state);
        }
        else {
-           // todo edit specific issue
+          $this->edit_existing($issue, &$form, $form_state);
        }
+    }
+    public function  create_new_issue_form(&$form, $form_state)
+    {
+    }
+    public function edit_existing($issue, &$form, $form_state)
+    {
+
     }
 
 }
