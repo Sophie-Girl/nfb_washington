@@ -7,6 +7,7 @@ use Drupal\nfb_washington\verification\congress_number_check;
 
 class AdminIssueHomeForm extends FormBase
 {
+    public $verification;
     public function getFormId()
     {
         // TODO: Implement getFormId() method.
