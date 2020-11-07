@@ -10,7 +10,7 @@ class AdminComitForm extends FormBase
     public $verification;
     public function getFormId()
     {
-        return "nfb_washignton_admin_commit";
+        return "nfb_washington_admin_commit";
     }
     public function  buildForm(array $form, FormStateInterface $form_state)
     {
