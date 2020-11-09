@@ -270,7 +270,7 @@ class issue_table extends meeting_table
             'size' =>  'tiny',
             'default' => '0',
             'not null' => true,
-            'description' => 'boolean for if the  issue is the frist time this issue has comite up'
+            'description' => 'boolean for if the  issue is the first time this issue has comite up'
         );
         $schema[$table_name]['fields']['primary_issue_id'] = array(
             'type' => 'int',
