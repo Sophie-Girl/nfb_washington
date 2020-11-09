@@ -205,12 +205,9 @@ class issue_table extends meeting_table
         $this->issue_schema($table_name, $schema);
         $schema[$table_name]['description'] = "Table for Issues";
         $schema[$table_name]['primary key'] = ['issue_id'];
-        \Drupal::logger("nfb_washington_install")->notice(print_r($schema, true));
+
         $this->create_table($schema, $table_name);
-        \Drupal::logger("nfb_washington_install_2")->notice(print_r($schema, true));
-        $query = Database::getConnection()->schema();
-        $test = $query->fieldExists($table_name, "issue_name");
-        \Drupal::logger("nfb_washington_install_2")->notice("Table field was create: ". $test);
+
 
     }
     public function issue_schema($table_name, &$schema)
