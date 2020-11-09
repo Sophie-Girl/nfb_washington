@@ -86,11 +86,11 @@ class admin_issue
             )
         );
     }
-    public function edit_bill_slug($issue, &$form, $form_state)
+    public function edit_bill_slug($issue, &$form, &$form_state)
     {
         $form["bill_slug"] = array(
             '#type' => 'textfield',
-            '#title' => "Bill Id",
+            '#title' => "Bill Slug",
             '#required' => true,
             '#size' => "20",
             '#min' => 4,
@@ -101,7 +101,44 @@ class admin_issue
             $form_state['input']['edit_bill_slug'] = $issue['bill_id'];
         }
     }
-    public function
+    public function create_bill_slug(&$form, $form_state)
+    {
+        $form["bill_slug"] = array(
+            '#type' => 'textfield',
+            '#title' => "Bill Slug",
+            '#required' => true,
+            '#size' => "20",
+            '#min' => 4,
+            '#max' => 80,
+        );
+    }
+    public function create_primary(&$form, $form_state)
+    {
+        $form['primary_issue'] = array(
+            '#type' => "select",
+            "#title" => "Is this the first time the Issue is being brought up during Washington Seminar?",
+            "#options" => array(
+                "yes" => "Yes",
+                "no" => "No",
+            ),
+            '#required' => true,
+        );
+    }
+    public function edit_primary($issue, &$form, &$form_state)
+    {
+        $form['primary_issue'] = array(
+            '#type' => "select",
+            "#title" => "Is this the first time the Issue is being brought up during Washington Seminar?",
+            "#options" => array(
+                "yes" => "Yes",
+                "no" => "No",
+            ),
+            '#required' => true,
+        );
+
+            $form_state['input']['edit_bill_slug'] = $issue['bill_id'];
+    }
+
 
 
 
