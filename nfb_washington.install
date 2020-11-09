@@ -127,42 +127,42 @@ class meeting_table  extends  member_table
         );
         $schema[$table_name]['fields']['time'] = array(
             'type'=> 'varchar',
-            'length' => '8',
+            'length' => 8,
             'default' => '12:00 AM',
             'not null' => TRUE,
             'description' => 'Activity time'
         );
         $schema[$table_name]['fields']['description'] = array(
             'type'=> 'varchar',
-            'length' => '256',
+            'length' => 256,
             'default' => '',
             'not null' => TRUE,
             'description' => 'Activity description'
         );
         $schema[$table_name]['fields']['location'] = array(
             'type'=> 'varchar',
-            'length' => '500',
+            'length' => 500,
             'default' => '',
             'not null' => TRUE,
             'description' => 'Activity location'
         );
         $schema[$table_name]['fields']['m_o_c_contact'] = array(
             'type'=> 'varchar',
-            'length' => '500',
+            'length' => 500,
             'default' => '',
             'not null' => TRUE,
             'description' => 'Activity contact for member of congress'
         );
         $schema[$table_name]['fields']['nfb_contact'] = array(
             'type'=> 'varchar',
-            'length' => '500',
+            'length' => 500,
             'default' => '',
             'not null' => TRUE,
             'description' => 'Activity contact for nfb'
         );
         $schema[$table_name]['fields']['nfb_phone'] = array(
             'type'=> 'varchar',
-            'length' => '12',
+            'length' => 12,
             'default' => '',
             'not null' => TRUE,
             'description' => 'Phone number for the nfb contact'
@@ -176,14 +176,14 @@ class meeting_table  extends  member_table
         );
         $schema[$table_name]['fields']['created_user'] = array(
             'type'=> 'varchar',
-            'length' => '64',
+            'length' => 64,
             'default' => '',
             'not null' => False,
             'description' => 'who made the note'
         );
         $schema[$table_name]['fields']['last_modified_user'] = array(
             'type'=> 'varchar',
-            'length' => '64',
+            'length' => 64,
             'default' => '',
             'not null' => False,
             'description' => 'who made the note'
@@ -225,14 +225,14 @@ class issue_table extends meeting_table
         );
         $schema[$table_name]['fields']['bill_id'] = array(
             'type'=> 'varchar',
-            'length' => '256',
+            'length' => 256,
             'default' => '',
             'not null' => TRUE,
             'description' => 'Bill ID'
         );
         $schema[$table_name]['fields']['bill_slug'] = array(
             'type'=> 'varchar',
-            'length' => '256',
+            'length' => 256,
             'default' => '',
             'not null' => TRUE,
             'description' => 'Bill slug for Propublica'
