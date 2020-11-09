@@ -1,5 +1,7 @@
 <?php
 namespace  Drupal\nfb_washington\form_factory\admin;
+use Drupal\nfb_washington\database\base;
+
 class admin_issue
 {
     public $database;
@@ -16,10 +18,23 @@ class admin_issue
     }
     public function  create_new_issue_form(&$form, $form_state)
     {
+        $issue = "create";
+        $this->build_issue_name($form, $form_state);
+        $this->create_issue__bill($form, $form_state);
+        $this->create_form_bill_id($form, $form_state);
+        $this->create_bill_slug($form, $form_state);
+        $this->create_primary($form, $form_state);
+        $this->hidden_value($issue, $form, $form_state);
     }
     public function edit_existing($issue, &$form, $form_state)
     {
-
+        $this->issue_query_to_array($issue);
+        $this->create_edit_issue_name($issue, $form, $form_state);
+        $this->edit_form_bill_id($issue, $form, $form_state);
+        $this->edit_bill_slug($issue, $form, $form_state);
+        $this->edit_primary($issue, $form, $form_state);
+        $this->edit_primary_issue($issue, $form, $form_state);
+        $this->hidden_value($issue, $form, $form_state);
     }
     public function build_issue_name(&$form, $form_state)
     {
@@ -44,7 +59,7 @@ class admin_issue
         );
         $form_state['input']['edit_issue_name'] = $issue['name'];
     }
-    public function create_issue__bill(&$form, $form_State)
+    public function create_issue__bill(&$form, $form_state)
     {
         $form['bill_in_congress'] = array(
           '#type' => "select",
@@ -138,6 +153,73 @@ class admin_issue
 
             $form_state['input']['edit_bill_slug'] = $issue['bill_id'];
     }
+    public function create_primary_issue(&$form, $form_state)
+    {
+        $form["derivative_issue"] = array(
+            '#type' => 'select',
+            '#title' => "Attach this issue to",
+            '#options' => $this->primary_issue_options(),
+            '#states' => array(
+                'visible' =>  [':input[name="primary"]' => ['value' => "yes"]],
+                "and",
+                'required' => [':input[name="primary"]' => ['value' => "yes"]],
+            )
+        );
+    }
+    public function edit_primary_issue($issue, &$form, &$form_state)
+    {
+        $form["derivative_issue"] = array(
+            '#type' => 'select',
+            '#title' => "Attach this issue to",
+            '#options' => $this->primary_issue_options(),
+            '#states' => array(
+                'visible' =>  [':input[name="primary"]' => ['value' => "yes"]],
+                "and",
+                'required' => [':input[name="primary"]' => ['value' => "yes"]],
+            )
+        );
+        if($issue['primary_issue_id'] !=  "0")
+        {
+            $form_state['input']['edit_derivative_issue'] = $issue['primary_issue_id'];
+        }
+    }
+
+    public function primary_issue_options()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_wshington_issues where primary = '0' ;";
+        $key = 'issue_id';
+        $this->database->select_query($query, $key);
+        $options = null;
+        foreach ($this->database->get_result() as $issue)
+        {
+            $issue_array = get_object_vars($issue);
+            $options[$issue_array['isssue_id']] = $issue_array['name']." First use ".$issue_array['year'];
+        }
+        if($options == null)
+        {$options['na'] = "No issues have been entered please make this the primary issue";}
+        return $options;
+    }
+    public function hidden_value($issue, &$form, $form_state)
+    {
+        $form['issue_vlaue'] = array(
+          '#type' => 'hidden',
+            '#value' => $issue
+        );
+    }
+    public function issue_query_to_array(&$issue)
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_issues where issue_id = '".$issue."';";
+        $key = 'issue_id';
+        $this->database->select_query($query, $key);
+        foreach($this->database->get_result() as $issue_array)
+        {
+            $issue = get_object_vars($issue_array);
+        }
+        $this->database = null;
+    }
+
 
 
 
