@@ -167,7 +167,7 @@ class meeting_table  extends  member_table
             'not null' => TRUE,
             'description' => 'Phone number for the nfb contact'
         );
-        $schema[$table_name]['fields']['year'] = array(
+        $schema[$table_name]['fields']['meeting_year'] = array(
             'type'=> 'int',
             'size' => 'big',
             'default' => '2020',
@@ -216,7 +216,7 @@ class issue_table extends meeting_table
             'not null' => TRUE,
             'description' => 'Primary Key: issue id'
         );
-        $schema[$table_name]['fields']['name'] = array(
+        $schema[$table_name]['fields']['issue_name'] = array(
             'type'=> 'varchar',
             'length' => '256',
             'default' => '',
@@ -237,7 +237,7 @@ class issue_table extends meeting_table
             'not null' => TRUE,
             'description' => 'Bill slug for Propublica'
         );
-        $schema[$table_name]['fields']['year'] = array(
+        $schema[$table_name]['fields']['issue_year'] = array(
             'type' => 'int',
             'size' => 'big',
             'default' => '2020',
@@ -409,7 +409,7 @@ class note_table extends rating_table
             'not null' => False,
             'description' => 'who made the note'
         );
-        $schema[$table_name]['fields']['year']= array(
+        $schema[$table_name]['fields']['note_year']= array(
           'type' => 'int',
           'size' =>  'big',
           'default' => '2020',

@@ -198,14 +198,14 @@ class admin_issue
     public function primary_issue_options()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_issues where name = 0 ;";
+        $query = "select * from nfb_washington_issues where primary_status = 0 ;";
         $key = 'issue_id';
         $this->database->select_query($query, $key);
         $options = null;
         foreach ($this->database->get_result() as $issue)
         {
             $issue_array = get_object_vars($issue);
-            $options[$issue_array['isssue_id']] = $issue_array['name']." First use ".$issue_array['year'];
+            $options[$issue_array['issue_id']] = $issue_array['issue_name']." First use ".$issue_array['issue_year'];
         }
         if($options == null)
         {$options['na'] = "No issues have been entered please make this the primary issue";}
