@@ -218,7 +218,7 @@ class issue_table extends meeting_table
         );
         $schema[$table_name]['fields']['issue_name'] = array(
             'type'=> 'varchar',
-            'length' => '256',
+            'length' => 256,
             'default' => '',
             'not null' => TRUE,
             'description' => 'Issue name'
