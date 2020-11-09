@@ -251,7 +251,7 @@ class issue_table extends meeting_table
             'not null' => TRUE,
             'description' => 'link to civicrm for bill tracking info'
         );
-        $schema[$table_name]['fields']['primary_status']= array(
+        $schema[$table_name]['fields']['primary_status'] = array(
             'type' => 'int',
             'size' =>  'tiny',
             'default' => '0',
