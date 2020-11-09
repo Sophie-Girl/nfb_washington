@@ -11,7 +11,7 @@ class admin_issue
           $this->create_new_issue_form($form, $form_state);
        }
        else {
-          $this->edit_existing($issue, &$form, $form_state);
+          $this->edit_existing($issue, $form, $form_state);
        }
     }
     public function  create_new_issue_form(&$form, $form_state)
