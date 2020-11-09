@@ -81,7 +81,7 @@ nfb_washington_admin_member:
     _permission: 'access content'
     _role: 'administrator + nfb_washington_admin'
 nfb_washington_admin_issue:
-  path: '`nfb_washington/admin/issue/{issue}'
+  path: 'nfb_washington/admin/issue/{issue}'
   defaults:
     _form: '\Drupal\nfb_washington\Form\AdminIssueForm'
     _title: 'NFB Washington Create/Edit Issues'
