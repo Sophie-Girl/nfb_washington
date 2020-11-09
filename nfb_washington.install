@@ -219,10 +219,11 @@ class issue_table extends meeting_table
         $schema[$table_name]['fields']['issue_name'] = array(
             'type'=> 'varchar',
             'length' => 256,
-            'default' => '',
-            'not null' => TRUE,
+            'default' => '0',
+            'not null' => false,
             'description' => 'Issue name'
         );
+
         $schema[$table_name]['fields']['bill_id'] = array(
             'type'=> 'varchar',
             'length' => 256,
