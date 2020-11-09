@@ -223,7 +223,7 @@ class issue_table extends meeting_table
             'not null' => false,
             'description' => 'Issue name'
         );
-
+        \Drupal::logger("nfb_washington_install")->notice("Ih ave the parameters for this");
         $schema[$table_name]['fields']['bill_id'] = array(
             'type'=> 'varchar',
             'length' => 256,
