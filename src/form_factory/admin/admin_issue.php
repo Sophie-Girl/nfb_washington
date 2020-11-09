@@ -23,7 +23,7 @@ class admin_issue
     }
     public function build_issue_name(&$form, $form_state)
     {
-        $form["create_issue_name"] = array(
+        $form["issue_name"] = array(
             '#type' => 'textfield',
             '#title' => "Issue Name",
             '#required' => true,
@@ -34,7 +34,7 @@ class admin_issue
     }
     public function create_edit_issue_name($issue, &$form, &$form_state)
     {
-        $form["edit_issue_name"] = array(
+        $form["issue_name"] = array(
             '#type' => 'textfield',
             '#title' => "Issue Name",
             '#required' => true,
@@ -42,12 +42,67 @@ class admin_issue
             '#min' => 4,
             '#max' => 80,
         );
-        $form_state['input']['edit_edit_issue_name'] = $issue['name'];
+        $form_state['input']['edit_issue_name'] = $issue['name'];
     }
     public function create_issue__bill(&$form, $form_State)
     {
-
+        $form['bill_in_congress'] = array(
+          '#type' => "select",
+          "#title" => "Does this Issue have a corresponding bill in Congress?",
+          "#options" => array(
+            "yes" => "Yes",
+              "no" => "No",
+          ),
+           '#required' => true,
+        );
     }
+    public function edit_form_bill_id($issue, &$form, &$form_state)
+    {
+        $form["bill_id"] = array(
+            '#type' => 'textfield',
+            '#title' => "Bill Id",
+            '#required' => true,
+            '#size' => "20",
+            '#min' => 4,
+            '#max' => 80,
+        );
+        if($issue['bill_id'] != "n/a")
+        {
+            $form_state['input']['edit_bill_id'] = $issue['bill_id'];
+        }
+    }
+    public function  create_form_bill_id(&$form, $form_state)
+    {
+        $form["bill_id"] = array(
+            '#type' => 'textfield',
+            '#title' => "Bill Id",
+            '#size' => "20",
+            '#min' => 4,
+            '#max' => 80,
+            '#states' => array(
+                'visible' =>  [':input[name="bill_in_congress"]' => ['value' => "yes"]],
+                "and",
+                'required' => [':input[name="bill_in_congress"]' => ['value' => "yes"]],
+            )
+        );
+    }
+    public function edit_bill_slug($issue, &$form, $form_state)
+    {
+        $form["bill_slug"] = array(
+            '#type' => 'textfield',
+            '#title' => "Bill Id",
+            '#required' => true,
+            '#size' => "20",
+            '#min' => 4,
+            '#max' => 80,
+        );
+        if($issue['bill_slug'] != "n/a")
+        {
+            $form_state['input']['edit_bill_slug'] = $issue['bill_id'];
+        }
+    }
+    public function
+
 
 
 }
