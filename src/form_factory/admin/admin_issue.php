@@ -198,7 +198,7 @@ class admin_issue
     public function primary_issue_options()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_issues where primary_issue = 0 ;";
+        $query = "select * from nfb_washington_issues where primary_status = 0 ;";
         $key = 'issue_id';
         $this->database->select_query($query, $key);
         $options = null;
