@@ -253,10 +253,10 @@ class issue_table extends meeting_table
         );
         $schema[$table_name]['fields']['primary_status'] = array(
             'type' => 'int',
-            'size' =>  'tiny',
+            'size' =>  'big',
             'default' => '0',
             'not null' => true,
-            'description' => 'boolean for if the  issue is the first time this issue has comite up'
+            'description' => 'boolean for if the  issue is the first time this issue has committee up'
         );
         $schema[$table_name]['fields']['primary_issue_id'] = array(
             'type' => 'int',
