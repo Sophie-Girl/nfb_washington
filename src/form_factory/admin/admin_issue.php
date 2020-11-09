@@ -110,6 +110,11 @@ class admin_issue
             '#size' => "20",
             '#min' => 4,
             '#max' => 80,
+            '#states' => array(
+                'visible' =>  [':input[name="bill_in_congress"]' => ['value' => "yes"]],
+                "and",
+                'required' => [':input[name="bill_in_congress"]' => ['value' => "yes"]],
+            )
         );
         if($issue['bill_slug'] != "n/a")
         {
@@ -125,6 +130,11 @@ class admin_issue
             '#size' => "20",
             '#min' => 4,
             '#max' => 80,
+            '#states' => array(
+                'visible' =>  [':input[name="bill_in_congress"]' => ['value' => "yes"]],
+                "and",
+                'required' => [':input[name="bill_in_congress"]' => ['value' => "yes"]],
+            )
         );
     }
     public function create_primary(&$form, $form_state)
@@ -160,9 +170,9 @@ class admin_issue
             '#title' => "Attach this issue to",
             '#options' => $this->primary_issue_options(),
             '#states' => array(
-                'visible' =>  [':input[name="primary"]' => ['value' => "yes"]],
+                'visible' =>  [':input[name="primary_issue"]' => ['value' => "yes"]],
                 "and",
-                'required' => [':input[name="primary"]' => ['value' => "yes"]],
+                'required' => [':input[name="primary_issue"]' => ['value' => "yes"]],
             )
         );
     }
@@ -173,9 +183,9 @@ class admin_issue
             '#title' => "Attach this issue to",
             '#options' => $this->primary_issue_options(),
             '#states' => array(
-                'visible' =>  [':input[name="primary"]' => ['value' => "yes"]],
+                'visible' =>  [':input[name="primary_issue"]' => ['value' => "yes"]],
                 "and",
-                'required' => [':input[name="primary"]' => ['value' => "yes"]],
+                'required' => [':input[name="primary_issue"]' => ['value' => "yes"]],
             )
         );
         if($issue['primary_issue_id'] !=  "0")
