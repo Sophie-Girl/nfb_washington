@@ -24,6 +24,7 @@ class admin_issue
         $this->create_form_bill_id($form, $form_state);
         $this->create_bill_slug($form, $form_state);
         $this->create_primary($form, $form_state);
+        $this->create_primary_issue($form, $form_state);
         $this->hidden_value($issue, $form, $form_state);
     }
     public function edit_existing($issue, &$form, $form_state)
