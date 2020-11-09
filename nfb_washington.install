@@ -265,7 +265,7 @@ class issue_table extends meeting_table
             'not null' => False,
             'description' => 'who made the note'
         );
-        $schema[$table_name]['fields']['primary']= array(
+        $schema[$table_name]['fields']['primary_issue']= array(
             'type' => 'int',
             'size' =>  'tiny',
             'default' => '0',
