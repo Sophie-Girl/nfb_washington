@@ -1,12 +1,13 @@
 <?php
 namespace  Drupal\nfb_washington\form_factory\admin;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\database\base;
 
 class admin_issue
 {
     public $database;
 
-    public function issue_switch($issue, &$form, &$form_state)
+    public function issue_switch($issue, &$form, FormStateInterface &$form_state)
     {
        if($issue == "create")
        {
@@ -16,7 +17,7 @@ class admin_issue
           $this->edit_existing($issue, $form, $form_state);
        }
     }
-    public function  create_new_issue_form(&$form, $form_state)
+    public function  create_new_issue_form(&$form, FormStateInterface $form_state)
     {
         $issue = "create";
         $this->build_issue_name($form, $form_state);
@@ -27,7 +28,7 @@ class admin_issue
         $this->create_primary_issue($form, $form_state);
         $this->hidden_value($issue, $form, $form_state);
     }
-    public function edit_existing($issue, &$form, $form_state)
+    public function edit_existing($issue, &$form, FormStateInterface $form_state)
     {
         $this->issue_query_to_array($issue);
         $this->create_edit_issue_name($issue, $form, $form_state);
@@ -48,7 +49,7 @@ class admin_issue
             '#max' => 80,
         );
     }
-    public function create_edit_issue_name($issue, &$form, &$form_state)
+    public function create_edit_issue_name($issue, &$form, FormStateInterface &$form_state)
     {
         $form["issue_name"] = array(
             '#type' => 'textfield',
@@ -58,7 +59,7 @@ class admin_issue
             '#min' => 4,
             '#max' => 80,
         );
-        $form_state['input']['issue_name'] = $issue['issue_name'];
+        $form_state->setValue("issue_name", $issue['issue_name']);
     }
     public function create_issue__bill(&$form, $form_state)
     {
@@ -72,7 +73,7 @@ class admin_issue
            '#required' => true,
         );
     }
-    public function edit_form_bill_id($issue, &$form, &$form_state)
+    public function edit_form_bill_id($issue, &$form, FormStateInterface &$form_state)
     {
         $form["bill_id"] = array(
             '#type' => 'textfield',
@@ -84,7 +85,7 @@ class admin_issue
         );
         if($issue['bill_id'] != "n/a")
         {
-            $form_state['input']['bill_id'] = $issue['bill_id'];
+            $form_state->setValue("bill_id", $issue['bill_id']);
         }
     }
     public function  create_form_bill_id(&$form, $form_state)
@@ -102,7 +103,7 @@ class admin_issue
             )
         );
     }
-    public function edit_bill_slug($issue, &$form, &$form_state)
+    public function edit_bill_slug($issue, &$form, FormStateInterface &$form_state)
     {
         $form["bill_slug"] = array(
             '#type' => 'textfield',
@@ -119,7 +120,7 @@ class admin_issue
         );
         if($issue['bill_slug'] != "n/a")
         {
-            $form_state['input']['bill_slug'] = $issue['bill_slug'];
+            $form_state->setValue("bill_slug", $issue['bill_slug']);
         }
     }
     public function create_bill_slug(&$form, $form_state)
@@ -150,7 +151,7 @@ class admin_issue
             '#required' => true,
         );
     }
-    public function edit_primary($issue, &$form, &$form_state)
+    public function edit_primary($issue, &$form, FormStateInterface &$form_state)
     {
         $form['primary_issue'] = array(
             '#type' => "select",
@@ -163,7 +164,7 @@ class admin_issue
         );
         if($issue['primary_status'] == "0" )
         {$primary = "yes";} else {$primary = "no";}
-            $form_state['input']['primary_issue'] = $primary;
+            $form_state->setValue("primary_issue", $primary);
     }
     public function create_primary_issue(&$form, $form_state)
     {
@@ -178,7 +179,7 @@ class admin_issue
             )
         );
     }
-    public function edit_primary_issue($issue, &$form, &$form_state)
+    public function edit_primary_issue($issue, &$form, FormStateInterface &$form_state)
     {
         $form["derivative_issue"] = array(
             '#type' => 'select',
@@ -192,7 +193,7 @@ class admin_issue
         );
         if($issue['primary_issue_id'] !=  null)
         {
-            $form_state['input']['edit_derivative_issue'] = $issue['primary_issue_id'];
+            $form_state->setValue("primary_issue_id", $issue['primary_issue_id']);
         }
     }
 
