@@ -48,13 +48,13 @@ class admin_issue_home
     {
         $count = 1;
         $markup = "<table width='100%'>
-<t><th class='table-header'>Issue Name</th><th class='table-header'>Bill Slug</th><th class='table-header'>First Use</th><th class='table-header'>Actions</th></tr>";
+<t><th class='table-header'>Issue Name</th><th class='table-header'>Bill Slug</th><th class='table-header'>First Use</th><th class='table-header'>Year</th><th class='table-header'>Actions</th></tr>";
         foreach($result as $issue)
         {
             $issue = get_object_vars($issue);
             if($issue['primary_status'] == "0")
             {$primary = "Yes";} else {$primary = "No";}
-            $markup = $markup."<tr><td>".$issue['issue_name']."</td><td>".$issue['bill_slug']."</td><td>".$primary."</td><td><a href='/nfb_washington/admin/issues/".$issue['issue_id']."' class='button-".$count."'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit/View&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> </td></tr>";
+            $markup = $markup."<tr><td>".$issue['issue_name']."</td><td>".$issue['bill_slug']."</td><td>".$primary."</td><td>".$issue['issue_year']."</td><td><a href='/nfb_washington/admin/issue/".$issue['issue_id']."' class='button-".$count."'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit/View&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> </td></tr>";
             $this->count_catch($count);
         }
         $markup = $markup."</table>";
