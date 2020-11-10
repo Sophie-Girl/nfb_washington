@@ -213,7 +213,7 @@ class admin_issue
     }
     public function hidden_value($issue, &$form, $form_state)
     {
-        $form['issue_vlaue'] = array(
+        $form['issue_value'] = array(
           '#type' => 'hidden',
             '#value' => $issue
         );
