@@ -58,8 +58,8 @@ class admin_issue
             '#size' => "20",
             '#min' => 4,
             '#max' => 80,
-        );
-        $form_state->setValue("issue_name", $issue['issue_name']);
+            '#default_value' => $issue['issue_name'],
+        );// default
     }
     public function create_issue__bill(&$form, $form_state)
     {
