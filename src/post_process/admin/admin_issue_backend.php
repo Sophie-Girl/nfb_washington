@@ -90,7 +90,7 @@ class admin_issue_backend
             "primary_status" => $this->get_primary_issue(),
             "primary_issue_id" => $this->get_primary_issue_id(),
             "created_user" => $this->get_created_user(),
-            "modified_user" => $this->get_modified_user(),
+            "last_modified_user" => $this->get_modified_user(),
         );
         $table = "nfb_washington_issues";
         $this->database = new base();
