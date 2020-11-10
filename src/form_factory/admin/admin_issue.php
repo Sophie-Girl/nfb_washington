@@ -171,9 +171,9 @@ class admin_issue
             '#title' => "Attach this issue to",
             '#options' => $this->primary_issue_options(),
             '#states' => array(
-                'visible' =>  [':input[name="primary_issue"]' => ['value' => "yes"]],
+                'visible' =>  [':input[name="primary_issue"]' => ['value' => "no"]],
                 "and",
-                'required' => [':input[name="primary_issue"]' => ['value' => "yes"]],
+                'required' => [':input[name="primary_issue"]' => ['value' => "no"]],
             )
         );
     }
