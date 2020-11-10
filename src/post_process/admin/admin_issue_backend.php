@@ -87,7 +87,7 @@ class admin_issue_backend
             "bill_id" => $this->get_bill_id(),
             "bill_slug" => $this->get_bill_slug(),
             "civicrm_id" => "0",
-            "primary_issue" => $this->get_primary_issue(),
+            "primary_status" => $this->get_primary_issue(),
             "primary_issue_id" => $this->get_primary_issue_id(),
             "created_user" => $this->get_created_user(),
             "modified_user" => $this->get_modified_user(),
@@ -128,25 +128,25 @@ class admin_issue_backend
     public function bill_slug_update(&$query, $issue)
     {
         $query = "update nfb_washington_issues
-        set bill_id = '".$this->get_bill_slug()."'
+        set bill_slug = '".$this->get_bill_slug()."'
         where issue_id = '".$issue."';";
     }
     public function primary_issue_update(&$query, $issue)
     {
         $query = "update nfb_washington_issues
-        set bill_id = '".$this->get_primary_issue()."'
+        set status = '".$this->get_primary_issue()."'
         where issue_id = '".$issue."';";
     }
     public function primary_issue_id_update(&$query, $issue)
     {
         $query = "update nfb_washington_issues
-        set bill_id = '".$this->get_primary_issue_id()."'
+        set primary_issue_id = '".$this->get_primary_issue_id()."'
         where issue_id = '".$issue."';";
     }
     public function modified_user_update(&$query, $issue)
     {
         $query = "update nfb_washington_issues
-        set bill_id = '".$this->get_modified_user()."'
+        set last_modified_user = '".$this->get_modified_user()."'
         where issue_id = '".$issue."';";
     }
 
