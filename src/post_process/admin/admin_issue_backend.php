@@ -1,6 +1,7 @@
 <?php
 Namespace Drupal\nfb_washington\post_process\admin;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\nfb_washington\database\base;
 
 class admin_issue_backend
 {
@@ -27,6 +28,14 @@ class admin_issue_backend
     {
 
     }
+    public function set_up_form_values($issue, FormStateInterface $form_state)
+    {
+        $this->convert_true_false($form_state);
+        if($issue == "create")
+        {$this->created_user_set();}
+        $this->modified_user_set();
+
+    }
     public function  convert_true_false(FormStateInterface $form_state)
     {
         if($form_state->getValue("primary_issue") == "yes")
@@ -49,7 +58,7 @@ class admin_issue_backend
     {
         if($issue = "create")
         {
-
+            $this->create_backend($form_state);
         }
         else
         {
@@ -68,6 +77,9 @@ class admin_issue_backend
             "created_user" => $this->get_created_user(),
             "modified_user" => $this->get_modified_user(),
         );
+        $table = "nfb_washington_issues";
+        $this->database = new base();
+        $this->database->insert_query($table, $fields);
     }
 
 
