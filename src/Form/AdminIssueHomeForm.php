@@ -2,12 +2,14 @@
 Namespace Drupal\nfb_washington\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\nfb_washington\form_factory\admin\admin_issue_home;
 use Drupal\nfb_washington\verification\api_key_check;
 use Drupal\nfb_washington\verification\congress_number_check;
 
 class AdminIssueHomeForm extends FormBase
 {
     public $verification;
+    public $form_factory;
     public function getFormId()
     {
         return "nfb_washington_admin_issue_home";
@@ -17,6 +19,9 @@ class AdminIssueHomeForm extends FormBase
             $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
             $this->verify_api_key($form, $form_state);
             $this->congress_number_markup($form, $form_state);
+            $this->form_factory = new admin_issue_home();
+            $this->form_factory->Build_issue_home_form($form, $form_state);
+            return $form;
         }
     public function submitForm(array &$form, FormStateInterface $form_state)
         {

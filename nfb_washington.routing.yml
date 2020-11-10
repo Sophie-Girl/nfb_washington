@@ -90,3 +90,12 @@ nfb_washington_admin_issue:
     _access: 'TRUE'
     _permission: 'access content'
     _role: 'administrator + nfb_washington_admin'
+nfb_washington_admin_issue_home:
+  path: 'nfb_washington/admin/issue'
+  defaults:
+    _form: '\Drupal\nfb_washington\Form\AdminIssueHomeForm'
+    _title: 'NFB Washington Seminar Issues'
+  requirements:
+    _access: 'TRUE'
+    _permission: 'access content'
+    _role: 'administrator + nfb_washington_admin'
