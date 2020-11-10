@@ -26,7 +26,8 @@ class admin_issue_backend
     {return $this->primary_issue_id;}
     public function issue_backend($issue, FormStateInterface $form_state)
     {
-
+        $this->set_up_form_values($issue, $form_state);
+        $this->issue_switch($issue, $form_state);
     }
     public function set_up_form_values($issue, FormStateInterface $form_state)
     {
@@ -34,7 +35,8 @@ class admin_issue_backend
         if($issue == "create")
         {$this->created_user_set();}
         $this->modified_user_set();
-
+        $this->set_up_primary_issue_id($form_state);
+        $this->set_bill_slugs_and_id($form_state);
     }
     public function  convert_true_false(FormStateInterface $form_state)
     {
@@ -54,6 +56,19 @@ class admin_issue_backend
         $user = \drupal::currentUser()->getUsername();
         $this->modified_user = $user;
     }
+    public function  set_up_primary_issue_id(FormStateInterface $form_state)
+    {
+        if($form_state->getValue("derivative_issue") == "")
+        {$this->primary_issue_id = null;}
+        else {$this->primary_issue_id = $form_state->getValue("derivative_issue");}
+    }
+    public function set_bill_slugs_and_id(FormStateInterface $form_state)
+    {
+        if($form_state->getValue("bill_id") == "")
+        {$this->bill_id = "n/a";} else {$this->bill_id = $form_state->getValue("bill_id");}
+        if($form_state->getValue("bill_slug") == "")
+        {$this->bill_slug = "n/a";} else {$this->bill_slug = $form_state->getValue("bill_slug");}
+    }
     public function issue_switch($issue, FormStateInterface $form_state)
     {
         if($issue = "create")
@@ -62,7 +77,7 @@ class admin_issue_backend
         }
         else
         {
-
+            $this->edit_backend($issue, $form_state);
         }
     }
     public function create_backend(FormStateInterface $form_state)
@@ -80,6 +95,59 @@ class admin_issue_backend
         $table = "nfb_washington_issues";
         $this->database = new base();
         $this->database->insert_query($table, $fields);
+    }
+    public function edit_backend($issue, FormStateInterface $form_state)
+    {
+        $this->database = new base();
+        $this->issue_name_update($query, $issue, $form_state);
+        $this->database->update_query($query);
+        $this->bill_id_update($query, $issue);
+        $this->database->update_query($query);
+        $this->bill_slug_update($query, $issue);
+        $this->database->update_query($query);
+        $this->primary_issue_update($query, $issue);
+        $this->database->update_query($query);
+        $this->primary_issue_id_update($query, $issue);
+        $this->database->update_query($query);
+        $this->modified_user_update($query, $issue);
+        $this->database->update_query($query);
+
+    }
+    public function issue_name_update(&$query, $issue, FormStateInterface $form_state)
+    {
+        $query = "update nfb_washington_issues
+        set issue_name = '".$form_state->getValue("issue_name")."'
+        where issue_id = '".$issue."';";
+    }
+    public function bill_id_update(&$query, $issue)
+    {
+        $query = "update nfb_washington_issues
+        set bill_id = '".$this->get_bill_id()."'
+        where issue_id = '".$issue."';";
+    }
+    public function bill_slug_update(&$query, $issue)
+    {
+        $query = "update nfb_washington_issues
+        set bill_id = '".$this->get_bill_slug()."'
+        where issue_id = '".$issue."';";
+    }
+    public function primary_issue_update(&$query, $issue)
+    {
+        $query = "update nfb_washington_issues
+        set bill_id = '".$this->get_primary_issue()."'
+        where issue_id = '".$issue."';";
+    }
+    public function primary_issue_id_update(&$query, $issue)
+    {
+        $query = "update nfb_washington_issues
+        set bill_id = '".$this->get_primary_issue_id()."'
+        where issue_id = '".$issue."';";
+    }
+    public function modified_user_update(&$query, $issue)
+    {
+        $query = "update nfb_washington_issues
+        set bill_id = '".$this->get_modified_user()."'
+        where issue_id = '".$issue."';";
     }
 
 
