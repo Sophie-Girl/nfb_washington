@@ -93,3 +93,8 @@
 {
     float: right; text-align: right;
 }
+.table-header
+{
+    color: #ffffff;
+    background-color: #005aa3;
+}
