@@ -8,7 +8,7 @@ class admin_issue_home
     public function Build_issue_home_form(&$form, $form_state)
     {
         $this->initial_element($form, $form_state);
-        $this->issue_table($form, $form_State);
+        $this->issue_table($form, $form_state);
     }
     public function initial_markup()
     {
