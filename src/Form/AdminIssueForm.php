@@ -18,6 +18,7 @@ class AdminIssueForm extends FormBase
     }
     public function  buildForm(array $form, FormStateInterface $form_state, $issue = "create")
     {
+        $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
         $this->verify_api_key($form, $form_state);
         $this->congress_number_markup($form, $form_state);
         $this->form_factory = new admin_issue();
