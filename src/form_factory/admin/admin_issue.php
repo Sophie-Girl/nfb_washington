@@ -58,7 +58,7 @@ class admin_issue
             '#min' => 4,
             '#max' => 80,
         );
-        $form_state['input']['edit_issue_name'] = $issue['name'];
+        $form_state['input']['issue_name'] = $issue['issue_name'];
     }
     public function create_issue__bill(&$form, $form_state)
     {
@@ -84,7 +84,7 @@ class admin_issue
         );
         if($issue['bill_id'] != "n/a")
         {
-            $form_state['input']['edit_bill_id'] = $issue['bill_id'];
+            $form_state['input']['bill_id'] = $issue['bill_id'];
         }
     }
     public function  create_form_bill_id(&$form, $form_state)
@@ -119,7 +119,7 @@ class admin_issue
         );
         if($issue['bill_slug'] != "n/a")
         {
-            $form_state['input']['edit_bill_slug'] = $issue['bill_id'];
+            $form_state['input']['bill_slug'] = $issue['bill_slug'];
         }
     }
     public function create_bill_slug(&$form, $form_state)
@@ -161,8 +161,9 @@ class admin_issue
             ),
             '#required' => true,
         );
-
-            $form_state['input']['edit_bill_slug'] = $issue['bill_id'];
+        if($issue['primary_status'] == "0" )
+        {$primary = "yes";} else {$primary = "no";}
+            $form_state['input']['primary_issue'] = $primary;
     }
     public function create_primary_issue(&$form, $form_state)
     {
@@ -189,7 +190,7 @@ class admin_issue
                 'required' => [':input[name="primary_issue"]' => ['value' => "yes"]],
             )
         );
-        if($issue['primary_issue_id'] !=  "0")
+        if($issue['primary_issue_id'] !=  null)
         {
             $form_state['input']['edit_derivative_issue'] = $issue['primary_issue_id'];
         }
