@@ -34,6 +34,13 @@ class AdminIssueForm extends FormBase
         $this->backend = new admin_issue_backend();
         $this->backend->issue_backend($issue, $form_state);
     }
+    public function validateForm(array &$form, FormStateInterface $form_state)
+    {
+        parent::validateForm($form, $form_state);
+        if($form_state->getValue("derivative_issue") == "na")
+        {$form_state->setErrorByName("derivative_issue", "No issues have been set, so THis issue must be primary" );}
+    }
+
     public function verify_api_key(&$form, $form_state)
     {
         $this->verification = new api_key_check();
