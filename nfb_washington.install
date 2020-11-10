@@ -290,7 +290,7 @@ class rating_table extends issue_table
 {
     public function set_up_rating_table()
     {
-        $table_name = 'nfb_washington_issues';
+        $table_name = 'nfb_washington_rating';
         $this->table_test($table_name);
         $this->ratings_schema($table_name, $schema);
         $schema[$table_name]['description'] = "Table for ratings";
@@ -637,3 +637,4 @@ $install->set_up_note_link_table();
 $install->set_up_committee_table();
 $install->set_up_committee_membership_table();
 $install->set_up_configuration_table();
+
