@@ -39,7 +39,9 @@ class AdminIssueForm extends FormBase
     {
         parent::validateForm($form, $form_state);
         if($form_state->getValue("derivative_issue") == "na")
-        {$form_state->setErrorByName("derivative_issue", "No issues have been set, so THis issue must be primary" );}
+        {$form_state->setErrorByName("derivative_issue_null", "No issues have been set, so THis issue must be primary" );}
+        if($form_state->getValue("derivative_issue") == $form_state->getValue("issue_value"))
+        {$form_state->setErrorByName("derivative_issue_matches_current_issue", "If the issue is the first use please select No, and clear put the element and select no, or select a different issue for primary.");}
     }
 
     public function verify_api_key(&$form, $form_state)
