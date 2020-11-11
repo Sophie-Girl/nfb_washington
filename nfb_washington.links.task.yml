@@ -31,7 +31,7 @@ nfb_washington.member:
   title: "Manage Members"
   base_route: nfb_washington.admin
 nfb_washington.adminissue:
-  route_name: nfb_washington_admin_issue
+  route_name: nfb_washington_admin_issue_home
   title: "View Issues"
   base_route: nfb_washington.admin
 nfb_washington.createeditissue:
