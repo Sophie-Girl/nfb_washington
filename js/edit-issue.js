@@ -8,15 +8,10 @@
                         type: 'POST',
                         url: '/nfb_washington/admin/ajax/issue',
                         data: { issueid:vissueid },
-                        error: function (xhr, status, error) {
-                            alert(status);
-                            alert(xhr.responseText);}
                     }).done(function (data) {
                         if(data == null)
                         {alert("the fuck?");}
                         var issue = data;
-                        console.log(data);
-
                         document.getElementById('edit-issue-name').value = issue[0];
                        document.getElementById('edit-bill-id').value = issue[1];
                        document.getElementById('edit-bill-slug').value = issue[2];
