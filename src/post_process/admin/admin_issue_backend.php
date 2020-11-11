@@ -61,7 +61,7 @@ class admin_issue_backend
     public function  set_up_primary_issue_id(FormStateInterface $form_state)
     {
         if($form_state->getValue("derivative_issue") == "")
-        {$this->primary_issue_id = "null";}
+        {$this->primary_issue_id = null;}
         else {$this->primary_issue_id = $form_state->getValue("derivative_issue");}
     }
     public function set_bill_slugs_and_id(FormStateInterface $form_state)
@@ -142,7 +142,7 @@ class admin_issue_backend
         where issue_id = '".$issue."';";
     }
     public function primary_issue_id_update(&$query, $issue)
-    { if($this->get_primary_issue_id() != "null"){
+    { if($this->get_primary_issue_id() != null){
         $query = "update nfb_washington_issues
         set primary_issue_id = '".$this->get_primary_issue_id()."'
         where issue_id = '".$issue."';";}
