@@ -9,9 +9,9 @@
                         type: 'POST',
                         url: '/nfb_washington/admin/ajax/issue',
                         data: {issueid: vissueid},
-                    }).done(function (ajax_array) {
-                        console.log(toString(ajax_array));
-                        var issue = ajax_array;
+                    }).done(function (data) {
+                        console.log(toString(data));
+                        var issue = data;
 
                         document.getElementById('edit-issue-name').value = issue[0];
                        document.getElementById('edit-bill-id').value = issue[1];

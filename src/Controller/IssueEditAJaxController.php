@@ -10,19 +10,19 @@ class  IssueEditAJaxController extends  ControllerBase
 {
     public $issue_id;
     public $sql_result;
-    public $ajax_array;
+    public $data;
     public function get_issue_id(){
     return $this->issue_id;
     }
     public function get_sql_result()
     {return $this->sql_result;}
-    public function get_ajax_array()
-    {return $this->ajax_array;}
+    public function get_data()
+    {return $this->data;}
     public $database;
     public function content()
     {
         $this->get_ajax_data();
-        return new JsonResponse($this->get_ajax_array());
+        return new JsonResponse($this->get_data());
     }
     public function  get_ajax_data()
     {
@@ -48,15 +48,15 @@ class  IssueEditAJaxController extends  ControllerBase
 
         $issue_data = get_object_vars($this->get_sql_result()[$this->get_issue_id()]);
         \drupal::logger('nfb_washington_ajax')->notice(print_r($issue_data, true));
-        $ajax_array = [];
-        $ajax_array[0] = $issue_data['issue_name'];
-        $ajax_array[1] = $issue_data['bill_id'];
-        $ajax_array[2] = $issue_data['bill_slug'];
+        $data = [];
+        $data[0] = $issue_data['issue_name'];
+        $data[1] = $issue_data['bill_id'];
+        $data[2] = $issue_data['bill_slug'];
         if($issue_data['primary_Status'] == "0")
         {$primary = "yes";}else{$primary = "no";}
-        $ajax_array[3] = $primary;
-        $ajax_array[4] = $issue_data['primary_issue_id'];
-        $this->ajax_array = $ajax_array;
+        $data[3] = $primary;
+        $data[4] = $issue_data['primary_issue_id'];
+        $this->data = $data;
 
     }
 
