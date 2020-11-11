@@ -158,6 +158,7 @@ class admin_issue_backend
         if($issue == "create")
         {$message = "Issue created for ".$form_state->getValue("issue_name");}
         else {$message = "Issue Updated";}
+        $form_state = null;
         drupal_set_message($message);
         $ender = new RedirectResponse('/nfb_washington/admin/issues');
         $ender->send();
