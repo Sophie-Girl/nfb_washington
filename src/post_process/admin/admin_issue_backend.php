@@ -97,6 +97,7 @@ class admin_issue_backend
         $table = "nfb_washington_issues";
         $this->database = new base();
         $this->database->insert_query($table, $fields);
+        $this->database = null;
     }
     public function edit_backend($issue, FormStateInterface $form_state)
     {
@@ -113,6 +114,7 @@ class admin_issue_backend
         $this->database->update_query($query);
         $this->modified_user_update($query, $issue);
         $this->database->update_query($query);
+        $this->database = null;
 
     }
     public function issue_name_update(&$query, $issue, FormStateInterface $form_state)
