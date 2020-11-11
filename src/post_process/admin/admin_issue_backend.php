@@ -73,7 +73,7 @@ class admin_issue_backend
     }
     public function issue_switch($issue, FormStateInterface $form_state)
     {
-        if($issue = "create")
+        if($issue == "create")
         {
             $this->create_backend($form_state);
         }
