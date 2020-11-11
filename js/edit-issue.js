@@ -9,7 +9,8 @@
                         url: '/nfb_washington/admin/ajax/issue',
                         data: {issueid: vissueid},
                     }).done(function (data) {
-                        var issue = JSON.parse(data);
+                        console.log(toString(data));
+                        var issue = data;
                         document.getElementById('edit-issue-name').value = issue[0];
                        document.getElementById('edit-bill-id').value = issue[1];
                        document.getElementById('edit-bill-slug').value = issue[2];
