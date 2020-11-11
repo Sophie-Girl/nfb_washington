@@ -15,7 +15,7 @@ class admin_home
         $form['members_markup'] = array(
             '#type' => "item",
             '#markup' =>  "<h3>Members of Congress</h3>
-<p class='right-side'> Import a new congress, run mtnence on current roster of Members of Congress <span><a href='/nfb_washington/admin/members' class='button-1'>&nbsp;&nbsp;&nbsp;Members&nbsp;&nbsp;&nbsp;</a></span></p>"
+<p class='right-side'> Import a new congress, run maintenance on current roster of Members of Congress <span><a href='/nfb_washington/admin/member' class='button-1'>&nbsp;&nbsp;&nbsp;Members&nbsp;&nbsp;&nbsp;</a></span></p>"
         );
     }
     public function committee_markup(&$form, $form_state)
@@ -23,14 +23,14 @@ class admin_home
         $form['committee_markup'] = array(
             '#type' => "item",
             '#markup' => "<h3>Committees</h3>
-<p class='right-side'> Import committewes, find members, update membership. <span><a href='/nfb_washington/admin/committee' class='button-2'>&nbsp;&nbsp;&nbsp;Committee&nbsp;&nbsp;&nbsp;</a> </span></p>");
+<p class='right-side'> Import committees, find members, update membership. <span><a href='/nfb_washington/admin/committee' class='button-2'>&nbsp;&nbsp;&nbsp;Committee&nbsp;&nbsp;&nbsp;</a> </span></p>");
     }
     public function issues_markup(&$form, $form_state)
     {
         $form['issue_markup'] = array(
             '#type' => "item",
             '#markup' => "<h3>Issues</h3>
-<p class='right-side'> Create and edit issues, link issues to past issues. <span><a href='/nfb_washington/admin/issue' class='button-3'>&nbsp;&nbsp;&nbsp;Issues&nbsp;&nbsp;&nbsp;</a> </span></p>");
+<p class='right-side'> Create and edit issues, link issues to past issues. <span><a href='/nfb_washington/admin/issues' class='button-3'>&nbsp;&nbsp;&nbsp;Issues&nbsp;&nbsp;&nbsp;</a> </span></p>");
     }
     public function note_markup(&$form, $form_state)
     {
