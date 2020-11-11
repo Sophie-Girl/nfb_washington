@@ -26,6 +26,7 @@ class AdminIssueForm extends FormBase
         $this->congress_number_markup($form, $form_state);
         $this->form_factory = new admin_issue();
         $this->form_factory->issue_switch($issue, $form, $form_state);
+        $this->rule_of_three($form, $form_state);
         return $form;
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
