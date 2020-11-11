@@ -199,8 +199,11 @@ class admin_issue
     public function hidden_value($issue, &$form, $form_state)
     {
         $form['issue_value'] = array(
-          '#type' => 'hidden',
-            '#value' => $issue
+          '#type' => 'texfeild',
+            '#value' => $issue,
+            '#size' => '20',
+            '#attributes' => array('readonly' => 'readonly'),
+            '#title' => "Issue Id"
         );
     }
     public function issue_query_to_array(&$issue)
