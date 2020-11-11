@@ -61,7 +61,7 @@ class admin_issue_backend
     public function  set_up_primary_issue_id(FormStateInterface $form_state)
     {
         if($form_state->getValue("derivative_issue") == "")
-        {$this->primary_issue_id = null;}
+        {$this->primary_issue_id = "null";}
         else {$this->primary_issue_id = $form_state->getValue("derivative_issue");}
     }
     public function set_bill_slugs_and_id(FormStateInterface $form_state)
