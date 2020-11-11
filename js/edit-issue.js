@@ -12,7 +12,8 @@
                             alert(status);
                             alert(xhr.responseText);}
                     }).done(function (data) {
-                        console.log(JSON.stringify(data));
+                        if(data == null)
+                        {alert("the fuck?");}
                         var issue = data;
 
                         document.getElementById('edit-issue-name').value = issue[0];
