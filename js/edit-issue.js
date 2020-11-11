@@ -15,6 +15,7 @@
                         if(data == null)
                         {alert("the fuck?");}
                         var issue = data;
+                        console.log(data);
 
                         document.getElementById('edit-issue-name').value = issue[0];
                        document.getElementById('edit-bill-id').value = issue[1];
