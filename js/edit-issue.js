@@ -2,7 +2,7 @@
     Drupal.behaviors.wash_sem_update_meeting = {
         attach: function(context, settings) {
             window.onload = function () {
-                var vissueid = $('#edit-route-id-field').val();
+                var vissueid = $('#edit-issue-value').val();
                 if (vissueid != "create") {
                     $.ajax({
                         type: 'POST',

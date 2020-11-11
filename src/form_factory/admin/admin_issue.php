@@ -30,7 +30,6 @@ class admin_issue
     }
     public function edit_existing($issue, &$form, FormStateInterface $form_state)
     {
-        $this->issue_query_to_array($issue);
         $this->create_edit_issue_name($issue, $form, $form_state);
         $this->edit_form_bill_id($issue, $form, $form_state);
         $this->edit_bill_slug($issue, $form, $form_state);

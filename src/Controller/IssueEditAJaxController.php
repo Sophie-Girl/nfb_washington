@@ -37,7 +37,7 @@ class  IssueEditAJaxController extends  ControllerBase
     public function issue_query()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_issues where issue_id '".$this->get_issue_id()."';";
+        $query = "select * from nfb_washington_issues where issue_id = '".$this->get_issue_id()."';";
         $key = "issue_id";
         $this->database->select_query($query, $key);
         $this->sql_result = $this->database->get_result();
