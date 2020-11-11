@@ -66,8 +66,9 @@ class AdminIssueForm extends FormBase
         foreach($this->database->get_result() as $count)
         {
             $count = get_object_vars($count);
+            \Drupal::logger("nfb_washington_validation")->notice(print_r($count, true));
         }
-        if((int)$count > 2)
+        if((int)$count > 2 && $form_state->getValue("issue_value") == "create")
         {
             $this->too_many_issues($form, $form_state);
         }
