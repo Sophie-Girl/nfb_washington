@@ -19,6 +19,11 @@ class  IssueEditAJaxController extends  ControllerBase
     public function get_ajax_array()
     {return $this->ajax_array;}
     public $database;
+    public function  get_ajax_data()
+    {
+        $this->request_js_data(); $this->issue_query();
+        $this->process_sql_result(); return new JsonResponse($this->get_ajax_array());
+    }
     public function request_js_data()
     {
         $request = Request::createFromGlobals();
@@ -39,7 +44,12 @@ class  IssueEditAJaxController extends  ControllerBase
         $ajax_array = [];
         $ajax_array[0] = $issue_data['issue_name'];
         $ajax_array[1] = $issue_data['bill_id'];
-        $jajx_array[2] = $issue_data['bill_slug'];
+        $ajax_array[2] = $issue_data['bill_slug'];
+        if($issue_data['primary_Status'] == "0")
+        {$primary = "yes";}else{$primary = "no";}
+        $ajax_array[3] = $primary;
+        $ajax_array[4] = $issue_data['primary_issue_id'];
+        $this->ajax_array = $ajax_array;
 
     }
 
