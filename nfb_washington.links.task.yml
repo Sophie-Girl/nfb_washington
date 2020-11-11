@@ -18,3 +18,24 @@ nfb_washington.update_rate:
   route_name: nfb_washington_update_rate_issue
   title: 'Update Rating'
   base_route: nfb_washington.seminar
+nfb_washington.admin:
+  route_name: nfb_washington_admin_home
+  title: 'Home'
+  base_route: nfb_washington.admin
+nfb_washington.config:
+  route_name: nfb_washington_admin_config
+  title: "Configuration"
+  base_route: nfb_washington.admin
+nfb_washington.member:
+  route_name: nfb_washington_admin_member
+  title: "Manage Members"
+  base_route: nfb_washington.admin
+nfb_washington.adminissue:
+  route_name: nfb_washington_admin_issue
+  title: "View Issues"
+  base_route: nfb_washington.admin
+nfb_washington.createeditissue:
+  route_name: nfb_washington_admin_issue
+  title: "Create/Edit Issues"
+  base_route: nfb_washington.admin
+
