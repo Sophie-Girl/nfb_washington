@@ -3,6 +3,7 @@
         attach: function(context, settings) {
             window.onload = function () {
                 var vissueid = $('#edit-issue-value').val();
+                console.log(vissueid);
                 if (vissueid != "create") {
                     $.ajax({
                         type: 'POST',
