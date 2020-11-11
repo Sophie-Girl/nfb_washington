@@ -199,7 +199,7 @@ class admin_issue
     public function hidden_value($issue, &$form, $form_state)
     {
         $form['issue_value'] = array(
-          '#type' => 'texfeild',
+          '#type' => 'textfield',
             '#value' => $issue,
             '#size' => '20',
             '#attributes' => array('readonly' => 'readonly'),
