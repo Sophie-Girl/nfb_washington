@@ -73,6 +73,7 @@ class AdminIssueForm extends FormBase
             $this->too_many_issues($form, $form_state);
         }
         else {$this->go_ahead($form, $form_state);}
+        $this->database = null;
     }
     public function go_ahead(&$form, $form_state)
     {
