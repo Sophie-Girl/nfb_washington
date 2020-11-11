@@ -81,10 +81,6 @@ class admin_issue
             '#min' => 4,
             '#max' => 80,
         );
-        if($issue['bill_id'] != "n/a")
-        {
-            $form_state->setValue("bill_id", $issue['bill_id']);
-        }
     }
     public function  create_form_bill_id(&$form, $form_state)
     {
