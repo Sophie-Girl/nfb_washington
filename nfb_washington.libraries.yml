@@ -3,3 +3,7 @@ nfb-washington:
   css:
     theme:
       css/nfb-washington.css: {}
+edit-issue:
+   version: 1.x
+   js:
+     js/edit-issue.js: {}
