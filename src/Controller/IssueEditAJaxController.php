@@ -19,10 +19,15 @@ class  IssueEditAJaxController extends  ControllerBase
     public function get_ajax_array()
     {return $this->ajax_array;}
     public $database;
+    public function content()
+    {
+        $this->get_ajax_data();
+        return new JsonResponse($this->get_ajax_array());
+    }
     public function  get_ajax_data()
     {
         $this->request_js_data(); $this->issue_query();
-        $this->process_sql_result(); return new JsonResponse($this->get_ajax_array());
+        $this->process_sql_result();
     }
     public function request_js_data()
     {

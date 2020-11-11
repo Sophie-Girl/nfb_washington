@@ -7,7 +7,7 @@
                     $.ajax({
                         type: 'POST',
                         url: '/nfb_washington/admin/ajax/issue',
-                        data: {route: issueid},
+                        data: {issueid: vissueid},
                     }).done(function (data) {
                         var issue = data;
                         document.getElementById('edit-issue-name').value = issue[0];
