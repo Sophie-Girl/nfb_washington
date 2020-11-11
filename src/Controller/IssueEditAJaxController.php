@@ -22,6 +22,7 @@ class  IssueEditAJaxController extends  ControllerBase
     public function content()
     {
         $this->get_ajax_data();
+        \Drupal::logger("nfb_washington_ajax")->notice(print_r($this->get_data(), true));
         return new JsonResponse($this->get_data());
     }
     public function  get_ajax_data()
