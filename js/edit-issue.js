@@ -9,6 +9,9 @@
                         type: 'POST',
                         url: '/nfb_washington/admin/ajax/issue',
                         data: { issueid:vissueid },
+                        error: function (xhr, status, error) {
+                            alert(status);
+                            alert(xhr.responseText);
                     }).done(function (data) {
                         console.log(toString(data));
                         var issue = data;
