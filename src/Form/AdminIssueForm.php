@@ -26,7 +26,7 @@ class AdminIssueForm extends FormBase
         $this->congress_number_markup($form, $form_state);
         $this->form_factory = new admin_issue();
         $this->form_factory->issue_switch($issue, $form, $form_state);
-        $this->rule_of_three($form, $form_state);
+        $this->rule_of_three($form, $form_state, $issue);
         return $form;
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
@@ -56,7 +56,7 @@ class AdminIssueForm extends FormBase
         $this->verification->congress_number_verification($form, $form_state);
         $this->verification = null;
     }
-    public function rule_of_three(&$form, $form_state)
+    public function rule_of_three(&$form, $form_state, $issue)
     {
         $this->database = new base(); $year = date("Y");
         $query = "select count(*)  as 'issues' from nfb_washington_issues where issue_year = '".$year."' group by issue_year;";
@@ -68,7 +68,7 @@ class AdminIssueForm extends FormBase
             $count = get_object_vars($count);
             \Drupal::logger("nfb_washington_validation")->notice($count['issues']);
         }
-        if((int)$count['issues'] > 2 && $form_state->getValue("issue_value") == "create")
+        if($count['issues'] == '3' && $issue = "create")
         {
             $this->too_many_issues($form, $form_state);
         }

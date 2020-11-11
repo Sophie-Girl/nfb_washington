@@ -136,7 +136,7 @@ class admin_issue_backend
     public function primary_issue_update(&$query, $issue)
     {
         $query = "update nfb_washington_issues
-        set status = '".$this->get_primary_issue()."'
+        set primary_status = '".$this->get_primary_issue()."'
         where issue_id = '".$issue."';";
     }
     public function primary_issue_id_update(&$query, $issue)
