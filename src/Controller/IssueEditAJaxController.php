@@ -55,7 +55,7 @@ class  IssueEditAJaxController extends  ControllerBase
         if($issue_data['primary_status'] == "0")
         {$primary = "yes";}else{$primary = "no";}
         $data[3] = $primary;
-        if($issue_data['primary_issue_id'])
+        if($issue_data['primary_issue_id'] && $issue_data['primary_issue_id'] != '0')
         {$prim_id = $issue_data['primary_issue_id'];}
         else {$prim_id = "";}
         $data[4] = $prim_id;
