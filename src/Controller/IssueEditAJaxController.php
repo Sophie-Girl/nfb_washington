@@ -52,10 +52,13 @@ class  IssueEditAJaxController extends  ControllerBase
         $data[0] = $issue_data['issue_name'];
         $data[1] = $issue_data['bill_id'];
         $data[2] = $issue_data['bill_slug'];
-        if($issue_data['primary_Status'] == "0")
+        if($issue_data['primary_status'] == "0")
         {$primary = "yes";}else{$primary = "no";}
         $data[3] = $primary;
-        $data[4] = $issue_data['primary_issue_id'];
+        if($issue_data['primary_issue_id'])
+        {$prim_id = $issue_data['primary_issue_id'];}
+        else {$prim_id = "";}
+        $data[4] = $prim_id;
         $this->data = $data;
 
     }
