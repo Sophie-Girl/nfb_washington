@@ -1,5 +1,5 @@
 (function ($, Drupal) {
-    Drupal.behaviors.wash_sem_update_meeting = {
+    Drupal.behaviors.wash_sem_issue_edit = {
         attach: function(context, settings) {
             window.onload = function () {
                 var vissueid = $('#edit-issue-value').val();

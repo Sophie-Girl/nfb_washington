@@ -42,7 +42,6 @@ class  IssueEditAJaxController extends  ControllerBase
         $key = "issue_id";
         $this->database->select_query($query, $key);
         $this->sql_result = $this->database->get_result();
-        $this->database = null;
     }
     public function process_sql_result()
     {
