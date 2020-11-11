@@ -20,13 +20,14 @@ class AdminIssueForm extends FormBase
     }
     public function  buildForm(array $form, FormStateInterface $form_state, $issue = "create")
     {
+        $issue_type = $issue;
         $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
         $form['#attached']['library'][] = 'nfb_washington/edit-issue';
         $this->verify_api_key($form, $form_state);
         $this->congress_number_markup($form, $form_state);
         $this->form_factory = new admin_issue();
         $this->form_factory->issue_switch($issue, $form, $form_state);
-        $this->rule_of_three($form, $form_state, $issue);
+        $this->rule_of_three($form, $form_state, $issue_type);
         return $form;
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
@@ -56,7 +57,7 @@ class AdminIssueForm extends FormBase
         $this->verification->congress_number_verification($form, $form_state);
         $this->verification = null;
     }
-    public function rule_of_three(&$form, $form_state, $issue)
+    public function rule_of_three(&$form, $form_state, $issue_type)
     {
         $this->database = new base(); $year = date("Y");
         $query = "select count(*)  as 'issues' from nfb_washington_issues where issue_year = '".$year."' group by issue_year;";
@@ -68,7 +69,7 @@ class AdminIssueForm extends FormBase
             $count = get_object_vars($count);
             \Drupal::logger("nfb_washington_validation")->notice($count['issues']);
         }
-        if($count['issues'] == '3' && $issue = "create")
+        if($count['issues'] == '3' && $issue_type == "create")
         {
             $this->too_many_issues($form, $form_state);
         }
@@ -86,7 +87,7 @@ class AdminIssueForm extends FormBase
     {
         $form['alert_too_many'] = array(
           '#type' => "item",
-          '#markup' => "<p class = 'admin_alert'>You have usbmitted all the issues you can for this year./ Please return to the 
+          '#markup' => "<p class = 'admin_alert'>You have usbmitted all the issues you can for this year. Please return to the 
 <a href='/nfb_Washington/admin/issue'> issue home page</a></p>"
         );
     }
