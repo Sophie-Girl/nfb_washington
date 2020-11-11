@@ -194,6 +194,7 @@ class admin_issue
         }
         if($options == null)
         {$options['na'] = "No issues have been entered please make this the primary issue";}
+        $this->database = null;
         return $options;
     }
     public function hidden_value($issue, &$form, $form_state)
