@@ -19,7 +19,7 @@
                 }
                 else{
                     document.getElementById('edit-issue-value').style.display = 'none';
-                    document.getElementsByClassName("form-item js-form-item form-type-textfield js-form-type-textfield form-item-issue-value-field js-form-item-issue-value")['0'].style.display = 'none';
+                    document.getElementsByClassName("form-item js-form-item form-type-textfield js-form-type-textfield form-item-issue-value js-form-item-issue-value")['0'].style.display = 'none';
                 }
             }
         }
