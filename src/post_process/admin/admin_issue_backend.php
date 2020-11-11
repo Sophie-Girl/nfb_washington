@@ -161,7 +161,7 @@ class admin_issue_backend
         $form_state = null;
         drupal_set_message($message);
         $ender = new RedirectResponse('/nfb_washington/admin/issues');
-        $ender->send();
+        $ender->send(); $ender = null;
         return;
 
     }
