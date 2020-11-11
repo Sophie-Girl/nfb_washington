@@ -99,3 +99,10 @@ nfb_washington_admin_issue_home:
     _access: 'TRUE'
     _permission: 'access content'
     _role: 'administrator + nfb_washington_admin'
+nfb_washington.edit_ajax:
+  path: '/nfb_washington/admin/ajax/issue'
+  defaults:
+    _controller: '\Drupal\nfb_washington\Controller\IssueEditAjaxController::content'
+    _title: 'ajax'
+  requirements:
+    _permission: 'access content'
