@@ -147,7 +147,7 @@ class admin_issue_backend
         set primary_issue_id = '".$this->get_primary_issue_id()."'
         where issue_id = '".$issue."';";}
         else{      $query = "update nfb_washington_issues
-        set primary_issue_id = null
+        set primary_issue_id = ".$this->get_primary_issue_id()."
         where issue_id = '".$issue."';";}
     }
     public function modified_user_update(&$query, $issue)
