@@ -58,7 +58,6 @@ class admin_issue
             '#size' => "20",
             '#min' => 4,
             '#max' => 80,
-            '#default_value' => $issue['issue_name'],
         );// default
     }
     public function create_issue__bill(&$form, $form_state)
@@ -118,10 +117,6 @@ class admin_issue
                 'required' => [':input[name="bill_in_congress"]' => ['value' => "yes"]],
             )
         );
-        if($issue['bill_slug'] != "n/a")
-        {
-            $form_state->setValue("bill_slug", $issue['bill_slug']);
-        }
     }
     public function create_bill_slug(&$form, $form_state)
     {
@@ -162,9 +157,6 @@ class admin_issue
             ),
             '#required' => true,
         );
-        if($issue['primary_status'] == "0" )
-        {$primary = "yes";} else {$primary = "no";}
-            $form_state->setValue("primary_issue", $primary);
     }
     public function create_primary_issue(&$form, $form_state)
     {
@@ -191,10 +183,6 @@ class admin_issue
                 'required' => [':input[name="primary_issue"]' => ['value' => "yes"]],
             )
         );
-        if($issue['primary_issue_id'] !=  null)
-        {
-            $form_state->setValue("primary_issue_id", $issue['primary_issue_id']);
-        }
     }
 
     public function primary_issue_options()
