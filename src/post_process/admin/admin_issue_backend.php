@@ -142,10 +142,13 @@ class admin_issue_backend
         where issue_id = '".$issue."';";
     }
     public function primary_issue_id_update(&$query, $issue)
-    {
+    { if($this->get_primary_issue_id() != "null"){
         $query = "update nfb_washington_issues
         set primary_issue_id = '".$this->get_primary_issue_id()."'
-        where issue_id = '".$issue."';";
+        where issue_id = '".$issue."';";}
+        else{      $query = "update nfb_washington_issues
+        set primary_issue_id = null
+        where issue_id = '".$issue."';";}
     }
     public function modified_user_update(&$query, $issue)
     {
