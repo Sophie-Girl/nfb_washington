@@ -10,6 +10,7 @@
                         url: '/nfb_washington/admin/ajax/issue',
                         data: {issueid: vissueid},
                     }).done(function (ajax_array) {
+                        console.log(toString(ajax_array));
                         var issue = ajax_array;
 
                         document.getElementById('edit-issue-name').value = issue[0];
