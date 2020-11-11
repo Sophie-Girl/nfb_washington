@@ -2,6 +2,7 @@
 Namespace Drupal\nfb_washington\post_process\admin;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\database\base;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class admin_issue_backend
 {
@@ -28,6 +29,7 @@ class admin_issue_backend
     {
         $this->set_up_form_values($issue, $form_state);
         $this->issue_switch($issue, $form_state);
+        $this->finish_redirect($issue, $form_state);
     }
     public function set_up_form_values($issue, FormStateInterface $form_state)
     {
@@ -149,6 +151,18 @@ class admin_issue_backend
         set last_modified_user = '".$this->get_modified_user()."'
         where issue_id = '".$issue."';";
     }
+    public function finish_redirect($issue, FormStateInterface $form_state)
+    {
+        if($issue == "create")
+        {$message = "Issue created for ".$form_state->getValue("issue_name");}
+        else {$message = "Issue Updated";}
+        drupal_set_message($message);
+        $ender = new RedirectResponse('/nfb_washington/admin/issues');
+        $ender->send();
+        return;
+
+    }
+
 
 
 }
