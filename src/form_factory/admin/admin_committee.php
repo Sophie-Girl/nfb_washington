@@ -7,13 +7,9 @@ class admin_committee
     {
         $this->initial_markup_($committee, $form, $form_state);
         $this->hidden_value($committee, $form, $form_state);
-        if($committee == "add")
-        {
-            $this->create_form($committee, $form, $form_state);
-        }
-        else{
-           $this->edit_form($committee, $form, $form_state);
-        }
+        $this->committee_name($form, $form_state);
+        $this->committee_pp_id($form, $form_state);
+        $this->committee_chamber($form, $form_state);
     }
     public function create_form($committee, $form, $form_State)
     {
@@ -59,7 +55,7 @@ class admin_committee
             '#max' => 250,
         );
     }
-    public function committtee_pp_id(&$form, $form_state)
+    public function committee_pp_id(&$form, $form_state)
     {
         $form['committee_id'] = array(
             '#type' => 'textfield',
@@ -69,5 +65,19 @@ class admin_committee
             '#max' => 250,
         );
     }
+    public function committee_chamber($form, $form_state)
+    {
+        $form['committee_chamber'] = array(
+          '#type' => "select",
+          '#title' => "Chamber",
+          '#options' => array(
+              "senate" => "Senate",
+              "joint" => "Joint",
+              "house" => "House",
+          ),
+            "#required" => true
+        );
+    }
+
 
 }
