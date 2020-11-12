@@ -17,7 +17,7 @@ class admin_issue_home
     Seminar are listed below. Issue year is assigned by calender date. If you wish to created issues for 
     the next Washington Seminar. Please wait until that calender year. Each year there is a maximum of three
      issues that can be created. To create an issue  click the create issue button below</p>
-     <p><a href='/nfb_washington/admin/issue/create' class = 'button-1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creave Issue&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></p>";
+     <p><a href='/nfb_washington/admin/issue/create' class = 'button-1' role = 'button'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create Issue&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></p>";
         return $markup;
     }
     public function initial_element(&$form, $form_state)
@@ -54,7 +54,7 @@ class admin_issue_home
             $issue = get_object_vars($issue);
             if($issue['primary_status'] == "0")
             {$primary = "Yes";} else {$primary = "No";}
-            $markup = $markup."<tr><td>".$issue['issue_name']."</td><td>".$issue['bill_slug']."</td><td>".$primary."</td><td>".$issue['issue_year']."</td><td><a href='/nfb_washington/admin/issue/".$issue['issue_id']."' class='button-".$count."'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit/View&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> </td></tr>";
+            $markup = $markup."<tr><td>".$issue['issue_name']."</td><td>".$issue['bill_slug']."</td><td>".$primary."</td><td>".$issue['issue_year']."</td><td><a href='/nfb_washington/admin/issue/".$issue['issue_id']."' class='button-".$count."' role='button'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit/View&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> </td></tr>";
             $this->count_catch($count);
         }
         $markup = $markup."</table>";
