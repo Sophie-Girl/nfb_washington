@@ -35,7 +35,7 @@ linked to an issue
     {
         $form['committee_table'] = array(
             '#type' => "item",
-            '#markup' => $this->table_markup();
+            '#markup' => $this->table_markup()
         );
     }
     public function table_markup()
