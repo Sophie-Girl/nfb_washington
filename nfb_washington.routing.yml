@@ -106,3 +106,12 @@ nfb_washington.edit_ajax:
     _title: 'ajax'
   requirements:
     _permission: 'access content'
+nfb_washington_admin_committee_home:
+  path: 'nfb_washington/admin/committees'
+  defaults:
+    _form: '\Drupal\nfb_washington\Form\AdminCommittHomeForm'
+    _title: 'NFB Washington Seminar Committees'
+  requirements:
+    _access: 'TRUE'
+    _permission: 'access content'
+    _role: 'administrator + nfb_washington_admin'
