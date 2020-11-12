@@ -87,8 +87,8 @@ class AdminIssueForm extends FormBase
     {
         $form['alert_too_many'] = array(
           '#type' => "item",
-          '#markup' => "<p class = 'admin_alert'>You have usbmitted all the issues you can for this year. Please return to the 
-<a href='/nfb_Washington/admin/issue'> issue home page</a></p>"
+          '#markup' => "<p class = 'admin_alert'>You have submitted all the issues you can for this year. Please return to the 
+<a href='/nfb_Washington/admin/issue'> issue home page</a> and edit an exiting issue for this year</p>"
         );
     }
 
