@@ -16,7 +16,8 @@ class admin_issue_home
         $markup = "<p>Issues that are currently being brought up during the ".$year." Washington
     Seminar are listed below. Issue year is assigned by calender date. If you wish to created issues for 
     the next Washington Seminar. Please wait until that calender year. Each year there is a maximum of three
-     issues that can be created. To create an issue  click the create issue button below</p>
+     issues that can be created. To create an issue  click the create issue button below. All issues for the past 4 years are listed below. 
+     you can edit them with their corresponding edit button</p>
      <p><a href='/nfb_washington/admin/issue/create' class = 'button-1' role = 'button'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create Issue&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></p>";
         return $markup;
     }
