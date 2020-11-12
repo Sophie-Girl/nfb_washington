@@ -625,9 +625,58 @@ class configuration_table extends comittee_memberhsip_table
             'description' => 'who made the note'
         );
 
+
     }
 }
-$install = new configuration_table();
+class committee_issue_link_table extends configuration_table
+{
+    public function  set_up_com_issue_link_table()
+    {
+        $table_name = 'nfb_washington_committee_issue_link';
+        $this->table_test($table_name);
+        $schema[$table_name]['description'] = "Table for linking issues to committees";
+        $schema[$table_name]['primary key'] = ['link_id'];
+        $this->link_table_schema($schema, $table_name);
+        $this->create_table($schema, $table_name);
+
+    }
+    public function link_table_schema(&$schema, $table_name)
+    {
+        $schema[$table_name]['fields']['link_id'] = array(
+            'type'=> 'serial',
+            'size' => 'big',
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+            'description' => 'Primary Key: link id'
+        );
+        $schema[$table_name]['fields']['committee_id']= array(
+            'type' => 'int',
+            'size' =>  'big',
+            'default' => '0',
+            'not null' => true,
+            'description' => 'id for the committed'
+        );
+        $schema[$table_name]['fields']['issue_id'] = array(
+            'type' => 'int',
+            'size' => 'big',
+            'default' => '0',
+            'not null' => true,
+            'description' => 'FK to issue'
+        );
+        $schema[$table_name]['foreign keys'] = array(
+            'nfb_washington_issues' => array(
+                'table' => 'nfb_washington_issues',
+                'columns' => array('issue_id' => 'issue_id')
+            ),
+            'nfb_washington_committee' => array(
+                'table' => 'nfb_washington_committee',
+                'columns' => array('committee_id' => 'committee_id')
+            ),
+        );
+
+    }
+}
+$install = new committee_issue_link_table();
 $install->set_up_member_table();
 $install->set_up_meeting_table();
 $install->set_up_issue_table();
@@ -637,4 +686,5 @@ $install->set_up_note_link_table();
 $install->set_up_committee_table();
 $install->set_up_committee_membership_table();
 $install->set_up_configuration_table();
+$install->set_up_com_issue_link_table();
 
