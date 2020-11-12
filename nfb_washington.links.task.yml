@@ -38,4 +38,8 @@ nfb_washington.createeditissue:
   route_name: nfb_washington_admin_issue
   title: "Create/Edit Issues"
   base_route: nfb_washington.admin
+nfb_washington.committeehome:
+  route_name: nfb_washington_admin_committee_home
+  title: 'View Committees'
+  base_route: nfb_washington.admin
 
