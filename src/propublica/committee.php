@@ -13,6 +13,7 @@ class committee extends members
     {
         $this->api_url = "https://api.propublica.org/congress/v1/".$this->get_congress_number()."/".$this->get_search_criteria_1()."/".$this->get_entity()."/".$this->get_committee_id().".json";
     }
+    public function
 
 
 }
