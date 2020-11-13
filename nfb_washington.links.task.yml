@@ -42,4 +42,8 @@ nfb_washington.committeehome:
   route_name: nfb_washington_admin_committee_home
   title: 'View Committees'
   base_route: nfb_washington.admin
+nfb_washington.committee:
+  route_name: nfb_washington_admin_committee
+  title: 'Add New Committees'
+  base_route: nfb_washington.admin
 
