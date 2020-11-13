@@ -65,7 +65,7 @@ class admin_committee
             '#max' => 250,
         );
     }
-    public function committee_chamber($form, $form_state)
+    public function committee_chamber(&$form, $form_state)
     {
         $form['committee_chamber'] = array(
           '#type' => "select",
