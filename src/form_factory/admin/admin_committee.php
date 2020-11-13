@@ -29,9 +29,9 @@ class admin_committee
     public function markup_switch($committee)
     {
         if ($committee == "add") {
-            $markup = "";
+            $markup = "<p>Add Markup</p>";
         } else {
-            $markup = "";
+            $markup = "<p>ID Markup</p>";
         }
         return $markup;
     }

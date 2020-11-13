@@ -115,3 +115,13 @@ nfb_washington_admin_committee_home:
     _access: 'TRUE'
     _permission: 'access content'
     _role: 'administrator + nfb_washington_admin'
+nfb_washington_admin_committee:
+  path: 'nfb_washington/admin/committee/{committee}'
+  defaults:
+    _form: '\Drupal\nfb_washington\Form\AdminComitForm'
+    _title: 'NFB Washington Add/Edit Committee'
+    issue: "add"
+  requirements:
+    _access: 'TRUE'
+    _permission: 'access content'
+    _role: 'administrator + nfb_washington_admin'

@@ -2,20 +2,26 @@
 Namespace Drupal\nfb_washington\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\nfb_washington\form_factory\admin\admin_committee;
 use Drupal\nfb_washington\verification\api_key_check;
 use Drupal\nfb_washington\verification\congress_number_check;
 
 class AdminComitForm extends FormBase
 {
     public $verification;
+    public $form_factory;
     public function getFormId()
     {
         return "nfb_washington_admin_commit";
     }
-    public function  buildForm(array $form, FormStateInterface $form_state)
+    public function  buildForm(array $form, FormStateInterface $form_state, $committee = "add")
     {
+        $this->form_factory = new admin_committee();
+        $this->form_factory->build_committee_form($committee, $form, $form_state);
         $this->verify_api_key($form, $form_state);
         $this->congress_number_markup($form, $form_state);
+        $this->form_factory = null;
+        return $form;
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {

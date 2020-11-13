@@ -18,7 +18,7 @@ class admin_committee_home
 To add a new issues click the corresponding button below. Each Committee cna be edited, have maintenance performed
 on its members (remove those who are not currently in the committee, and in new additions), and have the committee 
 linked to an issue
-<br><a href='/nfb_washington/admin/committee/create' role='button' class='button-1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Committee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></p>"
+<br><a href='/nfb_washington/admin/committee/add' role='button' class='button-1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Committee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></p>"
         );
     }
     public function select_query()
