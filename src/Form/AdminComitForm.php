@@ -17,9 +17,9 @@ class AdminComitForm extends FormBase
     public function  buildForm(array $form, FormStateInterface $form_state, $committee = "add")
     {
         $this->form_factory = new admin_committee();
-        $this->form_factory->build_committee_form($committee, $form, $form_state);
         $this->verify_api_key($form, $form_state);
         $this->congress_number_markup($form, $form_state);
+        $this->form_factory->build_committee_form($committee, $form, $form_state);
         $this->form_factory = null;
         return $form;
     }
