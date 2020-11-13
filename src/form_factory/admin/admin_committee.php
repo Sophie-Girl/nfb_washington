@@ -3,7 +3,7 @@ namespace  Drupal\nfb_washington\form_factory\admin;
 class admin_committee
 {
     public $database;
-    public function build_comittee_form($committee, &$form, $form_state)
+    public function build_committee_form($committee, &$form, $form_state)
     {
         $this->initial_markup_($committee, $form, $form_state);
         $this->hidden_value($committee, $form, $form_state);
