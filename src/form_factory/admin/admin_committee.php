@@ -8,16 +8,9 @@ class admin_committee
         $this->initial_markup_($committee, $form, $form_state);
         $this->hidden_value($committee, $form, $form_state);
         $this->committee_name($form, $form_state);
-        $this->committee_pp_id($form, $form_state);
         $this->committee_chamber($form, $form_state);
-    }
-    public function create_form($committee, $form, $form_State)
-    {
-
-    }
-    public function edit_form($committee, $form, $form_state)
-    {
-
+        if($committee != "add")
+        {$this->committee_pp_id($form, $form_state);}
     }
     public function initial_markup_($committee, &$form, $form_state)
     {
