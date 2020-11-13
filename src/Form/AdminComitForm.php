@@ -16,6 +16,7 @@ class AdminComitForm extends FormBase
     }
     public function  buildForm(array $form, FormStateInterface $form_state, $committee = "add")
     {
+        $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
         $this->form_factory = new admin_committee();
         $this->verify_api_key($form, $form_state);
         $this->congress_number_markup($form, $form_state);
