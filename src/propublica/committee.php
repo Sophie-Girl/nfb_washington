@@ -24,8 +24,18 @@ class committee extends members
     }
     public function specific_committee_parse($com_member)
     {
-
+        $this->member_pp_id = $com_member['id'];
+        $this->member_active = $com_member['0'];
     }
+    public function member_maintnence($con_member)
+    {
+        if($con_member['id'] == $this->get_member_pp_id())
+        {
+            $this->specific_committee_parse($con_member);
+        }
+    }
+
+
 
 
 }
