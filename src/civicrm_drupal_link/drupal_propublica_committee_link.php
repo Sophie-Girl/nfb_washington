@@ -25,7 +25,12 @@ class drupal_propublica_committee_link
     {
         $this->propublica->set_api_key(); $this->propublica->set_congress_number();
     }
-    public function set_up_specific_query_for_edits_and_members()
+    public function set_up_specific_query_for_edits_and_members(FormStateInterface $form_state)
+    {
+        $this->propublica->entity = "committees";
+        $this->establish_propublica_dependencies();
+    }
+    public function database_value_lookup()
     {
 
     }
