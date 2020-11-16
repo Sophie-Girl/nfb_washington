@@ -165,9 +165,11 @@ class drupal_propublica_committee_link
         $this->database->select_query($query, $key);
         $result = $this->database->get_result();
     }
-    public function duplicate_com_mem_2($result)
+    public function duplicate_com_mem_2($result, &$com_member_id)
     {
-
+        $result = get_object_vars($result[$this->get_drupal_member_id()]);
+        if($result['com_mem_id']){
+        $com_member_id = $result['com_mem_id'];}
     }
 
 
