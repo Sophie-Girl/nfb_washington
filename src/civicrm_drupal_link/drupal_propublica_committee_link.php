@@ -30,7 +30,7 @@ class drupal_propublica_committee_link
         $this->propublica->entity = "committees";
         $this->establish_propublica_dependencies();
     }
-    public function database_value_lookup()
+    public function database_value_lookup(FormStateInterface $form_state)
     {
 
     }
