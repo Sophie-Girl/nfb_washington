@@ -29,9 +29,13 @@ class drupal_propublica_committee_link
             $this->deduplication_check();
             if(!$this->get_drupal_committee_id())
             {$this->create_committee_drupal_record();}
+            $this->set_up_specific_query_for_edits_and_members($form_state);
+            $this-> member_committee_run_through();
+
         }
         else {
-
+            $this->set_up_specific_query_for_edits_and_members($form_state);
+            $this-> member_committee_run_through();
         }
     }
     public function set_up_initial_query_add_committee(FormStateInterface $form_state)
@@ -64,6 +68,8 @@ class drupal_propublica_committee_link
         {
 
         }
+        else {$this->create_committee_drupal_record();
+        }
 
     }
     public function duplicate_check_step_2($result)
@@ -81,9 +87,12 @@ class drupal_propublica_committee_link
         if($form_state->getValue("committee_value") != "add")
         {$this->drupal_committee_id = $form_state->getValue("committee_value");}
         $this->propublica->entity = "committees";
-        if(!$this->get_drupal_committee_id())
+        if(!$this->propublica->get_committee_id())
         {$this->database_value_lookup();}
         $this->establish_propublica_dependencies();
+        if(!$this->propublica->get_search_criteria_1())
+        {$this->propublica->search_criteria_1 = $form_state->getValue("committee_chamber");}
+        $this->propublica->specific_committee_search();
     }
     public function database_value_lookup()
     {
@@ -136,8 +145,6 @@ class drupal_propublica_committee_link
             $this->drupal_member_id = null;
             $this->propublica->specific_committee_parse($com_mem);
             $this->find_member_id();
-
-
         }
     }
     public function find_member_id()
@@ -149,6 +156,7 @@ class drupal_propublica_committee_link
         $result = $this->propublica->get_propublica_result();
         $this->set_drupal_member_id($result);
         $this->database = null;
+        $this->duplicate_committee_member_check();
     }
     public function set_drupal_member_id($result)
     {
@@ -170,9 +178,24 @@ class drupal_propublica_committee_link
     public function duplicate_com_mem_2($result, &$com_member_id)
     {
         $result = get_object_vars($result[$this->get_drupal_member_id()]);
-        if($result['com_mem_id']){
+        if($result['com_mem_id'] != null){
         $com_member_id = $result['com_mem_id'];}
+        else { $this->create_con_mem_record();}
     }
+    public function create_con_mem_record()
+    {
+        $this->database = new base();
+        $fields = array(
+          'committee_id' => $this->get_drupal_committee_id(),
+          'member_id' => $this->get_drupal_member_id(),
+          "active" => '0',
+        );
+        $table = "nfb_washington_committee_mem";
+        $this->database->insert_query($table, $fields);
+        $this->database = null;
+    }
+
+
 
 
 
