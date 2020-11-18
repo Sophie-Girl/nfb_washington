@@ -132,8 +132,15 @@ class drupal_propublica_committee_link
     }
     public function find_committee_id($result)
     {
-        $result = get_object_vars($result[$this->propublica->get_committee_id()]);
-        $this->drupal_committee_id = $result['committee_id'];
+        $committee_id = null;
+        foreach ($result as $committee)
+        {
+            if($committee_id == null)
+            {
+                $committee_id = $committee['committee_id'];
+            }
+        }
+        $this->drupal_committee_id = $committee_id;
     }
     public function create_committee_drupal_record()
     {
