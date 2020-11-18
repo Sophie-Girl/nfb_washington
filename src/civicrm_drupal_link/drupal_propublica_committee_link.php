@@ -171,6 +171,7 @@ class drupal_propublica_committee_link
     }
     public function set_drupal_member_id($result)
     {
+        \drupal::logger("nfb_washington_debug")->notice("I am doing the drupal add committee members");
         $member_id = null;
         foreach ($result as $member)
         {
