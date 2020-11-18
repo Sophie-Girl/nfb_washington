@@ -49,6 +49,7 @@ class drupal_propublica_committee_link
     }
     public function initial_addition_run_through()
     {   $this->propublica->committee_id = "null";
+    \Drupal::logger('nfb_washinton_debug')->notice(print_r($this->propublica->get_propublica_result(), true));
         foreach($this->propublica->get_propublica_result()['results']['0']['committees'] as $committee)
         {
             $committee_name = $this->get_committee_name();
