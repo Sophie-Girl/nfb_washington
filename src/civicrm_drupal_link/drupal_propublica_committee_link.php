@@ -162,7 +162,7 @@ class drupal_propublica_committee_link
     public function find_member_id()
     {
         $this->database = new base;
-        $query = "select member_id, propublica_id from nfb_wasington_members where propublica_id = '".$this->propublica->get_member_pp_id()."';";
+        $query = "select member_id, propublica_id from nfb_washington_members where propublica_id = '".$this->propublica->get_member_pp_id()."';";
         $key = "propublica_id";
         $this->database->select_query($query, $key);
         $result = $this->propublica->get_propublica_result();
