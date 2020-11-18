@@ -3,6 +3,7 @@ Namespace Drupal\nfb_washington\civicrm_drupal_link;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\database\base;
 use Drupal\nfb_washington\propublica\committee;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class drupal_propublica_committee_link
 {
