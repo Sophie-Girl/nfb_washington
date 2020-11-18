@@ -161,6 +161,7 @@ class drupal_propublica_committee_link
     }
     public function find_member_id()
     {
+        \Drupal::logger("nfb_washington_bullshit")->notice("member_id ". $this->propublica->get_member_pp_id() );
         $this->database = new base;
         $query = "select member_id, propublica_id from nfb_washington_members where propublica_id = '".$this->propublica->get_member_pp_id()."';";
         $key = "propublica_id";
@@ -196,10 +197,13 @@ class drupal_propublica_committee_link
     }
     public function duplicate_com_mem_2($result, &$com_member_id)
     {
-        $result = get_object_vars($result[$this->get_drupal_member_id()]);
-        if($result['com_mem_id'] != null){
-        $com_member_id = $result['com_mem_id'];}
-        else { $this->create_con_mem_record();}
+        $com_member_id = null;
+        foreach ($result as $con_mem) {
+            if ($com_member_id == null) {
+                $com_member_id = $con_mem['com_mem_id'];
+            }}
+        if($com_member_id == null)
+        {  $this->create_con_mem_record();}
     }
     public function create_con_mem_record()
     {
