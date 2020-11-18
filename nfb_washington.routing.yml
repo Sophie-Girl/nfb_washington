@@ -120,7 +120,7 @@ nfb_washington_admin_committee:
   defaults:
     _form: '\Drupal\nfb_washington\Form\AdminComitForm'
     _title: 'NFB Washington Add/Edit Committee'
-    issue: "add"
+    committee: "add"
   requirements:
     _access: 'TRUE'
     _permission: 'access content'
