@@ -98,7 +98,7 @@ class drupal_propublica_committee_link
     public function database_value_lookup()
     {
         $this->database = new base();
-        $query = "select committee_id, propublica_id from nfb_washington_committee where committee_id == '".$this->get_drupal_committee_id()."';";
+        $query = "select committee_id, propublica_id from nfb_washington_committee where committee_id = '".$this->get_drupal_committee_id()."';";
         $key = 'committee_id';
         $this->database->select_query($query, $key);
         $result = $this->database->get_result();
@@ -113,7 +113,7 @@ class drupal_propublica_committee_link
     public function find_drupal_comittee_id()
     {
         $this->database = new base();
-        $query = "select committee_id, propublica_id from nfb_washington_committee where propublica_id == '".$this->propublica->get_committee_id()."';";
+        $query = "select committee_id, propublica_id from nfb_washington_committee where propublica_id = '".$this->propublica->get_committee_id()."';";
         $key = 'propublica_id';
         $this->database->select_query($query, $key);
         $result = $this->database->get_result();
