@@ -135,6 +135,7 @@ class drupal_propublica_committee_link
         $committee_id = null;
         foreach ($result as $committee)
         {
+            $committee = get_object_vars($committee);
             if($committee_id == null)
             {
                 $committee_id = $committee['committee_id'];
