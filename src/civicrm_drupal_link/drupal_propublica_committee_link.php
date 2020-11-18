@@ -31,7 +31,7 @@ class drupal_propublica_committee_link
             if(!$this->get_drupal_committee_id())
             {$this->create_committee_drupal_record();}
             $this->set_up_specific_query_for_edits_and_members($form_state);
-            $this-> member_committee_run_through();
+            $this->member_committee_run_through();
             $error_status = "none";
             $this->finish_redirect($error_status);
         }
@@ -171,9 +171,15 @@ class drupal_propublica_committee_link
     }
     public function set_drupal_member_id($result)
     {
-        $result = get_object_vars($result[$this->propublica->get_member_pp_id()]);
-        if($result['member_id']){
-        $this->drupal_member_id = $result['member_id'];}
+        $member_id = null;
+        foreach ($result as $member)
+        {
+            if($member_id == null)
+            {
+                $member_id = $member['member_id'];
+            }
+        }
+        $this->drupal_member_id = $member_id;
     }
     public function duplicate_committee_member_check()
     {
