@@ -44,15 +44,25 @@ linked to an issue
         $count = 0;
         $markup = "<table>
 <tr><th class='table-header'>Committee Name</th><th class='table-header'>Propublica ID</th><th class='table-header'> Actions</th></tr>";
+        $count = 1;
         foreach ($sql_result as $committee)
         {
+            $this->count_switch($count);
             $committee = get_object_vars($committee);
-            $markup = $markup."<tr><td>".$committee['committee_name']."</td><td>".$committee['h']."</td></tr>";
+            $markup = $markup."<tr><td>".$committee['committee_name']."</td><td>".$committee['propublica_id']."</td><td><a href='nfb_washington/admin/committee/".$committee['committee_id']."' class='button-".$count."'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> </td></tr>";
             $count++;
         }
         $markup = $markup."</tabe>";
         if($count == 0)
         {$markup = "<p>No committees have been added</p>";}
         return $markup;
+    }
+    public function count_switch(&$count)
+    {
+        if($count < 3)
+        {
+            $count++;
+        }
+        else { $count = 1;}
     }
 }
