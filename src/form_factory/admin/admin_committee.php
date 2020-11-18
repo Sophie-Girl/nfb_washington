@@ -11,6 +11,10 @@ class admin_committee
         $this->committee_chamber($form, $form_state);
         if($committee != "add")
         {$this->committee_pp_id($form, $form_state);}
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => "Submit",
+        );
     }
     public function initial_markup_($committee, &$form, $form_state)
     {
