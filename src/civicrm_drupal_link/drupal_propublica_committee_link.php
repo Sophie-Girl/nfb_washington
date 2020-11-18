@@ -174,7 +174,7 @@ class drupal_propublica_committee_link
         $query = "select member_id, propublica_id from nfb_washington_members where propublica_id = '".$this->propublica->get_member_pp_id()."';";
         $key = "propublica_id";
         $this->database->select_query($query, $key);
-        $result = $this->propublica->get_propublica_result();
+        $result = $this->database->get_result();
         $this->set_drupal_member_id($result);
         $this->database = null;
         $this->duplicate_committee_member_check();
@@ -185,6 +185,7 @@ class drupal_propublica_committee_link
         $member_id = null;
         foreach ($result as $member)
         {
+            $member = get_object_vars($member);
             if($member_id == null)
             {
                 $member_id = $member['member_id'];
