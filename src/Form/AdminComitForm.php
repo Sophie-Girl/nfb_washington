@@ -56,6 +56,7 @@ class AdminComitForm extends FormBase
         $count = 0;
         foreach ($this->database->get_result() as $committee)
         {
+            \Drupal::logger("nfb_washington_validation")->ntoice("I amn running");
             $count++;
         }
         if($count > 0)
