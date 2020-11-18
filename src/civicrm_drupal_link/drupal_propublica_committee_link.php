@@ -102,6 +102,7 @@ class drupal_propublica_committee_link
         $this->establish_propublica_dependencies();
         if(!$this->propublica->get_search_criteria_1())
         {$this->propublica->search_criteria_1 = $form_state->getValue("committee_chamber");}
+        \drupal::logger("nfb_washington_debug")->notice("I am running the query");
         $this->propublica->specific_committee_search();
     }
     public function database_value_lookup()
