@@ -47,12 +47,12 @@ linked to an issue
         $count = 1;
         foreach ($sql_result as $committee)
         {
-            $this->count_switch($count);
+
             $committee = get_object_vars($committee);
             $markup = $markup."<tr><td>".$committee['committee_name']."</td><td>".$committee['propublica_id']."</td><td><a href='nfb_washington/admin/committee/".$committee['committee_id']."' class='button-".$count."'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> </td></tr>";
-            $count++;
+            $this->count_switch($count);
         }
-        $markup = $markup."</tabe>";
+        $markup = $markup."</table>";
         if($count == 0)
         {$markup = "<p>No committees have been added</p>";}
         return $markup;
