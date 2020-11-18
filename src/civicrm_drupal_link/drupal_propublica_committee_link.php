@@ -151,6 +151,7 @@ class drupal_propublica_committee_link
     }
     public function member_committee_run_through()
     {
+        \drupal::logger("nfb_washington_debug")->notice(print_r($this->propublica->get_propublica_result(), true));
         foreach($this->propublica->get_propublica_result()['result']['0']['current_members'] as $com_mem)
         {
             $this->drupal_member_id = null;
