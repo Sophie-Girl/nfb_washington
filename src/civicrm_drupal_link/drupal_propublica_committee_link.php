@@ -31,11 +31,14 @@ class drupal_propublica_committee_link
             {$this->create_committee_drupal_record();}
             $this->set_up_specific_query_for_edits_and_members($form_state);
             $this-> member_committee_run_through();
-
+            $error_status = "none";
+            $this->finish_redirect($error_status);
         }
         else {
             $this->set_up_specific_query_for_edits_and_members($form_state);
             $this-> member_committee_run_through();
+            $error_status = "none";
+            $this->finish_redirect($error_status);
         }
     }
     public function set_up_initial_query_add_committee(FormStateInterface $form_state)
@@ -67,7 +70,8 @@ class drupal_propublica_committee_link
         $this->duplicate_check_step_2($result);
         if($this->get_drupal_committee_id() != null)
         {
-
+            $error_Status = "duplicate";
+            $this->finish_redirect($error_Status);
         }
         else {$this->create_committee_drupal_record();
         }
@@ -75,9 +79,13 @@ class drupal_propublica_committee_link
     }
     public function duplicate_check_step_2($result)
     {
-      $result = get_object_vars($result[$this->propublica->get_committee_id()]);
-      if($result['committee_id'])
-      {$this->drupal_committee_id = $result['committee_id'];}
+        $committee_id = null;
+        foreach ($result as $committee)
+        { $committee = get_object_vars($committee);
+        if($committee_id == null)
+        {$committee_id = $committee['committee_id'];}
+        }
+        $this->drupal_committee_id = $committee_id;
     }
     public function establish_propublica_dependencies()
     {
@@ -194,6 +202,22 @@ class drupal_propublica_committee_link
         $table = "nfb_washington_committee_mem";
         $this->database->insert_query($table, $fields);
         $this->database = null;
+    }
+    public function finish_redirect($error_status)
+    {
+        if($error_status == "duplicate")
+        {$message = "Error: The Committee already exists. Please enter a new committee";
+            drupal_set_message($message, "error");
+            $ender = new RedirectResponse('/nfb_washington/admin/committee/add');
+            $ender->send(); $ender = null;
+            return;
+        }
+        else {$message = "Issue Updated";
+        $message = "Committee Record Created";
+            drupal_set_message($message);
+        $ender = new RedirectResponse('/nfb_washington/admin/committees');
+        $ender->send(); $ender = null;}
+        return;
     }
 
 
