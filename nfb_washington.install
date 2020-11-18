@@ -486,9 +486,9 @@ class committee_table extends note_link
             'description' => 'Primary Key: committe_id'
         );
         $schema[$table_name]['fields']['propublica_id']= array(
-            'type' => 'int',
-            'size' =>  'big',
-            'default' => '0',
+            'type'=> 'varchar',
+            'length' => '64',
+            'default' => '',
             'not null' => true,
             'description' => 'id used in propublica'
         );
