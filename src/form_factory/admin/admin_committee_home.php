@@ -49,7 +49,7 @@ linked to an issue
         {
 
             $committee = get_object_vars($committee);
-            $markup = $markup."<tr><td>".$committee['committee_name']."</td><td>".$committee['propublica_id']."</td><td><a href='nfb_washington/admin/committee/".$committee['committee_id']."' class='button-".$count."'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> </td></tr>";
+            $markup = $markup."<tr><td>".$committee['committee_name']."</td><td>".$committee['propublica_id']."</td><td><a href='/nfb_washington/admin/committee/".$committee['committee_id']."' class='button-".$count."'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> </td></tr>";
             $this->count_switch($count);
         }
         $markup = $markup."</table>";
