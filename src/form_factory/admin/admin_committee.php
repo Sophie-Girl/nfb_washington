@@ -8,7 +8,8 @@ class admin_committee
         $this->initial_markup_($committee, $form, $form_state);
         $this->hidden_value($committee, $form, $form_state);
         $this->committee_name($form, $form_state);
-        $this->committee_chamber($form, $form_state);
+        if($committee == "add"){
+        $this->committee_chamber($form, $form_state);}
         if($committee != "add")
         {$this->committee_pp_id($form, $form_state);}
         $form['submit'] = array(
@@ -59,6 +60,7 @@ class admin_committee
             '#title' => "Committee propublica ID",
             '#required' => true,
             '#size' => "20",
+            '#attributes' => array('readonly' => 'readonly'),
             '#max' => 250,
         );
     }
