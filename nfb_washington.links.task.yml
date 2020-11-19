@@ -49,6 +49,6 @@ nfb_washington.committee:
 nfb_washington.committeemember:
   route_name: nfb_washington_admin_committee_maint
   title: 'Member Maintenance'
-  base_route: nfb_washington_admin
+  base_route: nfb_washington.admin
 
 
