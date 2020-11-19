@@ -12,6 +12,11 @@ class  admin_committee_backend
         $this->link = $this->dependency_injection();
         $this->link->committee_add_edit_backend($form_state);
     }
+    public function member_backend(FormStateInterface $form_state)
+    {
+     $this->link = $this->dependency_injection();
+     $this->link->maint_backend($form_state);
+    }
     public function dependency_injection()
     {
         $propublica  =  new committee();

@@ -176,7 +176,6 @@ class drupal_propublica_committee_link
     }
     public function find_member_id()
     {
-        \Drupal::logger("nfb_washington_bullshit")->notice("member_id ". $this->propublica->get_member_pp_id() );
         $this->database = new base;
         $query = "select member_id, propublica_id from nfb_washington_members where propublica_id = '".$this->propublica->get_member_pp_id()."';";
         $key = "propublica_id";
@@ -267,6 +266,90 @@ class drupal_propublica_committee_link
         $this->database = null;
 
     }
+    public function maint_backend(FormStateInterface $form_state)
+    {
+        $this->drupal_committee_id = $form_state->getValue("committee_value");
+        $this->find_needed_values();
+        $this->establish_propublica_dependencies();
+
+    }
+    public function find_needed_values()
+    {   $committee_pp_id = null; $committee_chamber = null;
+        $this->database = new base();
+        $query = "select * from nfb_washington_committee;";
+        $key = "committee_id";
+        $this->database->select_query($query, $key);
+        foreach($this->database->get_result() as $committee)
+        {
+            $committee = get_object_vars($committee);
+            if($committee_chamber == null)
+            {$committee_chamber = $committee['committee_chamber'];}
+            if($committee_pp_id == null)
+            {$committee_pp_id = $committee['propublica_id'];}
+        }
+        $this->propublica->search_criteria_1 = $committee_chamber;
+        $this->propublica->committee_id = $committee_pp_id;
+        $this->propublica->entity = "committees";
+        $this->database = null;
+    }
+    public function specific_committee_query()
+    {
+        $this->propublica->specific_committee_search();
+        $this->member_committee_run_through();
+    }
+    public function remove_old_member()
+    {
+        foreach($this->propublica->get_propublica_result()['results']['0']['current_members'] as $com_mem)
+        {
+            $this->drupal_member_id = null;
+            $this->propublica->specific_committee_parse($com_mem);
+            $this->find_old_member();
+        }
+    }
+    public function find_old_member()
+    {
+        $this->database = new base;
+        $query = "select member_id, propublica_id from nfb_washington_members where propublica_id = '".$this->propublica->get_member_pp_id()."';";
+        $key = "propublica_id";
+        $this->database->select_query($query, $key);
+        $result = $this->database->get_result();
+        $this->set_drupal_member_id($result);
+        $this->database = null;
+        $this->old_committee_member_check();
+    }
+    public function old_committee_member_check()
+    {
+        $com_member_id = null;
+        $this->database = new base();
+        $query = "select * from nfb_washington_committee_mem where committee_id = '".$this->get_drupal_committee_id()."' and member_id = '".$this->get_drupal_member_id()."';";
+        $key = "member_id";
+        $this->database->select_query($query, $key);
+        $result = $this->database->get_result();
+        $this->old_com_mem_2($result, $com_member_id);
+        $this->database = null;
+    }
+    public function old_com_mem_2($result, &$com_member_id)
+    {
+        $com_member_id = null;
+        foreach ($result as $con_mem) {
+            $con_mem = get_object_vars($con_mem);
+            if ($com_member_id == null) {
+                $com_member_id = $con_mem['com_mem_id'];
+            }}
+        if($com_member_id != null)
+        { $this->update__member_commitee($con_member_id)}
+    }
+    public function update__member_commitee($con_member_id)
+    {
+        $this->database = new base();
+        $query  = "update nfb_washington_committee_mem
+        set active = 1
+        where com_mem_id '".$con_member_id."';";
+        $this->database->update_query($query);
+        $this->database = null;
+    }
+
+
 
 
 
