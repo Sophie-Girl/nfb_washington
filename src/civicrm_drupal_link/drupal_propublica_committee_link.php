@@ -36,8 +36,7 @@ class drupal_propublica_committee_link
             $this->finish_redirect($error_status);
         }
         else {
-            $this->set_up_specific_query_for_edits_and_members($form_state);
-            $this-> member_committee_run_through();
+            $this->update_committee($form_state);
             $error_status = "none";
             $this->finish_redirect($error_status);
         }
@@ -54,6 +53,7 @@ class drupal_propublica_committee_link
     public function initial_addition_run_through()
     {   $this->propublica->committee_id = null;
         $committee_name = $this->get_committee_name();
+
         foreach($this->propublica->get_propublica_result()['results']['0']['committees']as $committee)
         {
             \Drupal::logger('nfb_washinton_debug')->notice(print_r($committee, true));
@@ -64,7 +64,7 @@ class drupal_propublica_committee_link
     {
         $this->drupal_committee_id = null;
         $this->database = new base();
-        $query = " select committee_id from nfb_washington_committee where propublica_id = '".$this->propublica->committee_id."';";
+        $query = " select committee_id from nfb_washington_committee where propublica_id = '".$this->propublica->get_committee_id()."';";
         $key = "propublica_id";
         $this->database->select_query($query, $key);
         $result = $this->database->get_result();
@@ -74,7 +74,14 @@ class drupal_propublica_committee_link
             $error_Status = "duplicate";
             $this->finish_redirect($error_Status);
         }
-        else {$this->create_committee_drupal_record();
+        else {
+            if($this->propublica->get_committee_id() != null)
+            {
+            $this->create_committee_drupal_record(); }
+            else {
+                $error_Status = "notfound";
+                $this->finish_redirect($error_Status);
+            }
         }
 
     }
@@ -235,12 +242,30 @@ class drupal_propublica_committee_link
             $ender->send(); $ender = null;
             return;
         }
+        elseif( $error_status == "nofound")
+        {
+            $message = "Error: The Committee Name provided, ".$this->get_committee_name().", is not matching anything in Propublica. Please try again";
+            drupal_set_message($message, "error");
+            $ender = new RedirectResponse('/nfb_washington/admin/committee/add');
+            $ender->send(); $ender = null;
+            return;
+        }
         else {$message = "Issue Updated";
         $message = "Committee Record Created";
             drupal_set_message($message);
         $ender = new RedirectResponse('/nfb_washington/admin/committees');
         $ender->send(); $ender = null;}
         return;
+    }
+    public function update_committee(FormStateInterface $form_state)
+    {
+        $this->database = new base();
+        $query = "update nfb_washington_committee
+        set committee_name = '".$form_state->getValue("committee_name")."'
+        where committee_id = '".$form_state->getValue("committee_value")."';";
+        $this->database->update_query($query);
+        $this->database = null;
+
     }
 
 
