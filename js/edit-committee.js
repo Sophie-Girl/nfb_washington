@@ -7,7 +7,7 @@
                     $.ajax({
                         type: 'POST',
                         url: '/nfb_washington/admin/ajax/committee',
-                        data: { issueid:vissueid },
+                        data: { committeeid:vcommitteeid },
                     }).done(function (data) {
                         var issue = data;
                         document.getElementById('edit-committee-name').value = issue[0];
