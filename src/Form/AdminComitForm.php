@@ -21,6 +21,7 @@ class AdminComitForm extends FormBase
     public function  buildForm(array $form, FormStateInterface $form_state, $committee = "add")
     {
         $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
+        $form['#attached']['library'][] = 'nfb_washington/edit-committee';
         $this->form_factory = new admin_committee();
         $this->verify_api_key($form, $form_state);
         $this->congress_number_markup($form, $form_state);
@@ -48,19 +49,20 @@ class AdminComitForm extends FormBase
     public function validateForm(array &$form, FormStateInterface $form_state)
     {
         parent::validateForm($form, $form_state);
-        $this->database = new base();
-        $query = "select * from nfb_washington_committee where committee_name = '".$form_state->getValue("committee_name")."'
-        and committee_id != '".$form_state->getValue("committee_value")."' and chamber = '".$form_state->getValue("chamber")."';";
-        $key = "committee_id";
-        $this->database->select_query($query, $key);
-        $count = 0;
-        foreach ($this->database->get_result() as $committee)
-        {
-            \Drupal::logger("nfb_washington_validation")->ntoice("I amn running");
-            $count++;
+        if($form_state->getValue("committee_value") == "add") {
+            $this->database = new base();
+            $query = "select * from nfb_washington_committee where committee_name = '" . $form_state->getValue("committee_name") . "'
+        and committee_id != '" . $form_state->getValue("committee_value") . "' and chamber = '" . $form_state->getValue("chamber") . "';";
+            $key = "committee_id";
+            $this->database->select_query($query, $key);
+            $count = 0;
+            foreach ($this->database->get_result() as $committee) {
+                \Drupal::logger("nfb_washington_validation")->ntoice("I amn running");
+                $count++;
+            }
+            if ($count > 0) {
+                $form_state->setErrorByName("committee_name", "THis committee already exists");
+            }
         }
-        if($count > 0)
-        {$form_state->setErrorByName("committee_name", "THis committee already exists");}
-
     }
 }
