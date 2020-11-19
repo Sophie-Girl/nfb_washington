@@ -132,3 +132,12 @@ nfb_washington.committee_ajax:
     _title: 'ajax'
   requirements:
     _permission: 'access content'
+nfb_washington_admin_committee_maint:
+  path: 'nfb_washington/admin/committees/maintenance'
+  defaults:
+    _form: '\Drupal\nfb_washington\Form\AdminComMemForm'
+    _title: 'NFB Washington Seminar Committee Member Maintenance'
+  requirements:
+    _access: 'TRUE'
+    _permission: 'access content'
+    _role: 'administrator + nfb_washington_admin'
