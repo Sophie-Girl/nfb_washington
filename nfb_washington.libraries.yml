@@ -7,3 +7,7 @@ edit-issue:
    version: 1.x
    js:
      js/edit-issue.js: {}
+edit-committee:
+  version: 1.x
+  js:
+    js/edit-committee.js: {}

@@ -125,3 +125,10 @@ nfb_washington_admin_committee:
     _access: 'TRUE'
     _permission: 'access content'
     _role: 'administrator + nfb_washington_admin'
+nfb_washington.committee_ajax:
+  path: '/nfb_washington/admin/ajax/committee'
+  defaults:
+    _controller: '\Drupal\nfb_washington\Controller\CommitteeEditAjax::content'
+    _title: 'ajax'
+  requirements:
+    _permission: 'access content'
