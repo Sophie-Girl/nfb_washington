@@ -40,6 +40,7 @@ class admin_com_member
         $this->database->select_query($query, $key);
         foreach($this->database->get_result() as $option)
         {
+            $option = get_object_vars($option);
             $options[$option['committee_id']] = $option['propublica_id'].": ".$option['committee_name'];
         }
         $this->database = null;
