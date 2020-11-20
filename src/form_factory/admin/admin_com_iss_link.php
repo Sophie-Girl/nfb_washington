@@ -39,7 +39,7 @@ class admin_com_iss_link
             '#type' => "select",
             '#title' => "Committee",
             "#required" => true,
-            "#options" => $this->commitee_options(),
+            "#options" => $this->committee_options(),
         );
     }
     public function issue_options()
