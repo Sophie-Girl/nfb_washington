@@ -328,23 +328,23 @@ class drupal_propublica_committee_link
         $this->old_com_mem_2($result, $com_member_id);
         $this->database = null;
     }
-    public function old_com_mem_2($result, &$com_member_id)
+    public function old_com_mem_2($result)
     {
-        $com_member_id = null;
+        $com_member_id  = null;
         foreach ($result as $con_mem) {
             $con_mem = get_object_vars($con_mem);
             if ($com_member_id == null) {
                 $com_member_id = $con_mem['com_mem_id'];
             }}
         if($com_member_id != null)
-        { $this->update__member_commitee($con_member_id)}
+        { $this->update__member_commitee($com_member_id);}
     }
-    public function update__member_commitee($con_member_id)
+    public function update__member_commitee($com_member_id)
     {
         $this->database = new base();
         $query  = "update nfb_washington_committee_mem
         set active = 1
-        where com_mem_id '".$con_member_id."';";
+        where com_mem_id '".$com_member_id."';";
         $this->database->update_query($query);
         $this->database = null;
     }
