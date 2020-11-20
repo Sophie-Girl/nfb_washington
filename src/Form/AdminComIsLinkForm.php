@@ -29,7 +29,6 @@ class  adminComIsLinkForm extends  FormBase
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        \Drupal::logger("the_fuck")->nmotice("What?");
         $this->backend = new admin_link_com_issue_backend();
         $this->backend->backend($form_state);
     }
