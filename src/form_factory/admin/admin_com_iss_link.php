@@ -6,7 +6,7 @@ class admin_com_iss_link
 {
     public $database;
 
-    public function build_form_array($form, $form_state)
+    public function build_form_array(&$form, $form_state)
     {
         $this->initial_markup($form, $form_state);
         $this->issue_select($form, $form_state);
