@@ -249,8 +249,16 @@ class drupal_propublica_committee_link
             $ender->send(); $ender = null;
             return;
         }
-        else {$message = "Issue Updated";
-        $message = "Committee Record Created";
+        elseif($error_status == "maint")
+        {
+            $message = "Committee Members Updated";
+            drupal_set_message($message);
+            $ender = new RedirectResponse('/nfb_washington/admin/committees');
+            $ender->send(); $ender = null;}
+        return;
+        }
+        else {
+        $message = "Committee Record Created/Updated";
             drupal_set_message($message);
         $ender = new RedirectResponse('/nfb_washington/admin/committees');
         $ender->send(); $ender = null;}
@@ -271,6 +279,11 @@ class drupal_propublica_committee_link
         $this->drupal_committee_id = $form_state->getValue("committee_value");
         $this->find_needed_values();
         $this->establish_propublica_dependencies();
+        $this->specific_committee_query();
+        $this->remove_old_member();
+        $error_status = "maint";
+        $this->finish_redirect($error_status);
+
 
     }
     public function find_needed_values()
