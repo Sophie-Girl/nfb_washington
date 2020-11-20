@@ -15,7 +15,10 @@ class  adminComIsLinkForm extends  FormBase
     }
     public function buildForm(array $form, FormStateInterface $form_state)
     {
-        // TODO: Implement buildForm() method.
+        $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
+        $this->verify_api_key($form, $form_state);
+        $this->congress_number_markup($form, $form_state);
+
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
@@ -32,4 +35,5 @@ class  adminComIsLinkForm extends  FormBase
         $this->verification->congress_number_verification($form, $form_state);
         $this->verification = null;
     }
+
 }
