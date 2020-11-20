@@ -254,7 +254,7 @@ class drupal_propublica_committee_link
             $message = "Committee Members Updated";
             drupal_set_message($message);
             $ender = new RedirectResponse('/nfb_washington/admin/committees');
-            $ender->send(); $ender = null;}
+            $ender->send(); $ender = null;
         return;
         }
         else {
