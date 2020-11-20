@@ -141,3 +141,12 @@ nfb_washington_admin_committee_maint:
     _access: 'TRUE'
     _permission: 'access content'
     _role: 'administrator + nfb_washington_admin'
+nfb_washington_admin_committee_issue:
+  path: 'nfb_washington/admin/committees/issue'
+  defaults:
+    _form: '\Drupal\nfb_washington\Form\AdminComIsLinkForm'
+    _title: 'NFB Washington Seminar Link Issue to a Committee'
+  requirements:
+    _access: 'TRUE'
+    _permission: 'access content'
+    _role: 'administrator + nfb_washington_admin'
