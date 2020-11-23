@@ -52,7 +52,7 @@ class admin_note_create
     {
         $form['note_year'] = array(
             '#type' => 'textfield',
-            '#etitle' => "Year",
+            '#title' => "Year",
             '#max' => 5,
             '#required' => true
         );
