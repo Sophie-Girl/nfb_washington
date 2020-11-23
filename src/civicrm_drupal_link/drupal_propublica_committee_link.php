@@ -56,7 +56,7 @@ class drupal_propublica_committee_link
 
         foreach($this->propublica->get_propublica_result()['results']['0']['committees']as $committee)
         {
-            \Drupal::logger('nfb_washinton_debug')->notice(print_r($committee, true));
+            \Drupal::logger('nfb_washington_committee')->notice(print_r($committee, true));
             $this->propublica->parse_general_query($committee, $committee_name);
         }
     }
