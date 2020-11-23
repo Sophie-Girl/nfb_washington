@@ -30,7 +30,7 @@ class admin_note_create
     }
     public function note_text(&$form, $form_state)
     {
-        $form['note_text'] =- array(
+        $form['note_text'] = array(
           "#type" => "textarea",
           "#title" => "Note Text",
           "#required" => true,
