@@ -150,3 +150,13 @@ nfb_washington_admin_committee_issue:
     _access: 'TRUE'
     _permission: 'access content'
     _role: 'administrator + nfb_washington_admin'
+nfb_washington_admin_note:
+  path: 'nfb_washington/admin/note/{note}'
+  defaults:
+    _form: '\Drupal\nfb_washington\Form\AdminCreateNoteForm'
+    _title: 'NFB Washington Create/Edit Notes'
+    note: "create"
+  requirements:
+    _access: 'TRUE'
+    _permission: 'access content'
+    _role: 'administrator + nfb_washington_admin'
