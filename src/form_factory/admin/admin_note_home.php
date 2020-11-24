@@ -6,7 +6,7 @@ use Drupal\nfb_washington\database\base;
 class admin_note_home
 {
     public $database;
-    public function build_form_array($form, FormStateInterface $form_state)
+    public function build_form_array(&$form, FormStateInterface &$form_state)
     {
         $this->year_select($form, $form_state);
         $this->note_markup($form, $form_state);
