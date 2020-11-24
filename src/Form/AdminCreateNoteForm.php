@@ -29,6 +29,7 @@ class AdminCreateNoteForm extends FormBase
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         $this->backend = new admin_note_creat_backend();
+        \Drupal::logger('nfb_washington_note')->notie("I am running UwU");
         $this->backend->backend($form_state);
 
     }
