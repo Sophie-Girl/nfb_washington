@@ -30,7 +30,7 @@ class admin_note_create_backend
     public function backend(FormStateInterface $form_state)
     {
         $this->set_values($form_state);
-        if($this->get_note_id() == "add")
+        if($this->get_note_id() == "create")
         {
             $this-> duplicate_check();
         }
@@ -55,7 +55,6 @@ class admin_note_create_backend
             if($note_id == null)
             {$note_id = $note['note_id'];}
         }
-        \Drupal::logger('nfb_washington_note')->notice("Note id: ".$note_id);
         if($note_id != null)
         {$this->note_id = $note_id;}
         else{
@@ -65,7 +64,6 @@ class admin_note_create_backend
     }
     public function create_note_Record()
     {
-        \Drupal::logger("nfb_washington_debug")->notice("i am getting her boi!");
         $this->database = new base();
         $fields = array(
           'note_type' => $this->get_note_type(),
