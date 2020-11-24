@@ -54,6 +54,10 @@ nfb_washington.committeeissue:
   route_name: nfb_washington_admin_committee_issue
   title: 'Link Issue'
   base_route: nfb_washington.admin
+nfb_washington.notehome:
+  route_name: nfb_washington_admin_note_home
+  title: 'Notes'
+  base_route: nfb_washington.admin
 nfb_washington.adminnote:
   route_name: nfb_washington_admin_note
   title: 'Create Note'

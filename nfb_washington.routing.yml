@@ -160,3 +160,12 @@ nfb_washington_admin_note:
     _access: 'TRUE'
     _permission: 'access content'
     _role: 'administrator + nfb_washington_admin'
+nfb_washington_admin_note_home:
+  path: 'nfb_washington/admin/notes'
+  defaults:
+    _form: '\Drupal\nfb_washington\Form\AdminNoteHomeForm'
+    _title: 'NFB Washington Notes'
+  requirements:
+    _access: 'TRUE'
+    _permission: 'access content'
+    _role: 'administrator + nfb_washington_admin'
