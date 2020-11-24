@@ -397,7 +397,14 @@ class note_table extends rating_table
             'length' => '500',
             'default' => '',
             'not null' => False,
-            'description' => 'Rating comments'
+            'description' => 'note types'
+        );
+        $schema[$table_name]['fields']['note_type'] = array(
+            'type'=> 'varchar',
+            'length' => 128,
+            'default' => '',
+            'not null' => False,
+            'description' => 'type of notes'
         );
         $schema[$table_name]['fields']['created_user'] = array(
             'type'=> 'varchar',
