@@ -11,7 +11,7 @@ class AdminCreateNoteForm extends FormBase
 {
     public  $verification;
     public $form_factory;
-    public $backened;
+    public $backend;
     public function getFormId()
     {
        return "nfb_Washington_note_creation_form";
@@ -29,6 +29,7 @@ class AdminCreateNoteForm extends FormBase
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         $this->backend = new admin_note_creat_backend();
+        $this->backend->backend($form_state);
 
     }
     public function verify_api_key(&$form, $form_state)
