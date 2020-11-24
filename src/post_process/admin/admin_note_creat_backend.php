@@ -64,6 +64,7 @@ class admin_note_creat_backend
     }
     public function create_note_Record()
     {
+        \Drupal::logger("nfb_washington_debug")->notice("i am getting her boi!");
         $this->database = new base();
         $fields = array(
           'note_type' => $this->get_note_type(),
