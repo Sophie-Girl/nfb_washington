@@ -3,7 +3,7 @@ Namespace Drupal\nfb_washington\post_process\admin;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\database\base;
 
-class admin_note_creat_backend
+class admin_note_create_backend
 {
     public $database;
     public $note_id;
