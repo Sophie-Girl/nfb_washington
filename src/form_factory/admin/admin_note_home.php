@@ -11,7 +11,7 @@ class admin_note_home
         $this->year_select($form, $form_state);
         $this->note_markup($form, $form_state);
     }
-    public function year_select($form, $form_state)
+    public function year_select(&$form, &$form_state)
     {
         $form['year_select'] = array(
            '#type' => 'select',
@@ -37,7 +37,7 @@ class admin_note_home
             ),
         );
     }
-    public function note_markup($form, FormStateInterface $form_state)
+    public function note_markup(&$form, FormStateInterface &$form_state)
     {
         $form['note_table'] = array(
           '#prefix' => "<div id = 'note_markup'>",
