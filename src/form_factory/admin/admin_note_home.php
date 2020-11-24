@@ -75,7 +75,7 @@ class admin_note_home
         foreach($result as $note)
         {
             $note = get_object_vars($note);
-            $markup = $markup."<tr><td>".$note['note_type']."</td><td>".$note['note_text']."</td><td>".$note['note_year']."</td><td>".$note['created_user']."</td><td>".$note['last_modified_user']."</td><td> <a href='/nfb_washington/admin/note/".$note['note_id']."' class='button-1' role='button'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;<a href='/nfb_washington/admin/issue_link' class='button-2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Link to Member&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td></tr>";
+            $markup = $markup."<tr><td>".$note['note_type']."</td><td>".$note['note']."</td><td>".$note['note_year']."</td><td>".$note['created_user']."</td><td>".$note['last_modified_user']."</td><td> <a href='/nfb_washington/admin/note/".$note['note_id']."' class='button-1' role='button'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;<a href='/nfb_washington/admin/issue_link' class='button-2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Link to Member&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td></tr>";
         }
          $markup= $markup. "</table>";
     }

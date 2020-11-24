@@ -45,7 +45,7 @@ class admin_note_create_backend
     public function duplicate_check()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_note where note_text = '".$this->get_note_text()."' and
+        $query = "select * from nfb_washington_note where note = '".$this->get_note_text()."' and
         note_type = '".$this->get_note_type()."' and note_year = '".$this->get_note_year()."';";
         $key = 'note_id';
         $this->database->select_query($query, $key);
@@ -67,7 +67,7 @@ class admin_note_create_backend
         $this->database = new base();
         $fields = array(
           'note_type' => $this->get_note_type(),
-          'note_text' => $this->get_note_text(),
+          'note' => $this->get_note_text(),
           'note_year' => $this->get_note_year(),
           'created_user' => \Drupal::currentUser()->getUsername(),
           'modified_user' => \Drupal::currentUser()  ->getUsername(),
