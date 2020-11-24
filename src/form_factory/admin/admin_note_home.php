@@ -71,7 +71,7 @@ class admin_note_home
     {
         $markup =  "<p>Bellow are all issues for the selected year</p>
         <table>
-        <tr><th class='table-header'>Note Type</th><th>Note Text</th><th>Note Year</th><th>Created User</th><th>Last Modified by</th><th>Actions</th></tr>";
+        <tr><th class='table-header'>Note Type</th><th class='table-header'>Note Text</th><th class='table-header'>Note Year</th><th class='table-header'>Created User</th><th class='table-header'>Last Modified by</th><th class='table-header'>Actions</th></tr>";
         foreach($result as $note)
         {
             $note = get_object_vars($note);
