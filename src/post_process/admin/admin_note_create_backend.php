@@ -55,6 +55,7 @@ class admin_note_create_backend
             if($note_id == null)
             {$note_id = $note['note_id'];}
         }
+        \Drupal::logger('nfb_washington_note')->notice("Note id: ".$note_id);
         if($note_id != null)
         {$this->note_id = $note_id;}
         else{
