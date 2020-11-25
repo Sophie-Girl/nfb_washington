@@ -91,11 +91,10 @@ class admin_note_create_backend
         "update nfb_washington_note
         set note_year = '".$this->get_note_year()."'
         where note_id = '".$this->get_note_id()."';";
-        $this->database->insert_query($query);
+        $this->database->update_query($query);
         "update nfb_washington_note
         set last_modififed_user = '".\drupal::currentUser()->getUsername()."'
         where note_id = '".$this->get_note_id()."';";
-        $this->database->insert_query($query);
-
+        $this->database->update_query($query);
     }
 }
