@@ -30,7 +30,7 @@ class NoteEditAjaxController extends ControllerBase
     public function note_query()
     {
         $this->database= new base();
-        $query = "select * nfb_washington_note where note_id = '".$this->get_note_id()."'';";
+        $query = "select * nfb_washington_note where note_id = '".$this->get_note_id()."';";
         $key = 'note_id';
         $this->database->select_query($query, $key);
         $result = $this->database->get_result();
