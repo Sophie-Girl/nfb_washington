@@ -34,6 +34,7 @@ class admin_note_create_backend
         {
             $this-> duplicate_check();
         }
+        else { $this->Edit_functions();}
     }
     public function set_values(FormStateInterface $form_state)
     {
@@ -75,5 +76,26 @@ class admin_note_create_backend
         $table = 'nfb_washington_note';
         $this->database->insert_query($table, $fields);
         $this->database = null;
+    }
+    public function Edit_functions()
+    {
+        $this->database = new base();
+        $query = "update nfb_washington_note
+        set note = '".$this->get_note_text()."'
+        where note_id = '".$this->get_note_id()."';";
+        $this->database->update_query($query);
+        $query = "update nfb_washington_note
+        set note_type = '".$this->get_note_type()."'
+        where note_id = '".$this->get_note_id()."';";
+        $this->database->update_query($query);
+        "update nfb_washington_note
+        set note_year = '".$this->get_note_year()."'
+        where note_id = '".$this->get_note_id()."';";
+        $this->database->insert_query($query);
+        "update nfb_washington_note
+        set last_modififed_user = '".\drupal::currentUser()->getUsername()."'
+        where note_id = '".$this->get_note_id()."';";
+        $this->database->insert_query($query);
+
     }
 }

@@ -48,7 +48,6 @@ class NoteEditAjaxController extends ControllerBase
             $data[2] = $note['note'];
         }
         $this->data = $data;
-        \Drupal::logger("nfb_washington_ajax")->notice("Data array".print_r($data, true));
     }
     public function ajax_process()
     {
