@@ -19,6 +19,7 @@ class AdminCreateNoteForm extends FormBase
     public function buildForm(array $form, FormStateInterface $form_state, $note = 'create')
     {
         $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
+        $form['#attached']['library'][] = 'nfb_washington/edit-note';
         $this->verify_api_key($form, $form_state);
         $this->congress_number_markup($form, $form_state);
         $this->form_factory = new admin_note_create();
@@ -29,7 +30,6 @@ class AdminCreateNoteForm extends FormBase
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         $this->backend = new admin_note_create_backend();
-        \Drupal::logger('nfb_washington_note')->notice("I am running UwU");
         $this->backend->backend($form_state);
 
     }
