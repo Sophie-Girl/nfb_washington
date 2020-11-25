@@ -25,7 +25,7 @@ class NoteEditAjaxController extends ControllerBase
     public function set_note_id()
     {
         $request = Request::createFromGlobals();
-        $this->committee_id = $request->request->get('noteid');
+        $this->note_id = $request->request->get('noteid');
     }
     public function note_query()
     {
