@@ -39,15 +39,16 @@ class NoteEditAjaxController extends ControllerBase
     }
     public function build_data_array($result)
     {
-        $ddata = [];
+        $data = [];
         foreach ($result as $note)
         {
             $note = get_object_vars($note);
             $data[0] = $note['note_type'];
             $data[1] = $note['note_year'];
-            $data[2] = $note['note_text'];
+            $data[2] = $note['note'];
         }
         $this->data = $data;
+        \Drupal::logger("nfb_washington_ajax")->notice("Data array".print_r($data, true));
     }
     public function ajax_process()
     {
