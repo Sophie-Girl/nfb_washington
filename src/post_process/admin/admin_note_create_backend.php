@@ -71,7 +71,7 @@ class admin_note_create_backend
           'note' => $this->get_note_text(),
           'note_year' => $this->get_note_year(),
           'created_user' => \Drupal::currentUser()->getUsername(),
-          'last_modified_user' => \Drupal::currentUser()  ->getUsername(),
+          'last_modified_user' => \Drupal::currentUser() ->getUsername(),
         );
         $table = 'nfb_washington_note';
         $this->database->insert_query($table, $fields);
