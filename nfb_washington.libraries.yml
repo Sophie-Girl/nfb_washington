@@ -11,3 +11,7 @@ edit-committee:
   version: 1.x
   js:
     js/edit-committee.js: {}
+edit-note:
+    version: 1.x
+    js:
+      js/edit-note.js: {}
