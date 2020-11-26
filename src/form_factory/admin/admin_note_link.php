@@ -11,7 +11,12 @@ class admin_note_link
     public $civicrm;
     public function build_form_array(&$form, FormStateInterface $form_state)
     {
-
+        $this->state_select($form, $form_state);
+        $this->member_options($form, $form_state);
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => "Submit",
+        );
     }
     public function state_select( &$form, $form_state)
     {
@@ -58,7 +63,8 @@ class admin_note_link
          '#type' => 'select',
          '#title' => "Select Member of Congress",
          '#required'  =>  true,
-          '#options'  => ''
+          '#options'  => $this->member_option_create($form_state),
+           '#suffix' => '</div>'
        );
 
     }
@@ -66,10 +72,15 @@ class admin_note_link
     {
         if($form_state->getValue("member_sate") == '')
         {$options = [];}
-        else {}
+        else {$this->member_selecct_options($form_state, $options);}
         return $options;
     }
-    public function get_member_ids_query(FormStateInterface $form_state)
+    public function member_selecct_options($form_state, &$options)
+    {
+        $this->get_member_ids_query($form_state, $options);
+
+    }
+    public function get_member_ids_query(FormStateInterface $form_state, &$options)
     {
         $this->database = new base();
         $query  = "select * from nfb_washington_members where active = 0 and 
@@ -78,9 +89,40 @@ class admin_note_link
         $this->database->select_query($query, $key);
         $query_result = $this->database->get_result();
         $this->database = null;
+        $this->member_loop($query_result, $options);
     }
-    public function member_lopp($query_result, &$options)
+    public function member_loop($query_result, &$options)
     {
+        foreach ($query_result as $member)
+        {
+            $member = get_object_vars($member);
+            $option_array['id'] = $member['member_id'];
+            $option_array['civicrm_id'] = $member['civicrm_contact_id'];
+            $this->find_member_name($option_array);
+            $options[$option_array['id']] = $option_array['first_name']." ".$option_array['last_name'];
+        }
+    }
+    public function find_member_name(&$option_array)
+    {
+        $civi = new Civicrm(); $civi->initialize();
+        $this->civicrm = new query($civi);
+        $this->civicrm->entity = 'Contact';
+        $this->civicrm->mode = 'get';
+        $this->civicrm->params = array(
+            'sequential' => 1,
+            'id' =>  $option_array['civicrm_id'],
+        );
+        $this->civicrm->civi_query($result);
+        $option_array['first_name'] = null;
+        $option_array['last_name'] = null;
+        foreach ($result['values'] as $member)
+        {
+            if($option_array['first_name'] == null)
+            {$option_array['first_name'] = $result['first_name'];}
+            if($option_array['last_name'] == null)
+            {$option_array['last_name'] = $result['last_name'];}
+        }
+        $this->civicrm = null;
 
     }
 }
