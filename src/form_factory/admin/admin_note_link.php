@@ -66,13 +66,14 @@ class admin_note_link
            '#options'  => $this->member_option_create($form_state),
            '#suffix' => '</div>'
        );
+        \Drupal::logger("nfb_washington_ajax_debug")->notice("form array: ".print_r($form['member'],true));
 
     }
     public function member_option_create(FormStateInterface $form_state)
     {
-        if($form_state->getValue("member_state") == '')
-        {$options = [];}
-        else {$this->member_selecct_options($form_state, $options);}
+        if($form_state->getValue("member_state") != '')
+        {$this->member_selecct_options($form_state, $options);}
+        else {$options = [];}
        \Drupal::logger("nfb_washington_options_ajax_debug")->notice("options: ".print_r($options, true));
         return $options;
     }
