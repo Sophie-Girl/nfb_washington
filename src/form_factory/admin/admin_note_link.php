@@ -116,6 +116,7 @@ class admin_note_link
             'id' =>  $option_array['civicrm_id'],
         );
         $this->civicrm->civi_query($result);
+        \drupal::logger('nfb_Washignton_civi_Result')->niotice("Civi_result: ".print_r($result, true));
         $option_array['first_name'] = null;
         $option_array['last_name'] = null;
         foreach ($result['values'] as $member)
