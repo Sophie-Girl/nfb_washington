@@ -102,7 +102,7 @@ class admin_note_link
             $this->find_member_name($option_array);
             $options[$option_array['id']] = $option_array['first_name']." ".$option_array['last_name'];
         }
-        \Drupal::logger("nfb_wasington_ajax_options_debug")->logger("options_array: ".print_r($options, true));
+        \Drupal::logger("nfb_wasington_ajax_options_debug")->notice("options_array: ".print_r($options, true));
     }
     public function find_member_name(&$option_array)
     {
@@ -125,6 +125,6 @@ class admin_note_link
             {$option_array['last_name'] = $member['last_name'];}
         }
         $this->civicrm = null;
-        \Drupal::logger("nfb_wasington_ajax_debug")->logger("options_array: ".print_r($option_array, true));
+        \Drupal::logger("nfb_wasington_ajax_debug")->notice("options_array: ".print_r($option_array, true));
     }
 }
