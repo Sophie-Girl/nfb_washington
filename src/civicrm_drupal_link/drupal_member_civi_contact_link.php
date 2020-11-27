@@ -278,6 +278,7 @@ class drupal_member_civi_contact_link
     public function database_process(){
         $member_id = null;
         $this->database = new base();
+        \Drupal::logger('nfb_washington_member_debug')->notice("member pp id: ".$this->propublica_query->get_member_pp_id());
         $query = "select * from nfb_washington_members where 'propublica_id' = '".$this->propublica_query->get_member_pp_id()."';";
         $key = $this->propublica_query->get_member_pp_id();
         $this->database->select_query($query, $key);
