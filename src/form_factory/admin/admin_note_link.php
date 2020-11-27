@@ -88,7 +88,7 @@ class admin_note_link
         $key = 'member_id';
         $this->database->select_query($query, $key);
         $query_result = $this->database->get_result();
-        \Drupal::logger('nfb_washington_note_link_debug')->notice("Member results: ".print_r($query_result, true));
+
         $this->database = null;
         $this->member_loop($query_result, $options);
     }
@@ -97,13 +97,11 @@ class admin_note_link
         foreach ($query_result as $member)
         {
             $member = get_object_vars($member);
-            \Drupal::logger('nfb_washington_member_options_debug')->notice("member_array: ".print_r($member, true));
             $option_array['id'] = $member['member_id'];
             $option_array['civicrm_id'] = $member['civicrm_contact_id'];
             $this->find_member_name($option_array);
             $options[$option_array['id']] = $option_array['first_name']." ".$option_array['last_name'];
         }
-        \drupal::logger('nfb_washington_link_options')->notice("options_array: ".print_r($options, true));
     }
     public function find_member_name(&$option_array)
     {
@@ -116,15 +114,14 @@ class admin_note_link
             'id' =>  $option_array['civicrm_id'],
         );
         $this->civicrm->civi_query($result);
-        \drupal::logger('nfb_Washignton_civi_Result')->notice("Civi_result: ".print_r($result, true));
         $option_array['first_name'] = null;
         $option_array['last_name'] = null;
         foreach ($result['values'] as $member)
         {
             if($option_array['first_name'] == null)
-            {$option_array['first_name'] = $result['first_name'];}
+            {$option_array['first_name'] = $member['first_name'];}
             if($option_array['last_name'] == null)
-            {$option_array['last_name'] = $result['last_name'];}
+            {$option_array['last_name'] = $member['last_name'];}
         }
         $this->civicrm = null;
 
