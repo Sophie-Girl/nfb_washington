@@ -70,7 +70,7 @@ class admin_note_link
     }
     public function member_option_create(FormStateInterface $form_state)
     {
-        if($form_state->getValue("member_sate") == '')
+        if($form_state->getValue("member_state") == '')
         {$options = [];}
         else {$this->member_selecct_options($form_state, $options);}
         return $options;

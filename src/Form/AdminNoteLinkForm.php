@@ -39,7 +39,7 @@ class AdminNoteLinkForm extends FormBase
         $this->verification->congress_number_verification($form, $form_state);
         $this->verification = null;
     }
-    public function member_refresh(&$form, &$form_state)
+    public function member_refresh(array &$form, FormStateInterface $form_state)
     {
         return $form['member'];
     }
