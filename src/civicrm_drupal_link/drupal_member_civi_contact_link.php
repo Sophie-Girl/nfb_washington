@@ -284,8 +284,9 @@ class drupal_member_civi_contact_link
         \drupal::logger("nfb_washington_member_debug")->notice("Database: ".$this->database->get_result(), true);
         foreach($this->database->get_result() as $member)
         {
-            \drupal::logger("nfb_member_washignton_debug")->notice(print_r($member,true));
+
             $member = get_object_vars($member);
+            \drupal::logger("nfb_member_washignton_debug")->notice("member array:" .print_r($member,true));
             if($member['member_id'])
             {$member_id = $member['member_id'];}
         }
