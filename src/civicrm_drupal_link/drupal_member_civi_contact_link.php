@@ -283,6 +283,7 @@ class drupal_member_civi_contact_link
         $this->database->select_query($query, $key);
         foreach($this->database->get_result() as $member)
         {
+            \drupal::logger("nfb_member_washignton_debug")->notice(print_r($member,true));
             $member = get_object_vars($member);
             if($member['member_id'])
             {$member_id = $member['member_id'];}
