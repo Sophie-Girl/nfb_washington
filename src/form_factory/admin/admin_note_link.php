@@ -28,7 +28,7 @@ class admin_note_link
           '#ajax' => array(
              'event' => 'change',
               "callback" => '::member_refresh',
-              'wrapper' => "member_select"
+              'wrapper' => "member-select"
           ) ,
         );
     }
@@ -59,12 +59,13 @@ class admin_note_link
     }
     public function member_options(&$form, &$form_state){
       $form['member']['#options'] = null;
+      $options = $this->member_option_create($form_state),
        $form['member'] = array(
-         '#preffix' => "<div id = 'member_select'>",
+         '#preffix' => "<div id = 'member-select'>",
          '#type' => 'select',
          '#title' => "Select Member of Congress",
            '#required'  =>  true,
-           '#options'  => $this->member_option_create($form_state),
+           '#options'  => $options,
            '#suffix' => '</div>'
        );
         \Drupal::logger("nfb_washington_ajax_debug")->notice("form array: ".print_r($form['member'],true));
