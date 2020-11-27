@@ -97,6 +97,7 @@ class admin_note_link
         foreach ($query_result as $member)
         {
             $member = get_object_vars($member);
+            \Drupal::logger('nfb_washington_member_options_debug')->notice("member_array: ".print_r($member, true));
             $option_array['id'] = $member['member_id'];
             $option_array['civicrm_id'] = $member['civicrm_contact_id'];
             $this->find_member_name($option_array);
