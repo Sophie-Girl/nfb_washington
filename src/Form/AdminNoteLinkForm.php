@@ -40,7 +40,7 @@ class AdminNoteLinkForm extends FormBase
         $this->verification->congress_number_verification($form, $form_state);
         $this->verification = null;
     }
-    public function member_refresh(array &$form, FormStateInterface $form_state)
+    public function member_refresh(array &$form, FormStateInterface &$form_state)
     {
         \Drupal::logger("nfb_washington_ajax_debug")->notice("form array: ".print_r($form['member'],true));
         return $form['member'];
