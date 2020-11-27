@@ -102,6 +102,7 @@ class admin_note_link
             $this->find_member_name($option_array);
             $options[$option_array['id']] = $option_array['first_name']." ".$option_array['last_name'];
         }
+        \drupal::logger('nfb_washington_link_options')->notice("options_array: ".print_r($options, true));
     }
     public function find_member_name(&$option_array)
     {
