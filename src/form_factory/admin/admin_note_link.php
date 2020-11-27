@@ -9,7 +9,7 @@ class admin_note_link
 {
     public $database;
     public $civicrm;
-    public function build_form_array(&$form, FormStateInterface $form_state)
+    public function build_form_array(&$form, FormStateInterface &$form_state)
     {
         $this->state_select($form, $form_state);
         $this->member_options($form, $form_state);
@@ -18,7 +18,7 @@ class admin_note_link
             '#value' => "Submit",
         );
     }
-    public function state_select( &$form, $form_state)
+    public function state_select( &$form, &$form_state)
     {
         $form['member_state'] = array(
           '#type' => "select",
@@ -71,6 +71,7 @@ class admin_note_link
     }
     public function member_option_create(FormStateInterface $form_state)
     {
+        $options = null;
         if($form_state->getValue("member_state") != '')
         {$this->member_selecct_options($form_state, $options);}
         else {$options = [];}
