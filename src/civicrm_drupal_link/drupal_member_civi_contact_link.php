@@ -281,7 +281,7 @@ class drupal_member_civi_contact_link
         $query = "select * from nfb_washington_members where 'propublica_id' = '".$this->propublica_query->get_member_pp_id()."';";
         $key = $this->propublica_query->get_member_pp_id();
         $this->database->select_query($query, $key);
-        \drupal::logger("nfb_washington_member_debug")->notice("Database: ".$this->database->get_result(), true);
+        \drupal::logger("nfb_washington_member_debug")->notice("Database: ".print_r($this->database->get_result(), true));
         foreach($this->database->get_result() as $member)
         {
 
