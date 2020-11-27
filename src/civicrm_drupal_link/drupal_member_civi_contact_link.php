@@ -359,36 +359,36 @@ class drupal_member_civi_contact_link
     public function  update_member_record($member_id)
     {
         $this->database = new base();
-        $query = "update nfb_Washington_members
+        $query = "update nfb_washington_members
         set state = '".$this->propublica_query->get_member_state()."'
         where member_id = '".$member_id."';";
         $this->database->update_query($query);
-        $query = "update nfb_Washington_members
+        $query = "update nfb_washington_members
         set civicrm_contact_id = '".$this->get_drupal_civicrm_id()."'
         where member_id = '".$member_id."';";
         $this->database->update_query($query);
         $this->convert_in_office();
-        $query = "update nfb_Washington_members
+        $query = "update nfb_washington_members
         set active = '".$this->propublica_query->get_member_active()."'
         where member_id = '".$member_id."';";
         $this->database->update_query($query);
         if($this->propublica_query->get_search_criteria_1() == "senate")
         {
-            $query = "update nfb_Washington_members
+            $query = "update nfb_washington_members
         set district = 'Senate'
         where member_id = '".$member_id."';";
             $this->database->update_query($query);
-            $query = "update nfb_Washington_members
+            $query = "update nfb_washington_members
         set rank = '".$this->propublica_query->get_member_rank()."'
         where member_id = '".$member_id."';";
             $this->database->update_query($query);
         }
         else {
-            $query = "update nfb_Washington_members
+            $query = "update nfb_washington_members
         set district = '".$this->propublica_query->get_member_district()."'
         where member_id = '".$member_id."';";
             $this->database->update_query($query);
-            $query = "update nfb_Washington_members
+            $query = "update nfb_washington_members
         set rank = 'House'
         where member_id = '".$member_id."';";
             $this->database->update_query($query);
