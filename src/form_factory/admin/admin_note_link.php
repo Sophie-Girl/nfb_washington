@@ -61,7 +61,7 @@ class admin_note_link
 
       $options = $this->member_option_create($form_state);
        $form['member'] = array(
-         '#preffix' => "<div id = 'member-select'>",
+         '#prefix' => "<div id = 'member-select'>",
          '#type' => 'select',
          '#title' => "Select Member of Congress",
            '#required'  =>  true,
