@@ -88,6 +88,7 @@ class admin_note_link
         $key = 'member_id';
         $this->database->select_query($query, $key);
         $query_result = $this->database->get_result();
+        \Drupal::logger('nfb_washington_note_link_debug')->notice("Member results: ".print_r($query_result, true));
         $this->database = null;
         $this->member_loop($query_result, $options);
     }
