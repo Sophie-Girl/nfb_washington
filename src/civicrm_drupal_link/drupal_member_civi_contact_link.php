@@ -279,7 +279,7 @@ class drupal_member_civi_contact_link
         $member_id = null;
         $this->database = new base();
         \Drupal::logger('nfb_washington_member_debug')->notice("member pp id: ".$this->propublica_query->get_member_pp_id());
-        $query = "select * from nfb_washington_members where 'propublica_id' = '".$this->propublica_query->get_member_pp_id()."';";
+        $query = "select * from nfb_washington_members;";
         $key = 'propublica_id';
         $this->database->select_query($query, $key);
         \drupal::logger("nfb_washington_member_debug")->notice("Database: ".print_r($this->database->get_result(), true));
@@ -288,8 +288,10 @@ class drupal_member_civi_contact_link
 
             $member = get_object_vars($member);
             \drupal::logger("nfb_member_washignton_debug")->notice("member array:" .print_r($member,true));
-            if($member['member_id'])
-            {$member_id = $member['member_id'];}
+            if(strtolower(trim($member['propublica_id'])) == strtolower(trim($this->propublica_query->get_member_pp_id())))
+            {
+                $member_id = $member['member_id'];
+            }
         }
         \Drupal::logger("nfb_washington_member_deduplication")->notice("Member Id: ".$member_id);
         if($member_id != null)
