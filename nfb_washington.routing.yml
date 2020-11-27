@@ -176,3 +176,12 @@ nfb_washington.note_ajax:
     _title: 'ajax'
   requirements:
     _permission: 'access content'
+nfb_washington_note_link:
+  path: 'nfb_washington/admin/note_link'
+  defaults:
+    _form: '\Drupal\nfb_washington\Form\AdminNoteLinkForm'
+    _title: 'NFB Washington Link Note To Member'
+  requirements:
+    _access: 'TRUE'
+    _permission: 'access content'
+    _role: 'administrator + nfb_washington_admin'
