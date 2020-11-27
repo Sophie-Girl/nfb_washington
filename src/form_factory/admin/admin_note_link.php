@@ -59,7 +59,7 @@ class admin_note_link
     }
     public function member_options(&$form, &$form_state){
       $form['member']['#options'] = null;
-      $options = $this->member_option_create($form_state),
+      $options = $this->member_option_create($form_state);
        $form['member'] = array(
          '#preffix' => "<div id = 'member-select'>",
          '#type' => 'select',
