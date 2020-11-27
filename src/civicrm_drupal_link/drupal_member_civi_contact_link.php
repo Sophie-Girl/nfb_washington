@@ -276,6 +276,7 @@ class drupal_member_civi_contact_link
         $this->civi_query->civi_query();
     }
     public function database_process(){
+        $member_id = null;
         $this->database = new base();
         $query = "select * from nfb_washington_members where 'propublica_id' = '".$this->propublica_query->get_member_pp_id()."';";
         $key = $this->propublica_query->get_member_pp_id();
@@ -286,7 +287,8 @@ class drupal_member_civi_contact_link
             if($member['member_id'])
             {$member_id = $member['member_id'];}
         }
-        if($member_id)
+        \Drupal::logger("nfb_washington_member_deduplication")->notice("Member Id: ".$member_id);
+        if($member_id != null)
         {
             $this->update_member_record($member_id);
         }
