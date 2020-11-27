@@ -41,6 +41,7 @@ class AdminNoteLinkForm extends FormBase
     }
     public function member_refresh(array &$form, FormStateInterface $form_state)
     {
+        \Drupal::logger("nfrb_washington_ajax_debug")->notice("I am running UwU");
         return $form['member'];
     }
 }
