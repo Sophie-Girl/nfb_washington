@@ -62,8 +62,8 @@ class admin_note_link
          '#preffix' => "<div id = 'member_select'>",
          '#type' => 'select',
          '#title' => "Select Member of Congress",
-         '#required'  =>  true,
-          '#options'  => $this->member_option_create($form_state),
+           '#required'  =>  true,
+           '#options'  => $this->member_option_create($form_state),
            '#suffix' => '</div>'
        );
 
