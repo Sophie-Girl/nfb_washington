@@ -68,8 +68,7 @@ class admin_note_link
            '#options'  => $options,
            '#suffix' => '</div>'
        );
-        \Drupal::logger("nfb_washington_ajax_debug")->notice("form array: ".print_r($form['member'],true));
-
+       $options = null;
     }
     public function member_option_create(FormStateInterface $form_state)
     {
@@ -77,7 +76,7 @@ class admin_note_link
         if($form_state->getValue("member_state") != '')
         {$this->member_selecct_options($form_state, $options);}
         else {$options = [];}
-       \Drupal::logger("nfb_washington_options_ajax_debug")->notice("options: ".print_r($options, true));
+        $form_state = null;
         return $options;
     }
     public function member_selecct_options($form_state, &$options)
@@ -93,7 +92,6 @@ class admin_note_link
         $key = 'member_id';
         $this->database->select_query($query, $key);
         $query_result = $this->database->get_result();
-
         $this->database = null;
         $this->member_loop($query_result, $options);
     }
