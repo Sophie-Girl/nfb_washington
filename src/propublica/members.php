@@ -69,7 +69,8 @@ class members extends query_base{
         $this->member_office_address = $member['office'];
         if($this->get_search_criteria_1() == "house")
         {\Drupal::logger("nfb_washington_member_debug")->notice("I am getting Here");
-        $this->member_district = $member["district"];}
+        $this->member_district = $member["district"];
+        \drupal::logger("nfb_washington_member_debug")->notice("District: ".$this->get_member_district());}
         else{$this->member_rank = $member["state_rank"];}
         $this->member_pp_id = $member["id"];
         $this->member_d_o_b = $member["date_of_birth"];
