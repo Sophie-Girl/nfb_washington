@@ -67,7 +67,7 @@ class members extends query_base{
         $this->member_last_name = $member["last_name"];
         $this->member_phone_number = $member["phone"];
         $this->member_office_address = $member['office'];
-        if($this->get_search_criteria_1() ==" house")
+        if($this->get_search_criteria_1() == "house")
         {$this->member_district = $member["district"];}
         else{$this->member_rank = $member["state_rank"];}
         $this->member_pp_id = $member["id"];
