@@ -61,7 +61,7 @@ class members extends query_base{
     }
     public function parse_member($member)
     {
-        \Drupal::logger("nfb_washington_member_pp_array")->notice(print_r($member, true));
+        \Drupal::logger("nfb_washington_member_pp_array_parse")->notice(print_r($member, true));
         $this->member_first_name = $member['first_name'];
         $this->member_middle_name = $member["middle_name"];
         $this->member_last_name = $member["last_name"];
