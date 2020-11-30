@@ -278,16 +278,13 @@ class drupal_member_civi_contact_link
     public function database_process(){
         $member_id = null;
         $this->database = new base();
-        \Drupal::logger('nfb_washington_member_debug')->notice("member pp id: ".$this->propublica_query->get_member_pp_id());
         $query = "select * from nfb_washington_members;";
         $key = 'propublica_id';
         $this->database->select_query($query, $key);
-        \drupal::logger("nfb_washington_member_debug")->notice("Database: ".print_r($this->database->get_result(), true));
         foreach($this->database->get_result() as $member)
         {
 
             $member = get_object_vars($member);
-            \drupal::logger("nfb_member_washignton_debug")->notice("member array:" .print_r($member,true));
             if(strtolower(trim($member['propublica_id'])) == strtolower(trim($this->propublica_query->get_member_pp_id())))
             {
                 $member_id = $member['member_id'];
