@@ -13,6 +13,7 @@ class admin_note_link
     {
         $this->state_select($form, $form_state);
         $this->member_options($form, $form_state);
+        $this->note_id__select($form, $form_state);
         $form['submit'] = array(
             '#type' => 'submit',
             '#value' => "Submit",
@@ -128,5 +129,29 @@ class admin_note_link
             {$option_array['last_name'] = $member['last_name'];}
         }
         $this->civicrm = null;
+    }
+    public function note_id__select(&$form, $form_state)
+    {
+        $form['note_value'] = array(
+            '#type' => "select",
+            '#title' => "Select Note",
+            '#required' => true,
+            '#options' => $this->note_options(),
+        );
+    }
+    public function note_options()
+    {
+        $this->database = new base(); $options = [];
+        $year = date('Y');
+        $query = "select * from nfb_washington_note where note_year = '".$year."' ";
+        $key = 'note_id';
+        $this->database->select_query($query, $key);
+        foreach($this->database->get_result() as $note)
+        {
+            $note = get_object_vars($note);
+            $options[$note['note_id']] = $note['note_type'].": ".substr($note['note'], 0 , 75);
+        }
+        $this->database = null;
+        return $options;
     }
 }
