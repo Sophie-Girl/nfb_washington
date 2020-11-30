@@ -1,10 +1,13 @@
 <?php
 Namespace Drupal\nfb_washington\form_factory;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\archive_nfb\representative_data;
+use Drupal\nfb_washington\database\base;
 
 class markup_elements extends date_elements
 {
     public $markup;
+    public $database;
     public function get_markup()
     {return $this->markup;}
 
@@ -61,6 +64,22 @@ class markup_elements extends date_elements
         $form['submit'] = array(
             '#type' => 'submit',
             '#value' => $this->t('Submit'),);
+    }
+    public function new_home_markup(FormStateInterface $form_state)
+    {
+        $markup = "<table>
+    <tr><th class='table-header'>Member of Congress<th class='table-header'>Chamber</th><th></th></tr>";
+        $this->database = new base();
+        $query = "select * from nfb_Washington_members where state = '".$form_state->getValue("select_state")."'
+        and active = 0 and district = 'Senate';";
+        $key = 'member_id';
+        $this->database->select_query($query, $key);
+        $member_result = $this->database->get_result();
+
+    }
+    public function member_loop($member_result, &$member_array)
+    {
+
     }
 
 }
