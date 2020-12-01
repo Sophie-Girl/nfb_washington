@@ -76,8 +76,10 @@ class markup_elements extends date_elements
         $this->database->select_query($query, $key);
         $member_result = $this->database->get_result();
         $this->member_loop($member_result, $markup);
+        $this->database = new base();
         $query = "select * from nfb_washington_members where state = '".$form_state->getValue("select_state")."'
         and active = 0 and district != 'Senate';";
+        $key = 'member_id';
         $this->database->select_query($query, $key);
         $member_result = $this->database->get_result();
         $this->member_loop($member_result, $markup);
