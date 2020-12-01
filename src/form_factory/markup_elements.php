@@ -153,6 +153,8 @@ class markup_elements extends date_elements
             $member_array['moc_contact'] = "N/A";
             $member_array['nfb_contact'] = "N/A";
             $member_array['location'] = "N/A";
+            $member_array['date'] = "N/A";
+            $member_array['time'] = "";
         }
         else{
             $member_array['meeting_time'] = $time;
