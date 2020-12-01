@@ -70,13 +70,13 @@ class markup_elements extends date_elements
         $markup = "<table>
     <tr><th class='table-header'>Member of Congress<th class='table-header'>Chamber</th><th class='table-header'>District/Rank</th><th class='table-header'>Meeting Location</th><th class='table-header'>Meeting Time</th><th class='table-header'>NFB Contact</th><th class='table-header'>Member of Congress Contact Person</th> </tr>";
         $this->database = new base();
-        $query = "select * from nfb_Washington_members where state = '".$form_state->getValue("select_state")."'
+        $query = "select * from nfb_washington_members where state = '".$form_state->getValue("select_state")."'
         and active = 0 and district = 'Senate';";
         $key = 'member_id';
         $this->database->select_query($query, $key);
         $member_result = $this->database->get_result();
         $this->member_loop($member_result, $markup);
-        $query = "select * from nfb_Washington_members where state = '".$form_state->getValue("select_state")."'
+        $query = "select * from nfb_washington_members where state = '".$form_state->getValue("select_state")."'
         and active = 0 and district != 'Senate';";
         $this->database->select_query($query, $key);
         $member_result = $this->database->get_result();
