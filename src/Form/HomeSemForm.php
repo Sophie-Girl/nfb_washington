@@ -1,8 +1,9 @@
 <?php
 Namespace Drupal\nfb_washington\Form;
-use Drupal\nfb_washington\form_factory\form_factory;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\nfb_washington\form_factory\form_factory;
+
 class HomeSemForm extends FormBase
 {
     private $form_factory;
@@ -12,6 +13,7 @@ class HomeSemForm extends FormBase
     }
     public function buildForm(array $form, FormStateInterface $form_state)
     {
+        $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
         $this->form_factory = new form_factory();
         $this->form_factory->build_home_page_form($form, $form_state);
         $this->form_factory = null;
