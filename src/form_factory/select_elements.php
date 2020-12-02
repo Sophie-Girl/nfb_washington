@@ -325,6 +325,7 @@ class select_elements extends textfield_elements
             $key = 'member_id';
             $this->database->select_query($query, $key);
             $member_result = $this->database->get_result();
+            $options = [];
             $this->options_member_loop($member_result, $options);
             $this->database = new base();
             $query = "select * from nfb_washington_members where state = '".$form_state->getValue("select_state")."'
@@ -339,7 +340,6 @@ class select_elements extends textfield_elements
     }
     public function options_member_loop($member_result, &$options)
     {
-        $options = [];
         foreach ($member_result as  $member)
         {
             $member = get_object_vars($member);
