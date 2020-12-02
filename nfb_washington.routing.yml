@@ -1,8 +1,9 @@
 nfb_washington_new_meeting:
-  path: 'nfb-washington/new-meeting'
+  path: 'nfb-washington/meeting/{meeting}'
   defaults:
     _form: 'Drupal\nfb_washington\Form\NewMeetingForm'
-    _title: 'NFB Washington Seminar: New Meeting'
+    _title: 'NFB Washington Seminar: Schedule Meeting'
+    meeting: 'new'
   requirements:
     _permission: 'access content'
     _role: 'administrator + nfb_washington_user'

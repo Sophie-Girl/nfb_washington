@@ -2,10 +2,12 @@
 Namespace Drupal\nfb_washington\form_factory;
 class form_factory extends update_form_ajax_test
 {
-    public function build_new_meeting_time(&$form, $form_state)
+    public function build_new_meeting_time(&$form, $form_state, $meeting)
     {
+        if($meeting == "new"){
         $this->state_ajax_select_element($form,  $form_state);
-        $this->state_rep_ajax_select_element($form, $form_state);
+        $this->state_rep_ajax_select_element($form, $form_state);}
+        $this->meeting_hidden_value($form, $form_state, $meeting);
         $this->contact_first_name_element($form, $form_state);
         $this->contact_last_name_element($form, $form_state);
         $this->contact_email_element($form, $form_state);
@@ -81,6 +83,16 @@ class form_factory extends update_form_ajax_test
             '#states' => [
                 'visible' =>[
                     [':input[name="confirm"]' => ['checked' => true]]],],
+        );
+    }
+    public function meeting_hidden_value(&$form, $form_state, $meeting)
+    {
+        $form['meeting_value'] = array(
+            '#type' => 'textfield',
+            '#value' => $meeting,
+            '#size' => '20',
+            '#attributes' => array('readonly' => 'readonly'),
+            '#title' => "Drupal meeting Id"
         );
     }
 

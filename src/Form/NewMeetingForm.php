@@ -11,10 +11,10 @@ class NewMeetingForm extends FormBase
     public $post_process;
     public function getFormId()
     {return 'washington_sem_new_meeting';}
-    public function buildForm(array $form, FormStateInterface $form_state)
+    public function buildForm(array $form, FormStateInterface $form_state, $meeting = "new")
     {
         $this->form_factory = new form_factory();
-        $this->form_factory->build_new_meeting_time($form, $form_state);
+        $this->form_factory->build_new_meeting_time($form, $form_state, $meeting);
         $this->form_factory = null;
         return $form;
     }

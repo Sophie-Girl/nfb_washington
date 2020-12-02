@@ -1,13 +1,16 @@
 <?php
 namespace Drupal\nfb_washington\form_factory;
 use Drupal\civicrm\Civicrm;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_civicrm_bridge\civicrm\query;
 use Drupal\nfb_washington\archive_nfb\representative_data;
+use Drupal\nfb_washington\civicrm\civi_query;
+use Drupal\nfb_washington\database\base;
 
 class select_elements extends textfield_elements
 {
     protected $civicrm;
-
+    public $database;
     public $options;
     public function get_element_options()
     {return $this->options;}
@@ -124,9 +127,7 @@ class select_elements extends textfield_elements
 
     }
     public function state_rep_ajax_select_element(&$form, $form_state){
-        $this->representative_data = new representative_data();
-        $this->representative_data->new_meeting_options_element($form_state, $options);
-        $this->representative_data = null;
+        $this->new_drupal_rep_options( $form_state, $options);
         $this->options = $options; $this->prefix = "<div id='rep_wrapper'>";
         $this->element_id = 'select_rep'; $this->type = 'select';
         $this->title = "Select Elected Official"; $this->required = TRUE;
@@ -314,6 +315,69 @@ class select_elements extends textfield_elements
         $options["11:15 PM"] = "11:15 PM";
         $options["11:30 PM"] = "11:30 PM";
         $options["11:45 PM"] = "11:45 PM";
+    }
+    public function new_drupal_rep_options(FormStateInterface $form_state, &$options)
+    {
+        If($form_state->getValue("select_state") != ""){
+        $this->database = new base();
+            $query = "select * from nfb_washington_members where state = '".$form_state->getValue("select_state")."'
+        and active = 0 and district = 'Senate';";
+            $key = 'member_id';
+            $this->database->select_query($query, $key);
+            $member_result = $this->database->get_result();
+            $this->options_member_loop($member_result, $options);
+            $this->database = new base();
+            $query = "select * from nfb_washington_members where state = '".$form_state->getValue("select_state")."'
+        and active = 0 and district != 'Senate';";
+            $key = 'member_id';
+            $this->database->select_query($query, $key);
+            $member_result = $this->database->get_result();
+            $this->options_member_loop($member_result, $options);
+        }
+        else {$options = [];}
+    }
+    public function options_member_loop($member_result, &$options)
+    {
+        $options = [];
+        foreach ($member_result as  $member)
+        {
+            $member = get_object_vars($member);
+            $this->build_member_array($member, $member_array);
+            $this->civicrm_member_names($member, $member_array);
+            if($member_array['district'] = "Senate")
+            {$option_text = "Senator ".$member_array['first_name']." ".$member_array['last_name'];}
+            else {$option_text = $member_array['first_name']." ".$member_array['last_name']. " ".$member_array['state']. " ".$member_array['district'];}
+        $options[$member_array['id']] = $option_text;
+        }
+    }
+    public function build_member_array($member, &$member_array)
+    {
+        $member_array['id'] = $member['member_id'];
+        $member_array['state'] = $member['state'];
+        $member_array['district'] = $member['district'];
+        $member_array['rank'] = $member['rank'];
+    }
+    public function civicrm_member_names($member, &$member_array)
+    {
+        $civi = new Civicrm(); $civi->initialize();
+        $this->civicrm = new civi_query($civi);
+        $this->civicrm->civi_mode = 'get';
+        $this->civicrm->civi_entity = 'Contact';
+        $this->civicrm->civi_params = array(
+            'sequential' => 1,
+            'id' => $member['civicrm_contact_id'],
+        ); $first_name = null; $last_name = null;
+        $this->civicrm->civi_query();
+        foreach($this->civicrm->get_civicrm_result()['values'] as $result)
+        {
+            if($first_name == null)
+            {$first_name = $result['first_name'];}
+            if($last_name == null)
+            {$last_name = $result['last_name'];}
+        }
+        $member_array['first_name'] = $first_name;
+        $member_array['last_name'] = $last_name;
+        $this->civicrm = null;
     }
 
 
