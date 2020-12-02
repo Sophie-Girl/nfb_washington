@@ -68,7 +68,7 @@ class markup_elements extends date_elements
     public function new_home_markup(FormStateInterface $form_state, &$markup)
     {
         $markup = "<table>
-    <tr><th class='table-header'>Member of Congress<th class='table-header'>Chamber</th><th class='table-header'>District/Rank</th><th class='table-header'>Meeting Location</th><th class='table-header'>Meeting Time</th><th class='table-header'>NFB Contact</th><th class='table-header'>Member of Congress Contact Person</th> </tr>";
+    <tr><th class='table-header'>Member of Congress<th class='table-header'>Chamber</th><th class='table-header'>District/Rank</th><th class='table-header'>Meeting Location</th><th class='table-header'>Meeting Time</th><th class='table-header'>NFB Contact</th><th class='table-header'>Member of Congress Contact Person</th><th class='table-header'>Actions</th></tr>";
         $this->database = new base();
         $query = "select * from nfb_washington_members where state = '".$form_state->getValue("select_state")."'
         and active = 0 and district = 'Senate';";
@@ -155,6 +155,7 @@ class markup_elements extends date_elements
             $member_array['location'] = "N/A";
             $member_array['date'] = "N/A";
             $member_array['time'] = "";
+            $member_array['meeting_id'] = "new";
         }
         else{
             $member_array['meeting_time'] = $time;
@@ -163,6 +164,7 @@ class markup_elements extends date_elements
             $member_array['moc_contact'] = $moc_contact;
             $member_array['nfb_contact'] = $nfb_contact." Phone #:".$nfb_phone;
             $member_array['location'] = $location;
+            $member_array['meeting_id'] = $activity_id;
         }
         $this->database = null;
     }
@@ -180,8 +182,9 @@ class markup_elements extends date_elements
         else {
             $rank = $member_array['state']." ".$member_array['district'];
         }
-
-            $markup = $markup."<tr><td>".$member_array['first_name']." ".$member_array['last_name']."</td><td>".$chamber."</td><td>$rank</td><td>".$member_array['location']."</td><td>".$member_array['date']." ".$member_array['time']."</td><td>".$member_array['nfb_contact']."</td><td>".$member_array['moc_contact']."</td></tr>";
+        if($member_array['meeting_id'] == "new") {$button_2 = "schedule Meeting";}
+        else{$button_2 = "Edit meeting";}
+            $markup = $markup."<tr><td>".$member_array['first_name']." ".$member_array['last_name']."</td><td>".$chamber."</td><td>$rank</td><td>".$member_array['location']."</td><td>".$member_array['date']." ".$member_array['time']."</td><td>".$member_array['nfb_contact']."</td><td>".$member_array['moc_contact']."</td><td><a href='nfb-washington/meeting/".$member_array['meeting_id']."' class='button-2'>".$button_2."</a></td></tr>";
     }
 
 
