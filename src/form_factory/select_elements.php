@@ -333,6 +333,7 @@ class select_elements extends textfield_elements
             $this->database->select_query($query, $key);
             $member_result = $this->database->get_result();
             $this->options_member_loop($member_result, $options);
+            $this->database = null;
         }
         else {$options = [];}
     }
