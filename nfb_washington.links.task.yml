@@ -6,10 +6,6 @@ nfb_washington.new_met:
   route_name: nfb_washington_new_meeting
   title: 'New Meeting'
   base_route: nfb_washington.seminar
-nfb_washington.update_met:
-  route_name: nfb_washington_update_meeting
-  title: 'Update Meeting'
-  base_route: nfb_washington.seminar
 nfb_washington.rate:
   route_name: nfb_washington_rate_issue
   title: 'Enter Rating'
