@@ -345,7 +345,7 @@ class select_elements extends textfield_elements
             $member = get_object_vars($member);
             $this->build_member_array($member, $member_array);
             $this->civicrm_member_names($member, $member_array);
-            if($member_array['district'] = "Senate")
+            if($member_array['district'] == "Senate")
             {$option_text = "Senator ".$member_array['first_name']." ".$member_array['last_name'];}
             else {$option_text = $member_array['first_name']." ".$member_array['last_name']. " ".$member_array['state']. " ".$member_array['district'];}
         $options[$member_array['id']] = $option_text;
