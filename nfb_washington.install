@@ -120,14 +120,14 @@ class meeting_table  extends  member_table
         );
         $schema[$table_name]['fields']['date'] = array(
             'type'=> 'varchar',
-            'length' => '16',
+            'length' => '64',
             'default' => '1/1/20',
             'not null' => TRUE,
             'description' => 'Activity date'
         );
         $schema[$table_name]['fields']['time'] = array(
             'type'=> 'varchar',
-            'length' => 8,
+            'length' => 12,
             'default' => '12:00 AM',
             'not null' => TRUE,
             'description' => 'Activity time'
@@ -166,6 +166,13 @@ class meeting_table  extends  member_table
             'default' => '',
             'not null' => TRUE,
             'description' => 'Phone number for the nfb contact'
+        );
+        $schema[$table_name]['fields']['moc_attendance'] = array(
+            'type'=> 'int',
+            'size' => 'tiny',
+            'default' => '1',
+            'not null' => TRUE,
+            'description' => 'True or false on whether representative is currently in congress'
         );
         $schema[$table_name]['fields']['meeting_year'] = array(
             'type'=> 'int',
