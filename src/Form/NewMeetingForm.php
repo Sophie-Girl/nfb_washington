@@ -3,7 +3,7 @@ Namespace Drupal\nfb_washington\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\form_factory\form_factory;
-use Drupal\nfb_washington\post_process\meeting_backend;
+use Drupal\nfb_washington\post_process\new_update_meeting_backend;
 
 class NewMeetingForm extends FormBase
 {
@@ -20,10 +20,10 @@ class NewMeetingForm extends FormBase
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        $this->post_process = new meeting_backend();
-        $this->post_process->meeting_person($form_state);
-        $this->post_process = null;
-        drupal_set_message($this->t("New Meeting Created"), 'status');
+        $this->post_process = new new_update_meeting_backend();
+        \Drupal::logger("nfb_washington")->notice("New/Edit Meeting form submission created by ".\Drupal::currentUser()->getUsername());
+        $this->post_process->backed($form_state);
+
     }
     public function validateForm(array &$form, FormStateInterface $form_state)
     {
