@@ -137,8 +137,8 @@ class markup_elements extends date_elements
         foreach($this->database->get_result() as $activity)
         {
             $activity = get_object_vars($activity);
-            $date = $activity['date'];
-            $time = $activity['time'];
+            $date = $activity['meeting_date'];
+            $time = $activity['meeting_time'];
             $description = $activity['description'];
             $location = $activity['location'];
             $moc_contact = $activity['m_o_c_contact'];
