@@ -2,6 +2,7 @@
 Namespace Drupal\nfb_washington\post_process;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\database\base;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class  new_update_meeting_backend
 {
@@ -190,6 +191,23 @@ class  new_update_meeting_backend
 
     public function redirect($status)
     {
-
+        if ($status == "duplicate")
+        {
+            $url = '/nfb-washington/meeting/'.$this->get_meeting_id();
+            $message = "There is another meeting for this member of congress. Please update it below";
+        }
+        elseif($status == "success")
+        {
+            $url = "nfb-washington/home";
+            $message = "Meeting scheduled";
+        }
+        else {
+            $url = "nfb-washington/home";
+            $message = "Meeting updated";
+        }
+        drupal_set_message($message);
+        $ender = new RedirectResponse($url);
+        $ender->send(); $ender = null;
+        return;
     }
 }
