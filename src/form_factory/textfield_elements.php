@@ -21,6 +21,18 @@ class textfield_elements extends base
             '#max' => $this->get_element_max(),
             '#size' => $this->get_element_size(),
             '#required' => $this->get_element_required_status(),);}
+    public function update_first_name(&$form, $form_state)
+    {
+        $category = 'nfb_contact_name';
+
+        $form['meeting_data']['nfb_contact_name'] = array(
+            '#type' => 'textfield',
+            '#title' => $this->t("Contact Person Name"),
+            '#size' => 20,
+            '#required' => TRUE,
+        );
+        $this->representative_data = null;
+    }
     public function build_prefix_textfield(&$form, $form_state)
     {
         $form[$this->get_element_id()] = array(

@@ -8,8 +8,10 @@ class form_factory extends update_form_ajax_test
         $this->state_ajax_select_element($form,  $form_state);
         $this->state_rep_ajax_select_element($form, $form_state);}
         $this->meeting_hidden_value($form, $form_state, $meeting);
+        if($meeting == "new") {
         $this->contact_first_name_element($form, $form_state);
-        $this->contact_last_name_element($form, $form_state);
+        $this->contact_last_name_element($form, $form_state);}
+        else { $this->update_first_name($form, $form_state);}
         $this->contact_email_element($form, $form_state);
         $this->meeting_day_element($form, $form_state);
         $this->meeting_time_element($form, $form_state);
