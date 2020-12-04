@@ -8,10 +8,13 @@ Class admin_config_backend
     public $query;
     public $api_key_value;
     public $congress_number_value;
+    public $seminar_type;
     public function get_api_key_value()
     {return $this->api_key_value;}
     public function get_congress_number_value()
     {Return $this->congress_number_value;}
+    public function get_seminar_type()
+    {return $this->seminar_type;}
     public $database;
     public $user_name;
     public function get_user_name()
@@ -28,6 +31,7 @@ Class admin_config_backend
     {
         $this->api_key_value = $form_state->getValue("pp_api_key");
         $this->congress_number_value = $form_state->getValue("congress_number");
+        $this->seminar_type = $form_state->getValue("seminar");
     }
     public function set_user_name(){
         $user = \drupal::currentUser()->getUsername();
@@ -101,6 +105,42 @@ Class admin_config_backend
         $query = "update nfb_washington_config
         set value = '".$this->get_congress_number_value()."'
         where setting = '"."congress_number"."' and config_id > '"."0"."';";
+        $this->database = new base();
+        $this->database->update_query($query);
+    }
+    public function find_existing_seminar_type()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_config where setting = 'seminar_type' and value = '".$this->get_congress_number_value()."';";
+        $key = "value";
+        $this->database->select_query($query, $key);
+        if($this->database->get_result() == "error" || $this->database->get_result() == array())
+        {
+            $this->insert_seminar_type();
+        }
+        else
+        {
+            $this->update_seminar_type();
+        }
+    }
+    public function insert_seminar_type()
+    {
+        $table = "nfb_washington_config";
+        $fields = array(
+            'setting' => "seminar_type",
+            'value' => $this->get_seminar_type(),
+            "active" => "0",
+            "created_user" => \drupal::currentUser()->getUsername(),
+            "last_modified_user" => \drupal::currentUser()->getUsername(),
+        );
+        $this->database = new base();
+        $this->database->insert_query($table, $fields);
+    }
+    public function update_seminar_type()
+    {
+        $query = "update nfb_washington_config
+        set value = '".$this->get_seminar_type()."'
+        where setting = '"."seminar_type"."' and config_id > '"."0"."';";
         $this->database = new base();
         $this->database->update_query($query);
     }

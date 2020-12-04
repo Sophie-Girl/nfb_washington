@@ -35,6 +35,18 @@ For information on th eAPi please visit their website <a href='https://projects.
           "#required" => "true",
         );
     }
+    public function seminar_type(&$form, $form_State)
+    {
+        $form['seminar'] = array(
+            '#type' => 'select',
+            '#title' => "Is washington Seminar In Person or Virtual",
+            "#options" => array(
+                "in_person" => "In Person",
+                "virtual" => "Virtual",
+            ),
+            "#required" => "true",
+        );
+    }
     public function build_form_array(&$form, $form_state)
     {
         $this->API_key_markup($form, $form_state);

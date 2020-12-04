@@ -118,14 +118,14 @@ class meeting_table  extends  member_table
             'not null' => TRUE,
             'description' => 'Activity type'
         );
-        $schema[$table_name]['fields']['date'] = array(
+        $schema[$table_name]['fields']['meeting_date'] = array(
             'type'=> 'varchar',
             'length' => '64',
             'default' => '1/1/20',
             'not null' => TRUE,
             'description' => 'Activity date'
         );
-        $schema[$table_name]['fields']['time'] = array(
+        $schema[$table_name]['fields']['meeting_time'] = array(
             'type'=> 'varchar',
             'length' => 12,
             'default' => '12:00 AM',
