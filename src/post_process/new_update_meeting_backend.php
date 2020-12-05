@@ -103,7 +103,7 @@ class  new_update_meeting_backend
     {
         $this->database = new base();
         $year = date("Y");
-        $query = "select * from nfb_washington_activities whre member_id = '" . $this->get_member_id() . "' and  meeting_year = '" . $year . "';";
+        $query = "select * from nfb_washington_activities where member_id = '" . $this->get_member_id() . "' and  meeting_year = '" . $year . "';";
         $key = 'activity_id';
         $activity_id = null;
         $this->database->select_query($query, $key);
