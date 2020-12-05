@@ -184,7 +184,7 @@ class markup_elements extends date_elements
         }
         if($member_array['meeting_id'] == "new") {$button_2 = "Schedule Meeting";}
         else{$button_2 = "Edit meeting";}
-            $markup = $markup."<tr><td>".$member_array['first_name']." ".$member_array['last_name']."</td><td>".$chamber."</td><td>$rank</td><td>".$member_array['location']."</td><td>".$member_array['date']." ".$member_array['time']."</td><td>".$member_array['nfb_contact']."</td><td>".$member_array['moc_contact']."</td><td><a href='nfb-washington/meeting/".$member_array['meeting_id']."' class='button-2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_2."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td></tr>";
+            $markup = $markup."<tr><td>".$member_array['first_name']." ".$member_array['last_name']."</td><td>".$chamber."</td><td>$rank</td><td>".$member_array['location']."</td><td>".$member_array['date']." ".$member_array['time']."</td><td>".$member_array['nfb_contact']."</td><td>".$member_array['moc_contact']."</td><td><a href='/nfb-washington/meeting/".$member_array['meeting_id']."' class='button-2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_2."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td></tr>";
     }
 
 
