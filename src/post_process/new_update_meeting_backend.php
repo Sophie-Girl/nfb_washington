@@ -77,6 +77,7 @@ class  new_update_meeting_backend
         } else {
             $status = $this->update_meeting_info();
         }
+        $this->redirect($status);
     }
 
     public function set_values(FormStateInterface $form_state)
