@@ -119,6 +119,7 @@ class  new_update_meeting_backend
             $this->insert_query();
             $status = "success";
         } else {
+            $this->meeting_id = $activity_id;
             $status = "duplicate";
         }
         return $status;
