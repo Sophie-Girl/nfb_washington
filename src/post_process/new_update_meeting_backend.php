@@ -108,6 +108,7 @@ class  new_update_meeting_backend
         $key = 'activity_id';
         $activity_id = null;
         $this->database->select_query($query, $key);
+        \Drupal::logger("nfb_washington_post_process_debug")->notice(" SQL Results: ".print_r($this->database->get_result(), true));
         foreach ($this->database->get_result() as $meeting) {
             $meeting = get_object_vars($meeting);
             if ($activity_id == null) {

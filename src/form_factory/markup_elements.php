@@ -131,7 +131,7 @@ class markup_elements extends date_elements
     {
         $this->database = new base(); $year = date('Y');
         $query = "select * from nfb_washington_activities where meeting_year = '".$year."'
-        and member_id = '".$member['meeting_id']."' and type  = 'meeting';";
+        and member_id = '".$member['member_id']."' and type  = 'meeting';";
         $key = 'activity_id';
         $this->database->select_query($query, $key);
         foreach($this->database->get_result() as $activity)
