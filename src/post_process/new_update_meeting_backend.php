@@ -137,7 +137,7 @@ class  new_update_meeting_backend
             "description" => "Washington Seminar Meeting",
             "location" => $this->virtual_in_person(),
             "m_o_c_contact" => $this->get_moc_contact(),
-            "nfb_contact" => $this->get_moc_contact(),
+            "nfb_contact" => $this->get_nfb_contact(),
             "nfb_phone" => $this->get_nfb_phone(),
             "moc_attendance" => $this->get_moc_attendance(),
             "meeting_year" => $year,
