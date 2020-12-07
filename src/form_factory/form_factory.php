@@ -18,42 +18,19 @@ class form_factory extends update_form_ajax_test
         $this->meeting_comments_element($form, $form_state);
         $this->new_attendance_element($form, $form_state);
         $this->MOC_contact_element($form, $form_state);
-        $this->submit_button($form, $form_state);
+        if($meeting == "new"){
+        $this->submit_button($form, $form_state);}
+        else{
+            $this->build_confirmation_checkbox($form, $form_state);
+            $this->conditional_submit($form, $form_state);
+        }
     }
-    public function build_update_meeting_form(&$form, $form_state)
+    public function build_update_rating_form(&$form, $form_state, $rating)
     {
-        $this->state_ajax_select_element($form, $form_state);
-        $this->update_state_rep_meeting_select_elements($form, $form_state);
-        $this->field_set($form, $form_state);
-        $this->update_first_name($form, $form_state);
-        $this->update_contact_phone_record($form, $form_state);
-        $this->update_meeting_location($form, $form_state);
-        $this->update_meeting_date($form, $form_state);
-        $this->meeting_time_update_element($form, $form_state);
-        $this->build_confirmation_checkbox($form, $form_state);
-        $this->update_expectend_attedence($form, $form_state);
-        $this->update_MOC_contact($form, $form_state);
-        $this->conditional_submit($form, $form_state);
-    }
-    public function build_rating_form(&$form, $form_state)
-    {
-        $this->state_ajax_select_element($form, $form_state);
-        $this->new_ranking_select_element($form, $form_state);
-        $this->contact_first_name_element($form, $form_state);
-        $this->contact_last_name_element($form, $form_state);
-        $this->contact_email_element($form, $form_state);
-        $this->issue_1_ranking_element($form, $form_state);
-        $this->issue_1_comment_element($form, $form_state);
-        $this->issue_2_ranking_element($form, $form_state);
-        $this->issue_2_comment_element($form, $form_state);
-        $this->issue_3_ranking_element($form, $form_state);
-        $this->issue_3_comment_element($form, $form_state);
-        $this->submit_button($form, $form_state);
-    }
-    public function build_update_rating_form(&$form, $form_state)
-    {
-        $this->state_ajax_select_element($form, $form_state);
-        $this->update_ranking_select_element($form, $form_state);
+        if($rating == "new"){
+            $this->state_ajax_select_element($form,  $form_state);
+            $this->state_rep_ajax_select_element($form, $form_state);
+        }
         $this->update_first_name($form, $form_state);
         $this->contact_email_element($form, $form_state);
         $this->issue_1_ranking_element($form, $form_state);
@@ -92,6 +69,16 @@ class form_factory extends update_form_ajax_test
         $form['meeting_value'] = array(
             '#type' => 'textfield',
             '#value' => $meeting,
+            '#size' => '20',
+            '#attributes' => array('readonly' => 'readonly'),
+            '#title' => "Drupal meeting Id"
+        );
+    }
+    public function raiting_hidden_value(&$form, $form_state, $rating)
+    {
+        $form['rating_value'] = array(
+            '#type' => 'textfield',
+            '#value' => $rating,
             '#size' => '20',
             '#attributes' => array('readonly' => 'readonly'),
             '#title' => "Drupal meeting Id"

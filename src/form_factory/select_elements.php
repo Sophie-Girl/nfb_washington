@@ -70,10 +70,8 @@ class select_elements extends textfield_elements
         $this->rankings_options();
         $this->element_id = 'issue_1_ranking';
         $this->type = 'select';
-        $this->representative_data =  new representative_data();
-        $rank = 1;
-        $this->representative_data->get_issue_name($rank, $issue, $id);
-        $this->title = $issue." Rating";
+        $this->get_issue_names();
+        $this->title = $this->get_issue1()." Rating";
         $this->required = True;
         $this->build_Static_select_box($form, $form_state);
     }
@@ -82,10 +80,8 @@ class select_elements extends textfield_elements
         $this->rankings_options();
         $this->element_id = 'issue_2_ranking';
         $this->type = 'select';
-        $this->representative_data =  new representative_data();
-        $rank = 2;
-        $this->representative_data->get_issue_name($rank, $issue, $id);
-        $this->title = $issue." Rating";
+        $this->get_issue_names();
+        $this->title = $this->get_issue2()." Rating";
         $this->required = True;
         $this->build_Static_select_box($form, $form_state);
     }
@@ -94,16 +90,11 @@ class select_elements extends textfield_elements
         $this->rankings_options();
         $this->element_id = 'issue_3_ranking';
         $this->type = 'select';
-        $this->representative_data =  new representative_data();
-        $rank = 3;
-        $this->representative_data->get_issue_name($rank, $issue, $id);
-        $this->title = $issue." Rating";
+        $this->get_issue_names();
+        $this->title = $this->get_issue3()." Rating";
         $this->required = True;
         $this->build_Static_select_box($form, $form_state);
     }
-    public function moc_select_element(&$form)
-    { //todo implement this code once connection to archive.nfb.org is established
-        }
     public function meeting_time_element(&$form, $form_state)
     {
         $this->time_options(); $this->type = 'select';
