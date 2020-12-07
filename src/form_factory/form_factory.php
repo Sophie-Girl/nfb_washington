@@ -39,7 +39,12 @@ class form_factory extends update_form_ajax_test
         $this->issue_2_comment_element($form, $form_state);
         $this->issue_3_ranking_element($form, $form_state);
         $this->issue_3_comment_element($form, $form_state);
-        $this->submit_button($form, $form_state);
+        if($rating == 'new')
+        {$this->submit_button($form, $form_state);}
+        else{
+            $this->build_confirmation_checkbox($form, $form_state);
+            $this->conditional_submit($form, $form_state);
+        }
     }
     public function build_home_page_form(&$form, $form_state){
         $this->state_select_element($form, $form_state);
