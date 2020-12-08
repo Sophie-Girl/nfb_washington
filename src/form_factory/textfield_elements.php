@@ -69,8 +69,9 @@ class textfield_elements extends element_base
         $this->min = '1'; $this->max = '30';
         $this->size = '20'; $this->required = TRUE;
         $this->element_id = 'nfb_civicrm_f_name_1';
-        $this->prefix = "<div id='data_wrapper'>";
-        $this->build_prefix_textfield($form, $form_state);}
+
+        $this->build_static_textfield($form, $form_state);
+        }
     public function contact_last_name_element(&$form, $form_state)
     {   $this->type = 'textfield'; $this->title = "Point of Contact Last Name";
         $this->min = '1'; $this->max = '30';
@@ -117,8 +118,7 @@ class textfield_elements extends element_base
      {  $this->element_id = "meeting_location"; $this->type = 'textfield';
         $this->title = "Zoom Meeting Information"; $this->size = '20';
         $this->min = '0'; $this->max = '200'; $this->required = TRUE;
-        $this->suffix = "</div>";
-         $this->build_suffix_textfield($form, $form_state);
+         $this->build_static_textfield($form, $form_state);
      }
      public function MOC_contact_element(&$form, $form_State)
      {
