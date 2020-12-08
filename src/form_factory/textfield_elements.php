@@ -36,7 +36,7 @@ class textfield_elements extends base
 
         $form['nfb_contact_name'] = array(
             '#type' => 'textfield',
-            '#title' => $this->t("Contact Person Name"),
+            '#title' => "Contact Person Name",
             '#size' => 20,
             '#required' => TRUE,
         );

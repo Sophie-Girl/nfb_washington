@@ -23,7 +23,7 @@ class update_form_ajax_test extends markup_elements
         $this->representative_data->get_rep_data_update($form_state, $category, $text);
         $form['meeting_data']['moc_contact'] = array(
             '#type' => 'textfield',
-            '#title' => $this->t("Member of Congress Contact Person"),
+            '#title' =>"Member of Congress Contact Person",
             '#default_value' => $text,
             '#size' => 20,
             '#required' => false,
