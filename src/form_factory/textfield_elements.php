@@ -132,7 +132,7 @@ class textfield_elements extends element_base
          //
          $this->database = new base(); $year = date("Y");
          $query = "select * from  nfb_washington_issues where issue_year = '".$year."'
-         order by issue_id ascending";
+         order by issue_id ASC";
          $key = 'issue_id';
          $this->database->select_query($query, $key);
          $count = 1;
