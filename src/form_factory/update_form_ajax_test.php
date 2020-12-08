@@ -15,19 +15,7 @@ class update_form_ajax_test extends markup_elements
         );
     }
 
-    public function update_first_name(&$form, $form_state)
-    {
-        $this->representative_data = new representative_data();
-        $category = 'nfb_contact_name';
-        $this->representative_data->get_rep_data_update($form_state, $category, $text);
-        $form['meeting_data']['nfb_contact_name'] = array(
-            '#type' => 'textfield',
-            '#title' => $this->t("Contact Person Name"),
-            '#size' => 20,
-            '#required' => TRUE,
-        );
-        $this->representative_data = null;
-    }
+
     public function update_MOC_contact(&$form, $form_state)
     {
         $this->representative_data = new representative_data();
