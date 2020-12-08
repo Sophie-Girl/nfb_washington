@@ -16,10 +16,11 @@ nfb_washington_home_form:
     _permission: 'access content'
     _role: 'administrator + nfb_washington_user'
 nfb_washington_update_rate_issue:
-  path: 'nfb-washington/update-rating'
+  path: 'nfb-washington/rating/{rating}'
   defaults:
     _form: 'Drupal\nfb_washington\Form\UpdateRatingForm'
     _title: 'NFB Washington Seminar: Update a Rating'
+    rating: 'new'
   requirements:
     _permission: 'access content'
     _role: 'administrator + nfb_washington_user'

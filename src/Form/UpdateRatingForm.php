@@ -15,10 +15,10 @@ class UpdateRatingForm extends FormBase
         return "wash_sem_update_issue_rank";
     }
 
-    public function buildForm(array $form, FormStateInterface $form_state)
+    public function buildForm(array $form, FormStateInterface $form_state, $rating = "new")
     {
         $this->form_factory = new form_factory();
-        $this->form_factory->build_update_rating_form($form, $form_state);
+        $this->form_factory->build_update_rating_form($form, $form_state, $rating);
         $this->form_factory = null;
         return $form;
     }
