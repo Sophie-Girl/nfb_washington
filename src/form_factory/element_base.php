@@ -2,7 +2,7 @@
 namespace Drupal\nfb_washington\form_factory;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
-class base
+class element_base
 {
     use StringTranslationTrait; // use translation trait for form titles and drupal translate
     public $element_id; // form element id
