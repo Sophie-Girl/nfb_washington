@@ -51,6 +51,7 @@ class new_ratings_form_backend
     {return $this->issue_3_comment;}
     public function backend(FormStateInterface $form_state)
     {
+        $this->set_issue_ids();
         $this->set_values($form_state);
         if($this->get_meeting_id() == null) {
             $this->find_meeting_id();
