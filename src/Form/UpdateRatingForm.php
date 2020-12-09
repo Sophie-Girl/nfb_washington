@@ -3,7 +3,7 @@ Namespace Drupal\nfb_washington\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\form_factory\form_factory;
-use Drupal\nfb_washington\post_process\meeting_backend;
+use Drupal\nfb_washington\post_process\new_ratings_form_backend;
 
 class UpdateRatingForm extends FormBase
 {
@@ -25,8 +25,8 @@ class UpdateRatingForm extends FormBase
 
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        $this->post_process = new meeting_backend();
-        $this->post_process->rating_backend($form_state);
+        $this->post_process = new new_ratings_form_backend();
+        $this->post_process->backend($form_state);
         $this->post_process = null;
         drupal_set_message($this->t("Rating Submitted"), 'status');
     }
