@@ -78,7 +78,7 @@ class new_ratings_form_backend
             $this->member_id = null;
         }
         $this->nfb_contact = $form_state->getValue("nfb_contact_name");
-        $this->nfb_phone = $form_state->getValue("nfb_contact_phone_1");
+        $this->nfb_phone = $form_state->getValue("nfb_civicrm_phone_1");
         $this->issue_1_rating = $form_state->getValue("issue_1_ranking");
         $this->issue_1_comment = $form_state->getValue("issue_1_comment");
         $this->issue_2_rating = $form_state->getValue("issue_2_ranking");
