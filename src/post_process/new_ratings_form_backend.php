@@ -236,6 +236,7 @@ class new_ratings_form_backend
     }
     public function convert_rating($rating, $issue_number)
     {
+        \Druipal::logger("nfb_wahsington")->notice("rating ".$rating);
         switch($rating)
         {
             case "Yes":
