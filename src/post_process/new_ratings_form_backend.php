@@ -236,7 +236,7 @@ class new_ratings_form_backend
     }
     public function convert_rating($rating, $issue_number)
     {
-        \Drupal::logger("nfb_wahsington")->notice("rating ".$rating);
+        \Drupal::logger("nfb_washington")->notice("rating ".$rating. " ". $issue_number);
         switch($rating)
         {
             case "Yes":
@@ -251,11 +251,11 @@ class new_ratings_form_backend
         switch($issue_number)
         {
             case 1:
-                $this->issue_1_rating = $new_rating;
+                $this->issue_1_rating = $new_rating; break;
             case 2:
-                $this->issue_2_rating = $new_rating;
+                $this->issue_2_rating = $new_rating; break;
             case 3:
-                $this->issue_3_rating = $new_rating;
+                $this->issue_3_rating = $new_rating; break;
         }
     }
     public function issue_1_create_array(&$fields)
