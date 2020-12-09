@@ -154,6 +154,7 @@ class new_ratings_form_backend
                     $this->issue_3 = $issue['issue_id'];
                     break;
             }
+            $count++;
         }
     }
     public function deduplication($issue_number)

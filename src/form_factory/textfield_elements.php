@@ -151,6 +151,7 @@ class textfield_elements extends element_base
                      $this->issue_3 = $issue['issue_name'];
                      break;
              }
+             $count++;
          }
 
      }
