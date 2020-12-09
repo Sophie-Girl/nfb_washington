@@ -142,6 +142,7 @@ class new_ratings_form_backend
         $count = 1;
         foreach ($this->database->get_result() as $issue)
         {
+            \drupal::logger("nfb_washington_issue")->notice("array:" .print_R($issue, true));
             $issue = get_object_vars($issue);
             switch ($count)
             {
