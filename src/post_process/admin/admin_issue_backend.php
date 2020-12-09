@@ -84,11 +84,13 @@ class admin_issue_backend
     }
     public function create_backend(FormStateInterface $form_state)
     {
+        $year = date('Y');
         $fields = array(
             'issue_name'  => $form_state->getValue("issue_name"),
             "bill_id" => $this->get_bill_id(),
             "bill_slug" => $this->get_bill_slug(),
             "civicrm_id" => "0",
+            'issue_year' => $year,
             "primary_status" => $this->get_primary_issue(),
             "primary_issue_id" => $this->get_primary_issue_id(),
             "created_user" => $this->get_created_user(),
