@@ -83,6 +83,7 @@ class new_ratings_form_backend
         $this->issue_1_rating = $form_state->getValue("issue_1_ranking");
         $this->issue_1_comment = $form_state->getValue("issue_1_comment");
         $this->issue_2_rating = $form_state->getValue("issue_2_ranking");
+        \Drupal::logger("nfb_washington")->notice("issue_2_rating ".$this->get_issue_2_rating());
         $this->issue_2_comment = $form_state->getValue("issue_2_comment");
         $this->issue_3_rating = $form_state->getValue("issue_3_ranking");
         $this->issue_3_comment = $form_state->getValue("issue_3_comment");
@@ -142,7 +143,6 @@ class new_ratings_form_backend
         $count = 1;
         foreach ($this->database->get_result() as $issue)
         {
-            \drupal::logger("nfb_washington_issue")->notice("array:" .print_R($issue, true));
             $issue = get_object_vars($issue);
             switch ($count)
             {
