@@ -31,6 +31,7 @@ class form_factory extends update_form_ajax_test
             $this->state_ajax_select_element($form,  $form_state);
             $this->state_rep_ajax_select_element($form, $form_state);
         }
+        $this->raiting_hidden_value($form, $form_state, $rating);
         $this->update_first_name($form, $form_state);
         $this->contact_email_element($form, $form_state);
         $this->issue_1_ranking_element($form, $form_state);
