@@ -318,7 +318,7 @@ class rating_table extends issue_table
           'size' => 'big',
           'default' => null,
           'not null' => False,
-          'description' => 'FK toactivity'
+          'description' => 'FK to activity'
         );
         $schema[$table_name]['fields']['member_id'] = array(
             'type' => 'int',

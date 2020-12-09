@@ -142,13 +142,13 @@ class textfield_elements extends element_base
              switch ($count)
              {
                  case 1:
-                     $this->issue_1 = $issue['name'];
+                     $this->issue_1 = $issue['issue_name'];
                      break;
                  case 2:
-                     $this->issue_2 = $issue['name'];
+                     $this->issue_2 = $issue['issue_name'];
                      break;
                  case 3:
-                     $this->issue_3 = $issue['name'];
+                     $this->issue_3 = $issue['issue_name'];
                      break;
              }
          }
