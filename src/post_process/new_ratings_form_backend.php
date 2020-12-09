@@ -147,13 +147,13 @@ class new_ratings_form_backend
             switch ($count)
             {
                 case 1:
-                    $this->issue_1 = $issue['issue_id'];
+                    $this->issue1 = $issue['issue_id'];
                     break;
                 case 2:
-                    $this->issue_2 = $issue['issue_id'];
+                    $this->issue2 = $issue['issue_id'];
                     break;
                 case 3:
-                    $this->issue_3 = $issue['issue_id'];
+                    $this->issue3 = $issue['issue_id'];
                     break;
             }
             $count++;
