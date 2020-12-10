@@ -118,7 +118,7 @@ class new_ratings_form_backend
             "member_id" => $this->get_member_id(),
             "type" => "meeting",
             "meeting_date" => '1/1/2020',
-            "meeting_time" => "12:00: Am",
+            "meeting_time" => "12:00: AM",
             "description" => "Washington Seminar Meeting",
             "location" => "Unknown",
             "m_o_c_contact" => "Unknown",

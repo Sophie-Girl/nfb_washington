@@ -13,7 +13,7 @@
                         document.getElementById('edit-meeting-location').value = issue[0];
                         document.getElementById('edit-meeting-time').value = issue[1];
                         document.getElementById('edit-meeting-day').value = issue[2];
-                        document.getElementById('edit-nfb-contact').value = issue[3];
+                        document.getElementById('edit-nfb-contact-name').value = issue[3];
                         document.getElementById('edit-nfb-civicrm-phone-1').value = issue[4];
                         document.getElementById('edit-moc-contact').value = issue[5];
                         document.getElementById('editattendance').value = issue[6];
