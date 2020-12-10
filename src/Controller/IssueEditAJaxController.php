@@ -8,11 +8,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class  IssueEditAJaxController extends  ControllerBase
 {
-    public $issue_id;
+    public $meeting_id;
     public $sql_result;
     public $data;
-    public function get_issue_id(){
-    return $this->issue_id;
+    public function get_meeting_id(){
+    return $this->meeting_id;
     }
     public function get_sql_result()
     {return $this->sql_result;}
@@ -21,45 +21,86 @@ class  IssueEditAJaxController extends  ControllerBase
     public $database;
     public function content()
     {
-        $this->get_ajax_data();
+        $this->set_data();
         return new JsonResponse($this->get_data());
     }
-    public function  get_ajax_data()
-    {
-        $this->request_js_data(); $this->issue_query();
-        $this->process_sql_result();
-    }
+
     public function request_js_data()
     {
         $request = Request::createFromGlobals();
-        $this->issue_id = $request->request->get('issueid');
+        $this->meeting_id = $request->request->get('meetingid');
     }
-    public function issue_query()
+    public function set_data()
+    {
+        $this->request_js_data();
+        $this->find_ratings();
+        $this->loop();
+
+    }
+    public function find_ratings()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_issues where issue_id = '".$this->get_issue_id()."';";
-        $key = "issue_id";
+        $query = "select * from nfb_washington_rating where activity_id = '".$this->get_meeting_id()."'
+        order by issue_id ASC;";
+        $key = 'issue_id';
         $this->database->select_query($query, $key);
         $this->sql_result = $this->database->get_result();
+        $this->database = null;
     }
-    public function process_sql_result()
+    public function loop()
     {
-
-        $issue_data = get_object_vars($this->get_sql_result()[$this->get_issue_id()]);
-        \drupal::logger('nfb_washington_ajax')->notice(print_r($issue_data, true));
-        $data = [];
-        $data[0] = $issue_data['issue_name'];
-        $data[1] = $issue_data['bill_id'];
-        $data[2] = $issue_data['bill_slug'];
-        if($issue_data['primary_status'] == "0")
-        {$primary = "yes";}else{$primary = "no";}
-        $data[3] = $primary;
-        if($issue_data['primary_issue_id'] && $issue_data['primary_issue_id'] != '0')
-        {$prim_id = $issue_data['primary_issue_id'];}
-        else {$prim_id = "";}
-        $data[4] = $prim_id;
+        $count = 1;
+        foreach ($this->get_sql_result() as $rating)
+        {
+            $rating = get_object_vars($rating);
+            switch ($count)
+            {
+                case 1:
+                  $this->set_issue_1($rating, $data);  break;
+                case 2:
+                    $this->set_issue_2($rating, $data);  break;
+                case 3:
+                    $this->set_issue_3($rating, $data);  break;
+            }
+            $count++;
+        }
         $this->data = $data;
-
+    }
+    public function set_issue_1($rating, &$data)
+    {
+        $new_rating = $rating['rating'];
+        $this->convert_rating($new_rating);
+        $data[0] = $new_rating;
+        $data[1] = $rating['comment'];
+    }
+    public function set_issue_2($rating, &$data)
+    {
+        $new_rating = $rating['rating'];
+        $this->convert_rating($new_rating);
+        $data[2] = $new_rating;
+        $data[3] = $rating['comment'];
+    }
+    public function set_issue_3($rating, &$data)
+    {
+        $new_rating = $rating['rating'];
+        $this->convert_rating($new_rating);
+        $data[4] = $new_rating;
+        $data[5] = $rating['comment'];
+    }
+    public function convert_rating(&$new_rating)
+    {
+        switch($new_rating)
+        {
+            case 'y':
+                $rating = "Yes"; break;
+            case "n":
+                $rating = "No"; break;
+            case "u":
+                $rating = "Undecided"; break;
+            case "nd":
+                $rating = "Not Discussed"; break;
+        }
+        $new_rating = $rating;
     }
 
 }
