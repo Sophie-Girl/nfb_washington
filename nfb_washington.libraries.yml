@@ -15,7 +15,7 @@ edit-note:
     version: 1.x
     js:
       js/edit-note.js: {}
-updatemeetings:
+updatemeeting:
   version: 1.x
   js:
     js/updatemeeting.js: {}
