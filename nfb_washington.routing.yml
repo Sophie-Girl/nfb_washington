@@ -35,7 +35,7 @@ nfb_washington.meeting_ajax:
 nfb_washington.raitng_ajax:
   path: 'nfb_washington/ajax/rating'
   defaults:
-    _controller: '\Drupal\nfb_washington\Controller\IssueEditAJaxController::content'
+    _controller: '\Drupal\nfb_washington\Controller\RatingAjaxController::content'
     _title: 'ajax'
   requirements:
     _permission: 'access content'
