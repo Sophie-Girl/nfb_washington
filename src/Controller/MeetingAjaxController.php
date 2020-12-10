@@ -82,12 +82,6 @@ class MeetingAjaxController extends ControllerBase
             $this->moc_attendance = $meeting['moc_attendance'];
         }
     }
-    public function convert_y_n()
-    {
-        if($this->get_moc_attendance() == '0')
-        { $this->moc_attendance = "Yes";}
-        else {$this->moc_attendance = "No";}
-    }
     public function build_data_array()
     {
         $data[0] = $this->get_meeting_location();
@@ -104,7 +98,6 @@ class MeetingAjaxController extends ControllerBase
         $this->request_js_data();
         $this->find_meeting();
         $this->meeting_data_info_for_loop();
-        $this->convert_y_n();
         $this->build_data_array();
     }
 
