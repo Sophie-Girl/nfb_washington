@@ -200,11 +200,11 @@ class  new_update_meeting_backend
         }
         elseif($status == "success")
         {
-            $url = "nfb-washington/home";
+            $url = "/nfb-washington/home";
             $message = "Meeting scheduled";
         }
         else {
-            $url = "nfb-washington/home";
+            $url = "/nfb-washington/home";
             $message = "Meeting updated";
         }
         drupal_set_message($message);
