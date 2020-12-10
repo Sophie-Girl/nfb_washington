@@ -94,7 +94,6 @@ class  new_update_meeting_backend
         $this->meeting_location = $form_state->getValue("meeting_location");
         $this->meeting_date = $form_state->getValue("meeting_day");
         $this->meeting_time = $form_state->getValue("meeting_time");
-        $this->nfb_contact = $form_state->getValue("nfb_civicrm_f_name_1") . " " . $form_state->getValue("nfb_civicrm_l_name_1");
         $this->nfb_phone = $form_state->getValue("nfb_civicrm_phone_1");
         $this->moc_attendance = $form_state->getValue("attendance");
         $this->moc_contact = $form_state->getValue("moc_contact");
