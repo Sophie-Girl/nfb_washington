@@ -6,7 +6,7 @@
                 if (vmeetingid != "new") {
                     $.ajax({
                         type: 'POST',
-                        url: '/nfb_washington/admin/ajax/note',
+                        url: '/nfb_washington/ajax/meeting',
                         data: { meetingid:vmeetingid },
                     }).done(function (data) {
                         var issue = data;

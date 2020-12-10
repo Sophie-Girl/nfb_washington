@@ -49,7 +49,7 @@ class MeetingAjaxController extends ControllerBase
     public function get_moc_attendance()
     {return $this->moc_attendance;}
     public function content()
-    {
+    {\drupal::logger("nfb_washington_ajax")->notice("I am running UwU");
         $this->set_Data();
         return new JsonResponse($this->get_data());
     }
