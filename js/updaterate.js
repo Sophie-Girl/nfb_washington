@@ -2,12 +2,12 @@
     Drupal.behaviors.wash_sem_note_edit = {
         attach: function(context, settings) {
             window.onload = function () {
-                var vmeeint_id = $('#edit-note-value').val();
-                if (vmeeitngid != "new") {
+                var vmeetingid = $('#edit-note-value').val();
+                if (vmeetingid != "new") {
                     $.ajax({
                         type: 'POST',
                         url: '/nfb_washington/ajax/rating',
-                        data: { meetingid:vmeeitngid },
+                        data: { meetingid:vmeetingid },
                     }).done(function (data) {
                         var issue = data;
                         document.getElementById('edit-issue-1-ranking').value = issue[0];
