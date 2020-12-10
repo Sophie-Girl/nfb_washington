@@ -19,3 +19,7 @@ updatemeeting:
   version: 1.x
   js:
     js/updatemeeting.js: {}
+updaterate:
+  version: 1.x
+  js:
+    js/updaterate.js: {}
