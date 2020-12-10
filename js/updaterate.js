@@ -2,7 +2,7 @@
     Drupal.behaviors.wash_sem_note_edit = {
         attach: function(context, settings) {
             window.onload = function () {
-                var vmeetingid = $('#edit-note-value').val();
+                var vmeetingid = $('#edit-rating-value').val();
                 if (vmeetingid != "new") {
                     $.ajax({
                         type: 'POST',
@@ -18,10 +18,10 @@
                         document.getElementById('edit-issue-3-comment').value = issue[5];
                     });
                 }
-                else{
+
                     document.getElementById('edit-rating-value').style.display = 'none';
                     document.getElementsByClassName("form-item js-form-item form-type-textfield js-form-type-textfield form-item-rating-value js-form-item-rating-value")['0'].style.display = 'none';
-                }
+
             }
         }
     }
