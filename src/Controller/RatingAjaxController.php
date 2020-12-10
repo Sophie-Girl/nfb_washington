@@ -30,6 +30,7 @@ class  RatingAjaxController extends  ControllerBase
     {
         $request = Request::createFromGlobals();
         $this->meeting_id = $request->request->get('meetingid');
+        \drupal::logger("nfb_Washington_ajax")->notice("Meeting_id: ".$this->get_meeting_id());
     }
     public function set_data()
     {
