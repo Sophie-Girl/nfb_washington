@@ -14,6 +14,22 @@ class individual_member_report
     public $sql_result;
     public function get_sql_result()
     {return $this->sql_result;}
+    public $civicrm_id;
+    public function get_civicrm_id()
+    {return $this->civicrm_id;}
+    public $district;
+    public function get_district()
+    {return $this->district;}
+    public $rank;
+    public function get_rank()
+    {return $this->rank;}
+    public $state;
+    public function get_state()
+    {return $this->state;}
+    public $propublica_id;
+    public function get_propublica_id()
+    {return $this->propublica_id;}
+
     public function set_user_permission()
     {
         $user = \Drupal::currentUser(); $permission = "false";
@@ -46,8 +62,13 @@ class individual_member_report
         foreach ($this->get_sql_result() as $member)
         {
             $member = get_object_vars($member);
-
+            $this->civicrm_id = $member['civicrm_contact_id'];
+            $this->state = $member['state'];
+            $this->rank = $member['rank'];
+            $this->district = $member['district'];
+            $this->propublica_id = $member['propublica_id'];
         }
     }
+
 
 }
