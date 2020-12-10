@@ -61,7 +61,7 @@ class MeetingAjaxController extends ControllerBase
     public function find_meeting()
     {
         $this->database = new base();
-        $query = "select * nfb_washington_activities where activity_id = '".$this->get_meeting_id()."';";
+        $query = "select * from nfb_washington_activities where activity_id = '".$this->get_meeting_id()."';";
         $key = 'activity_id';
         $this->database->select_query($query, $key);
         $this->sql_result = $this->database->get_result();
