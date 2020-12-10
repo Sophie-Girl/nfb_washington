@@ -16,7 +16,7 @@
                         document.getElementById('edit-nfb-contact-name').value = issue[3];
                         document.getElementById('edit-nfb-civicrm-phone-1').value = issue[4];
                         document.getElementById('edit-moc-contact').value = issue[5];
-                        document.getElementById('editattendance').value = issue[6];
+                        document.getElementById('edit-attendance').value = issue[6];
                     });
                 }
                     document.getElementById('edit-meeting-value').style.display = 'none';

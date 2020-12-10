@@ -89,7 +89,7 @@ class  new_update_meeting_backend
         } else {
             $this->member_id = null;
             $this->meeting_id = $form_state->getValue("meeting_value");
-            $this->nfb_contact = $form_state->getValue("nfb_civicrm_f_name_1") . " " . $form_state->getValue("nfb_civicrm_l_name_1");
+            $this->nfb_contact = $form_state->getValue("nfb_contact_name");
         }
         $this->meeting_location = $form_state->getValue("meeting_location");
         $this->meeting_date = $form_state->getValue("meeting_day");
