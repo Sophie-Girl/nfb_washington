@@ -75,7 +75,7 @@ class MeetingAjaxController extends ControllerBase
             $meeting = get_object_vars($meeting);
             $this->meeting_location = $meeting['location'];
             $this->meeting_time = $meeting['meeting_time'];
-            $this->meeting_date = $meeting['meeting_Date'];
+            $this->meeting_date = $meeting['meeting_date'];
             $this->nfb_contact = $meeting['nfb_contact'];
             $this->nfb_phone = $meeting['nfb_phone'];
             $this->moc_contact = $meeting['m_o_c_contact'];
