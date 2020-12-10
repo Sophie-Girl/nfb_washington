@@ -22,4 +22,4 @@
             }
         }
     }
-})(jQuery, Drupal)
+})(jQuery, Drupal);
