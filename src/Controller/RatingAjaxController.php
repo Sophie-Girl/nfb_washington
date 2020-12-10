@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class  IssueEditAJaxController extends  ControllerBase
+class  RatingAjaxController extends  ControllerBase
 {
     public $meeting_id;
     public $sql_result;
@@ -65,6 +65,7 @@ class  IssueEditAJaxController extends  ControllerBase
             }
             $count++;
         }
+        \drupal::logger("nfb_washington_aja")->notice(print_r($data, true));
         $this->data = $data;
     }
     public function set_issue_1($rating, &$data)
