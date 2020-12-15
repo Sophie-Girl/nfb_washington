@@ -261,7 +261,7 @@ class individual_member_report
     public function set_issues()
     {
         $this->database = new base(); $year = date('Y');
-        $query = " select * from nfb_washington_issue where issue_year = '".$year."' order by issue_id asc;";
+        $query = " select * from nfb_washington_issues where issue_year = '".$year."' order by issue_id asc;";
         $key = 'issue_id';
         $this->database->select_query($query, $key);
         $count = 1;
@@ -401,7 +401,7 @@ class individual_member_report
     public function find_primary_issue_1()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_issue where issue_id = '".$this->get_issue_1()."';";
+        $query = "select * from nfb_washington_issues where issue_id = '".$this->get_issue_1()."';";
         $key = "issue_id";
         $this->database->select_query($query, $key);
         $primary_id = null;
@@ -426,7 +426,7 @@ class individual_member_report
     public function find_primary_issue_2()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_issue where issue_id = '".$this->get_issue_2()."';";
+        $query = "select * from nfb_washington_issues where issue_id = '".$this->get_issue_2()."';";
         $key = "issue_id";
         $this->database->select_query($query, $key);
         $primary_id = null;
@@ -450,7 +450,7 @@ class individual_member_report
     public function find_primary_issue_3()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_issue where issue_id = '".$this->get_issue_3()."';";
+        $query = "select * from nfb_washington_issues where issue_id = '".$this->get_issue_3()."';";
         $key = "issue_id";
         $this->database->select_query($query, $key);
         $primary_id = null;
