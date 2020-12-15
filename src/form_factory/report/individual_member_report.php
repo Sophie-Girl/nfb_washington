@@ -265,7 +265,8 @@ class individual_member_report
     {
         \drupal::logger("nfb_moc_weirdness")->notice("I am getting to the issue set");
         $this->database = new base(); $year = date('Y');
-        $query = " select * from nfb_washington_issues where issue_year = '".$year."' order by issue_id ASC";
+        $query = "select * from  nfb_washington_issues where issue_year = '".$year."'
+         order by issue_id ASC";
         $key = 'issue_id';
         $this->database->select_query($query, $key);
         $count = 1;
@@ -285,6 +286,7 @@ class individual_member_report
                     $this->issue_name_3 = $issue['issue_name']; break;
             }
         }
+        \drupal::logger("nfb_moc_weirdness")->notice("I am getting pass the issue set");
         $this->database = null;
     }
     public function find_committee_1()
