@@ -294,6 +294,7 @@ class individual_member_report
         $this->database->select_query($query, $key);
         $committee_id_array = null;
         $count = 1;
+        \Drupal::logger("nfb_washington_moc_report")->notice("sql_result". print_r($this->database->get_result(), true));
         foreach ($this->database->get_result() as $committee) {
             $committee = get_object_vars($committee);
             $committee_id_array[$count] = $committee['link_id'];
