@@ -179,5 +179,5 @@ nfb_washington_ind_report:
     member: "none"
   requirements:
     _access: 'TRUE'
-     _permission: 'access content'
+    _permission: 'access content'
     _role: 'administrator + nfb_washington_admin + nfb_washington_user'
