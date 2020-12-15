@@ -41,12 +41,45 @@ class individual_member_report
     public $phone_number;
     public function get_phone_number()
     {return $this->phone_number;}
+    public $contact_markup;
+    public function get_contact_markup()
+    {return $this->contact_markup;}
     public $link_id;
     public function get_link_id()
     {return $this->link_id;}
     public $note_markup;
     public function get_note_markup()
     {return $this->note_markup;}
+    public $issue1;
+    public function get_issue_1()
+    {return $this->issue1;}
+    public  $issue2;
+    public function get_issue_2()
+    {return $this->issue2;}
+    public  $issue3;
+    public function get_issue_3()
+    {return $this->issue3;}
+    public $issue_name_1;
+    public function  get_issue_name_1()
+    {return $this->issue_name_1;}
+    public $issue_name_2;
+    public function  get_issue_name_2()
+    {return $this->issue_name_2;}
+    public $issue_name_3;
+    public function  get_issue_name_3()
+    {return $this->issue_name_3;}
+    public $committee_name;
+    public function get_committee_name()
+    {return $this->committee_name;}
+    public $committee_markup;
+    public $committee_member_match;
+    public function  get_committee_member_match()
+    {
+        return $this->committee_member_match;
+    }
+    public function get_committee_markup()
+    {return $this->committee_markup;}
+
     public function set_user_permission()
     {
         $user = \Drupal::currentUser(); $permission = "false";
@@ -73,6 +106,7 @@ class individual_member_report
         $this->database->select_query($query, $key);
         $this->sql_result = $this->database->get_result();
         $this->database = null;
+        $this->set_member_values();
     }
     public function set_member_values()
     {
@@ -104,6 +138,28 @@ class individual_member_report
             $this->phone_number = $contact['phone'];
         }
         $this->civi_query = null;
+    }
+    public function build_contact_markup()
+    {
+        $this->member_query();
+        $this->get_contact_info();
+        if($this->get_district() == "Senate")
+        {$this->contact_markup = "<h2>Senator ".$this->get_first_name()." ".$this->get_last_name()."</h2>";}
+        elseif($this->get_state() == "PR")
+        {$this->contact_markup = "<h2>Resident Commissioner ".$this->get_first_name()." ".$this->get_last_name()."</h2>";}
+        elseif($this->get_state() == "DC")
+        {$this->contact_markup = "<h2>Delegate ".$this->get_first_name()." ".$this->get_last_name()."</h2>";}
+        else {$this->contact_markup = "<h2>Representative ".$this->get_first_name()." ".$this->get_last_name()."</h2>";}
+        if($this->get_district() == "Senate")
+        {
+
+        }
+    }
+    public function senate_contact_markup()
+    {
+        $this->contact_markup = $this->get_committee_markup()."
+        <p class='right-side'>State: ".$this->get_state()." <span>Rank: ".strtoupper(substr($this->get_rank(),0, 1)).substr($this->get_rank(), 1,20)."</span></p>
+        <p></p>";
     }
     public function get_notes()
     {
@@ -163,8 +219,149 @@ class individual_member_report
     }
     public function relevant_committees_markup()
     {
+        $this->committee_markup = "<h3>Committee Info</h3>";
+        $this->set_issues();
+        $this->find_committee_1();
+        $this->find_committee_2();
+        $this->find_committee_3();
+        if($this->get_committee_member_match() != "true")
+        { $this->committee_markup = $this->get_committee_markup(). "<p>They do not serve on any relevant committees</p>";}
 
     }
+    public function set_issues()
+    {
+        $this->database = new base(); $year = date('Y');
+        $query = " select * from nfb_washington_issue where issue_year = '".$year."' order by issue_id asc;";
+        $key = 'issue_id';
+        $this->database->select_query($query, $key);
+        $count = 1;
+        foreach($this->database->get_result() as $issue)
+        {
+            $issue = get_object_vars($issue);
+            switch ($count)
+            {
+                case 1:
+                    $this->issue1 = $issue['issue_id'];
+                    $this->issue_name_1 = $issue['issue_name'];break;
+                case 2:
+                    $this->issue2 = $issue['issue_id'];
+                    $this->issue_name_2 = $issue['issue_name'];break;
+                case 3:
+                    $this->issue3 = $issue['issue_id'];
+                    $this->issue_name_3 = $issue['issue_name']; break;
+            }
+        }
+        $this->database = null;
+    }
+    public function find_committee_1()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_committee_issue_link where issue_id = '" . $this->get_issue_1() . ";'";
+        $key = 'link_id';
+        $this->database->select_query($query, $key);
+        $committee_id_array = null;
+        $count = 1;
+        foreach ($this->database->get_result() as $committee) {
+            $committee = get_object_vars($committee);
+            $committee_id_array[$count] = $committee['link_id'];
+            $count++;
+        }
+
+            $count = 1;
+            $this->committee_loop($committee_id_array, $count);
+    }
+        public function find_committee_2()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_committee_issue_link where issue_id = '".$this->get_issue_2().";'";
+        $key = 'link_id';
+        $this->database->select_query($query, $key);
+        $committee_id_array = null;  $count =1;
+        foreach($this->database->get_result() as $committee)
+        {
+            $committee = get_object_vars($committee);
+            $committee_id_array[$count] = $committee['link_id'];
+            $count++;
+        }
+            $count =2;
+            $this->committee_loop($committee_id_array, $count);
+
+    }
+    public function find_committee_3()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_committee_issue_link where issue_id = '".$this->get_issue_3().";'";
+        $key = 'link_id';
+        $this->database->select_query($query, $key);
+        $committee_id_array = null;  $count =1;
+        foreach($this->database->get_result() as $committee)
+        {
+            $committee = get_object_vars($committee);
+            $committee_id_array[$count] = $committee['link_id'];
+            $count++;
+        }
+            $count =3;
+            $this->committee_loop($committee_id_array, $count);
+
+    }
+    public function committee_loop($committee_id_array, $count )
+    {
+        $match = "false";
+        foreach($committee_id_array as $committee)
+        {
+            $this->set_committee_name($committee);
+            $this->member_link_search($match, $count, $committee);
+        }
+        if($this->get_committee_member_match() != "true")
+        {$this->committee_member_match = $match;}
+    }
+    public function set_committee_name($committee)
+    {
+        $this->database = new base();
+        $query = "select *  from nfb_washington_committee where 
+    committee_id = '".$committee."';";
+        $key = 'committee_id';
+        $this->database->select_query($query, $key);
+        foreach($this->database->get_result() as $record)
+        {
+            $record = get_object_vars($record);
+            $this->committee_name = $record['committee_name'];
+        }
+    }
+    public function member_link_search(&$match, $count, $committee)
+    {
+        $this->database = new base();
+        $query = "select *  from nfb_washington_committee_mem where 
+    committee_id = '".$committee."';";
+        $key = "com_mem_id";
+        $this->database->select_query($query, $key);
+        foreach ($this->database->get_result() as $link)
+        {
+            $link = get_object_vars($link);
+            if($match == false)
+            {if($this->get_member_id() == $link['member_id'])
+            {
+                $match = "true";
+                if($count == 1)
+                {
+                    $this->committee_markup = $this->get_committee_name(). "
+<p> Serves on the ".$this->get_committee_name()." which the".$this->get_issue_name_1()." will pass through</p>";
+                }
+                elseif($count == 2)
+                {
+                    $this->committee_markup = $this->get_committee_markup(). "
+<p> Serves on the ".$this->get_committee_name()." which the".$this->get_issue_name_2()." will pass through</p>";
+                }
+                elseif($count == 3)
+                {
+                    $this->committee_markup = $this->get_committee_name()."
+<p> Serves on the ".$this->get_committee_name()." which the".$this->get_issue_name_3()." will pass through</p>";
+                }
+            }}
+
+        }
+    }
+
 
 
 
