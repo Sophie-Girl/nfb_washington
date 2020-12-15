@@ -147,7 +147,7 @@ class individual_member_report
             'id' => $this->get_civicrm_id(),
         );
         $this->civi_query->civi_query();
-        foreach($this->civi_query->get_civicrm_result() as $contact)
+        foreach($this->civi_query->get_civicrm_result()['values'] as $contact)
         {
             $this->first_name = $contact['first_name'];
             $this->last_name =  $contact['last_name'];
