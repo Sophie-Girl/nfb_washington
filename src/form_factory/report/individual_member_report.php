@@ -350,47 +350,45 @@ class individual_member_report
     }
     public function set_committee_name($committee)
     {
+        if ($committee != "" || $committee != null) {
+
         $this->database = new base();
         $query = "select *  from nfb_washington_committee where 
-    committee_id = '".$committee."';";
+    committee_id = '" . $committee . "';";
         $key = 'committee_id';
         $this->database->select_query($query, $key);
-        foreach($this->database->get_result() as $record)
-        {
+        foreach ($this->database->get_result() as $record) {
             $record = get_object_vars($record);
             $this->committee_name = $record['committee_name'];
         }
     }
+    }
     public function member_link_search(&$match, $count, $committee)
     {
+        if ($committee != "" || $committee != null) {
         $this->database = new base();
         $query = "select *  from nfb_washington_committee_mem where 
     committee_id = '".$committee."';";
         $key = "com_mem_id";
         $this->database->select_query($query, $key);
-        foreach ($this->database->get_result() as $link)
-        {
+        foreach ($this->database->get_result() as $link) {
             $link = get_object_vars($link);
-            if($match == false)
-            {if($this->get_member_id() == $link['member_id'])
-            {
-                $match = "true";
-                if($count == 1)
-                {
-                    $this->committee_markup = $this->get_committee_name(). "
-<p> Serves on the ".$this->get_committee_name()." which the".$this->get_issue_name_1()." will pass through</p>";
+            if ($match == false) {
+                if ($this->get_member_id() == $link['member_id']) {
+                    $match = "true";
+                    if ($count == 1) {
+                        $this->committee_markup = $this->get_committee_name() . "
+<p> Serves on the " . $this->get_committee_name() . " which the" . $this->get_issue_name_1() . " will pass through</p>";
+                    } elseif ($count == 2) {
+                        $this->committee_markup = $this->get_committee_markup() . "
+<p> Serves on the " . $this->get_committee_name() . " which the" . $this->get_issue_name_2() . " will pass through</p>";
+                    } elseif ($count == 3) {
+                        $this->committee_markup = $this->get_committee_name() . "
+<p> Serves on the " . $this->get_committee_name() . " which the" . $this->get_issue_name_3() . " will pass through</p>";
+                    }
                 }
-                elseif($count == 2)
-                {
-                    $this->committee_markup = $this->get_committee_markup(). "
-<p> Serves on the ".$this->get_committee_name()." which the".$this->get_issue_name_2()." will pass through</p>";
-                }
-                elseif($count == 3)
-                {
-                    $this->committee_markup = $this->get_committee_name()."
-<p> Serves on the ".$this->get_committee_name()." which the".$this->get_issue_name_3()." will pass through</p>";
-                }
-            }}
+            }
+        }
 
         }
     }
