@@ -106,8 +106,11 @@ class individual_member_report
         $this->member_id = $member;
         $this->set_user_permission();
         $this->build_contact_markup();
+        \Drupal::logger("nfb_noc_report")->notice("I made the contact info section");
         $this->set_note_markup();
+        \Drupal::logger("nfb_noc_report")->notice("I made the note section");
         $this->relevant_committees_markup();
+        \Drupal::logger("nfb_noc_report")->notice("I made the committee section");
         $this->relevant_issue_markup();
         $markup = $this->get_contact_markup().$this->get_note_markup().
             $this->get_contact_markup(). $this->get_issue_markup();
