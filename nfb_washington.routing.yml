@@ -171,3 +171,13 @@ nfb_washington_note_link:
     _access: 'TRUE'
     _permission: 'access content'
     _role: 'administrator + nfb_washington_admin'
+nfb_washington_ind_report:
+  path: 'nfb-washington/report/moc/{member}'
+  defaults:
+    _form: '\Drupal\nfb_washington\Form\IndMemberReportForm'
+    _title: 'NFB Washington: Member Of Congress Details'
+    note: "create"
+  requirements:
+    _access: 'TRUE'
+     _permission: 'access content'
+    _role: 'administrator + nfb_washington_admin + nfb_washington_user'

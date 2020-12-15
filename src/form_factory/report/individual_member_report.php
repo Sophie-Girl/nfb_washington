@@ -79,7 +79,9 @@ class individual_member_report
     }
     public function get_committee_markup()
     {return $this->committee_markup;}
-
+    public $issue_markup;
+    public function get_issue_markup()
+    {return $this->issue_markup;}
     public function set_user_permission()
     {
         $user = \Drupal::currentUser(); $permission = "false";
@@ -92,10 +94,24 @@ class individual_member_report
         }
         $this->user_permission = $permission;
     }
+    public function build_report_page(&$form, $form_state, $member)
+    {
+        $form['report_markup'] = array(
+          '#type' => "item",
+          "#markup" => $this->build_markup($member)
+        );
+    }
     public function build_markup($member)
     {
         $this->member_id = $member;
         $this->set_user_permission();
+        $this->build_contact_markup();
+        $this->set_note_markup();
+        $this->relevant_committees_markup();
+        $this->relevant_issue_markup();
+        $markup = $this->get_contact_markup().$this->get_note_markup().
+            $this->get_contact_markup(). $this->get_issue_markup();
+        return $markup;
 
     }
     public function member_query()
@@ -152,14 +168,28 @@ class individual_member_report
         else {$this->contact_markup = "<h2>Representative ".$this->get_first_name()." ".$this->get_last_name()."</h2>";}
         if($this->get_district() == "Senate")
         {
-
+            $this->senate_contact_markup();
+        }
+        else{
+             $this->house_contact_markup();
         }
     }
     public function senate_contact_markup()
     {
         $this->contact_markup = $this->get_committee_markup()."
         <p class='right-side'>State: ".$this->get_state()." <span>Rank: ".strtoupper(substr($this->get_rank(),0, 1)).substr($this->get_rank(), 1,20)."</span></p>
-        <p></p>";
+        <p class='right-side'>Phone: ".$this->get_phone_number()."<span>Propublica Legislator ID: ".$this->get_propublica_id()."</span></p>";
+    }
+    public function house_contact_markup()
+    {
+        $this->contact_markup = $this->get_committee_markup()."
+        <p class='right-side'>State: ".$this->get_state()." <span>District: ".strtoupper(substr($this->get_district(),0, 1)).substr($this->get_district(), 1,20)."</span></p>
+        <p>Phone: ".$this->get_phone_number()."</p>";
+    }
+    public function set_note_markup()
+    {
+        $this->get_notes();
+        $this->note_link_loop();
     }
     public function get_notes()
     {
@@ -361,6 +391,136 @@ class individual_member_report
 
         }
     }
+    public function relevant_issue_markup()
+    {
+        $this->set_issues();
+        $this->find_primary_issue_1();
+        $this->find_primary_issue_2();
+        $this->find_primary_issue_3();
+    }
+    public function find_primary_issue_1()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_issue where issue_id = '".$this->get_issue_1()."';";
+        $key = "issue_id";
+        $this->database->select_query($query, $key);
+        $primary_id = null;
+        foreach ($this->database->get_result() as $issue)
+        {
+            $issue = get_object_vars($issue);
+            if($issue['primary_status'] == "0")
+            {$this->issue_markup = "<h3>Past Ratings on our Issues</h3>
+<p>".$this->get_issue_name_1()."</p>
+    <p>No past info on ".$this->get_issue_name_1()."</p>";}
+            else{
+                $this->issue_markup = "<h3>Past Ratings on our Issues</h3>
+<p>".$this->get_issue_name_1()."</p>";
+                $primary_id =  $issue['primary_issue_id'];
+                $issue_id = $this->get_issue_1();
+                $this->find_all_all_repeat_uses($primary_id, $issue_id);
+            }
+
+        }
+        $this->database = null;
+    }
+    public function find_primary_issue_2()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_issue where issue_id = '".$this->get_issue_2()."';";
+        $key = "issue_id";
+        $this->database->select_query($query, $key);
+        $primary_id = null;
+        foreach ($this->database->get_result() as $issue)
+        {
+            $issue = get_object_vars($issue);
+            if($issue['primary_status'] == "0")
+            {$this->issue_markup = $this->get_issue_markup(). "
+                <p>".$this->get_issue_name_2()."</p>
+    <p>No past info on ".$this->get_issue_name_2()."</p>";}
+            else{
+                $this->issue_markup = $this->get_issue_markup()."
+                <p>".$this->get_issue_name_2()."</p>";
+                $primary_id =  $issue['primary_issue_id'];
+                $issue_id = $this->get_issue_2();
+                $this->find_all_all_repeat_uses($primary_id, $issue_id);
+            }
+        }
+        $this->database = null;
+    }
+    public function find_primary_issue_3()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_issue where issue_id = '".$this->get_issue_3()."';";
+        $key = "issue_id";
+        $this->database->select_query($query, $key);
+        $primary_id = null;
+        foreach ($this->database->get_result() as $issue)
+        {
+            $issue = get_object_vars($issue);
+            if($issue['primary_status'] == "0")
+            {$this->issue_markup = $this->get_issue_markup(). "
+                <p>".$this->get_issue_name_3()."</p>
+    <p>No past info on ".$this->get_issue_name_3()."</p>";}
+            else{
+                $this->issue_markup = $this->get_issue_markup()."
+                <p>".$this->get_issue_name_3()."</p>";
+                $primary_id =  $issue['primary_issue_id'];
+                $issue_id = $this->get_issue_3();
+                $this->find_all_all_repeat_uses($primary_id, $issue_id);
+            }
+        }
+        $this->database = null;
+    }
+    public function  find_all_all_repeat_uses($primary_id, $issue_id)
+    {
+        $this->database = new base();
+        $query = "select * from nfrb_washington_issues where primary_issue_id = '".$primary_id."' 
+        and issue_id != '".$issue_id."';";
+        $key = 'issue_id';
+        $this->database->select_query($query, $key);
+        foreach ($this->database->get_result() as $issue)
+        {
+            $issue = get_object_vars($issue);
+            $this->issue_rating_switch($issue);
+            $this->issue_markup = $this->get_issue_markup().
+                "<p>".$issue['issue_year'].": Rating".$issue['rating']."</p>
+    <p>Comment: ".$issue['comment']."</p>";
+        }
+        $this->find_original($primary_id);
+        $this->database = null;
+
+    }
+    public function issue_rating_switch(&$issue)
+    {
+        switch($issue['rating'])
+        {
+            case 'u':
+                $issue['rating'] = "Undecided"; break;
+            case 'y':
+                $issue['rating'] = "Yes"; break;
+            case 'n':
+                $issue['rating'] = "No"; break;
+            case "nd":
+                $issue['rating'] = "Not Discussed"; break;
+        }
+    }
+    public function find_original($primary_id)
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_issues where issue_id ='".$primary_id."';";
+        $key = "issue_id";
+        $this->database->select_query($query, $key);
+        foreach($this->database->get_result() as $issue)
+        {
+            $issue = get_object_vars($issue);
+            $this->issue_rating_switch($issue);
+            $this->issue_markup = $this->get_issue_markup().
+                "<p>".$issue['issue_year'].": Rating".$issue['rating']."</p>
+    <p>Comment: ".$issue['comment']."</p>";
+        }
+        $this->database = null;
+    }
+
 
 
 
