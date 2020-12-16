@@ -180,7 +180,7 @@ class markup_elements extends date_elements
         $query = "select * from nfb_washington_rating where activity_id = '".$member_array['meeting_id']."';";
         $key = 'rating_id';
         $this->database->select_query($query, $key);
-        \drupal::logger("nfb_Washington_)home_page")->notice("SQL result: ".print_r($this->database->get_result(), true));
+        \drupal::logger("nfb_Washington_home_page")->notice("SQL result: ".print_r($this->database->get_result(), true));
         foreach ($this->database->get_result() as $rating)
         {
             $rating = get_object_vars($rating);
