@@ -177,7 +177,7 @@ class markup_elements extends date_elements
     {
         $this->database = new base();
         $rating_id = null;
-        $query = "select * from nfb_washington_rating where activity_id '".$member_array['meeting_id']."';";
+        $query = "select * from nfb_washington_rating where activity_id = '".$member_array['meeting_id']."';";
         $key = 'rating_id';
         $this->database->select_query($query, $key);
         foreach ($this->database->get_result() as $rating)
@@ -209,7 +209,8 @@ class markup_elements extends date_elements
         $button_3_url = $member_array['meeting_id'];}
         if($member_array['meeting_id'] == "new") {$button_2 = "Schedule";}
         else{$button_2 = "Edit";}
-            $markup = $markup."<tr><td>".$member_array['first_name']." ".$member_array['last_name']."</td><td>".$chamber."</td><td>$rank</td><td>".$member_array['location']."</td><td>".$member_array['meeting_date']." ".$member_array['meeting_time']."</td><td>".$member_array['nfb_contact']."</td><td>".$member_array['moc_contact']."</td><td><a href='/nfb-washington/meeting/".$member_array['meeting_id']."' class='button-2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_2."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;<a a href='/nfb-washington/rating/".$button_3_url."' class='button-3' role = 'button'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_3."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td></tr>";
+        $button_1 = "View";
+            $markup = $markup."<tr><td>".$member_array['first_name']." ".$member_array['last_name']."</td><td>".$chamber."</td><td>$rank</td><td>".$member_array['location']."</td><td>".$member_array['meeting_date']." ".$member_array['meeting_time']."</td><td>".$member_array['nfb_contact']."</td><td>".$member_array['moc_contact']."</td><td><a href='/nfb-washington/report/moc/".$member_array['id']."' class='button-1' role = 'button' aria-label='View Member Details'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_1."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;<a href='/nfb-washington/meeting/".$member_array['meeting_id']."' class='button-2' role='button' aria-label = '".$button_2." Meeting'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_2."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;<a  href='/nfb-washington/rating/".$button_3_url."' class='button-3' role = 'button' aria-label='".$button_3." Rating'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_3."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td></tr>";
     }
 
 
