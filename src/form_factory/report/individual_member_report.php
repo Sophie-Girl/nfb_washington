@@ -395,13 +395,13 @@ class individual_member_report
                     $match = "true";
                     if ($count == 1) {
                         $this->committee_markup = $this->get_committee_markup() . "
-<p> Serves on the " . $this->get_committee_name() . " which the" . $this->get_issue_name_1() . " will pass through</p>";
+<p> Serves on the " . $this->get_committee_name() . " which the " . $this->get_issue_name_1() . " will pass through</p>";
                     } elseif ($count == 2) {
                         $this->committee_markup = $this->get_committee_markup() . "
-<p> Serves on the " . $this->get_committee_name() . " which the" . $this->get_issue_name_2() . " will pass through</p>";
+<p> Serves on the " . $this->get_committee_name() . " which the " . $this->get_issue_name_2() . " will pass through</p>";
                     } elseif ($count == 3) {
                         $this->committee_markup = $this->get_committee_markup() . "
-<p> Serves on the " . $this->get_committee_name() . " which the" . $this->get_issue_name_3() . " will pass through</p>";
+<p> Serves on the " . $this->get_committee_name() . " which the " . $this->get_issue_name_3() . " will pass through</p>";
                     }
                 }
             }
