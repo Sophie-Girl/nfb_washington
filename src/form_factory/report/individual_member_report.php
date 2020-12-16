@@ -348,6 +348,7 @@ class individual_member_report
     public function committee_loop($committee_id_array, $count )
     {
         $match = "false";
+        \drupal::logger("more_moc_weird_shit")->notice("array: ".print_r($committee_id_array, true));
         foreach($committee_id_array as $committee)
         {
             $this->set_committee_name($committee);
