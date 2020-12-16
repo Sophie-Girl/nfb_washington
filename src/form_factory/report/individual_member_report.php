@@ -272,6 +272,7 @@ class individual_member_report
         foreach($this->database->get_result() as $issue)
         {
             $issue = get_object_vars($issue);
+            \drupal::logger("nfb_washington_moc")->notice(print_r($issue,true));
             switch ($count)
             {
                 case 1:
