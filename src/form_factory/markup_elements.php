@@ -169,7 +169,7 @@ class markup_elements extends date_elements
         }
         if($member_array['meeting_id'] != "new")
         {
-
+            $this->find_ratings($member_array);
         }
         $this->database = null;
     }
