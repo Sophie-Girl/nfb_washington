@@ -177,13 +177,13 @@ class individual_member_report
     }
     public function senate_contact_markup()
     {
-        $this->contact_markup = $this->get_committee_markup()."
+        $this->contact_markup = $this->contact_markup_markup()."
         <p class='right-side'>State: ".$this->get_state()." <span>Rank: ".strtoupper(substr($this->get_rank(),0, 1)).substr($this->get_rank(), 1,20)."</span></p>
         <p class='right-side'>Phone: ".$this->get_phone_number()."<span>Propublica Legislator ID: ".$this->get_propublica_id()."</span></p>";
     }
     public function house_contact_markup()
     {
-        $this->contact_markup = $this->get_committee_markup()."
+        $this->contact_markup = $this->get_contact_markup()."
         <p class='right-side'>State: ".$this->get_state()." <span>District: ".strtoupper(substr($this->get_district(),0, 1)).substr($this->get_district(), 1,20)."</span></p>
         <p>Phone: ".$this->get_phone_number()."</p>";
     }
@@ -223,7 +223,7 @@ class individual_member_report
                 $note_markup = $note_markup."<p><a href='/nfb_washington/admin/notes/create' class='button-1' role ='button' aria-label='create new note'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create New&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='/nfb_washington/admin/note_link' class='button-2' role='button' aria-label='Link Existing Note'>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Link Existing&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></p>";
             }
-        }
+        }$this->note_markup = $note_markup;
 
     }
     public function note_loop(&$note_markup, $note_id, &$count)
