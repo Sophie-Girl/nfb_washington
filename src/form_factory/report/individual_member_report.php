@@ -323,7 +323,7 @@ class individual_member_report
         foreach($this->database->get_result() as $committee)
         {
             $committee = get_object_vars($committee);
-            $committee_id_array[$count] = $committee['link_id'];
+            $committee_id_array[$count] = $committee['committee_id'];
             $count++;
         }
             $count =2;
