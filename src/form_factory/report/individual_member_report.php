@@ -286,7 +286,8 @@ class individual_member_report
             }
             $count++;
         }
-        \drupal::logger("nfb_moc_weirdness")->notice("I am getting pass the issue set");
+        \drupal::logger("nfb_moc_weirdness")->notice("I am getting pass the issue set: Issue 1: ".$this->get_issue_1()."".PHP_EOL
+            ."Issue 2: ".$this->get_issue_2()." Issue 3: ".$this->get_issue_3());
         $this->database = null;
     }
     public function find_committee_1()
