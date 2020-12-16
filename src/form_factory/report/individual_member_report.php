@@ -389,6 +389,7 @@ class individual_member_report
         foreach ($this->database->get_result() as $link) {
             $link = get_object_vars($link);
             if ($match == false) {
+                \drupal::logger("nfb_washignton_moc_report")->notice("link ".print_r($link, true));
                 if ($this->get_member_id() == $link['member_id']) {
                     $match = "true";
                     if ($count == 1) {
