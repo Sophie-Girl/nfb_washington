@@ -295,7 +295,7 @@ class individual_member_report
     public function find_committee_1()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_committee_issue_link where issue_id = '" . $this->get_issue_1() . ";'";
+        $query = "select * from nfb_washington_committee_issue_link where issue_id = '" . $this->get_issue_1() . "';";
         \drupal::logger("nfb_washington_moc")->notice($query);
         $key = 'link_id';
         $this->database->select_query($query, $key);
