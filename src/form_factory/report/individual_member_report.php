@@ -108,7 +108,7 @@ class individual_member_report
         $this->build_contact_markup();
         $this->set_note_markup();
         $this->relevant_committees_markup();
-        \Drupal::logger("nfb_noc_report")->notice("I made the committee section");
+
         $this->relevant_issue_markup();
         $markup = $this->get_contact_markup().$this->get_note_markup().
             $this->get_committee_markup(). $this->get_issue_markup();
@@ -234,7 +234,6 @@ class individual_member_report
         $query = "select * from nfb_washington_note where note_id = '".$note_id."';";
         $key = "note_id";
         $this->database->select_query($query, $key);
-        \Drupal::logger("nfb_washington_note_year")->notice("array: ".print_r($this->database->get_result(), true));
         foreach($this->database->get_result() as $note)
         { $note = get_object_vars($note);
         if($note['note_year'] == $year)
@@ -273,7 +272,6 @@ class individual_member_report
         foreach($this->database->get_result() as $issue)
         {
             $issue = get_object_vars($issue);
-            \drupal::logger("nfb_washington_moc")->notice(print_r($issue,true));
             switch ($count)
             {
                 case 1:
@@ -289,20 +287,17 @@ class individual_member_report
             }
             $count++;
         }
-        \drupal::logger("nfb_moc_weirdness")->notice("I am getting pass the issue set: Issue 1: ".$this->get_issue_1()."".PHP_EOL
-            ."Issue 2: ".$this->get_issue_2()." Issue 3: ".$this->get_issue_3());
         $this->database = null;
     }
     public function find_committee_1()
     {
         $this->database = new base();
         $query = "select * from nfb_washington_committee_issue_link where issue_id = '" . $this->get_issue_1() . "';";
-        \drupal::logger("nfb_washington_moc")->notice($query);
+
         $key = 'link_id';
         $this->database->select_query($query, $key);
         $committee_id_array = null;
         $count = 1;
-        \Drupal::logger("nfb_washington_moc_report")->notice("sql_result". print_r($this->database->get_result(), true));
         foreach ($this->database->get_result() as $committee) {
             $committee = get_object_vars($committee);
             $committee_id_array[$count] = $committee['link_id'];
@@ -319,7 +314,6 @@ class individual_member_report
         $key = 'link_id';
         $this->database->select_query($query, $key);
         $committee_id_array = null;  $count =1;
-        \Drupal::logger("nfb_washington_moc_report")->notice("sql_result". print_r($this->database->get_result(), true));
         foreach($this->database->get_result() as $committee)
         {
             $committee = get_object_vars($committee);
@@ -338,7 +332,6 @@ class individual_member_report
         $key = 'link_id';
         $this->database->select_query($query, $key);
         $committee_id_array = null;  $count =1;
-        \Drupal::logger("nfb_washington_moc_report")->notice("sql_result". print_r($this->database->get_result(), true));
         foreach($this->database->get_result() as $committee)
         {
             $committee = get_object_vars($committee);
@@ -353,8 +346,6 @@ class individual_member_report
     public function committee_loop($committee_id_array, $count )
     {
         $match = "false";
-        \drupal::logger("more_moc_weird_shit")->notice("array: ".print_r($committee_id_array, true));
-
         foreach($committee_id_array as $committee)
         {
             $this->set_committee_name($committee);
@@ -366,7 +357,6 @@ class individual_member_report
     public function set_committee_name($committee)
     {
         if ($committee != "" || $committee != null) {
-            \drupal::logger("more_moc_weird_shit")->notice("committee: ".print_r($committee, true));
         $this->database = new base();
         $query = "select *  from nfb_washington_committee where 
     committee_id = '" . $committee . "';";
@@ -386,11 +376,9 @@ class individual_member_report
     committee_id = '".$committee."';";
         $key = "com_mem_id";
         $this->database->select_query($query, $key);
-        \Drupal::logger("nfb_washington_notice")->notice("sql _result committee". print_r($this->database->get_result(), true));
         foreach ($this->database->get_result() as $link) {
             $link = get_object_vars($link);
             if ($match == "false") {
-                \drupal::logger("nfb_washignton_moc_report")->notice("link ".print_r($link, true));
                 if ($this->get_member_id() == $link['member_id']) {
                     $match = "true";
                     if ($count == 1) {
