@@ -314,7 +314,7 @@ class individual_member_report
         public function find_committee_2()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_committee_issue_link where issue_id = '".$this->get_issue_2().";'";
+        $query = "select * from nfb_washington_committee_issue_link where issue_id = '".$this->get_issue_2()."';";
         $key = 'link_id';
         $this->database->select_query($query, $key);
         $committee_id_array = null;  $count =1;
@@ -331,7 +331,7 @@ class individual_member_report
     public function find_committee_3()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_committee_issue_link where issue_id = '".$this->get_issue_3().";'";
+        $query = "select * from nfb_washington_committee_issue_link where issue_id = '".$this->get_issue_3()."';";
         $key = 'link_id';
         $this->database->select_query($query, $key);
         $committee_id_array = null;  $count =1;
