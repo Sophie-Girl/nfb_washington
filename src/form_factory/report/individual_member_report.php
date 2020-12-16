@@ -106,9 +106,7 @@ class individual_member_report
         $this->member_id = $member;
         $this->set_user_permission();
         $this->build_contact_markup();
-        \Drupal::logger("nfb_noc_report")->notice("I made the contact info section");
         $this->set_note_markup();
-        \Drupal::logger("nfb_noc_report")->notice("I made the note section");
         $this->relevant_committees_markup();
         \Drupal::logger("nfb_noc_report")->notice("I made the committee section");
         $this->relevant_issue_markup();
@@ -263,13 +261,14 @@ class individual_member_report
     }
     public function set_issues()
     {
-        \drupal::logger("nfb_moc_weirdness")->notice("I am getting to the issue set");
+
         $this->database = new base();$year = date("Y");
         $query = "select * from  nfb_washington_issues where issue_year = '".$year."'
          order by issue_id ASC";
         $key = 'issue_id';
         $this->database->select_query($query, $key);
         $count = 1;
+        \drupal::logger("nfb_washington_moc")->notice(print_r($this->database->get_result(),));
         foreach($this->database->get_result() as $issue)
         {
             $issue = get_object_vars($issue);
@@ -285,6 +284,7 @@ class individual_member_report
                     $this->issue3 = $issue['issue_id'];
                     $this->issue_name_3 = $issue['issue_name']; break;
             }
+            $count++;
         }
         \drupal::logger("nfb_moc_weirdness")->notice("I am getting pass the issue set");
         $this->database = null;
