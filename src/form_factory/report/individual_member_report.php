@@ -234,7 +234,8 @@ class individual_member_report
         $query = "select * from nfb_washington_note where note_id = '".$note_id."';";
         $key = "note_id";
         $this->database->select_query($query, $key);
-        foreach($this->get_sql_result() as $note)
+        \Drupal::logger("nfb_washington_note_year")->notice("array: ".print_r($this->database->get_result(), true));
+        foreach($this->database->get_result() as $note)
         { $note = get_object_vars($note);
         if($note['note_year'] == $year)
         {
