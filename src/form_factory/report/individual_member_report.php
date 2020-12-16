@@ -111,7 +111,7 @@ class individual_member_report
         \Drupal::logger("nfb_noc_report")->notice("I made the committee section");
         $this->relevant_issue_markup();
         $markup = $this->get_contact_markup().$this->get_note_markup().
-            $this->get_contact_markup(). $this->get_issue_markup();
+            $this->get_committee_markup(). $this->get_issue_markup();
         return $markup;
 
     }

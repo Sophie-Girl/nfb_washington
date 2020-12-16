@@ -14,6 +14,7 @@ class IndMemberReportForm extends FormBase
 
     public function buildForm(array $form, FormStateInterface $form_state, $member = "none")
     {
+        $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
         $this->form_factory = new individual_member_report();
         if($member == "none")
         {$form['report_markup'] = array(
