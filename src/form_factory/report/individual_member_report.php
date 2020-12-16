@@ -276,6 +276,7 @@ class individual_member_report
             switch ($count)
             {
                 case 1:
+                    \drupal::logger("nfb_washington_moc")->notice(print_r($issue,true));
                     $this->issue1 = $issue['issue_id'];
                     $this->issue_name_1 = $issue['issue_name'];break;
                 case 2:
