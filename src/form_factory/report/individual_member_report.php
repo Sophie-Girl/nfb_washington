@@ -386,6 +386,7 @@ class individual_member_report
     committee_id = '".$committee."';";
         $key = "com_mem_id";
         $this->database->select_query($query, $key);
+        \Drupal::logger("nfb_washington_notice")->notice("sql _result committee". print_r($this->database->get_result(), true));
         foreach ($this->database->get_result() as $link) {
             $link = get_object_vars($link);
             if ($match == false) {
