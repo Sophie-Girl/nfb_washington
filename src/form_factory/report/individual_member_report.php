@@ -352,7 +352,7 @@ class individual_member_report
     }
     public function committee_loop($committee_id_array, $count )
     {
-        $match = false;
+        $match = "false";
         \drupal::logger("more_moc_weird_shit")->notice("array: ".print_r($committee_id_array, true));
 
         foreach($committee_id_array as $committee)
@@ -389,7 +389,7 @@ class individual_member_report
         \Drupal::logger("nfb_washington_notice")->notice("sql _result committee". print_r($this->database->get_result(), true));
         foreach ($this->database->get_result() as $link) {
             $link = get_object_vars($link);
-            if ($match == false) {
+            if ($match == "false") {
                 \drupal::logger("nfb_washignton_moc_report")->notice("link ".print_r($link, true));
                 if ($this->get_member_id() == $link['member_id']) {
                     $match = "true";
