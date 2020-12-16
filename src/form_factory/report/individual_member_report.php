@@ -366,7 +366,7 @@ class individual_member_report
     public function set_committee_name($committee)
     {
         if ($committee != "" || $committee != null) {
-
+            \drupal::logger("more_moc_weird_shit")->notice("committee: ".print_r($committee, true));
         $this->database = new base();
         $query = "select *  from nfb_washington_committee where 
     committee_id = '" . $committee . "';";
