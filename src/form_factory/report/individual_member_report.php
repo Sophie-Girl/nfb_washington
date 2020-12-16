@@ -268,7 +268,7 @@ class individual_member_report
         $key = 'issue_id';
         $this->database->select_query($query, $key);
         $count = 1;
-        \drupal::logger("nfb_washington_moc")->notice(print_r($this->database->get_result(),));
+        \drupal::logger("nfb_washington_moc")->notice(print_r($this->database->get_result(),true));
         foreach($this->database->get_result() as $issue)
         {
             $issue = get_object_vars($issue);
