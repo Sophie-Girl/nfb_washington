@@ -307,9 +307,9 @@ class individual_member_report
             $committee_id_array[$count] = $committee['link_id'];
             $count++;
         }
-
+        if($committee_id_array != null){
             $count = 1;
-            $this->committee_loop($committee_id_array, $count);
+            $this->committee_loop($committee_id_array, $count);}
     }
         public function find_committee_2()
     {
@@ -325,7 +325,8 @@ class individual_member_report
             $count++;
         }
             $count =2;
-            $this->committee_loop($committee_id_array, $count);
+        if($committee_id_array != null){
+            $this->committee_loop($committee_id_array, $count);}
 
     }
     public function find_committee_3()
@@ -342,13 +343,15 @@ class individual_member_report
             $count++;
         }
             $count =3;
-            $this->committee_loop($committee_id_array, $count);
+        if($committee_id_array != null){
+            $this->committee_loop($committee_id_array, $count);}
 
     }
     public function committee_loop($committee_id_array, $count )
     {
         $match = "false";
         \drupal::logger("more_moc_weird_shit")->notice("array: ".print_r($committee_id_array, true));
+
         foreach($committee_id_array as $committee)
         {
             $this->set_committee_name($committee);
