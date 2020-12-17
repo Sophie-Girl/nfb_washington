@@ -17,6 +17,7 @@ class html_to_word
             array('name' => 'Tahoma', 'size' => $this->get_font_size()));
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
         $objWriter->save($this->get_reportname().'.docx');
+
     }
 
 }
