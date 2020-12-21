@@ -13,8 +13,11 @@ class html_to_word
     {
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
         $section = $phpWord->addSection();
-        $section->addText($text,
+        $text_xplode = explode("\n", $text);
+        foreach($text_xplode as $line){
+        $section->addText($line,
             array('name' => 'Tahoma', 'size' => $this->get_font_size()));
+        $section->addTextBreak();}
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
         $objWriter->save($this->get_report_name());
         header("Content-Disposition: attachment; filename='".$this->get_report_name()."'");
