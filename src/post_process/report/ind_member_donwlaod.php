@@ -78,9 +78,9 @@ class  ind_member_donwlaod
     }
     public function house_contact_markup()
     {
-        $this->contact_markup = $this->get_contact_markup().
-        "State: ".$this->form_factory->get_state()." <span>District: ".strtoupper(substr($this->get_district(),0, 1)).substr($this->get_district(), 1,20)."</span></p>
-        <p>Phone: ".$this->get_phone_number()."<span>Propublica Legislator ID: ".$this->get_propublica_id()."</span></p>";
+        $this->contact_markup = $this->get_contact_markup().PHP_EOL.
+        "State: ".$this->form_factory->get_state()." <span>District: ".strtoupper(substr($this->form_factory->get_district(),0, 1)).substr($this->form_factory->get_district(), 1,20).PHP_EOL.
+       "Phone: ".$this->form_factory->get_phone_number()."Propublica Legislator ID: ".$this->form_factory->get_propublica_id().PHP_EOL;
     }
     public function handle_notes()
     {
