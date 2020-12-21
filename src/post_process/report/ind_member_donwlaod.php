@@ -228,7 +228,7 @@ Serves on the " . $this->form_factory->get_committee_name() . " which the " . $t
     public function find_primary_issue_1()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_issues where issue_id = '".$this->get_issue_1()."';";
+        $query = "select * from nfb_washington_issues where issue_id = '".$this->form_factory->get_issue_1()."';";
         $key = "issue_id";
         $this->database->select_query($query, $key);
         $primary_id = null;
@@ -253,7 +253,7 @@ $this->form_factory->get_issue_name_1().PHP_EOL;
     public function find_primary_issue_2()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_issues where issue_id = '".$this->get_issue_2()."';";
+        $query = "select * from nfb_washington_issues where issue_id = '".$this->form_factory->get_issue_2()."';";
         $key = "issue_id";
         $this->database->select_query($query, $key);
         $primary_id = null;

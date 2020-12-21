@@ -100,6 +100,13 @@ class individual_member_report
           '#type' => "item",
           "#markup" => $this->build_markup($member)
         );
+        $form['member_value'] = array(
+            '#type' => 'textfield',
+            '#value' => $member,
+            '#size' => '20',
+            '#attributes' => array('readonly' => 'readonly'),
+            '#title' => "Member Id"
+        );
         $form['submit'] = array(
             '#type' => 'submit',
             '#value' => "Download",
