@@ -44,7 +44,7 @@ class  ind_member_donwlaod
     public function set_php_office_values()
     {
         $this->phpoffice->font_size = 18;
-        $this->phpoffice->report_name = "individual_member_of_congress_report";
+        $this->phpoffice->report_name = "individual_member_of_congress_report.docx";
     }
     public function member_id_set(FormStateInterface $form_state){
         $this->form_factory->member_id = $form_state->getValue("member_value");

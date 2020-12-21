@@ -16,10 +16,19 @@ class html_to_word
         $section->addText($text,
             array('name' => 'Tahoma', 'size' => $this->get_font_size()));
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-        $objWriter->save($this->get_report_name().'.docx');
-        header("Content-Disposition: attachment; filename='".$this->get_report_name()."docx'");
-        echo file_get_contents($this->get_report_name()."docx");
-        unlink($this->get_report_name()."docx");
+        $objWriter->save($this->get_report_name());
+        header("Content-Disposition: attachment; filename='".$this->get_report_name()."'");
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename='.$this->get_report_name());
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($this->get_report_name()));
+        flush();
+        readfile($this->get_report_name());
+        unlink($this->get_report_name());
     }
 
 }
