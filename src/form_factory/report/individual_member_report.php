@@ -100,6 +100,10 @@ class individual_member_report
           '#type' => "item",
           "#markup" => $this->build_markup($member)
         );
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => "Download",
+        );
     }
     public function build_markup($member)
     {
