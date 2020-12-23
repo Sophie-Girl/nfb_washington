@@ -143,6 +143,7 @@ class meeting_report
     }
     Public Function build_markup(FormStateInterface $form_state)
     {
+        $this->set_state($form_state);
         if($form_state->getValue("state_select") == "")
         {$markup = "<p> Select a state to view a preview of the report</p>";}
         else{
@@ -154,7 +155,7 @@ class meeting_report
     }
     public function set_state(FormStateInterface $form_state)
     {
-        $this->state = $form_state->getValue("state-select");
+        $this->state = $form_state->getValue("state_select");
     }
     public function member_query()
     {
