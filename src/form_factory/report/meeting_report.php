@@ -68,10 +68,11 @@ class meeting_report
     {return $this->markup;}
     public function build_form(&$form, $form_state)
     {
-        $this->download_type($form, $form_state);
+
         $this->state_select($form, $form_state);
         $this->report_markup($form, $form_state);
         \Drupal::logger("nfb_washington_ajax")->notice(print_r($form['report_markup'], true));
+        $this->download_type($form, $form_state);
     }
     public function state_select(&$form, $form_state)
     {
