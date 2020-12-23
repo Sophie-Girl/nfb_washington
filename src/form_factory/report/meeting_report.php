@@ -270,7 +270,7 @@ class meeting_report
         {
             $this->set_member_values($member);
             $this->markup = $this->get_markup(). "<tr><td>".$this->get_first_name()." ".$this->get_last_name()."</td>
-<td>".$this->get_phone()."</td><td>".$this->district_text()."</td><td>".$this->get_location()."</td>".$this->get_date()." ".$this->get_time()."</td>
+<td>".$this->get_phone()."</td><td>".$this->district_text()."</td><td>".$this->get_location()."</td><td>".$this->get_date()." ".$this->get_time()."</td>
 <td>".$this->get_nfb_contact()." Phone: ".$this->get_nfb_phone()."</td><td>".$this->get_moc_attendance()."</td><td>".$this->get_moc_contact()."</td></tr>";
             \drupal::logger("nfb_washington_markup")->notice($this->get_markup());
         }
