@@ -181,6 +181,7 @@ class meeting_report
     public function set_member_values($member)
     {
         $member= get_object_vars($member);
+        \drupal::logger("nfb_washington_ajax")->notice("array".print_r($member, true));
         $this->member_id = $member['member_id'];
         $this->civi_id = $member['civicrm_contact_id'];
         $this->district = $member['district'];
@@ -245,12 +246,11 @@ class meeting_report
         $this->member_query();
         $this->markup = $this->get_markup().
         "<table>
-        <tr><th class='table-header'>Member of Congress Name:</th><th class='table-header'> Member of Congress Name phone:</th><th class='table-header'>District/Senate Rank</th><th class ='table-header'>
-        Zoom Meeting ID:</th><th class='table-header'> Meeting Time</th> <th class='table-header'>NFB Contact Information
+        <tr><th class='table-header'>Member of Congress Name:</th><th class='table-header'> Member of Congress Phone:</th><th class='table-header'>District/Senate Rank</th><th class ='table-header'>
+        Zoom Meeting ID:</th><th class='table-header'> Meeting Time:</th> <th class='table-header'>NFB Contact Information:
         </th><th class='table-header'>MOC Attendance</th><th class='table-header'> MOC Contact</th></tr>";
         foreach($this->get_member_results() as $member)
         {
-            $member = get_object_vars($member);
             $this->set_member_values($member);
             $this->markup = $this->get_markup(). "<tr><td>".$this->get_first_name()." ".$this->get_last_name()."</td>
 <td>".$this->get_phone()."</td><td>".$this->district_text()."</td><td>".$this->get_location()."</td>".$this->get_date()." ".$this->get_time()."<
