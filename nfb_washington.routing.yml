@@ -182,7 +182,7 @@ nfb_washington_ind_report:
     _permission: 'access content'
     _role: 'administrator + nfb_washington_admin + nfb_washington_user'
 nfb_washington_meeting_report:
-  path: 'nfb_washington\admin\reports\meeting'
+  path: 'nfb_washington/admin/reports/meeting'
   defaults:
     _form: '\Drupal\nfb_washington\Form\MeetReportForm'
     _title: "Washington Seminar Meeting Report"
