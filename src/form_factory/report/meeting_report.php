@@ -143,6 +143,7 @@ class meeting_report
         if($form_state->getValue("state_select") == "")
         {$markup = "<p> Select a state to view a preview of the report</p>";}
         else{
+            $this->set_state($form_state);
             $this->start_webpage_markup();
             $markup = $this->get_markup();
         }
