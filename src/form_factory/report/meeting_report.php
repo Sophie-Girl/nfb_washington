@@ -125,7 +125,9 @@ class meeting_report
             'country_id' => "1228",
             'options' => ['limit' => 60],
         );
-        $this->civicrm->civi_query($result);
+        $this->civicrm->civi_query();
+        $result = $this->civicrm->get_civicrm_result();
+        $this->civicrm = null;
     }
     public function set_state_options($result, &$options)
     {
