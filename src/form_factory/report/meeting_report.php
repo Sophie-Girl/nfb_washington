@@ -83,14 +83,14 @@ class meeting_report
             '#ajax' => array(
               'event' => 'change',
               'callback' => "::data_refresh",
-              'wrapper' => 'meeting_div'
+              'wrapper' => 'meetingdiv'
             ),
         );
     }
     public function report_markup(&$form, $form_state)
     {
         $form['report_markup'] = array(
-            '#prefix' => "<div class='meeting_div'> ",
+            '#prefix' => "<div class='meetingdiv'> ",
             '#type' => 'item',
             '#markup' => $this->build_markup($form_state),
             '#suffix' => "</div>",
@@ -218,7 +218,6 @@ class meeting_report
 
         $key = 'activity_id';
         $this->database->select_query($query, $key);
-        \Drupal::logger('nfb_Washington_markup_debug')->notice("result ".print_r($this->database->get_result(), true));
         foreach ($this->database->get_result() as $meeting)
         {
             $meeting = get_object_vars($meeting);
@@ -260,7 +259,6 @@ class meeting_report
     public function web_markup_builder()
     {
         $this->member_query();
-        \drupal::logger("nfb_washignton__markup")->notice($this->get_markup());
         $this->markup = $this->get_markup().
         "<table><tr><th class='table-header'>Member of Congress Name:</th><th class='table-header'> Member of Congress Phone:</th><th class='table-header'>District/Senate Rank</th><th class ='table-header'>
         Zoom Meeting ID:</th><th class='table-header'> Meeting Time:</th> <th class='table-header'>NFB Contact Information:
