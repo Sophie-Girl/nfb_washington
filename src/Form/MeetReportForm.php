@@ -23,7 +23,7 @@ class MeetReportForm extends FormBase
     {
         // TODO: Implement submitForm() method.
     }
-    public function data_refresh()
+    public function data_refresh(&$form, $form_state)
     {
         return $form['report_markup'];
     }
