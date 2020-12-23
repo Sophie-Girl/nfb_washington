@@ -131,6 +131,7 @@ class meeting_report
     }
     public function set_state_options($result, &$options)
     {
+        $options[''] = "Select";
         foreach($result['values'] as $state)
         {
             if($state['id'] != "1052" && $state['id'] != "1053" &&$state['id'] != "1055"
@@ -162,7 +163,7 @@ class meeting_report
         and active = 0 ;";
         $key = 'member_id';
         $this->database->select_query($query, $key);
-        $this->member_results = $this->database->select_query($query, $key);
+        $this->member_results = $this->database->get_result();
         $this->database = null;
     }
     public function start_webpage_markup()
