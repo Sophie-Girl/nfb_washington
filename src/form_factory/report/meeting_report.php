@@ -181,7 +181,6 @@ class meeting_report
     public function set_member_values($member)
     {
         $member= get_object_vars($member);
-        \drupal::logger("nfb_washington_ajax")->notice("array".print_r($member, true));
         $this->member_id = $member['member_id'];
         $this->civi_id = $member['civicrm_contact_id'];
         $this->district = $member['district'];
