@@ -90,10 +90,11 @@ class meeting_report
     }
     public function report_markup(&$form, $form_state)
     {
+        $markup = $this->build_markup($form_state);
         $form['report_markup'] = array(
             '#prefix' => "<div class='meetingdiv'> ",
             '#type' => 'item',
-            '#markup' => $this->build_markup($form_state),
+            '#markup' => $markup,
             '#suffix' => "</div>",
         );
     }
