@@ -58,3 +58,8 @@ nfb_washington.linknote:
   route_name: nfb_washington_note_link
   title: "Link to Member"
   base_route: nfb_washington.admin
+nfb_Washington.meetreport:
+  route_name: nfb_washington_meeting_report
+  title: "meeting Report"
+  base_route: nfb_washington.admin
+
