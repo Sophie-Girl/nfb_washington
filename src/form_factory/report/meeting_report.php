@@ -79,11 +79,11 @@ class meeting_report
           '#type' => 'select',
           '#title' => 'Select State',
           '#options' => $this->state_options(),
-          '#required' => false,
+            '#required' => false,
             '#ajax' => array(
-              'event' => 'change',
               'callback' => "::data_refresh",
-              'wrapper' => 'meetingdiv'
+              'wrapper' => 'meetingdiv',
+                 'event' => 'change',
             ),
         );
     }
