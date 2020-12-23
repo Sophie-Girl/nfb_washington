@@ -119,8 +119,8 @@ class meeting_report
     {
         $civi = new Civicrm(); $civi->initialize();
         $this->civicrm = new civi_query($civi);
-        $this->civicrm->mode = 'get'; $this->civicrm->entity = 'StateProvince';
-        $this->civicrm->params = array(
+        $this->civicrm->civi_mode = 'get'; $this->civicrm->civi_entity = 'StateProvince';
+        $this->civicrm->civi_params = array(
             'sequential' => 1,
             'country_id' => "1228",
             'options' => ['limit' => 60],
