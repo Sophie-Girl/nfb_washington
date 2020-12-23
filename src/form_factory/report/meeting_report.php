@@ -272,6 +272,7 @@ class meeting_report
             $this->markup = $this->get_markup(). "<tr><td>".$this->get_first_name()." ".$this->get_last_name()."</td>
 <td>".$this->get_phone()."</td><td>".$this->district_text()."</td><td>".$this->get_location()."</td>".$this->get_date()." ".$this->get_time()."<
 <td>".$this->get_nfb_contact()." Phone: ".$this->get_phone()."</td><td>".$this->get_moc_contact()."</td><td>".$this->get_moc_attendance()."</td></tr>";
+            \drupal::logger("nfb_washignton__markup")->notice($this->get_markup());
         }
         $this->markup = $this->get_markup(). "</table>";
 
