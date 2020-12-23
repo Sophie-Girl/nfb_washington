@@ -252,6 +252,7 @@ class meeting_report
 <td>".$this->get_phone()."</td><td>".$this->district_text()."</td><td>".$this->get_location()."</td>".$this->get_date()." ".$this->get_time()."<
 <td>".$this->get_nfb_contact()." Phone: ".$this->get_phone()."</td><td>".$this->get_moc_contact()."</td><td>".$this->get_moc_attendance()."</td></tr>";
         }
+        \dRupal::logger("nfb_washington_ajax_debug")->notice( $this->get_markup());
 
     }
     public function downlaod_markup()
