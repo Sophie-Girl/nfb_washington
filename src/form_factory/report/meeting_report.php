@@ -222,6 +222,7 @@ class meeting_report
         foreach ($this->database->get_result() as $meeting)
         {
             $meeting = get_object_vars($meeting);
+
             $this->location = $meeting['location'];
             $this->date = $meeting['meeting_date'];
             $this->time = $meeting['meeting_time'];
@@ -231,6 +232,19 @@ class meeting_report
             $this->moc_attendance = $meeting['moc_attendance'];
             $this->created_user = $meeting['created_user'];
             $this->modified_user = $meeting['last_modified_user'];
+        }
+        if($this->database->get_result() == [])
+        {
+
+            $this->location = "Unknown";
+            $this->date = "Unknown";
+            $this->time = "Unknown";
+            $this->nfb_contact = "Unknown";
+            $this->nfb_phone = "Unknown";
+            $this->moc_contact = "Unknown";
+            $this->moc_attendance = "Unknown";
+            $this->created_user = "Unknown";
+            $this->modified_user = "Unknown";
         }
         $this->database = null;
     }
@@ -259,7 +273,7 @@ class meeting_report
 <td>".$this->get_nfb_contact()." Phone: ".$this->get_phone()."</td><td>".$this->get_moc_contact()."</td><td>".$this->get_moc_attendance()."</td></tr>";
         }
         $this->markup = $this->get_markup(). "</table>";
-        \dRupal::logger("nfb_washington_ajax_debug")->notice( $this->get_markup());
+
 
     }
     public function downlaod_markup()

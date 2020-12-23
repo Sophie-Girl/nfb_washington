@@ -25,6 +25,7 @@ class MeetReportForm extends FormBase
     }
     public function data_refresh(&$form, $form_state)
     {
+        \Drupal::logger("nfb_washington_ajax")->noteice("I am running UwU");
         return $form['report_markup'];
     }
 }
