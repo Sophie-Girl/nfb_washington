@@ -260,11 +260,12 @@ class meeting_report
     public function web_markup_builder()
     {
         $this->member_query();
+        \drupal::logger("nfb_washignton__markup")->notice($this->get_markup());
         $this->markup = $this->get_markup().
-        "<table>
-        <tr><th class='table-header'>Member of Congress Name:</th><th class='table-header'> Member of Congress Phone:</th><th class='table-header'>District/Senate Rank</th><th class ='table-header'>
+        "<table><tr><th class='table-header'>Member of Congress Name:</th><th class='table-header'> Member of Congress Phone:</th><th class='table-header'>District/Senate Rank</th><th class ='table-header'>
         Zoom Meeting ID:</th><th class='table-header'> Meeting Time:</th> <th class='table-header'>NFB Contact Information:
         </th><th class='table-header'>MOC Attendance</th><th class='table-header'> MOC Contact</th></tr>";
+       \drupal::logger("nfb_washignton__markup")->notice($this->get_markup());
         foreach($this->get_member_results() as $member)
         {
             $this->set_member_values($member);
@@ -276,7 +277,7 @@ class meeting_report
 
 
     }
-    public function downlaod_markup()
+    public function download_markup()
     {
         $this->member_query();
         $this->markup = $this->get_markup()."-----------------------------------------------------------------------".PHP_EOL;
