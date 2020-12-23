@@ -162,6 +162,7 @@ class meeting_report
         $query = "Select * from nfb_washington_members where state = '".$this->get_state()."'
         and active = 0 ;";
         $key = 'member_id';
+        \Drupal::logger('nfb_Washington_markup_debug')->notice($query);
         $this->database->select_query($query, $key);
         $this->member_results = $this->database->get_result();
         $this->database = null;
