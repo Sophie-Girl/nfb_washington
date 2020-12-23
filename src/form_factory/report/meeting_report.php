@@ -215,9 +215,10 @@ class meeting_report
         $this->database = new base(); $year = date('Y');
         $query = "select * from nfb_washington_activities where meeting_year = '".$year."'
         and member_id = '".$this->get_member_id()."' and type  = 'meeting';";
-        \Drupal::logger('nfb_Washington_markup_debug')->notice($query);
+
         $key = 'activity_id';
         $this->database->select_query($query, $key);
+        \Drupal::logger('nfb_Washington_markup_debug')->notice("result ".print_r($this->database->get_result(), true));
         foreach ($this->database->get_result() as $meeting)
         {
             $meeting = get_object_vars($meeting);
@@ -280,7 +281,7 @@ class meeting_report
     public function district_text()
     {
         if($this->get_district() == "Senate")
-        { $district_text = strtoUpper(substr($this->get_rank(), 0,1)).substr($this->get_rank(), 1, 12). " Senator from"
+        { $district_text = strtoUpper(substr($this->get_rank(), 0,1)).substr($this->get_rank(), 1, 12). " Senator from "
         . $this->get_state();}
         elseif($this->get_state() == "DC")
         {$district_text = "Delegate for ".$this->get_state();}
