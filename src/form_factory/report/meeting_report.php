@@ -82,7 +82,7 @@ class meeting_report
           '#options' => $this->state_options(),
             '#required' => false,
             '#ajax' => array(
-              'callback' => "::data_refresh",
+              'callback' => "::report_refresh",
               'wrapper' => 'meetingdiv',
                  'event' => 'change',
             ),
