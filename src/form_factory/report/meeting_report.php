@@ -163,7 +163,7 @@ class meeting_report
         $query = "Select * from nfb_washington_members where state = '".$this->get_state()."'
         and active = 0 ;";
         $key = 'member_id';
-        \Drupal::logger('nfb_Washington_markup_debug')->notice($query);
+
         $this->database->select_query($query, $key);
         $this->member_results = $this->database->get_result();
         $this->database = null;
@@ -215,6 +215,7 @@ class meeting_report
         $this->database = new base(); $year = date('Y');
         $query = "select * from nfb_washington_activities where meeting_year = '".$year."'
         and member_id = '".$this->get_member_id()."' and type  = 'meeting';";
+        \Drupal::logger('nfb_Washington_markup_debug')->notice($query);
         $key = 'activity_id';
         $this->database->select_query($query, $key);
         foreach ($this->database->get_result() as $meeting)
