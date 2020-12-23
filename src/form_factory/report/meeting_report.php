@@ -248,6 +248,7 @@ class meeting_report
         </th><th class='table-header'>MOC Attendance</th><th class='table-header'> MOC Contact</th></tr>";
         foreach($this->get_member_results() as $member)
         {
+            $member = get_object_vars($member);
             $this->set_member_values($member);
             $this->markup = $this->get_markup(). "<tr><td>".$this->get_first_name()." ".$this->get_last_name()."</td>
 <td>".$this->get_phone()."</td><td>".$this->district_text()."</td><td>".$this->get_location()."</td>".$this->get_date()." ".$this->get_time()."<
