@@ -68,23 +68,46 @@ class meeting_report
     {return $this->markup;}
     public function build_form(&$form, $form_state)
     {
+        $this->download_type($form, $form_state);
+        $this->state_select($form, $form_state);
+        $this->report_markup($form, $form_state);
 
     }
-    public function state_select()
+    public function state_select(&$form, $form_state)
     {
         $form['state_select'] = array(
           '#type' => 'select',
           '#title' => 'Select State',
           '#options' => $this->state_options(),
           '#required' => false,
+            '#ajax' => array(
+              'event' => 'change',
+              'callback' => "::data_refresh",
+              'wrapper' => 'meeting_div'
+            ),
         );
     }
     public function report_markup(&$form, $form_state)
     {
         $form['report_markup'] = array(
+            '#prefix' => "<div class='meeting_div'> ",
             '#type' => 'item',
-            '#markup' => $this->build_markup($form_state)
+            '#markup' => $this->build_markup($form_state),
+            '#suffix' => "</div>",
         );
+    }
+    public function download_type(&$form, $form_state)
+    {
+        $form['doc_type'] = array(
+            '#type' => 'select',
+            '#title' => "Downloadable Report Version",
+            '#options' => array(
+              'state' => "Just Selected State",
+              'full' => "Full Report"
+            ),
+            '#required' => true
+        );
+
     }
     public function state_options()
     {
@@ -120,7 +143,8 @@ class meeting_report
         if($form_state->getValue("state_select") == "")
         {$markup = "<p> Select a state to view a preview of the report</p>";}
         else{
-
+            $this->start_webpage_markup();
+            $markup = $this->get_markup();
         }
         return $markup;
     }
@@ -141,6 +165,7 @@ class meeting_report
     public function start_webpage_markup()
     {
         $this->markup = "<h2>".$this->get_state()." Meeting Report</h2>";
+        $this->web_markup_builder();
     }
     public function start_full_download_markup()
     {
@@ -221,8 +246,38 @@ class meeting_report
         {
             $this->set_member_values($member);
             $this->markup = $this->get_markup(). "<tr><td>".$this->get_first_name()." ".$this->get_last_name()."</td>
-<td>".$this->get_phone()."</td><td></td></tr>";
+<td>".$this->get_phone()."</td><td>".$this->district_text()."</td><td>".$this->get_location()."</td>".$this->get_date()." ".$this->get_time()."<
+<td>".$this->get_nfb_contact()." Phone: ".$this->get_phone()."</td><td>".$this->get_moc_contact()."</td><td>".$this->get_moc_attendance()."</td></tr>";
         }
+
+    }
+    public function downlaod_markup()
+    {
+        $this->member_query();
+        $this->markup = $this->get_markup()."-----------------------------------------------------------------------".PHP_EOL;
+        foreach($this->get_member_results() as $member)
+        {
+            $this->set_member_values($member);
+            $this->markup = $this->get_markup(). $this->get_first_name()." ".$this->get_last_name().PHP_EOL.
+                $this->district_text(). " Phone number: ".$this->get_phone().PHP_EOL.
+                "Zoom Meeting ID: ".$this->get_location()." Meeting date: ".$this->get_date().PHP_EOL.
+                "Meeting Time: ". $this->get_time(). PHP_EOL.
+                "NFB Contact: ".$this->get_nfb_contact(). " Phone: ".$this->get_nfb_phone(). PHP_EOL.
+                "Attending Meeting: ".$this->get_moc_attendance(). " MOC Contact: ". $this->get_moc_contact().PHP_EOL.
+                "-----------------------------------------------------------------------".PHP_EOL;
+        }
+    }
+    public function district_text()
+    {
+        if($this->get_district() == "Senate")
+        { $district_text = strtoUpper(substr($this->get_rank(), 0,1)).substr($this->get_rank(), 1, 12). " Senator from"
+        . $this->get_state();}
+        elseif($this->get_state() == "DC")
+        {$district_text = "Delegate for ".$this->get_state();}
+        elseif($this->get_state() == "PR")
+        {$district_text = "Resident Commissioner for ".$this->get_state();}
+        else {$district_text = "Representative for ".$this->get_state()." District: ".$this->get_district();}
+        return $district_text;
     }
 
 }
