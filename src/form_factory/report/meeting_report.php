@@ -68,85 +68,23 @@ class meeting_report
     {return $this->markup;}
     public function build_form(&$form, $form_state)
     {
-
-        $this->state_select($form, $form_state);
-        $this->report_markup($form, $form_state);
-        \Drupal::logger("nfb_washington_ajax")->notice(print_r($form['report_markup'], true));
-        $this->download_type($form, $form_state);
+        $form['file_type'] = array(
+            '#type' => 'select',
+            '#title' => "Select file type for download",
+            '#options' => array(
+                'docx' => "Word Doc for braille production",
+                'csv' => "excel Spreadsheet",
+            ),
+            '#required' => true,
+        );
         $form['submit'] = array(
             '#type' => 'submit',
             '#value' => "Download",
         );
     }
-    public function state_select(&$form, $form_state)
-    {
-        $form['state_select'] = array(
-          '#type' => 'select',
-          '#title' => 'Select State',
-          '#options' => $this->state_options(),
-            '#required' => false,
-            '#ajax' => array(
-              'callback' => "::report_refresh",
-              'wrapper' => 'meetingdiv',
-                 'event' => 'change',
-            ),
-        );
-    }
-    public function report_markup(&$form, $form_state)
-    {
-        $markup = $this->build_markup($form_state);
-        $form['report_markup'] = array(
-            '#prefix' => "<div id='meetingdiv'> ",
-            '#type' => 'item',
-            '#markup' => $markup,
-            '#suffix' => "</div>",
-        );
-    }
-    public function download_type(&$form, $form_state)
-    {
-        $form['doc_type'] = array(
-            '#type' => 'select',
-            '#title' => "Downloadable Report Version",
-            '#options' => array(
-              'state' => "Just Selected State",
-              'full' => "Full Report"
-            ),
-            '#required' => true
-        );
 
-    }
-    public function state_options()
-    {
-        $this->set_up_civi($result);
-        $this->set_state_options($result, $options);
-        return  $options;
-    }
-    public function set_up_civi(&$result)
-    {
-        $civi = new Civicrm(); $civi->initialize();
-        $this->civicrm = new civi_query($civi);
-        $this->civicrm->civi_mode = 'get'; $this->civicrm->civi_entity = 'StateProvince';
-        $this->civicrm->civi_params = array(
-            'sequential' => 1,
-            'country_id' => "1228",
-            'options' => ['limit' => 60],
-        );
-        $this->civicrm->civi_query();
-        $result = $this->civicrm->get_civicrm_result();
-        $this->civicrm = null;
-    }
-    public function set_state_options($result, &$options)
-    {
-        $options[''] = "Select";
-        foreach($result['values'] as $state)
-        {
-            if($state['id'] != "1052" && $state['id'] != "1053" &&$state['id'] != "1055"
-                && $state['id'] != "1057" && $state['id'] != "1058" && $state['id'] != "1059"
-                && $state['id'] != "1060" && $state['id'] != "1061"){
-                $options[$state['abbreviation']] = $state['name'];}
-        }
-        ksort($options);
-    }
+
+
     Public Function build_markup(FormStateInterface $form_state)
     {
         $this->set_state($form_state);
@@ -312,12 +250,10 @@ class meeting_report
     public function download_markup()
     {
         $this->markup = $this->get_markup()."---------------------------------------------------------------------".PHP_EOL;
-        \drupal::logger("wft")->notice("sql: ".print_r($this->get_member_results(), true));
         foreach($this->get_member_results() as $member)
         {
             \drupal::logger("wft")->notice("member: ".print_r($member, true));
-            $this->set_member_values($member);
-            $this->markup = $this->get_markup(). $this->get_first_name()." ".$this->get_last_name().PHP_EOL.
+            $this->markup = $this->get_markup(). $member['first_name']." ".$member['last_name'].PHP_EOL.
                 $this->district_text(). " Phone number: ".$this->get_phone().PHP_EOL.
                 "Zoom Meeting ID: ".$this->get_location()." Meeting date: ".$this->get_date().PHP_EOL.
                 "Meeting Time: ". $this->get_time(). PHP_EOL.
@@ -326,17 +262,18 @@ class meeting_report
                 "---------------------------------------------------------------------".PHP_EOL;
         }
     }
-    public function district_text()
+    public function district_text($member)
     {
-        if($this->get_district() == "Senate")
-        { $district_text = strtoUpper(substr($this->get_rank(), 0,1)).substr($this->get_rank(), 1, 12). " Senator from "
-        . $this->get_state();}
-        elseif($this->get_state() == "DC")
-        {$district_text = "Delegate for ".$this->get_state();}
-        elseif($this->get_state() == "PR")
-        {$district_text = "Resident Commissioner for ".$this->get_state();}
-        else {$district_text = "Representative for ".$this->get_state()." District: ".$this->get_district();}
+        if($member['district'] == "Senate")
+        { $district_text = strtoUpper(substr($member['rank'], 0,1)).substr($member['rank'], 1, 12). " Senator from "
+        . $member['state'];}
+        elseif($member['state'] == "DC")
+        {$district_text = "Delegate for ".$member['state'];}
+        elseif($member['state'] == "PR")
+        {$district_text = "Resident Commissioner for ".$member['state'];}
+        else {$district_text = "Representative for ".$member['state']." District: ".$member['district'];}
         return $district_text;
     }
+
 
 }
