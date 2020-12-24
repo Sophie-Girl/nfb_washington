@@ -189,7 +189,7 @@ class meeting_report
     public function full_member_query()
     {
         $this->database = new base();
-        $query = "Select * from nfb_washington_members where   active = 0 order by state ASC ;";
+        $query = "Select * from nfb_washington_members where active = 0 order by state ASC ;";
         $key = 'member_id';
         $this->database->select_query($query, $key);
         $this->member_results = $this->database->get_result();
@@ -311,7 +311,6 @@ class meeting_report
     }
     public function download_markup()
     {
-        $this->member_query();
         $this->markup = $this->get_markup()."---------------------------------------------------------------------".PHP_EOL;
         \drupal::logger("wft")->notice("sql: ".print_r($this->get_member_results(), true));
         foreach($this->get_member_results() as $member)
