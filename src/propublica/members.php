@@ -73,6 +73,10 @@ class members extends query_base{
         $this->member_pp_id = $member["id"];
         $this->member_d_o_b = $member["date_of_birth"];
         $this->member_gender = $member["gender"];
+        if($member['in_office'] == 1){
+            $this->member_active = "true";
+        }
+        else {$this->member_active = "false";}
         $this->member_active = $member["in_office"];
         $this->member_state = $member['state'];
     }

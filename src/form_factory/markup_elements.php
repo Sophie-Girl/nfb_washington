@@ -98,7 +98,7 @@ class markup_elements extends date_elements
     }
     public function set_member_values($member, &$member_array)
     {
-        \Drupal::logger('nfb_fucking_washington')->notice("I clearly hate myself: ".print_r($member, true));
+
         $member_array['id'] = $member['member_id'];
         $member_array['civi_id'] = $member['civicrm_contact_id'];
         $member_array['propublica_id'] = $member['propublica_id'];

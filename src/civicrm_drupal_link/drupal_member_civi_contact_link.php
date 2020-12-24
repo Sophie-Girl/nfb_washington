@@ -178,7 +178,7 @@ class drupal_member_civi_contact_link
                 $this->propublica_query->member_gender = "male"; break;
             case "F":
                 $this->propublica_query->member_gender = "female"; break;
-            CAse "N":
+            case "N":
                 $this->propublica_query->member_gender = "non-binary";
 
         }
