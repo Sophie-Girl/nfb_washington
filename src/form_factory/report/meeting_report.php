@@ -73,6 +73,10 @@ class meeting_report
         $this->report_markup($form, $form_state);
         \Drupal::logger("nfb_washington_ajax")->notice(print_r($form['report_markup'], true));
         $this->download_type($form, $form_state);
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => "Download",
+        );
     }
     public function state_select(&$form, $form_state)
     {
@@ -155,6 +159,18 @@ class meeting_report
         }
         return $markup;
     }
+    public function backend_text_builder(FormStateInterface $form_state)
+    {
+        if($form_state->getValue("doc_type") == "full")
+        { $this->full_member_query();
+        $this->start_full_download_markup();}
+        else{
+            $this->set_state($form_state);
+            $this->member_query();
+            $this->start_state_download_markup();
+
+        }
+    }
     public function set_state(FormStateInterface $form_state)
     {
         $this->state = $form_state->getValue("state_select");
@@ -170,6 +186,15 @@ class meeting_report
         $this->member_results = $this->database->get_result();
         $this->database = null;
     }
+    public function full_member_query()
+    {
+        $this->database = new base();
+        $query = "Select * from nfb_washington_members where   active = 0 order by state ASC ;";
+        $key = 'member_id';
+        $this->database->select_query($query, $key);
+        $this->member_results = $this->database->get_result();
+        $this->database = null;
+    }
     public function start_webpage_markup()
     {
         $this->markup = "<h2>".$this->get_state()." Meeting Report</h2>";
@@ -179,6 +204,13 @@ class meeting_report
     {
         $year = date('Y');
         $this->markup = "Washington Seminar ".$year." Meetings Report".PHP_EOL;
+        $this->download_markup();
+    }
+    public function start_state_download_markup()
+    {
+        $year = date('Y');
+        $this->markup = "Washington seminar ".$year." ".$this->get_state()." Meetings Report".PHP_EOL;
+        $this->download_markup();
     }
     public function set_member_values($member)
     {
