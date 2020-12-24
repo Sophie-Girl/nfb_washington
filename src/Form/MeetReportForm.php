@@ -25,7 +25,6 @@ class MeetReportForm extends FormBase
     }
     public function report_refresh(&$form, $form_state)
     {
-        \Drupal::logger("fuck_this_shit")->notice("I fuc,king hate this project and my life");
         return $form['report_markup'];
     }
 }

@@ -92,7 +92,7 @@ class meeting_report
     {
         $markup = $this->build_markup($form_state);
         $form['report_markup'] = array(
-            '#prefix' => "<div class='meetingdiv'> ",
+            '#prefix' => "<div id='meetingdiv'> ",
             '#type' => 'item',
             '#markup' => $markup,
             '#suffix' => "</div>",
