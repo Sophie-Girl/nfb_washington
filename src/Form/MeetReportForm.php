@@ -26,7 +26,7 @@ class MeetReportForm extends FormBase
         $this->form_factory->backend_text_builder($form_state);
         $text = $this->form_factory->get_markup();
         $word  = new html_to_word();
-        $word->report_name = "washington_seminar_meeting_report";
+        $word->report_name = "washington_seminar_meeting_report.docx";
         $word->font_size = '18';
         $word->download_doc($text);
     }
