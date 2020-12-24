@@ -3,6 +3,7 @@ Namespace Drupal\nfb_washington\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\form_factory\report\meeting_report;
+use Drupal\nfb_washington\microsoft_office\html_to_word;
 
 class MeetReportForm extends FormBase
 {
@@ -21,7 +22,13 @@ class MeetReportForm extends FormBase
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        // TODO: Implement submitForm() method.
+        $this->form_factory = new meeting_report();
+        $this->form_factory->backend_text_builder($form_state);
+        $text = $this->form_factory->get_markup();
+        $word  = new html_to_word();
+        $word->report_name = "washington_seminar_meeting_report";
+        $word->font_size = '18';
+        $word->download_doc($text);
     }
     public function report_refresh(&$form, $form_state)
     {
