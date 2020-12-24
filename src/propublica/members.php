@@ -61,6 +61,7 @@ class members extends query_base{
     }
     public function parse_member($member)
     {
+        \Drupal::logger('why_am_i_finding_this_now')->notice(print_r($member, true));
         $this->member_first_name = $member['first_name'];
         $this->member_middle_name = $member["middle_name"];
         $this->member_last_name = $member["last_name"];
