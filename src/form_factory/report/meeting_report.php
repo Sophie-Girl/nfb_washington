@@ -312,9 +312,11 @@ class meeting_report
     public function download_markup()
     {
         $this->member_query();
-        $this->markup = $this->get_markup()."-----------------------------------------------------------------------".PHP_EOL;
+        $this->markup = $this->get_markup()."---------------------------------------------------------------------".PHP_EOL;
+        \drupal::logger("wft")->notice("sql: ".print_r($this->get_member_results(), true));
         foreach($this->get_member_results() as $member)
         {
+            \drupal::logger("wft")->notice("member: ".print_r($member, true));
             $this->set_member_values($member);
             $this->markup = $this->get_markup(). $this->get_first_name()." ".$this->get_last_name().PHP_EOL.
                 $this->district_text(). " Phone number: ".$this->get_phone().PHP_EOL.
@@ -322,7 +324,7 @@ class meeting_report
                 "Meeting Time: ". $this->get_time(). PHP_EOL.
                 "NFB Contact: ".$this->get_nfb_contact(). " Phone: ".$this->get_nfb_phone(). PHP_EOL.
                 "Attending Meeting: ".$this->get_moc_attendance(). " MOC Contact: ". $this->get_moc_contact().PHP_EOL.
-                "-----------------------------------------------------------------------".PHP_EOL;
+                "---------------------------------------------------------------------".PHP_EOL;
         }
     }
     public function district_text()
