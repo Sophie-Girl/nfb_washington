@@ -187,7 +187,7 @@ class meeting_report
             $member_array[$member_array]['meeting_date'.$this->get_member_id()]['moc_contact'] = $meeting['m_o_c_contact'];
             $attendance = $meeting['moc_attendance'];
             $this->convert_attendance($attendance);
-            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['moc_attendance'] = $attendance
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['moc_attendance'] = $attendance;
             $member_array[$member_array]['meeting_date'.$this->get_member_id()]['created_user'] = $meeting['created_user'];
             $member_array[$member_array]['meeting_date'.$this->get_member_id()]['modified_user'] = $meeting['last_modified_user'];
             $member_array[$member_array]['meeting_date'.$this->get_member_id()]['first_name'] = $this->get_first_name();
