@@ -1,7 +1,6 @@
 <?php
 namespace  Drupal\nfb_washington\form_factory\report;
 use Drupal\civicrm\Civicrm;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\civicrm\civi_query;
 use Drupal\nfb_washington\database\base;
 
@@ -84,36 +83,10 @@ class meeting_report
     }
 
 
-
-    Public Function build_markup(FormStateInterface $form_state)
-    {
-        $this->set_state($form_state);
-        if($form_state->getValue("state_select") == "")
-        {$markup = "<p> Select a state to view a preview of the report</p>";}
-        else{
-            $this->set_state($form_state);
-            $this->start_webpage_markup();
-            $markup = $this->get_markup();
-        }
-        return $markup;
+    public function docx_backned(){
+        $this->full_member_query();
+        $this->start_full_download_markup();
     }
-    public function backend_text_builder(FormStateInterface $form_state)
-    {
-        if($form_state->getValue("doc_type") == "full")
-        { $this->full_member_query();
-        $this->start_full_download_markup();}
-        else{
-            $this->set_state($form_state);
-            $this->member_query();
-            $this->start_state_download_markup();
-
-        }
-    }
-    public function set_state(FormStateInterface $form_state)
-    {
-        $this->state = $form_state->getValue("state_select");
-    }
-
     public function full_member_query()
     {
         $this->database = new base();
@@ -122,6 +95,10 @@ class meeting_report
         $this->database->select_query($query, $key);
         $this->member_results = $this->database->get_result();
         $this->database = null;
+
+    }
+    public function handle_meeting_report()
+    {
         $member_array = [];
         foreach( $this->get_member_results() as $member)
         {
@@ -129,7 +106,6 @@ class meeting_report
             $this->meeting_query($member_array);
         }
         $this->member_results = $member_array;
-        $this->start_full_download_markup();
     }
 
     public function start_full_download_markup()
