@@ -113,17 +113,7 @@ class meeting_report
     {
         $this->state = $form_state->getValue("state_select");
     }
-    public function member_query()
-    {
-        $this->database = new base();
-        $query = "Select * from nfb_washington_members where state = '".$this->get_state()."'
-        and active = 0 ;";
-        $key = 'member_id';
 
-        $this->database->select_query($query, $key);
-        $this->member_results = $this->database->get_result();
-        $this->database = null;
-    }
     public function full_member_query()
     {
         $this->database = new base();
@@ -132,22 +122,20 @@ class meeting_report
         $this->database->select_query($query, $key);
         $this->member_results = $this->database->get_result();
         $this->database = null;
+        $member_array = [];
+        foreach( $this->get_member_results() as $member)
+        {
+            $this->set_member_values($member);
+            $this->meeting_query($member_array);
+        }
+        $this->member_results = $member_array;
+        $this->start_full_download_markup();
     }
-    public function start_webpage_markup()
-    {
-        $this->markup = "<h2>".$this->get_state()." Meeting Report</h2>";
-        $this->web_markup_builder();
-    }
+
     public function start_full_download_markup()
     {
         $year = date('Y');
         $this->markup = "Washington Seminar ".$year." Meetings Report".PHP_EOL;
-        $this->download_markup();
-    }
-    public function start_state_download_markup()
-    {
-        $year = date('Y');
-        $this->markup = "Washington seminar ".$year." ".$this->get_state()." Meetings Report".PHP_EOL;
         $this->download_markup();
     }
     public function set_member_values($member)
@@ -159,8 +147,6 @@ class meeting_report
         $this->state = $member['state'];
         $this->rank = $member['rank'];
         $this->civi_query_stuff();
-        $this->meeting_query();
-        $this->convert_attendance();
     }
     public function civi_query_stuff()
     {
@@ -181,7 +167,7 @@ class meeting_report
         }
         $this->civicrm = null;
     }
-    public function meeting_query()
+    public function meeting_query(&$member_array)
     {
         $this->database = new base(); $year = date('Y');
         $query = "select * from nfb_washington_activities where meeting_year = '".$year."'
@@ -193,60 +179,56 @@ class meeting_report
         {
             $meeting = get_object_vars($meeting);
 
-            $this->location = $meeting['location'];
-            $this->date = $meeting['meeting_date'];
-            $this->time = $meeting['meeting_time'];
-            $this->nfb_contact = $meeting['nfb_contact'];
-            $this->nfb_phone = $meeting['nfb_phone'];
-            $this->moc_contact = $meeting['m_o_c_contact'];
-            $this->moc_attendance = $meeting['moc_attendance'];
-            $this->created_user = $meeting['created_user'];
-            $this->modified_user = $meeting['last_modified_user'];
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['location']= $meeting['location'];
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['date'] = $meeting['meeting_date'];
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['time'] = $meeting['meeting_time'];
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['nfb_contact'] = $meeting['nfb_contact'];
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['nfb_phone'] = $meeting['nfb_phone'];
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['moc_contact'] = $meeting['m_o_c_contact'];
+            $attendance = $meeting['moc_attendance'];
+            $this->convert_attendance($attendance);
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['moc_attendance'] = $attendance
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['created_user'] = $meeting['created_user'];
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['modified_user'] = $meeting['last_modified_user'];
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['first_name'] = $this->get_first_name();
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['last_name'] = $this->get_last_name();
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['phone'] = $this->get_phone();
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['rank'] = $this->get_rank();
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['district'] = $this->get_rank();
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['state'] = $this->get_state();
+
         }
         if($this->database->get_result() == [])
         {
 
-            $this->location = "Unknown";
-            $this->date = "Unknown";
-            $this->time = "Unknown";
-            $this->nfb_contact = "Unknown";
-            $this->nfb_phone = "Unknown";
-            $this->moc_contact = "Unknown";
-            $this->moc_attendance = "Unknown";
-            $this->created_user = "Unknown";
-            $this->modified_user = "Unknown";
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['location']= "Unknown";
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['date'] = "Unknown";
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['time'] = "Unknown";
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['nfb_contact'] = "Unknown";
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['nfb_phone'] = "Unknown";
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['moc_contact'] = "Unknown";
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['moc_attendance'] = "Unknown";
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['created_user'] = "Unknown";
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['modified_user'] = "Unknown";
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['first_name'] = "Unknown";
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['last_name'] = "Unknown";
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['phone'] = $this->get_phone();
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['rank'] = $this->get_rank();
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['district'] = $this->get_rank();
+            $member_array[$member_array]['meeting_date'.$this->get_member_id()]['state'] = $this->get_state();
         }
         $this->database = null;
     }
-    public function convert_attendance()
+    public function convert_attendance(&$attendance)
     {
-        if($this->get_moc_attendance() == "0")
+        if($attendance == "0")
         {
-            $this->moc_attendance = "No";
+            $attendance = "No";
         }
         else
-        {$this->moc_attendance = "Yes";}
+        {$attendance = "Yes";}
     }
-    public function web_markup_builder()
-    {
-        $this->member_query();
-        $this->markup = $this->get_markup().
-        "<table><tr><th class='table-header'>Member of Congress Name:</th><th class='table-header'> Member of Congress Phone:</th><th class='table-header'>District/Senate Rank</th><th class ='table-header'>
-        Zoom Meeting ID:</th><th class='table-header'> Meeting Time:</th> <th class='table-header'>NFB Contact Information:
-        </th><th class='table-header'>MOC Attendance</th><th class='table-header'> MOC Contact</th></tr>";
-       \drupal::logger("nfb_washignton__markup")->notice($this->get_markup());
-        foreach($this->get_member_results() as $member)
-        {
-            $this->set_member_values($member);
-            $this->markup = $this->get_markup(). "<tr><td>".$this->get_first_name()." ".$this->get_last_name()."</td>
-<td>".$this->get_phone()."</td><td>".$this->district_text()."</td><td>".$this->get_location()."</td><td>".$this->get_date()." ".$this->get_time()."</td>
-<td>".$this->get_nfb_contact()." Phone: ".$this->get_nfb_phone()."</td><td>".$this->get_moc_attendance()."</td><td>".$this->get_moc_contact()."</td></tr>";
-            \drupal::logger("nfb_washington_markup")->notice($this->get_markup());
-        }
-        $this->markup = $this->get_markup(). "</table>";
 
-
-    }
     public function download_markup()
     {
         $this->markup = $this->get_markup()."---------------------------------------------------------------------".PHP_EOL;
@@ -254,11 +236,11 @@ class meeting_report
         {
             \drupal::logger("wft")->notice("member: ".print_r($member, true));
             $this->markup = $this->get_markup(). $member['first_name']." ".$member['last_name'].PHP_EOL.
-                $this->district_text(). " Phone number: ".$this->get_phone().PHP_EOL.
-                "Zoom Meeting ID: ".$this->get_location()." Meeting date: ".$this->get_date().PHP_EOL.
-                "Meeting Time: ". $this->get_time(). PHP_EOL.
-                "NFB Contact: ".$this->get_nfb_contact(). " Phone: ".$this->get_nfb_phone(). PHP_EOL.
-                "Attending Meeting: ".$this->get_moc_attendance(). " MOC Contact: ". $this->get_moc_contact().PHP_EOL.
+                $this->district_text($member). " Phone number: ".$member['phone'].PHP_EOL.
+                "Zoom Meeting ID: ".$member['location']." Meeting date: ".$member['date'].PHP_EOL.
+                "Meeting Time: ". $member['time']. PHP_EOL.
+                "NFB Contact: ".$member['nfb_contact']. " Phone: ".$member['nfb_phone']. PHP_EOL.
+                "Attending Meeting: ".$member['moc_attendance']. " MOC Contact: ". $member['moc_contact'].PHP_EOL.
                 "---------------------------------------------------------------------".PHP_EOL;
         }
     }
