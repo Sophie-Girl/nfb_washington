@@ -81,8 +81,9 @@ class meeting_report
             '#value' => "Download",
         );
     }
+    public function new_markup_builder(){
 
-
+    }
     public function docx_backned(){
         $this->full_member_query();
         $this->start_full_download_markup();
@@ -207,31 +208,77 @@ class meeting_report
 
     public function download_markup()
     {
-        $this->markup = $this->get_markup()."---------------------------------------------------------------------".PHP_EOL;
-        foreach($this->get_member_results() as $member)
-        {
-            \drupal::logger("wft")->notice("member: ".print_r($member, true));
-            $this->markup = $this->get_markup(). $member['first_name']." ".$member['last_name'].PHP_EOL.
-                $this->district_text($member). " Phone number: ".$member['phone'].PHP_EOL.
-                "Zoom Meeting ID: ".$member['location']." Meeting date: ".$member['date'].PHP_EOL.
-                "Meeting Time: ". $member['time']. PHP_EOL.
-                "NFB Contact: ".$member['nfb_contact']. " Phone: ".$member['nfb_phone']. PHP_EOL.
-                "Attending Meeting: ".$member['moc_attendance']. " MOC Contact: ". $member['moc_contact'].PHP_EOL.
+
+
+            $this->markup = $this->get_markup(). $this->get_first_name()." ".$this.PHP_EOL.
+                $this->district_text(). " Phone number: ".$this->get_phone().PHP_EOL.
+                "Zoom Meeting ID: ".$this->get_location()." Meeting date: ".$this->get_date().PHP_EOL.
+                "Meeting Time: ". $this->get_time(). PHP_EOL.
+                "NFB Contact: ".$this->get_nfb_contact(). " Phone: ".$this->get_nfb_phone(). PHP_EOL.
+                "Attending Meeting: ".$this->get_moc_attendance(). " MOC Contact: ". $this->get_moc_contact().PHP_EOL.
                 "---------------------------------------------------------------------".PHP_EOL;
-        }
+
     }
-    public function district_text($member)
+    public function district_text()
     {
-        if($member['district'] == "Senate")
-        { $district_text = strtoUpper(substr($member['rank'], 0,1)).substr($member['rank'], 1, 12). " Senator from "
-        . $member['state'];}
-        elseif($member['state'] == "DC")
-        {$district_text = "Delegate for ".$member['state'];}
-        elseif($member['state'] == "PR")
-        {$district_text = "Resident Commissioner for ".$member['state'];}
-        else {$district_text = "Representative for ".$member['state']." District: ".$member['district'];}
+        if($this->get_district() == "Senate")
+        { $district_text = strtoUpper(substr($this->get_rank(), 0,1)).substr($this->get_rank(), 1, 12). " Senator from "
+        . $this->get_state();}
+        elseif($this->get_state() == "DC")
+        {$district_text = "Delegate for ".$this->get_state();}
+        elseif($this->get_state() == "PR")
+        {$district_text = "Resident Commissioner for ".$this->get_state();}
+        else {$district_text = "Representative for ".$this->get_state()." District: ".$this->get_district();}
         return $district_text;
     }
+    public function meeting_first_query()
+    {
+        $this->database = new base(); $year = date("Y");
+        $query = "select * from nfb_washington_activities where meeting_year = '".$year."' 
+        order by meeting_date ASC;";
+        $key = 'activity_id';
+        $this->database->select_query($query, $key);
+        $this->member_results = $this->database->get_result();
+        $this->database = null;
+    }
+    public function process_meeting_query()
+    {
+
+        foreach($this->get_member_results() as $meeting)
+        {
+            $meeting = get_object_vars($meeting);
+            if($meeting == array()) {
+                $this->member_id = $meeting['member_id'];
+                $this->location = $meeting['location'];
+                $this->date = $meeting['meeting_date'];
+                $this->time = $meeting['meeting_time'];
+                $this->nfb_contact = $meeting['nfb_contact'];
+                $this->nfb_phone = $meeting['nfb_phone'];
+                $this->moc_contact = $meeting['m_o_c_contact'];
+                $this->moc_attendance = $meeting['moc_attendance'];
+                $this->member_query_meeting_report();
+            }
+
+        }
+    }
+    public function member_query_meeting_report()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_members where member_id = '".$this->get_member_id()."';";
+        $key = "member_id";
+        $this->database->select_query($query, $key);
+        foreach ($this->database->get_result() as $member)
+        {
+            $member = get_object_vars($member);
+            $this->state = $member['state'];
+            $this->rank = $member['rank'];
+            $this->district = $member['district'];
+            $this->civi_id = $member['civicrm_contact_id'];
+            $this->civi_query_stuff();
+            $this->download_markup();
+        }
+    }
+
 
 
 }
