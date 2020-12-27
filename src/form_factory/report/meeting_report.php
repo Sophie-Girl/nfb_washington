@@ -205,12 +205,18 @@ class meeting_report
         else
         {$attendance = "Yes";}
     }
-
+    public function begin_new_download_markup()
+    {
+        $year = date("Y");
+        $this->markup = $year." Washington Seminar Meetings Report".PHP_EOL.
+        "------------------------------------------------------------------".PHP_EOL;
+        $this->meeting_first_query();
+        $this->process_meeting_query();
+    }
     public function download_markup()
     {
 
-
-            $this->markup = $this->get_markup(). $this->get_first_name()." ".$this.PHP_EOL.
+            $this->markup = $this->get_markup(). $this->get_first_name()." ".$this->get_last_name().PHP_EOL.
                 $this->district_text(). " Phone number: ".$this->get_phone().PHP_EOL.
                 "Zoom Meeting ID: ".$this->get_location()." Meeting date: ".$this->get_date().PHP_EOL.
                 "Meeting Time: ". $this->get_time(). PHP_EOL.
@@ -240,6 +246,7 @@ class meeting_report
         $this->database->select_query($query, $key);
         $this->member_results = $this->database->get_result();
         $this->database = null;
+
     }
     public function process_meeting_query()
     {
