@@ -243,7 +243,7 @@ class meeting_report
     }
     public function process_meeting_query()
     {
-
+        \Drupal::logger("nfb_washington_downlaod_debug")->notice(print_r($this->get_member_results(), true));
         foreach($this->get_member_results() as $meeting)
         {
             $meeting = get_object_vars($meeting);
