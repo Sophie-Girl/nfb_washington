@@ -23,11 +23,11 @@ class MeetReportForm extends FormBase
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         $this->form_factory = new meeting_report();
-        $this->form_factory->backend_text_builder($form_state);
+        $this->form_factory->begin_new_download_markup();
         $text = $this->form_factory->get_markup();
         $word  = new html_to_word();
         $word->report_name = "washington_seminar_meeting_report.docx";
-        $word->font_size = '18';
+        $word->font_size = '12';
         $word->download_doc($text);
     }
     public function report_refresh(&$form, $form_state)

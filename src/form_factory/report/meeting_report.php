@@ -68,22 +68,15 @@ class meeting_report
     public function build_form(&$form, $form_state)
     {
         $form['file_type'] = array(
-            '#type' => 'select',
-            '#title' => "Select file type for download",
-            '#options' => array(
-                'docx' => "Word Doc for braille production",
-                'csv' => "excel Spreadsheet",
-            ),
-            '#required' => true,
+            '#type' => 'item',
+            '#markup' => "<p>This report download will show  all meetings in order of the day in which they will happen in a word document</p>",
         );
         $form['submit'] = array(
             '#type' => 'submit',
             '#value' => "Download",
         );
     }
-    public function new_markup_builder(){
 
-    }
     public function docx_backned(){
         $this->full_member_query();
         $this->start_full_download_markup();
