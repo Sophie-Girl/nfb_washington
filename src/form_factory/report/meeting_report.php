@@ -247,7 +247,6 @@ class meeting_report
         foreach($this->get_member_results() as $meeting)
         {
             $meeting = get_object_vars($meeting);
-            if($meeting == array()) {
                 $this->member_id = $meeting['member_id'];
                 $this->location = $meeting['location'];
                 $this->date = $meeting['meeting_date'];
@@ -257,7 +256,7 @@ class meeting_report
                 $this->moc_contact = $meeting['m_o_c_contact'];
                 $this->moc_attendance = $meeting['moc_attendance'];
                 $this->member_query_meeting_report();
-            }
+
 
         }
     }
