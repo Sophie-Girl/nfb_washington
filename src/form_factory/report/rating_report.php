@@ -86,6 +86,7 @@ class rating_report extends meeting_report
             $this->rating_issue_3_query();
             $this->build_array($ratings_array);
         }
+        $this->member_results = $ratings_array;
         if($this->get_file_type() == "csv")
         {
             // todo csv function
@@ -200,5 +201,23 @@ class rating_report extends meeting_report
         $ratings_array[$array_key][$this->get_issue_3_name()."_rating"] = $this->get_issue_3_rating();
         $ratings_array[$array_key][$this->get_issue_3_name()."_comment"] = $this->get_issue_3_comment();
     }
+    public function docx_function()
+    { $year = date("Y");
+        $this->markup = $year." Washington Seminar Ratings Report".PHP_EOL.
+            "-------------------------------------------------------".PHP_EOL;
+        foreach ($this->get_member_results() as $member)
+        {
+            $this->markup = $this->get_markup(). $member['last_name']." ".$member['first_name'].PHP_EOL.
+                $member['district_text']. "Phone: ".$this->get_phone().PHP_EOL.
+                $this->get_issue_1_name().PHP_EOL.
+                "Rating: ".$member[$this->get_issue_1_name()."_rating"]. "Comments: ".$member[$this->get_issue_1_name()."_comment"].PHP_EOL.
+                $this->get_issue_2_name().PHP_EOL.
+                "Rating: ".$member[$this->get_issue_2_name()."_rating"]. "Comments: ".$member[$this->get_issue_2_name()."_comment"].PHP_EOL.
+                $this->get_issue_3_name().PHP_EOL.
+                "Rating: ".$member[$this->get_issue_3_name()."_rating"]. "Comments: ".$member[$this->get_issue_3_name()."_comment"].PHP_EOL.
+                "---------------------------------------------------".PHP_EOL;
+        }
+    }
+
 
 }
