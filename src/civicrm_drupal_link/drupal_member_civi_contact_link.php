@@ -44,7 +44,9 @@ class drupal_member_civi_contact_link
         $this->propublica_query->entity = "members";
         $this->propublica_query->search_criteria_1 = "house";
         $this->propublica_query->congress_number = (int)$this->propublica_query->get_congress_number() - 1;
+        \DRupal::logger('okay_checking_another_thing')->notice(print_r($this->propublica_query->get_propublica_result(), true));
         $this->propublica_query->leaving_congress_query();
+
         $this->removal_run_through();
         $this->propublica_query->search_criteria_1 = "senate";
         $this->propublica_query->leaving_congress_query();
