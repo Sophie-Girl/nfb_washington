@@ -58,7 +58,6 @@ class members extends query_base{
     }
     public function   member_query()
     {
-        \Drupal::logger("nfb_washington_new_congress")->notice("congress_number: ".$this->get_congress_number());
         $api_url = "https://api.propublica.org/congress/v1/".$this->get_congress_number()."/".$this->get_search_criteria_1()."/".$this->get_entity().".json";
         $this->api_url = $api_url;
         $this->set_curl();
@@ -70,10 +69,6 @@ class members extends query_base{
         $this->member_first_name = $member['first_name'];
         $this->member_middle_name = $member["middle_name"];
         $this->member_last_name = $member["last_name"];
-        if($this->get_member_last_name() == "Bush")
-        {
-            \Drupal::logger('why_am_i_finding_this_now')->notice(print_r($member, true));
-        }
         $this->member_phone_number = $member["phone"];
         $this->member_office_address = $member['office'];
         if($this->get_search_criteria_1() == "house")
