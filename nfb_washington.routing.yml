@@ -190,3 +190,12 @@ nfb_washington_meeting_report:
     _access: 'TRUE'
     _permission: 'access content'
     _role: 'administrator + nfb_washington_admin + nfb_washington_user'
+nfb_washington_rating_report:
+  path: 'nfb_washington/admin/reports/rating'
+  defaults:
+    _form: '\Drupal\nfb_washington\Form\RatingReportForm'
+    _title: "Washington Seminar Rating Report"
+  requirements:
+    _access: 'TRUE'
+    _permission: 'access content'
+    _role: 'administrator + nfb_washington_admin + nfb_washington_user'
