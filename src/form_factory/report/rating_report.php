@@ -2,6 +2,7 @@
 namespace  Drupal\nfb_washington\form_factory\report;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\database\base;
+use Drupal\nfb_washington\microsoft_office\html_to_word;
 
 class rating_report extends meeting_report
 {
@@ -20,6 +21,7 @@ class rating_report extends meeting_report
     public $issue_2_name;
     public $issue_3_name;
     public$file_type;
+    public $phpoffice;
     public function get_rating_id()
     {return $this->rating_id;}
     public function get_issue_1_rating()
@@ -88,11 +90,16 @@ class rating_report extends meeting_report
         }
         $this->member_results = $ratings_array;
         if($this->get_file_type() == "csv")
-        {
-            // todo csv function
+        {$this->csv_functions();
         }
         else {
-            // todo word markup download
+            $this->docx_function();
+            $text = $this->get_markup();
+            $this->phpoffice = new html_to_word();
+            $this->phpoffice->font_size = '12'; $year = date('Y');
+            $this->phpoffice->report_name = $year."_washington_seminar_rating_Report.docx";
+            $this->phpoffice->download_doc($text);
+
         }
     }
     public function rating_issue_1_query()
@@ -218,6 +225,74 @@ class rating_report extends meeting_report
                 "---------------------------------------------------".PHP_EOL;
         }
     }
+    public function csv_functions()
+    {
+        $data = $this->get_member_results(); $year = date("Y");
+        $filename = $year."_washington_seminar_rating_report.csv";
+        $this->set_csv_header($data);
+        $this->set_headers($filename);
+        $this->check_file_size($data, $filename, $file, $size);
+        $this->file_download($file, $size, $filename);
+
+    }
+    public function set_headers($fileName)
+    {
+        ob_clean();
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+    }
+    public function check_file_size($data, $fileName, &$file, &$size)
+    {
+        if (isset($data['0'])) {
+            \Drupal::logger('nfb_bell_download')->notice("I am creating the csv");
+            $fp = fopen($fileName, 'w');
+            fputcsv($fp, array_keys($data['0']));
+            foreach ($data AS $values) {
+                fputcsv($fp, $values);}
+            fclose($fp);}
+        ob_flush();
+        $file = file_get_contents($fileName);
+        $size = @filesize($fileName);
+    }
+    public function file_download($file, $size, $filename)
+    {
+        if (strlen($file) > 0) {
+            ob_start();  // buffer all but headers
+            ob_end_clean();  // headers get sent, erase all buffering and enable output
+            header("Content-type: application/csv; charset=UTF-8");
+            header("Content-length: " . $size);
+            header('Pragma: public');
+            header("Content-Description: PHP Generated Data");
+            header('Content-Disposition: attachment; filename="' . $filename . '"');
+            echo $file;
+            unlink($filename);
+            exit;}
+    }
+    public function download_report($fileName, $data)
+    {
+        $this->set_headers($fileName);
+        $this->check_file_size($data, $fileName, $file, $size);
+        $this->file_download($file, $size, $fileName);
+    }
+    public function  set_csv_header(&$data)
+    {
+        $data['0']['first_name'] = "First_Name";
+        $data['0']['last_name'] = "Last_Name";
+        $data['0']['phone'] = "Office_Phone";
+        $data['0']['district_text'] = "District/Senate_Rank";
+        $data['0'][$this->get_issue_1_name()."_rating"] = $this->get_issue_1_name()."_rating";
+        $data['0'][$this->get_issue_1_name()."_comment"] = $this->get_issue_1_name()."_comments";
+        $data['0'][$this->get_issue_2_name()."_rating"] = $this->get_issue_2_name()."rating";
+        $data['0'][$this->get_issue_2_name()."_comment"] = $this->get_issue_2_name()."_comments";
+        $data['0'][$this->get_issue_3_name()."_rating"] = $this->get_issue_3_name()."_rating";
+        $data['0'][$this->get_issue_3_name()."_comment"] = $this->get_issue_3_name()."_comments";
+    }
+
+
 
 
 }
