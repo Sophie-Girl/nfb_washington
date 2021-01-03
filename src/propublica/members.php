@@ -46,11 +46,14 @@ class members extends query_base{
         $key = 'config_id';
         $this->database = new base();
         $this->database->select_query($query, $key);
+        $congress_number = null;
         foreach($this->database->get_result() as $cong_numb)
         {
+            if($congress_number == null){
             $cong_numb = get_object_vars($cong_numb);
-            $this->congress_number = $cong_numb['value'];
+             $congress_number = $cong_numb['value'];}
         }
+        $this->congress_number = $congress_number;
     }
     public function   member_query()
     {
