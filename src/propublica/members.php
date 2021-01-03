@@ -82,6 +82,7 @@ class members extends query_base{
     }
     public function leaving_congress_query()
     {
+        \Drupal::logger("nfb_washington_new_congress")->notice("congress_number: ".$this->get_congress_number());
         $this->api_url = "https://api.propublica.org/congress/v1/".$this->get_congress_number()."/".$this->get_search_criteria_1()."/".$this->get_entity()."/leaving.json";
         $this->set_curl();
         $this->curl_execute_set_propublica_result();
