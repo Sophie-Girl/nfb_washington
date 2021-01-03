@@ -19,9 +19,10 @@ class drupal_member_civi_contact_link
     }
     public function new_congress_run_through()
     {
-        $this->set_up_old_congress_maintenance_query();
+
         \Drupal::logger("nfb_Washington_debug")->notice("I am going to get to the import");
         $this->set_up_general_member_process();
+        $this->set_up_old_congress_maintenance_query();
     }
     public function set_up_general_member_process()
     {
