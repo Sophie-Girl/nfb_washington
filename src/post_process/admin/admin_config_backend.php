@@ -78,7 +78,7 @@ Class admin_config_backend
         $query = "select * from nfb_washington_config where setting = 'congress_number' and value = '".$this->get_congress_number_value()."';";
         $key = "value";
         $this->database->select_query($query, $key);
-        \DRupal::logger('nfb_washington_sql')->ntotice("sql_result: ".print_r($this->database->get_result(),true));
+        \DRupal::logger('nfb_washington_sql')->notice("sql_result: ".print_r($this->database->get_result(),true));
         if($this->database->get_result() == "error" || $this->database->get_result() == array())
         {
             $this->insert_congress_number();
