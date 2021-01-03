@@ -47,6 +47,7 @@ class members extends query_base{
         $this->database = new base();
         $this->database->select_query($query, $key);
         $congress_number = null;
+        \Drupal::logger('nfb_washington_sql')->notice("sql_result: ".print_r($this->database->get_result(),true));
         foreach($this->database->get_result() as $cong_numb)
         {
             if($congress_number == null){
