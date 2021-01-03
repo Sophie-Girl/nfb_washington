@@ -75,7 +75,7 @@ Class admin_config_backend
     public function find_existing_congress_number()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_config where setting = 'congress_number' and value = '".$this->get_congress_number_value()."';";
+        $query = "select * from nfb_washington_config where setting = 'congress_number';";
         $key = "value";
         $this->database->select_query($query, $key);
         \DRupal::logger('nfb_washington_sql')->notice("sql_result: ".print_r($this->database->get_result(),true));
