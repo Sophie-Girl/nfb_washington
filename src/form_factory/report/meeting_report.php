@@ -91,6 +91,15 @@ class meeting_report
         $this->database = null;
 
     }
+    public function member_query()
+    {
+        $this->database = new base();
+        $query = "Select * from nfb_washington_members where active = 0  and state = '".$this->get_state()."';";
+        $key = 'member_id';
+        $this->database->select_query($query, $key);
+        $this->member_results = $this->database->get_result();
+        $this->database = null;
+    }
     public function handle_meeting_report()
     {
         $member_array = [];

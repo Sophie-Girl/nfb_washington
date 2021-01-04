@@ -47,7 +47,6 @@ class members extends query_base{
         $this->database = new base();
         $this->database->select_query($query, $key);
         $congress_number = null;
-        \Drupal::logger('nfb_washington_sql')->notice("sql_result: ".print_r($this->database->get_result(),true));
         foreach($this->database->get_result() as $cong_numb)
         {
             if($congress_number == null){
@@ -86,7 +85,6 @@ class members extends query_base{
     }
     public function leaving_congress_query()
     {
-        \Drupal::logger("nfb_washington_new_congress")->notice("congress_number: ".$this->get_congress_number());
         $this->api_url = "https://api.propublica.org/congress/v1/".$this->get_congress_number()."/".$this->get_search_criteria_1()."/".$this->get_entity()."/leaving.json";
         $this->set_curl();
         $this->curl_execute_set_propublica_result();

@@ -19,8 +19,6 @@ class drupal_member_civi_contact_link
     }
     public function new_congress_run_through()
     {
-
-        \Drupal::logger("nfb_Washington_debug")->notice("I am going to get to the import");
         $this->set_up_general_member_process();
         $this->set_up_old_congress_maintenance_query();
     }
@@ -31,7 +29,6 @@ class drupal_member_civi_contact_link
         $this->propublica_query->entity = "members";
         $this->propublica_query->search_criteria_1 = "house";
         $this->propublica_query->member_query();
-        \DRupal::logger('okay_checking_a_thing')->notice(print_r($this->propublica_query->get_propublica_result(), true));
         $this->general_run_through();
         $this->propublica_query->search_criteria_1 = "senate";
         $this->propublica_query->member_query();
@@ -44,9 +41,7 @@ class drupal_member_civi_contact_link
         $this->propublica_query->entity = "members";
         $this->propublica_query->search_criteria_1 = "house";
         $this->propublica_query->congress_number = (int)$this->propublica_query->get_congress_number() - 1;
-
         $this->propublica_query->leaving_congress_query();
-        \DRupal::logger('okay_checking_another_thing')->notice(print_r($this->propublica_query->get_propublica_result(), true));
         $this->removal_run_through();
         $this->propublica_query->search_criteria_1 = "senate";
         $this->propublica_query->leaving_congress_query();
