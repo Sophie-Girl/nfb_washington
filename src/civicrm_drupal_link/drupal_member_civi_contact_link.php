@@ -306,22 +306,10 @@ class drupal_member_civi_contact_link
     {
 
         foreach($this->propublica_query->get_propublica_result()['results']['0']['members'] as $member)
-        \Drupal::logger("nfb_washington_maintenance")->notice("member_array: ".print_r($member, true));
-        {$this->propublica_query->leaving_congress_parse($member);
-            if($this->propublica_query->get_member_state()  != "GU" &&
-                $this->propublica_query->get_member_state()  != "AS"  &&
-                $this->propublica_query->get_member_state()  != "VI"  &&
-                $this->propublica_query->get_member_state()  != "MP" &&
-                $this->propublica_query->get_member_state()  != "UM" &&
-                $this->propublica_query->get_member_state() != "FM"&&
-                $this->propublica_query->get_member_state() != "MH" &&
-                $this->propublica_query->get_member_state() != "PW"
-            )
-            {
+        {\Drupal::logger("nfb_washington_maintenance")->notice("member_array: ".print_r($member, true));
+        $this->propublica_query->leaving_congress_parse($member);
                 $this->find_civi_record();
-                $this->maintnence_database();
-            }
-            }
+                $this->maintnence_database();}
     }
     public function find_civi_record()
     {
