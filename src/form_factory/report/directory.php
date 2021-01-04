@@ -39,7 +39,7 @@ class  directory extends rating_report
         if($form_state->getValue('select_state') == "")
         {$markup = "<p>You must select a state to se a preview of that state</p>";}
         else{
-            $this->state = $form_state->getValue("select-state");
+            $this->state = $form_state->getValue("select_state");
             $this->web_preview_markup();
             $markup = $this->get_markup();
         }
