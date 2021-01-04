@@ -430,6 +430,7 @@ class drupal_member_civi_contact_link
     }
     public function deactivate_maintnence_record($member_id)
     {
+        \Drupal::logger("i_hate_programming")->notice("I am gettign here UwU");
         $query = "update nfb_washington_members
         set active = '1'
         where member_id = '".$member_id."';";
