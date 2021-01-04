@@ -347,12 +347,11 @@ class drupal_member_civi_contact_link
         $query = "select * from nfb_washington_members where propublica_id = '".$this->propublica_query->get_member_pp_id()."';";
         $key = 'propublica_id';
         $this->database->select_query($query, $key);
-        \Drupal::logger("nfb_washington_maintenance")->notice("sql result ".print_r($this->database->get_result(), true));
         foreach($this->database->get_result() as $member)
         {
             $member = get_object_vars($member);
-            if($member['propublica_id'] == $this->propublica_query->get_member_pp_id())
-            {$member_id = $member['member_id'];}
+            \Drupal::logger("nfb_washington_maintenance")->notice("sql result ".print_r($member, true));
+            $member_id = $member['member_id'];
         }
         if($member_id)
         {$this->deactivate_maintnence_record($member_id);}
