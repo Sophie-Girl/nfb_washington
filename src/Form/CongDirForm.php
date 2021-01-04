@@ -23,7 +23,7 @@ class CongDirForm extends FormBase
         $this->form_factory = new directory();
         $this->form_factory->directory_backend();
     }
-    public function data_refresh($form, $form_state)
+    public function data_refresh(&$form, FormStateInterface $form_state)
     {
         return  $form['preview_markup'];
     }

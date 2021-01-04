@@ -66,8 +66,8 @@ class  directory extends rating_report
         foreach ($this->get_member_results() as $member)
         {
             $this->set_member_values($member);
-            $this->markup = $this->get_markup(). "------------------------------------------------------".PHP_EOL
-                . $this->get_first_name(). " ".$this->get_last_name().": ".$this->district_text().PHP_EOL.
+            $this->markup = $this->get_markup() . $this->get_first_name(). " ".$this->get_last_name().": "
+                .$this->district_text().PHP_EOL.
                 "Phone: ".$this->get_phone().PHP_EOL.
                 "------------------------------------------------------".PHP_EOL;
         }
