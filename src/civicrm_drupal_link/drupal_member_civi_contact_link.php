@@ -344,14 +344,12 @@ class drupal_member_civi_contact_link
     public function  maintnence_database()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_members ;";
+        $query = "select * from nfb_washington_members where propublica_id = '".$this->propublica_query->get_member_pp_id()."';";
         $key = 'propublica_id';
         $this->database->select_query($query, $key);
         foreach($this->database->get_result() as $member)
         {
             $member = get_object_vars($member);
-            \Drupal::logger("nfb_washignton_debug")->notice("Results from sql: ".print_r($member, true));
-
             if($member['propublica_id'] == $this->propublica_query->get_member_pp_id())
             {$member_id = $member['member_id'];}
         }
