@@ -19,7 +19,7 @@ class  directory extends rating_report
              '#ajax' => array(
                  'event' => 'change',
                  'wrapper' => 'directory',
-                 'callback' => 'data_refresh'
+                 'callback' => '::data_refresh'
              ),
          );
          $form['preview_markup'] = array(
