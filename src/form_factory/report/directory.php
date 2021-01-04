@@ -25,7 +25,7 @@ class  directory extends rating_report
          $form['preview_markup'] = array(
            '#prefix' => "<div id = 'directory'>",
            '#type' => 'item',
-           '#makrup' => $this->directory_markup($form_state),
+           '#markup' => $this->directory_markup($form_state),
            "#suffix" => "</div>"
          );
         $form['submit'] = array(
