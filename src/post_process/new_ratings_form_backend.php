@@ -1,7 +1,10 @@
 <?php
 Namespace Drupal\nfb_washington\post_process;
+use Drupal\civicrm\Civicrm;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\nfb_washington\civicrm\civi_query;
 use Drupal\nfb_washington\database\base;
+use Drupal\nfb_washington\email\admin_notification;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class new_ratings_form_backend
@@ -65,8 +68,11 @@ class new_ratings_form_backend
         $this->deduplication($issue_number);
         $issue_number = 3;
         $this->deduplication($issue_number);
-
-
+        $this->set_email_params($params);
+        $params['nfb_contact'] = $form_state->getValue("nfb_contact_name");
+        $email = new admin_notification();
+        $email->ratings_email_details($form_state, $params);
+        $email = null;
     }
     public function set_values(FormStateInterface $form_state)
     {
@@ -341,6 +347,58 @@ class new_ratings_form_backend
         set last_modified_user = '".\Drupal::currentUser()->getUsername()."'
         where  rating_id = '".$rating_id."';";
         $this->database->update_query($query);
+    }
+    public function find_member_id()
+    {
+        if($this->get_member_id() == null)
+        {
+            $this->database = new base();
+            $query = "select * from nfb_washingto_activites where activity_id = '".$this->get_meeting_id()."';";
+            $key = 'activity_id';
+            $this->database->select_query($query, $key);
+            $member_id = null;
+            foreach($this->database->get_result() as $meeting)
+            {
+                $meeting= get_object_vars($meeting);
+                if($member_id == null){
+                $member_id = $meeting['member_id'];}
+            }
+            $this->member_id = $member_id;
+        }
+        $this->database = null;
+    }
+    public function set_email_params(&$params)
+    {
+        $this->find_member_id();
+        $this->database = new base();
+        $query = "select * from nfb_washington_members where member_id = '".$this->get_member_id()."';";
+        $key = 'member_id';
+        $this->database->select_query($query, $key);
+        Foreach($this->database->get_result() as $member)
+        {
+            $member = get_object_vars($member);
+            $civi_id = $member['civicrm_contact_id'];
+            $params['comment_1'] = $this->get_issue_1_comments();
+            $params['comment_2'] = $this->get_issue_2_comments();
+            $params['comment_3'] = $this->get_issue_3_comments();
+            $params['state'] = $member['state'];
+        }
+        $this->get_rep_name($civi_id, $params);
+    }
+    public function get_rep_name($civi_id, &$params)
+    {
+        $civi = new Civicrm(); $civi->initialize();;
+        $civi_query = new civi_query($civi);
+        $civi_query->civi_mode = 'get'; $civi_query->civi_entity = 'Contact';
+        $civi_query->civi_params = array(
+            'sequential' => 1,
+            'id' => $civi_id,
+        );
+        $civi_query->civi_query();
+        foreach ($civi_query->get_civicrm_result()['values'] as $contact)
+        {
+            $params['rep_name'] = $contact['first_name']." ".$contact['last_name'];
+        }
     }
 
 }
