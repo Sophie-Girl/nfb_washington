@@ -39,7 +39,7 @@ Class admin_config_backend
     public function find_existing_api_key()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_config where setting = 'pp_id' and value = '".$this->get_api_key_value()."' ;";
+        $query = "select * from nfb_washington_config where setting = 'pp_id' ;";
         $key = "value";
         $this->database->select_query($query, $key);
 
