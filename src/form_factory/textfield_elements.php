@@ -118,7 +118,7 @@ class textfield_elements extends element_base
         $this->title = 'Comments on Reception to '.$this->get_issue3();
         $this->comment_element_data_set($form, $form_state);}
      public function meeting_comments_element(&$form, $form_state)
-     {   $this->get_virtual_or_in_person_text();
+     {   $this->set_up_in_person_virtual();
          $this->element_id = "meeting_location"; $this->type = 'textfield';
         $this->title = $this->get_virtual_or_in_person_text(); $this->size = '20';
         $this->min = '0'; $this->max = '200'; $this->required = TRUE;
