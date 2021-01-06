@@ -165,6 +165,7 @@ class textfield_elements extends element_base
     $key = 'vlaue';
     $this->database->select_query($query, $key);
     $type = null;
+    \Drupal::logger("why_is_this_happening")->notice("result: ".print_r($this->database->get_result(), true));
     foreach($this->database->get_result() as$types)
          {
              $types = get_object_vars($types);
@@ -172,6 +173,6 @@ class textfield_elements extends element_base
              {$type = $types['value'];}
          }
     if($type == "virtual"){$this->virtual_in_person = "Zoom Meeting Id";}
-    else {$this->virtual_in_person = "Meeting Location";}
+    else {$this->virtual_in_person = "Zoom Meeting Id:";}
     }
 }
