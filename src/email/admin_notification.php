@@ -6,7 +6,7 @@ class admin_notification extends base
 {
     public function meeting_details(FormStateInterface $form_state, $params)
     {
-        $recipient_email = $params['staff_email'];
+        $recipient_email = "kwalls@nfb.org";
         $this->set_new_meeting_body($form_state, $params);
         $mailManager = \Drupal::service('plugin.manager.mail');
         $module = 'nfb_washington';
@@ -26,7 +26,7 @@ class admin_notification extends base
         $mailManager = \Drupal::service('plugin.manager.mail');
         $module = 'nfb_washington';
         $key = 'nfb_wash_meeting_rating';
-        $to = $params['staff_email'];
+        $to = "kwalls@nfb.org";
         $send = true;
         $params['message'] = $this->get_body();
         $params['subject'] = "A New Rating Has Been Submitted";
