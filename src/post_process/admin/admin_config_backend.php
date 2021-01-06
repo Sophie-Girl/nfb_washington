@@ -32,6 +32,7 @@ Class admin_config_backend
         $this->api_key_value = $form_state->getValue("pp_api_key");
         $this->congress_number_value = $form_state->getValue("congress_number");
         $this->seminar_type = $form_state->getValue("seminar");
+        \Drupal::logger("nfb_washington_updates")->notice("seminar_type: ".$this->get_seminar_type());
     }
     public function set_user_name(){
         $user = \drupal::currentUser()->getUsername();
