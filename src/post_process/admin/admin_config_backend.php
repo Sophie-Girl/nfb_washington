@@ -112,7 +112,7 @@ Class admin_config_backend
     public function find_existing_seminar_type()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_config where setting = 'seminar_type' and value = '".$this->get_congress_number_value()."';";
+        $query = "select * from nfb_washington_config where setting = 'seminar_type';";
         $key = "value";
         $this->database->select_query($query, $key);
         if($this->database->get_result() == "error" || $this->database->get_result() == array())

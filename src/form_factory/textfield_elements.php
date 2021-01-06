@@ -11,6 +11,7 @@ class textfield_elements extends element_base
     public $issue_1;
     public $issue_2;
     public $issue_3;
+    public $virtual_in_person;
     public function get_element_min()
     {return $this->min;}
     public function get_element_max()
@@ -23,6 +24,8 @@ class textfield_elements extends element_base
     {return $this->issue_2;}
     public function  get_issue3()
     {return $this->issue_3;}
+    public function get_virtual_or_in_person_text()
+    {return $this->virtual_in_person;}
     public function build_static_textfield(&$form, $form_state) // build all textfield elements that require no conditionals
     {   $form[$this->get_element_id()] = array(
             '#type' =>  $this->get_element_type(),
@@ -155,4 +158,19 @@ class textfield_elements extends element_base
          }
 
      }
+     public function set_up_in_person_virtual(){
+    $this->database = new base();
+    $query = "select * from nfb_washington_config where setting = 'seminar_type';";
+    $key = 'vlaue';
+    $this->database->select_query($query, $key);
+    $type = null;
+    foreach($this->database->get_result() as$types)
+         {
+             $types = get_object_vars($types);
+             if($type == null)
+             {$type = $types['value'];}
+         }
+    if($type == "virtual"){$this->virtual_in_person = "Zoom Meeting Id";}
+    else {$this->virtual_in_person = "Meeting Location";}
+    }
 }
