@@ -23,3 +23,7 @@ updaterate:
   version: 1.x
   js:
     js/updaterate.js: {}
+ind-report:
+  version: 1.x
+  js:
+    js/ind-report.js: {}
