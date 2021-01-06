@@ -190,7 +190,7 @@ class individual_member_report
     {
         $this->contact_markup = $this->get_contact_markup()."
         <p class='right-side'>State: ".$this->get_state()." <span>Rank: ".strtoupper(substr($this->get_rank(),0, 1)).substr($this->get_rank(), 1,20)."</span></p>
-        <p class='right-side'>Phone: ".$this->get_phone_number()."<span>Propublica Legislator ID: ".$this->get_propublica_id()."</span></p>";
+        <p class='right-side'>Phone: ".$this->get_phone_number()."</p>";
     }
     public function house_contact_markup()
     {
