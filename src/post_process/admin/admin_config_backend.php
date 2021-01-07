@@ -32,7 +32,7 @@ Class admin_config_backend
         $this->api_key_value = $form_state->getValue("pp_api_key");
         $this->congress_number_value = $form_state->getValue("congress_number");
         $this->seminar_type = $form_state->getValue("seminar");
-        \Drupal::logger("nfb_washington_updates")->notice("seminar_type: ".$this->get_seminar_type());
+
     }
     public function set_user_name(){
         $user = \drupal::currentUser()->getUsername();
@@ -79,7 +79,7 @@ Class admin_config_backend
         $query = "select * from nfb_washington_config where setting = 'congress_number';";
         $key = "value";
         $this->database->select_query($query, $key);
-        \Drupal::logger('nfb_washington_sql')->notice("sql_result: ".print_r($this->database->get_result(),true));
+
         if($this->database->get_result() == "error" || $this->database->get_result() == array())
         {
             $this->insert_congress_number();
@@ -116,6 +116,7 @@ Class admin_config_backend
         $query = "select * from nfb_washington_config where setting = 'seminar_type';";
         $key = "value";
         $this->database->select_query($query, $key);
+        \Drupal::logger("nfb_washington_updates")->notice("seminar_type: ".print_r($this->database->get_result(), true));
         if($this->database->get_result() == "error" || $this->database->get_result() == array())
         {
             $this->insert_seminar_type();
@@ -136,6 +137,7 @@ Class admin_config_backend
             "last_modified_user" => \drupal::currentUser()->getUsername(),
         );
         $this->database = new base();
+        \Drupal::logger('nfb_washington_updates')->notice("I am getting here");
         $this->database->insert_query($table, $fields);
     }
     public function update_seminar_type()
