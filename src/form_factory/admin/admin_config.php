@@ -47,12 +47,23 @@ For information on th eAPi please visit their website <a href='https://projects.
             "#required" => "true",
         );
     }
+    public function email_address(&$form, $form_State)
+    {
+        $form['staff_email'] = array(
+            '#type' => 'textfield',
+            '#title' => "Staff Email Address",
+            '#size' => '20',
+            '#min' => '6',
+            "#required" => "true",
+        );
+    }
     public function build_form_array(&$form, $form_state)
     {
         $this->API_key_markup($form, $form_state);
         $this->APIKey_text_Field($form, $form_state);
         $this->Congress_Number($form, $form_state);
         $this->seminar_type($form, $form_state);
+        $this->email_address($form, $form_state);
         $form['submit'] = array(
             '#type' => 'submit',
             '#value' => "Submit",);

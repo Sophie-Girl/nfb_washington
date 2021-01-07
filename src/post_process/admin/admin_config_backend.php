@@ -9,12 +9,15 @@ Class admin_config_backend
     public $api_key_value;
     public $congress_number_value;
     public $seminar_type;
+    public $staff_email;
     public function get_api_key_value()
     {return $this->api_key_value;}
     public function get_congress_number_value()
     {Return $this->congress_number_value;}
     public function get_seminar_type()
     {return $this->seminar_type;}
+    public function get_staff_email()
+    {return $this->staff_email;}
     public $database;
     public $user_name;
     public function get_user_name()
@@ -27,12 +30,14 @@ Class admin_config_backend
         $this->find_existing_api_key();
         $this->find_existing_congress_number();
         $this->find_existing_seminar_type();
+        $this->find_existing_staff_email();
     }
     public function set_form_values($form_state)
     {
         $this->api_key_value = $form_state->getValue("pp_api_key");
         $this->congress_number_value = $form_state->getValue("congress_number");
         $this->seminar_type = $form_state->getValue("seminar");
+        $this->staff_email = $form_state->getValue("staff_email");
 
     }
     public function set_user_name(){
@@ -146,6 +151,42 @@ Class admin_config_backend
         $query = "update nfb_washington_config
         set value = '".$this->get_seminar_type()."'
         where setting = '"."seminar_type"."' and config_id > '"."0"."';";
+        $this->database = new base();
+        $this->database->update_query($query);
+    }
+    public function find_existing_staff_email()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_config where setting = 'staff_email';";
+        $key = "value";
+        $this->database->select_query($query, $key);
+        if($this->database->get_result() == "error" || $this->database->get_result() == array())
+        {
+            $this->insert_staff_email();
+        }
+        else
+        {
+            $this->update_staff_email();
+        }
+    }
+    public function insert_staff_email()
+    {
+        $table = "nfb_washington_config";
+        $fields = array(
+            'setting' => "staff_email",
+            'value' => $this->get_staff_email(),
+            "active" => "0",
+            "created_user" => \drupal::currentUser()->getUsername(),
+            "last_modified_user" => \drupal::currentUser()->getUsername(),
+        );
+        $this->database = new base();
+        $this->database->insert_query($table, $fields);
+    }
+    public function update_staff_email()
+    {
+        $query = "update nfb_washington_config
+        set value = '".$this->get_staff_email()."'
+        where setting = '"."staff_email"."' and config_id > '"."0"."';";
         $this->database = new base();
         $this->database->update_query($query);
     }
