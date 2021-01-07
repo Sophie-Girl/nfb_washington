@@ -162,7 +162,7 @@ class textfield_elements extends element_base
      public function set_up_in_person_virtual(){
     $this->database = new base();
     $query = "select * from nfb_washington_config where setting = 'seminar_type';";
-    $key = 'vlaue';
+    $key = 'value';
     $this->database->select_query($query, $key);
     $type = null;
     \Drupal::logger("why_is_this_happening")->notice("result: ".print_r($this->database->get_result(), true));
