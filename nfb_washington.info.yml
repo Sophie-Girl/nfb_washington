@@ -1,5 +1,6 @@
 name: NFB Washington
 type: module
 description: 'Handles all Washington Seminar functions V 2.1
-updates - Updated Javascript to hide ids on individual report'
+updates - Updated Javascript to hide ids on individual report
+        - Updated Configuration to set up language for both in person and virtual style events'
 core: 8.x

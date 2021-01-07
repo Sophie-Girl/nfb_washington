@@ -64,7 +64,7 @@ nfb_washington.meetreport:
   base_route: nfb_washington.admin
 nfb_washington.ratereport:
   route_name: nfb_washington_rating_report
-  title: "Meeting Report"
+  title: "Rating Report"
   base_route: nfb_washington.admin
 nfb_washington.dirreport:
   route_name: nfb_washington_directory_report
