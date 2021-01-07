@@ -2,11 +2,11 @@
 namespace Drupal\nfb_washington\email;
 use Drupal\Core\Form\FormStateInterface;
 
-class admin_notification extends base
+class admin_notification extends email_base
 {
     public function meeting_details(FormStateInterface $form_state, $params)
     {
-        $recipient_email = "kwalls@nfb.org";
+        $recipient_email = $this->get_staff_email();
         $this->set_new_meeting_body($form_state, $params);
         $mailManager = \Drupal::service('plugin.manager.mail');
         $module = 'nfb_washington';
@@ -26,7 +26,7 @@ class admin_notification extends base
         $mailManager = \Drupal::service('plugin.manager.mail');
         $module = 'nfb_washington';
         $key = 'nfb_wash_meeting_rating';
-        $to = "kwalls@nfb.org";
+        $to = $this->get_staff_email();
         $send = true;
         $params['message'] = $this->get_body();
         $params['subject'] = "A New Rating Has Been Submitted";
