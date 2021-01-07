@@ -196,7 +196,7 @@ class individual_member_report
     {
         $this->contact_markup = $this->get_contact_markup()."
         <p class='right-side'>State: ".$this->get_state()." <span>District: ".strtoupper(substr($this->get_district(),0, 1)).substr($this->get_district(), 1,20)."</span></p>
-        <p>Phone: ".$this->get_phone_number()."<span>Propublica Legislator ID: ".$this->get_propublica_id()."</span></p>";
+        <p>Phone: ".$this->get_phone_number()."</p>";
     }
     public function set_note_markup()
     {
