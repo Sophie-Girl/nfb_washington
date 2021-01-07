@@ -26,6 +26,7 @@ Class admin_config_backend
         $this->set_form_values($form_state);
         $this->find_existing_api_key();
         $this->find_existing_congress_number();
+        $this->find_existing_seminar_type();
     }
     public function set_form_values($form_state)
     {
