@@ -173,6 +173,6 @@ class textfield_elements extends element_base
              {$type = $types['value'];}
          }
     if($type == "virtual"){$this->virtual_in_person = "Zoom Meeting Id";}
-    else {$this->virtual_in_person = "Zoom Meeting Id:";}
+    else {$this->virtual_in_person = "Meeting Location:";}
     }
 }
