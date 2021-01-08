@@ -714,7 +714,7 @@ $install->set_up_note_link_table();
 $install->set_up_committee_table();
 $install->set_up_committee_membership_table();
 $install->set_up_configuration_table();
-$install->set_up_com_issue_link_table();}
+$install->set_up_com_issue_link_table();
 }
 
 
