@@ -59,7 +59,7 @@ class  ind_member_donwlaod
         elseif($this->form_factory->get_state() == "PR")
         {$this->contact_markup = "Resident Commissioner ".$this->form_factory->get_first_name()." ".$this->form_factory->get_last_name().PHP_EOL;}
         elseif($this->form_factory->get_state() == "DC")
-        {$this->contact_markup = "<Delegate ".$this->form_factory->get_first_name()." ".$this->form_factory->get_last_name().PHP_EOL;}
+        {$this->contact_markup = "Delegate ".$this->form_factory->get_first_name()." ".$this->form_factory->get_last_name().PHP_EOL;}
         else {$this->contact_markup = "Representative ".$this->form_factory->get_first_name()." ".$this->form_factory->get_last_name().PHP_EOL;}
         if($this->form_factory->get_district() == "Senate")
         {
@@ -74,13 +74,13 @@ class  ind_member_donwlaod
     {
         $this->contact_markup = $this->get_contact_markup().
         "State: ".$this->form_factory->get_state()."      Rank: ".strtoupper(substr($this->form_factory->get_rank(),0, 1)).substr($this->form_factory->get_rank(), 1,20).PHP_EOL
-        ."Phone: ".$this->form_factory->get_phone_number()."      Propublica Legislator ID: ".$this->form_factory->get_propublica_id().PHP_EOL;
+        ."Phone: ".$this->form_factory->get_phone_number().PHP_EOL;
     }
     public function house_contact_markup()
     {
         $this->contact_markup = $this->get_contact_markup().PHP_EOL.
-        "State: ".$this->form_factory->get_state()." <span>District: ".strtoupper(substr($this->form_factory->get_district(),0, 1)).substr($this->form_factory->get_district(), 1,20).PHP_EOL.
-       "Phone: ".$this->form_factory->get_phone_number()."Propublica Legislator ID: ".$this->form_factory->get_propublica_id().PHP_EOL;
+        "State: ".$this->form_factory->get_state()." District: ".strtoupper(substr($this->form_factory->get_district(),0, 1)).substr($this->form_factory->get_district(), 1,20).PHP_EOL.
+       "Phone: ".$this->form_factory->get_phone_number().PHP_EOL;
     }
     public function handle_notes()
     {
