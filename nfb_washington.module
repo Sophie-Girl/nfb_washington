@@ -16,3 +16,7 @@ function nfb_washington_mail($key, &$message, $params)
             break;
     }
 }
+function hook_schema()
+{
+
+}
