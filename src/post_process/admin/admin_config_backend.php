@@ -34,6 +34,7 @@ Class admin_config_backend
         $this->find_existing_congress_number();
         $this->find_existing_seminar_type();
         $this->find_existing_staff_email();
+        $this->find_existing_issue_count();
     }
     public function set_form_values($form_state)
     {
@@ -212,6 +213,42 @@ Class admin_config_backend
                 $issue_number = 5; break;
         }
         $this->issue_count = $issue_number;
+    }
+    public function find_existing_issue_count()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_config where setting = 'issue_count';";
+        $key = "value";
+        $this->database->select_query($query, $key);
+        if($this->database->get_result() == "error" || $this->database->get_result() == array())
+        {
+            $this->insert_issue_count();
+        }
+        else
+        {
+            $this->update_issue_count();
+        }
+    }
+    public function insert_issue_count()
+    {
+        $table = "nfb_washington_config";
+        $fields = array(
+            'setting' => "staff_email",
+            'value' => $this->get_issue_number(),
+            "active" => "0",
+            "created_user" => \drupal::currentUser()->getUsername(),
+            "last_modified_user" => \drupal::currentUser()->getUsername(),
+        );
+        $this->database = new base();
+        $this->database->insert_query($table, $fields);
+    }
+    public function update_issue_count()
+    {
+        $query = "update nfb_washington_config
+        set value = '".$this->get_issue_number()."'
+        where setting = '"."issue_count"."' and config_id > '"."0"."';";
+        $this->database = new base();
+        $this->database->update_query($query);
     }
 
 }
