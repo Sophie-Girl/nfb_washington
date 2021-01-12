@@ -76,7 +76,7 @@ class admin_issue
         $form["bill_id"] = array(
             '#type' => 'textfield',
             '#title' => "Bill Id",
-            '#required' => true,
+            '#required' => false,
             '#size' => "20",
             '#min' => 4,
             '#max' => 80,
@@ -102,7 +102,7 @@ class admin_issue
         $form["bill_slug"] = array(
             '#type' => 'textfield',
             '#title' => "Bill Slug",
-            '#required' => true,
+            '#required' => false,
             '#size' => "20",
             '#min' => 4,
             '#max' => 80,
@@ -118,7 +118,7 @@ class admin_issue
         $form["bill_slug"] = array(
             '#type' => 'textfield',
             '#title' => "Bill Slug",
-            '#required' => true,
+            '#required' => false,
             '#size' => "20",
             '#min' => 4,
             '#max' => 80,
