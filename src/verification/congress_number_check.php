@@ -2,9 +2,9 @@
 Namespace Drupal\nfb_washington\verification;
 use Drupal\nfb_washington\database\base;
 
-class  congress_number_check
+class  congress_number_check extends issue_count_check
 {
-    public $database;
+
     public $congress_number;
     public function get_congress()
     {return $this->congress_number;}
