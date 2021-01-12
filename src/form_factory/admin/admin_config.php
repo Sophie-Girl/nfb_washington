@@ -35,11 +35,11 @@ For information on th eAPi please visit their website <a href='https://projects.
           "#required" => "true",
         );
     }
-    public function seminar_type(&$form, $form_State)
+    public function seminar_type(&$form, $form_state)
     {
         $form['seminar'] = array(
             '#type' => 'select',
-            '#title' => "Is washington Seminar In Person or Virtual",
+            '#title' => "Is Washington Seminar In Person or Virtual",
             "#options" => array(
                 "in_person" => "In Person",
                 "virtual" => "Virtual",
@@ -47,7 +47,23 @@ For information on th eAPi please visit their website <a href='https://projects.
             "#required" => "true",
         );
     }
-    public function email_address(&$form, $form_State)
+    public function  issue_number(&$form, $form_state)
+    {
+        $form['issue_number'] = array(
+            '#type' => 'select',
+            '#title' => "Issue Number for This Year",
+            "#options" => array(
+               "1" => "1",
+                "2" => "2",
+                "original_spec" => "3",
+                "death" => "4",
+                "just_in_case" => "5"
+            ),
+            "#required" => "true",
+        );
+    }
+
+    public function email_address(&$form, $form_state)
     {
         $form['staff_email'] = array(
             '#type' => 'textfield',
