@@ -109,6 +109,7 @@ class AdminIssueForm extends FormBase
         $query = "select setting, value from  nfb_washington_config  where setting = 'issue_count';";
         $key = "config_id";
         $count = null;
+        $this->database->select_query($query, $key);
         foreach($this->database->get_result() as $setting)
         {
             $setting = get_object_vars($setting);
