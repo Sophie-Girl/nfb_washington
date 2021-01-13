@@ -107,7 +107,7 @@ class AdminIssueForm extends FormBase
     public function set_issue_count()
     {
         $this->database = new base();
-        $query = "select setting, value from  nfb_washington_config  where setting = 'issue_count';";
+        $query = "select config_id, setting, value from  nfb_washington_config  where setting = 'issue_count';";
         $key = "config_id";
         $count = null;
         $this->database->select_query($query, $key);
