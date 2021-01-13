@@ -233,7 +233,7 @@ Class admin_config_backend
     {
         $table = "nfb_washington_config";
         $fields = array(
-            'setting' => "staff_email",
+            'setting' => "issue_count",
             'value' => $this->get_issue_number(),
             "active" => "0",
             "created_user" => \drupal::currentUser()->getUsername(),

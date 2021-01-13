@@ -48,7 +48,7 @@ class issue_count_check extends api_key_check
     {
         $form['issue_count_markup'] = array(
             '#type' => "item",
-            '#markup' => "<p class = 'admin_alert'><b>No issue number set. Please visit <a href='nfb_washington/admin/configuration'>the configuration page</a> </b></p>",
+            '#markup' => "<p class = 'admin_alert'><b>No issue number set. Please visit <a href='/nfb_washington/admin/configuration'>the configuration page</a> </b></p>",
         );
     }
 }
