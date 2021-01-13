@@ -14,6 +14,9 @@ class AdminIssueForm extends FormBase
     public $form_factory;
     public $backend;
     public $database;
+    public $issue_limit;
+    public function get_issue_limit()
+    {return $this->issue_limit;}
     public function getFormId()
     {
        return "nmfb_washington_issue_admin";
@@ -57,8 +60,15 @@ class AdminIssueForm extends FormBase
         $this->verification->congress_number_verification($form, $form_state);
         $this->verification = null;
     }
+    public function issue_limitmarkup(&$form, $form_state)
+    {
+        $this->verification = new congress_number_check();
+        $this->verification->issue_count_verification($form, $form_state);
+        $this->verification= null;
+    }
     public function rule_of_three(&$form, $form_state, $issue_type)
     {
+        $this->set_issue_count();
         $this->database = new base(); $year = date("Y");
         $query = "select count(*)  as 'issues' from nfb_washington_issues where issue_year = '".$year."' group by issue_year;";
         $key = 'issues';
@@ -69,7 +79,9 @@ class AdminIssueForm extends FormBase
             $count = get_object_vars($count);
             \Drupal::logger("nfb_washington_validation")->notice($count['issues']);
         }
-        if($count['issues'] == '3' && $issue_type == "create")
+
+        if($count['issues'] == $this->get_issue_limit() && $issue_type == "create" ||
+            $count['issues'] > $this->get_issue_limit() && $issue_type == "create")
         {
             $this->too_many_issues($form, $form_state);
         }
@@ -90,6 +102,20 @@ class AdminIssueForm extends FormBase
           '#markup' => "<p class = 'admin_alert'>You have submitted all the issues you can for this year. Please return to the 
 <a href='/nfb_Washington/admin/issue'> issue home page</a> and edit an exiting issue for this year</p>"
         );
+    }
+    public function set_issue_count()
+    {
+        $this->database = new base();
+        $query = "select setting, value from  nfb_washington_config  where setting = 'issue_count';";
+        $key = "config_id";
+        $count = null;
+        foreach($this->database->get_result() as $setting)
+        {
+            $setting = get_object_vars($setting);
+            if($count == null)
+            {$count = $setting['value'];}
+        }
+        $this->issue_limit  = $count;
     }
 
 }
