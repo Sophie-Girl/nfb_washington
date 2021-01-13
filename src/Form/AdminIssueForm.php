@@ -28,6 +28,7 @@ class AdminIssueForm extends FormBase
         $form['#attached']['library'][] = 'nfb_washington/edit-issue';
         $this->verify_api_key($form, $form_state);
         $this->congress_number_markup($form, $form_state);
+        $this->issue_limitmarkup($form, $form_state);
         $this->form_factory = new admin_issue();
         $this->form_factory->issue_switch($issue, $form, $form_state);
         $this->rule_of_three($form, $form_state, $issue_type);
