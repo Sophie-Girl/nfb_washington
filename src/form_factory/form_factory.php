@@ -1,5 +1,7 @@
 <?php
 Namespace Drupal\nfb_washington\form_factory;
+use Drupal\nfb_washington\database\base;
+
 class form_factory extends update_form_ajax_test
 {
     public function build_new_meeting_time(&$form, $form_state, $meeting)
@@ -27,6 +29,7 @@ class form_factory extends update_form_ajax_test
     }
     public function build_update_rating_form(&$form, $form_state, $rating)
     {
+        $this->set_issue_limit();
         if($rating == "new"){
             $this->state_ajax_select_element($form,  $form_state);
             $this->state_rep_ajax_select_element($form, $form_state);
@@ -36,10 +39,18 @@ class form_factory extends update_form_ajax_test
         $this->contact_email_element($form, $form_state);
         $this->issue_1_ranking_element($form, $form_state);
         $this->issue_1_comment_element($form, $form_state);
+        if($this->get_issue_count() > 1){
         $this->issue_2_ranking_element($form, $form_state);
-        $this->issue_2_comment_element($form, $form_state);
+        $this->issue_2_comment_element($form, $form_state);}
+        if($this->get_issue_count() > 2){
         $this->issue_3_ranking_element($form, $form_state);
-        $this->issue_3_comment_element($form, $form_state);
+        $this->issue_3_comment_element($form, $form_state);}
+        if($this->get_issue_count() > 3) {
+            $this->issue_4_ranking_element($form, $form_state);
+            $this->issue_4_comment_element($form,$form_state);}
+        if($this->get_issue_count() > 4) {
+            $this->issue_5_ranking_element($form, $form_state);
+            $this->issue_5_comment_element($form, $form_state);}
         if($rating == 'new')
         {$this->submit_button($form, $form_state);}
         else{
@@ -89,6 +100,25 @@ class form_factory extends update_form_ajax_test
             '#attributes' => array('readonly' => 'readonly'),
             '#title' => "Drupal meeting Id"
         );
+    }
+    public function set_issue_limit()
+    {
+        $issue_count = null;
+        $query = "select * from nfb_washington_config where setting = 'issue_count' and active = '0';";
+        $key = 'config_id';
+        $this->database = new base();
+        $this->database->select_query($query, $key);
+        if($this->database->get_result() != "error"|| $this->database->get_result() != array())
+        {
+            foreach($this->database->get_result() as $setting)
+            {
+                if($issue_count == null){
+                    $setting = get_object_vars($setting);
+                    $issue_count = $setting['value'];}
+            }
+        }
+        $this->issue_count = $issue_count;
+        $this->database = null;
     }
 
 }
