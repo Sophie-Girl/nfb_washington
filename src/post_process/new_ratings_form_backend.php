@@ -13,6 +13,8 @@ class new_ratings_form_backend
     public $issue1;
     public $issue2;
     public $issue3;
+    public $issue4;
+    public $issue5;
     public $member_id;
     public $meeting_id;
     public $rating_id;
@@ -24,12 +26,21 @@ class new_ratings_form_backend
     public $issue_2_comment;
     public $issue_3_rating;
     public $issue_3_comment;
+    public $issue_4_rating;
+    public $issue_4_comment;
+    public $issue_5_rating;
+    public $issue_5_comment;
+    public $issue_count;
     public function get_issue_1()
     {return $this->issue1;}
     public function get_issue_2()
     {return $this->issue2;}
     public function get_issue_3()
     {return $this->issue3;}
+    public function get_issue_4()
+    {return $this->issue4;}
+    public function get_issue_5()
+    {return $this->issue5;}
     public function get_meeting_id()
     {return $this->meeting_id;}
     public function get_member_id()
@@ -52,6 +63,16 @@ class new_ratings_form_backend
     {return $this->issue_3_rating;}
     public function  get_issue_3_comments()
     {return $this->issue_3_comment;}
+    public function  get_issue_4_rating()
+    {return $this->issue_4_rating;}
+    public function  get_issue_4_comments()
+    {return $this->issue_4_comment;}
+    public function  get_issue_5_rating()
+    {return $this->issue_5_rating;}
+    public function  get_issue_5_comments()
+    {return $this->issue_5_comment;}
+    public function get_issue_count()
+    {return $this->issue_count;}
     public function backend(FormStateInterface $form_state)
     {
         $this->set_issue_ids();
@@ -84,15 +105,18 @@ class new_ratings_form_backend
             $this->meeting_id =  $form_state->getValue("rating_value");
             $this->member_id = null;
         }
+        $this->set_issue_count();
         $this->nfb_contact = $form_state->getValue("nfb_contact_name");
         $this->nfb_phone = $form_state->getValue("nfb_civicrm_phone_1");
         $this->issue_1_rating = $form_state->getValue("issue_1_ranking");
         $this->issue_1_comment = $form_state->getValue("issue_1_comment");
         $this->issue_2_rating = $form_state->getValue("issue_2_ranking");
-        \Drupal::logger("nfb_washington")->notice("issue_2_rating ".$this->get_issue_2_rating());
         $this->issue_2_comment = $form_state->getValue("issue_2_comment");
         $this->issue_3_rating = $form_state->getValue("issue_3_ranking");
         $this->issue_3_comment = $form_state->getValue("issue_3_comment");
+        $this->issue_4_comment = $form_state->getValue("issue_4_comment");
+        $this->issue_4_rating = $form_state->getValue("issue_4_ranking");
+
     }
     public function find_meeting_id()
     {
@@ -387,7 +411,7 @@ class new_ratings_form_backend
     }
     public function get_rep_name($civi_id, &$params)
     {
-        $civi = new Civicrm(); $civi->initialize();;
+        $civi = new Civicrm(); $civi->initialize();
         $civi_query = new civi_query($civi);
         $civi_query->civi_mode = 'get'; $civi_query->civi_entity = 'Contact';
         $civi_query->civi_params = array(
@@ -399,6 +423,25 @@ class new_ratings_form_backend
         {
             $params['rep_name'] = $contact['first_name']." ".$contact['last_name'];
         }
+    }
+    public function set_issue_count()
+    {
+        $issue_count = null;
+        $query = "select * from nfb_washington_config where setting = 'issue_count' and active = '0';";
+        $key = 'config_id';
+        $this->database = new base();
+        $this->database->select_query($query, $key);
+        if($this->database->get_result() != "error"|| $this->database->get_result() != array())
+        {
+            foreach($this->database->get_result() as $setting)
+            {
+                if($issue_count == null){
+                    $setting = get_object_vars($setting);
+                    $issue_count = $setting['value'];}
+            }
+        }
+        $this->issue_count = $issue_count;
+        $this->database = null;
     }
 
 }
