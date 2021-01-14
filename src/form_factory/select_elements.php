@@ -95,6 +95,27 @@ class select_elements extends textfield_elements
         $this->required = True;
         $this->build_Static_select_box($form, $form_state);
     }
+    public function issue_4_ranking_element(&$form, $form_state)
+    {
+        $this->rankings_options();
+        $this->element_id = 'issue_4_ranking';
+        $this->type = 'select';
+        $this->get_issue_names();
+        $this->title = $this->get_issue_4()." Rating";
+        $this->required = True;
+        $this->build_Static_select_box($form, $form_state);
+    }
+    public function issue_5_ranking_element(&$form, $form_state)
+    {
+        $this->rankings_options();
+        $this->element_id = 'issue_5_ranking';
+        $this->type = 'select';
+        $this->get_issue_names();
+        $this->title = $this->get_issue_5()." Rating";
+        $this->required = True;
+        $this->build_Static_select_box($form, $form_state);
+    }
+
     public function meeting_time_element(&$form, $form_state)
     {
         $this->time_options(); $this->type = 'select';
