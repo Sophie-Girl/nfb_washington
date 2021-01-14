@@ -1,6 +1,5 @@
 name: NFB Washington
 type: module
-description: 'Handles all Washington Seminar functions V 2.1
-updates - Updated Javascript to hide ids on individual report
-        - Updated Configuration to set up language for both in person and virtual style events'
+description: 'Handles all Washington Seminar functions V 2.2
+updates - Dynamic issue count set.Can be changed from 1 issue to up to 5 each year'
 core: 8.x
