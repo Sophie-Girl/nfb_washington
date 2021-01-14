@@ -11,6 +11,9 @@ class textfield_elements extends element_base
     public $issue_1;
     public $issue_2;
     public $issue_3;
+    public $issue_4;
+    public $issue_5;
+    public $issue_count; // limit to the number of issues
     public $virtual_in_person;
     public function get_element_min()
     {return $this->min;}
@@ -24,6 +27,12 @@ class textfield_elements extends element_base
     {return $this->issue_2;}
     public function  get_issue3()
     {return $this->issue_3;}
+    public function get_issue_4()
+    {return $this->issue_4;}
+    public function get_issue_5()
+    {return $this->issue_5;}
+    public function get_issue_count()
+    {return $this->issue_count;}
     public function get_virtual_or_in_person_text()
     {return $this->virtual_in_person;}
     public function build_static_textfield(&$form, $form_state) // build all textfield elements that require no conditionals
@@ -117,7 +126,22 @@ class textfield_elements extends element_base
         $this->get_issue_names();
         $this->title = 'Comments on Reception to '.$this->get_issue3();
         $this->comment_element_data_set($form, $form_state);}
-     public function meeting_comments_element(&$form, $form_state)
+    public function issue_4_comment_element(&$form, $form_state)
+    {
+        $this->element_id = 'issue_4_comment';
+        $this->get_issue_names();
+        $this->title = 'Comments on Reception to '.$this->get_issue_4();
+        $this->comment_element_data_set($form, $form_state);
+    }
+    public function issue_5_comment_element(&$form, $form_state)
+    {
+        $this->element_id = 'issue_5_comment';
+        $this->get_issue_names();
+        $this->title = 'Comments on Reception to '.$this->get_issue_5();
+        $this->comment_element_data_set($form, $form_state);
+    }
+
+    public function meeting_comments_element(&$form, $form_state)
      {   $this->set_up_in_person_virtual();
          $this->element_id = "meeting_location"; $this->type = 'textfield';
         $this->title = $this->get_virtual_or_in_person_text(); $this->size = '20';
@@ -154,6 +178,10 @@ class textfield_elements extends element_base
                  case 3:
                      $this->issue_3 = $issue['issue_name'];
                      break;
+                 case 4:
+                     $this->issue_4 = $issue['issue_name']; break;
+                 case 5:
+                     $this->issue_5 = $issue['issue_name']; break;
              }
              $count++;
          }
@@ -165,7 +193,6 @@ class textfield_elements extends element_base
     $key = 'value';
     $this->database->select_query($query, $key);
     $type = null;
-    \Drupal::logger("why_is_this_happening")->notice("result: ".print_r($this->database->get_result(), true));
     foreach($this->database->get_result() as$types)
          {
              $types = get_object_vars($types);
