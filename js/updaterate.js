@@ -12,10 +12,20 @@
                         var issue = data;
                         document.getElementById('edit-issue-1-ranking').value = issue[0];
                         document.getElementById('edit-issue-1-comment').value = issue[1];
+                        if($issue[2]){
                         document.getElementById('edit-issue-2-ranking').value = issue[2];
-                        document.getElementById('edit-issue-2-comment').value = issue[3];
+                        document.getElementById('edit-issue-2-comment').value = issue[3];}
+                        if($issue[4]){
                         document.getElementById('edit-issue-3-ranking').value = issue[4];
-                        document.getElementById('edit-issue-3-comment').value = issue[5];
+                        document.getElementById('edit-issue-3-comment').value = issue[5];}
+                        if($issue[6])
+                        {document.getElementById('edit-issue-4-ranking').value = issue[6];
+                            document.getElementById('edit-issue-4-comment').value = issue[7];}
+                        if($issue[8])
+                        {document.getElementById('edit-issue-4-ranking').value = issue[8];
+                            document.getElementById('edit-issue-4-comment').value = issue[9];}
+
+
                     });
                 }
 

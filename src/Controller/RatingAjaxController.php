@@ -22,7 +22,6 @@ class  RatingAjaxController extends  ControllerBase
     public function content()
     {
         $this->set_data();
-        \drupal::logger("nfb_washington_ajax")->notice(print_r($this->get_data(),true));
         return new JsonResponse($this->get_data());
     }
 
@@ -63,6 +62,10 @@ class  RatingAjaxController extends  ControllerBase
                     $this->set_issue_2($rating, $data);  break;
                 case 3:
                     $this->set_issue_3($rating, $data);  break;
+                case 4:
+                    $this->set_issue_4($rating, $data);break;
+                case 5:
+                    $this->set_issue_5($rating, $data); break;
             }
             $count++;
         }
@@ -90,6 +93,22 @@ class  RatingAjaxController extends  ControllerBase
         $data[4] = $new_rating;
         $data[5] = $rating['comment'];
     }
+    public function set_issue_4($rating, &$data)
+    {
+        $new_rating = $rating['rating'];
+        $this->convert_rating($new_rating);
+        $data[6] = $new_rating;
+        $data[7] = $rating['comment'];
+    }
+    public function set_issue_5($rating, &$data)
+    {
+        $new_rating = $rating['rating'];
+        $this->convert_rating($new_rating);
+        $data[8] = $new_rating;
+        $data[9] = $rating['comment'];
+    }
+
+
     public function convert_rating(&$new_rating)
     {
         switch($new_rating)
