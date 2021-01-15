@@ -59,6 +59,12 @@ class individual_member_report
     public  $issue3;
     public function get_issue_3()
     {return $this->issue3;}
+    public  $issue4;
+    public function get_issue_4()
+    {return $this->issue4;}
+    public  $issue5;
+    public function get_issue_5()
+    {return $this->issue5;}
     public $issue_name_1;
     public function  get_issue_name_1()
     {return $this->issue_name_1;}
@@ -68,6 +74,15 @@ class individual_member_report
     public $issue_name_3;
     public function  get_issue_name_3()
     {return $this->issue_name_3;}
+    public $issue_name_4;
+    public function  get_issue_name_4()
+    {return $this->issue_name_4;}
+    public $issue_name_5;
+    public function  get_issue_name_5()
+    {return $this->issue_name_5;}
+    public $issue_count;
+    public function get_issue_count()
+    {return $this->issue_count;}
     public $committee_name;
     public function get_committee_name()
     {return $this->committee_name;}
@@ -295,6 +310,13 @@ class individual_member_report
                 case 3:
                     $this->issue3 = $issue['issue_id'];
                     $this->issue_name_3 = $issue['issue_name']; break;
+                case 4:
+                    $this->issue4 = $issue['issue_id'];
+                    $this->issue_name_4 = $issue['issue_name']; break;
+                case 5:
+                    $this->issue5 = $issue['issue_id'];
+                    $this->issue_name_5 = $issue['issue_name']; break;
+
             }
             $count++;
         }
@@ -401,6 +423,15 @@ class individual_member_report
                         $this->committee_markup = $this->get_committee_markup() . "
 <p> Serves on the " . $this->get_committee_name() . " which the " . $this->get_issue_name_3() . " will pass through</p>";
                     }
+                    elseif ($count == 4) {
+                        $this->committee_markup = $this->get_committee_markup() . "
+<p> Serves on the " . $this->get_committee_name() . " which the " . $this->get_issue_name_4() . " will pass through</p>";
+                    }
+                    elseif ($count == 5) {
+                        $this->committee_markup = $this->get_committee_markup() . "
+<p> Serves on the " . $this->get_committee_name() . " which the " . $this->get_issue_name_5() . " will pass through</p>";
+                    }
+
                 }
             }
         }
