@@ -85,10 +85,18 @@ class new_ratings_form_backend
         }
         $issue_number = 1;
         $this->deduplication($issue_number);
+        if($this->issue_count > 1){
         $issue_number = 2;
-        $this->deduplication($issue_number);
+        $this->deduplication($issue_number);}
+        if($this->issue_count > 2){
         $issue_number = 3;
-        $this->deduplication($issue_number);
+        $this->deduplication($issue_number);}
+        if($this->issue_count > 3){
+            $issue_number = 4;
+            $this->deduplication($issue_number);}
+        if($this->issue_count > 4){
+            $issue_number = 5;
+            $this->deduplication($issue_number);}
         $this->set_email_params($params);
         $params['nfb_contact'] = $form_state->getValue("nfb_contact_name");
         $email = new admin_notification();
@@ -116,6 +124,9 @@ class new_ratings_form_backend
         $this->issue_3_comment = $form_state->getValue("issue_3_comment");
         $this->issue_4_comment = $form_state->getValue("issue_4_comment");
         $this->issue_4_rating = $form_state->getValue("issue_4_ranking");
+        $this->issue_5_comment = $form_state->getValue("issue_5_comment");
+        $this->issue_5_rating = $form_state->getValue("issue_5_ranking");
+
 
     }
     public function find_meeting_id()
@@ -185,6 +196,12 @@ class new_ratings_form_backend
                 case 3:
                     $this->issue3 = $issue['issue_id'];
                     break;
+                case 4:
+                    $this->issue4 = $issue['issue_id'];
+                    break;
+                case 5:
+                    $this->issue5 = $issue['issue_id'];
+                    break;
             }
             $count++;
         }
@@ -203,6 +220,13 @@ class new_ratings_form_backend
             case 3:
                 $query = "select * from  nfb_washington_rating where activity_id = '".$this->get_meeting_id()."' and 
                 issue_id = '".$this->get_issue_3()."';"; break;
+            case 4:
+                $query = "select * from  nfb_washington_rating where activity_id = '".$this->get_meeting_id()."' and 
+                issue_id = '".$this->get_issue_4()."';"; break;
+            case 5:
+                $query = "select * from  nfb_washington_rating where activity_id = '".$this->get_meeting_id()."' and 
+                issue_id = '".$this->get_issue_5()."';"; break;
+
         }
         $key = 'rating_id';
         $this->database->select_query($query, $key);
@@ -242,6 +266,12 @@ class new_ratings_form_backend
             case 3:
                 $rating = $this->get_issue_3_rating(); $this->convert_rating($rating, $issue_number);
                 $this->update_issue_3($rating_id); break;
+            case 4:
+                $rating = $this->get_issue_4_rating(); $this->convert_rating($rating, $issue_number);
+                $this->update_issue_4($rating_id); break;
+            case 5:
+                $rating = $this->get_issue_5_rating(); $this->convert_rating($rating, $issue_number);
+                $this->update_issue_5($rating_id); break;
         }
     }
     public function fields_switch($issue_number, &$fields)
@@ -258,6 +288,12 @@ class new_ratings_form_backend
             case 3:
                 $rating = $this->get_issue_3_rating(); $this->convert_rating($rating, $issue_number);
                 $this->issue_3_create_array($fields); break;
+            case 4:
+                $rating = $this->get_issue_4_rating(); $this->convert_rating($rating, $issue_number);
+                $this->issue_4_create_array($fields); break;
+            case 5:
+                $rating = $this->get_issue_5_rating(); $this->convert_rating($rating, $issue_number);
+                $this->issue_5_create_array($fields); break;
         }
     }
     public function update_switch($issue_number)
@@ -324,6 +360,30 @@ class new_ratings_form_backend
             'last_modified_user' => \drupal::currentUser()->getUsername(),
         );
     }
+    public function issue_4_create_array(&$fields)
+    {
+        $fields = array(
+            'activity_id' => $this->get_meeting_id(),
+            'member_id' => $this->get_member_id(),
+            'issue_id' => $this->get_issue_4(),
+            'rating' => $this->get_issue_4_rating(),
+            'comment' => $this->get_issue_4_comments(),
+            'created_user' => \drupal::currentUser()->getUsername(),
+            'last_modified_user' => \drupal::currentUser()->getUsername(),
+        );
+    }
+    public function issue_5_create_array(&$fields)
+    {
+        $fields = array(
+            'activity_id' => $this->get_meeting_id(),
+            'member_id' => $this->get_member_id(),
+            'issue_id' => $this->get_issue_5(),
+            'rating' => $this->get_issue_5_rating(),
+            'comment' => $this->get_issue_5_comments(),
+            'created_user' => \drupal::currentUser()->getUsername(),
+            'last_modified_user' => \drupal::currentUser()->getUsername(),
+        );
+    }
     public function update_issue_1($rating_id)
     {
         $this->database = new base();
@@ -365,6 +425,38 @@ class new_ratings_form_backend
         $this->database->update_query($query);
         $query = "update nfb_washington_rating
         set comment = '".$this->get_issue_3_comments()."'
+        where rating_id = '".$rating_id."';";
+        $this->database->update_query($query);
+        $query = "update nfb_washington_rating
+        set last_modified_user = '".\Drupal::currentUser()->getUsername()."'
+        where  rating_id = '".$rating_id."';";
+        $this->database->update_query($query);
+    }
+    public function update_issue_4($rating_id)
+    {
+        $this->database = new base();
+        $query = "update nfb_washington_rating
+        set rating = '".$this->get_issue_4_rating()."'
+        where rating_id = '".$rating_id."';";
+        $this->database->update_query($query);
+        $query = "update nfb_washington_rating
+        set comment = '".$this->get_issue_4_comments()."'
+        where rating_id = '".$rating_id."';";
+        $this->database->update_query($query);
+        $query = "update nfb_washington_rating
+        set last_modified_user = '".\Drupal::currentUser()->getUsername()."'
+        where  rating_id = '".$rating_id."';";
+        $this->database->update_query($query);
+    }
+    public function update_issue_5($rating_id)
+    {
+        $this->database = new base();
+        $query = "update nfb_washington_rating
+        set rating = '".$this->get_issue_5_rating()."'
+        where rating_id = '".$rating_id."';";
+        $this->database->update_query($query);
+        $query = "update nfb_washington_rating
+        set comment = '".$this->get_issue_5_comments()."'
         where rating_id = '".$rating_id."';";
         $this->database->update_query($query);
         $query = "update nfb_washington_rating
