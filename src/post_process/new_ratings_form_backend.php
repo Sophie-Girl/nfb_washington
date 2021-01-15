@@ -83,6 +83,7 @@ class new_ratings_form_backend
                 $this->find_meeting_id(); /*Connell Sophia Find freshly created id */
             }
         }
+        $this->find_member_id();
         $issue_number = 1;
         $this->deduplication($issue_number);
         if($this->issue_count > 1){
