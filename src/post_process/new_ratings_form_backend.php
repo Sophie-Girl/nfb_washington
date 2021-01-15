@@ -112,6 +112,7 @@ class new_ratings_form_backend
         }
         else {
             $this->meeting_id =  $form_state->getValue("rating_value");
+            $this->find_member_id();
             $this->member_id = null;
         }
         $this->set_issue_count();
