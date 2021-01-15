@@ -91,6 +91,7 @@ class new_ratings_form_backend
         if($this->issue_count > 2){
         $issue_number = 3;
         $this->deduplication($issue_number);}
+        \drupal::logger("nfb_washington_issue_debug")->notice($this->get_issue_count());
         if($this->issue_count > 3){
             $issue_number = 4;
             $this->deduplication($issue_number);}
@@ -322,6 +323,10 @@ class new_ratings_form_backend
                 $this->issue_2_rating = $new_rating; break;
             case 3:
                 $this->issue_3_rating = $new_rating; break;
+            case 4:
+                $this->issue_4_rating = $new_rating; break;
+            case 5:
+                $this->issue_5_rating = $new_rating; break;
         }
     }
     public function issue_1_create_array(&$fields)
