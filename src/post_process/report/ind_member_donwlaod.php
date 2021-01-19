@@ -28,6 +28,10 @@ class  ind_member_donwlaod
     public $contact_markup;
     public function get_contact_markup()
     {return $this->contact_markup;}
+    public $issue_count;
+    public function get_issue_count()
+    {return $this->issue_count;}
+
     public function backend(FormStateInterface $form_state)
     {
         $this->set_php_office_values(); $this->member_id_set($form_state);
@@ -120,9 +124,16 @@ class  ind_member_donwlaod
     {
         $this->form_factory->set_issues();
         $this->committee_markup = "Committees: ".PHP_EOL;
+        $this->form_factory->set_issue_count();
         $this->find_committee_1();
-        $this->find_committee_2();
-        $this->find_committee_3();
+        if($this->form_factory->get_issue_count() > 1)
+        {$this->find_committee_2();}
+        if($this->form_factory->get_issue_count() > 2){
+        $this->find_committee_3();}
+        if($this->form_factory->get_issue_count() > 3){
+            $this->find_committee_4();}
+        if($this->form_factory->get_issue_count() > 4){
+            $this->find_committee_5();}
         if($this->form_factory->get_committee_member_match() != "true")
         {$this->committee_markup = $this->get_committee_markup()." They do not serve on any relevant committees";}
 
@@ -178,6 +189,40 @@ class  ind_member_donwlaod
             $count = 3;
             $this->committee_loop($committee_id_array, $count);}
     }
+    public function find_committee_4()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_committee_issue_link where issue_id = '" . $this->form_factory->get_issue_4() . "';";
+        $key = 'link_id';
+        $this->database->select_query($query, $key);
+        $committee_id_array = null;
+        $count = 1;
+        foreach ($this->database->get_result() as $committee) {
+            $committee = get_object_vars($committee);
+            $committee_id_array[$count] = $committee['link_id'];
+            $count++;
+        }
+        if($committee_id_array != null){
+            $count = 4;
+            $this->committee_loop($committee_id_array, $count);}
+    }
+    public function find_committee_5()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_committee_issue_link where issue_id = '" . $this->form_factory->get_issue_5() . "';";
+        $key = 'link_id';
+        $this->database->select_query($query, $key);
+        $committee_id_array = null;
+        $count = 1;
+        foreach ($this->database->get_result() as $committee) {
+            $committee = get_object_vars($committee);
+            $committee_id_array[$count] = $committee['link_id'];
+            $count++;
+        }
+        if($committee_id_array != null){
+            $count = 5;
+            $this->committee_loop($committee_id_array, $count);}
+    }
     public function committee_loop($committee_id_array, $count)
     {
         $match = "false";
@@ -212,6 +257,14 @@ Serves on the " . $this->form_factory->get_committee_name() . " which the " . $t
                             $this->committee_markup = $this->get_committee_markup() . "
  Serves on the " . $this->form_factory->get_committee_name() . " which the " . $this->form_factory->get_issue_name_3() . " will pass through" . PHP_EOL;
                         }
+                        elseif ($count == 4) {
+                            $this->committee_markup = $this->get_committee_markup() . "
+ Serves on the " . $this->form_factory->get_committee_name() . " which the " . $this->form_factory->get_issue_name_4() . " will pass through" . PHP_EOL;
+                        }
+                        elseif ($count == 5) {
+                            $this->committee_markup = $this->get_committee_markup() . "
+ Serves on the " . $this->form_factory->get_committee_name() . " which the " . $this->form_factory->get_issue_name_5() . " will pass through" . PHP_EOL;
+                        }
                     }
                 }
             }
@@ -221,9 +274,16 @@ Serves on the " . $this->form_factory->get_committee_name() . " which the " . $t
     public function relevant_issue_markup()
     {
         $this->form_factory->set_issues();
+        $this->form_factory->set_issue_count();
         $this->find_primary_issue_1();
-        $this->find_primary_issue_2();
-        $this->find_primary_issue_3();
+        if($this->form_factory->get_issue_count() > 1)
+        {$this->find_primary_issue_2();}
+        if($this->form_factory->get_issue_count() > 2)
+        {$this->find_primary_issue_3();}
+        if($this->form_factory->get_issue_count() > 3)
+        {$this->find_primary_issue_4();}
+        if($this->form_factory->get_issue_count() > 4)
+        {$this->find_primary_issue_5();}
     }
     public function find_primary_issue_1()
     {
@@ -293,6 +353,54 @@ $this->form_factory->get_issue_name_1().PHP_EOL;
                 $this->form_factory->get_issue_name_3().PHP_EOL;
                 $primary_id =  $issue['primary_issue_id'];
                 $issue_id = $this->form_factory->get_issue_3();
+                $this->find_all_all_repeat_uses($primary_id, $issue_id);
+            }
+        }
+        $this->database = null;
+    }
+    public function find_primary_issue_4()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_issues where issue_id = '".$this->form_factory->get_issue_4()."';";
+        $key = "issue_id";
+        $this->database->select_query($query, $key);
+        $primary_id = null;
+        foreach ($this->database->get_result() as $issue)
+        {
+            $issue = get_object_vars($issue);
+            if($issue['primary_status'] == "0")
+            {$this->issue_markup = $this->get_issue_markup().
+                $this->form_factory->get_issue_name_4().PHP_EOL.
+                "No past info on ".$this->form_factory->get_issue_name_4().PHP_EOL;}
+            else{
+                $this->issue_markup = $this->get_issue_markup().
+                    $this->form_factory->get_issue_name_4().PHP_EOL;
+                $primary_id =  $issue['primary_issue_id'];
+                $issue_id = $this->form_factory->get_issue_4();
+                $this->find_all_all_repeat_uses($primary_id, $issue_id);
+            }
+        }
+        $this->database = null;
+    }
+    public function find_primary_issue_5()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_issues where issue_id = '".$this->form_factory->get_issue_5()."';";
+        $key = "issue_id";
+        $this->database->select_query($query, $key);
+        $primary_id = null;
+        foreach ($this->database->get_result() as $issue)
+        {
+            $issue = get_object_vars($issue);
+            if($issue['primary_status'] == "0")
+            {$this->issue_markup = $this->get_issue_markup().
+                $this->form_factory->get_issue_name_5().PHP_EOL.
+                "No past info on ".$this->form_factory->get_issue_name_5().PHP_EOL;}
+            else{
+                $this->issue_markup = $this->get_issue_markup().
+                    $this->form_factory->get_issue_name_5().PHP_EOL;
+                $primary_id =  $issue['primary_issue_id'];
+                $issue_id = $this->form_factory->get_issue_5();
                 $this->find_all_all_repeat_uses($primary_id, $issue_id);
             }
         }
