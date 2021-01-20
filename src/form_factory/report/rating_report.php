@@ -205,6 +205,7 @@ class rating_report extends meeting_report
     }
     public function rating_issue_4_query()
     {
+        \Drupal::logger("nfb_Washington_updates")->notice("I am getting here");
         $this->database = new base();
         $query = "select * from nfb_washington_rating where member_id = '".$this->get_member_id()."' and issue_id = '".$this->get_issue_4_id()."';";
         $key = 'rating_id';
