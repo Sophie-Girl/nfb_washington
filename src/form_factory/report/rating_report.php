@@ -388,10 +388,19 @@ class rating_report extends meeting_report
         $data['0']['district_text'] = "District/Senate_Rank";
         $data['0'][$this->get_issue_1_name()."_rating"] = $this->get_issue_1_name()."_rating";
         $data['0'][$this->get_issue_1_name()."_comment"] = $this->get_issue_1_name()."_comments";
-        $data['0'][$this->get_issue_2_name()."_rating"] = $this->get_issue_2_name()."rating";
-        $data['0'][$this->get_issue_2_name()."_comment"] = $this->get_issue_2_name()."_comments";
-        $data['0'][$this->get_issue_3_name()."_rating"] = $this->get_issue_3_name()."_rating";
-        $data['0'][$this->get_issue_3_name()."_comment"] = $this->get_issue_3_name()."_comments";
+        if($this->get_issue_count() > 1)
+        {$data['0'][$this->get_issue_2_name()."_rating"] = $this->get_issue_2_name()."rating";
+        $data['0'][$this->get_issue_2_name()."_comment"] = $this->get_issue_2_name()."_comments";}
+        if($this->get_issue_count() > 2)
+        {$data['0'][$this->get_issue_3_name()."_rating"] = $this->get_issue_3_name()."_rating";
+        $data['0'][$this->get_issue_3_name()."_comment"] = $this->get_issue_3_name()."_comments";}
+        if($this->get_issue_count() > 3)
+        {$data['0'][$this->get_issue_4_name()."_rating"]  = $this->get_issue_4_name()."_rating";
+        $data['0'][$this->get_issue_4_name()."_comment"] = $this->get_issue_4_name()."_comments";}
+        if($this->get_issue_count() > 4)
+        {$data['0'][$this->get_issue_5_name()."_rating"]  = $this->get_issue_5_name()."_rating";
+        $data['0'][$this->get_issue_5_name()."_comment"] = $this->get_issue_5_name()."_comments";}
+
     }
 
 
