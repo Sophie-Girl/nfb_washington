@@ -11,15 +11,24 @@ class rating_report extends meeting_report
     public $issue_1_rating;
     public $issue_2_rating;
     public $issue_3_rating;
+    public $issue_4_rating;
+    public $issue_5_rating;
     public $issue_1_comment;
     public $issue_2_comment;
     public $issue_3_comment;
+    public $issue_4_comment;
+    public $issue_5_comment;
     public $issue_1_id;
     public $issue_2_id;
     public $issue_3_id;
+    public $issue_4_id;
+    public $issue_5_id;
     public $issue_1_name;
     public $issue_2_name;
     public $issue_3_name;
+    public $issue_4_name;
+    public $issue_5_name;
+    public $issue_count;
     public$file_type;
     public $phpoffice;
     public function get_rating_id()
@@ -30,24 +39,42 @@ class rating_report extends meeting_report
     {return $this->issue_2_rating;}
     public function get_issue_3_rating()
     {return $this->issue_3_rating;}
+    public function get_issue_4_rating()
+    {return $this->issue_4_rating;}
+    public function get_issue_5_rating()
+    {return $this->issue_5_rating;}
     public function get_issue_1_comment()
     {return $this->issue_1_comment;}
     public function get_issue_2_comment()
     {return $this->issue_2_comment;}
     public function get_issue_3_comment()
     {return $this->issue_3_comment;}
+    public function get_issue_4_comment()
+    {return $this->issue_4_comment;}
+    public function get_issue_5_comment()
+    {return $this->issue_5_comment;}
     public function get_issue_1_id()
     {return $this->issue_1_id;}
     public function get_issue_2_id()
     {return $this->issue_2_id;}
     public function get_issue_3_id()
     {return $this->issue_3_id;}
+    public function get_issue_4_id()
+    {return $this->issue_4_id;}
+    public function get_issue_5_id()
+    {return $this->issue_5_id;}
     public function get_issue_1_name()
     {return $this->issue_1_name;}
     public function get_issue_2_name()
     {return $this->issue_2_name;}
     public function get_issue_3_name()
     {return $this->issue_3_name;}
+    public function get_issue_4_name()
+    {return $this->issue_4_name;}
+    public function get_issue_5_name()
+    {return $this->issue_5_name;}
+    public function get_issue_count()
+    {return $this->issue_count;}
     public function  get_file_type()
     {return $this->file_type;}
     public function build_rating_form(&$form, $form_state)
@@ -69,9 +96,29 @@ class rating_report extends meeting_report
         );
 
     }
+    public function set_issue_count()
+    {
+        $issue_count = null;
+        $query = "select * from nfb_washington_config where setting = 'issue_count' and active = '0';";
+        $key = 'config_id';
+        $this->database = new base();
+        $this->database->select_query($query, $key);
+        if($this->database->get_result() != "error"|| $this->database->get_result() != array())
+        {
+            foreach($this->database->get_result() as $setting)
+            {
+                if($issue_count == null){
+                    $setting = get_object_vars($setting);
+                    $issue_count = $setting['value'];}
+            }
+        }
+        $this->issue_count = $issue_count;
+        $this->database = null;
+    }
     public function backend_markups_and_array(FormStateInterface $form_state)
     {
         $this->file_type = $form_state->getValue("file_type");
+        $this->set_issue_count();
         $this->get_issues();
         $this->full_member_query();
         $ratings_array = [];
@@ -84,8 +131,14 @@ class rating_report extends meeting_report
             $this->civi_id = $member['civicrm_contact_id'];
             $this->civi_query_stuff();
             $this->rating_issue_1_query();
-            $this->rating_issue_2_query();
-            $this->rating_issue_3_query();
+            if($this->get_issue_count() > 1)
+            {$this->rating_issue_2_query();}
+            if($this->get_issue_count() > 2)
+            {$this->rating_issue_3_query();}
+            if($this->get_issue_count() > 3)
+            {$this->rating_issue_4_query();}
+            if($this->get_issue_count() > 4)
+            {$this->rating_issue_5_query();}
             $this->build_array($ratings_array);
         }
         $this->member_results = $ratings_array;
@@ -137,7 +190,7 @@ class rating_report extends meeting_report
     public function rating_issue_3_query()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_rating where member_id = '".$this->get_issue_3_id()."' and issue_id = '".$this->get_issue_1_id()."';";
+        $query = "select * from nfb_washington_rating where member_id = '".$this->get_member_id()."' and issue_id = '".$this->get_issue_3_id()."';";
         $key = 'rating_id';
         $this->database->select_query($query, $key);
 
@@ -145,8 +198,40 @@ class rating_report extends meeting_report
             foreach ($this->database->get_result() as $rating) {
                 $rating = get_object_vars($rating);
                 $this->rating_switch($rating, $rating_value);
-                $this->issue_1_rating = $rating_value;
-                $this->issue_1_comment = $rating['comment'];
+                $this->issue_3_rating = $rating_value;
+                $this->issue_3_comment = $rating['comment'];
+            }
+        }
+    }
+    public function rating_issue_4_query()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_rating where member_id = '".$this->get_member_id()."' and issue_id = '".$this->get_issue_4_id()."';";
+        $key = 'rating_id';
+        $this->database->select_query($query, $key);
+
+        if($this->database->get_result() == array()) {
+            foreach ($this->database->get_result() as $rating) {
+                $rating = get_object_vars($rating);
+                $this->rating_switch($rating, $rating_value);
+                $this->issue_4_rating = $rating_value;
+                $this->issue_4_comment = $rating['comment'];
+            }
+        }
+    }
+    public function rating_issue_5_query()
+    {
+        $this->database = new base();
+        $query = "select * from nfb_washington_rating where member_id = '".$this->get_member_id()."' and issue_id = '".$this->get_issue_5_id()."';";
+        $key = 'rating_id';
+        $this->database->select_query($query, $key);
+
+        if($this->database->get_result() == array()) {
+            foreach ($this->database->get_result() as $rating) {
+                $rating = get_object_vars($rating);
+                $this->rating_switch($rating, $rating_value);
+                $this->issue_5_rating = $rating_value;
+                $this->issue_5_comment = $rating['comment'];
             }
         }
     }
@@ -189,6 +274,13 @@ class rating_report extends meeting_report
                     $this->issue_3_name = $issue['issue_name'];
                     $this->issue_3_id = $issue['issue_id'];
                     break;
+                case 4:
+                    $this->issue_4_name = $issue['issue_name'];
+                    $this->issue_4_id = $issue['issue_id']; break;
+                case 5:
+                    $this->issue_5_name = $issue['issue_name'];
+                    $this->issue_5_id = $issue['issue_id'];break;
+
             }
             $count++;
         }
@@ -203,10 +295,18 @@ class rating_report extends meeting_report
         $ratings_array[$array_key]['district_text'] = $this->district_text();
         $ratings_array[$array_key][$this->get_issue_1_name()."_rating"] = $this->get_issue_1_rating();
         $ratings_array[$array_key][$this->get_issue_1_name()."_comment"] = $this->get_issue_1_comment();
-        $ratings_array[$array_key][$this->get_issue_2_name()."_rating"] = $this->get_issue_2_rating();
-        $ratings_array[$array_key][$this->get_issue_2_name()."_comment"] = $this->get_issue_2_comment();
-        $ratings_array[$array_key][$this->get_issue_3_name()."_rating"] = $this->get_issue_3_rating();
-        $ratings_array[$array_key][$this->get_issue_3_name()."_comment"] = $this->get_issue_3_comment();
+        if($this->get_issue_count() > 1)
+        {$ratings_array[$array_key][$this->get_issue_2_name()."_rating"] = $this->get_issue_2_rating();
+        $ratings_array[$array_key][$this->get_issue_2_name()."_comment"] = $this->get_issue_2_comment();}
+        if($this->get_issue_count() > 2)
+        {$ratings_array[$array_key][$this->get_issue_3_name()."_rating"] = $this->get_issue_3_rating();
+        $ratings_array[$array_key][$this->get_issue_3_name()."_comment"] = $this->get_issue_3_comment();}
+        if($this->get_issue_count() > 3)
+        {$ratings_array[$array_key][$this->get_issue_4_name()."_rating"] = $this->get_issue_4_rating();
+        $ratings_array[$array_key][$this->get_issue_4_name()."_comment"] = $this->get_issue_4_comment();}
+        if($this->get_issue_count() > 4)
+        {$ratings_array[$array_key][$this->get_issue_5_name()."_rating"] = $this->get_issue_5_rating();
+        $ratings_array[$array_key][$this->get_issue_5_name()."_comment"] = $this->get_issue_5_comment();}
     }
     public function docx_function()
     { $year = date("Y");
