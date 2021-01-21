@@ -23,7 +23,6 @@ class AdminNoteLinkForm extends FormBase
         $this->congress_number_markup($form, $form_state);
         $this->form_factory = new admin_note_link();
         $this->form_factory->build_form_array($form, $form_state);
-        \Drupal::logger("nfb_washington_ajax_debug")->notice("form array: ".print_r($form['member'],true));
         $this->form_factory = null;
         return $form;
     }

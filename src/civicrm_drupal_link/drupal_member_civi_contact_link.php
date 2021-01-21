@@ -288,7 +288,6 @@ class drupal_member_civi_contact_link
                 $member_id = $member['member_id'];
             }
         }
-        \Drupal::logger("nfb_washington_member_deduplication")->notice("Member Id: ".$member_id);
         if($member_id != null)
         {
             $this->update_member_record($member_id);
@@ -301,7 +300,7 @@ class drupal_member_civi_contact_link
     {
 
         foreach($this->propublica_query->get_propublica_result()['results']['0']['members'] as $member)
-        {\Drupal::logger("nfb_washington_maintenance")->notice("member_array: ".print_r($member, true));
+        {
         $this->propublica_query->leaving_congress_parse($member);
                 $this->find_civi_record();
                 $this->maintnence_database();}
@@ -333,7 +332,6 @@ class drupal_member_civi_contact_link
         foreach($this->database->get_result() as $member)
         {
             $member = get_object_vars($member);
-            \Drupal::logger("nfb_washington_maintenance")->notice("sql result ".$member['member_id']);
             $member_id = $member['member_id'];
         }
         if($member_id)
@@ -413,7 +411,6 @@ class drupal_member_civi_contact_link
     }
     public function deactivate_maintnence_record($member_id)
     {
-        \Drupal::logger("i_hate_programming")->notice("I am gettign here UwU");
         $query = "update nfb_washington_members
         set active = '1'
         where member_id = '".$member_id."';";

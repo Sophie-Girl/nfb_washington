@@ -56,7 +56,6 @@ class drupal_propublica_committee_link
 
         foreach($this->propublica->get_propublica_result()['results']['0']['committees']as $committee)
         {
-            \Drupal::logger('nfb_washington_committee')->notice(print_r($committee, true));
             $this->propublica->parse_general_query($committee, $committee_name);
         }
     }
@@ -109,7 +108,6 @@ class drupal_propublica_committee_link
         $this->establish_propublica_dependencies();
         if(!$this->propublica->get_search_criteria_1())
         {$this->propublica->search_criteria_1 = $form_state->getValue("committee_chamber");}
-        \drupal::logger("nfb_washington_debug")->notice("I am running the query");
         $this->propublica->specific_committee_search();
     }
     public function database_value_lookup()
@@ -166,7 +164,6 @@ class drupal_propublica_committee_link
     }
     public function member_committee_run_through()
     {
-        \drupal::logger("nfb_washington_debug")->notice(print_r($this->propublica->get_propublica_result(), true));
         foreach($this->propublica->get_propublica_result()['results']['0']['current_members'] as $com_mem)
         {
             $this->drupal_member_id = null;
@@ -187,7 +184,6 @@ class drupal_propublica_committee_link
     }
     public function set_drupal_member_id($result)
     {
-        \drupal::logger("nfb_washington_debug")->notice("I am doing the drupal add committee members");
         $member_id = null;
         foreach ($result as $member)
         {

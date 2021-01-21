@@ -41,11 +41,9 @@ class query_base
         {
             $api_keys = get_object_vars($api_keys);
             if($api_key == "")
-            {$api_key = $api_keys['value'];
-            \Drupal::logger("nfb_Washington_api_key")->notice("aPI_key ".$this->get_api_key());}
+            {$api_key = $api_keys['value'];}
         }
         $this->api_key = $api_key;
-        \Drupal::logger("nfb_Washington_api_key")->notice("aPI_key ".$this->get_api_key());
     }
     public function  set_curl()
     {

@@ -21,7 +21,6 @@ class admin_link_com_issue_backend
     {
             $this->set_values($form_state);
             $this->duplicate_check();
-        \Drupal::logger("nfb_washington")->notice("I did the thing");
             $this->redirect();
 
     }

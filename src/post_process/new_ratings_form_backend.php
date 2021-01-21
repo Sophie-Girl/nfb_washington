@@ -92,7 +92,6 @@ class new_ratings_form_backend
         if($this->issue_count > 2){
         $issue_number = 3;
         $this->deduplication($issue_number);}
-        \drupal::logger("nfb_washington_issue_debug")->notice($this->get_issue_count());
         if($this->issue_count > 3){
             $issue_number = 4;
             $this->deduplication($issue_number);}
@@ -305,7 +304,7 @@ class new_ratings_form_backend
     }
     public function convert_rating($rating, $issue_number)
     {
-        \Drupal::logger("nfb_washington")->notice("rating ".$rating. " ". $issue_number);
+
         switch($rating)
         {
             case "Yes":

@@ -46,7 +46,6 @@ public function process_sql_result()
 {
 
 $issue_data = get_object_vars($this->get_sql_result()[$this->get_issue_id()]);
-\drupal::logger('nfb_washington_ajax')->notice(print_r($issue_data, true));
 $data = [];
 $data[0] = $issue_data['issue_name'];
 $data[1] = $issue_data['bill_id'];

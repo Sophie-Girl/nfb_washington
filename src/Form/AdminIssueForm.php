@@ -52,7 +52,6 @@ class AdminIssueForm extends FormBase
     public function verify_api_key(&$form, $form_state)
     {
         $this->verification = new api_key_check();
-        \drupal::logger('nfb_washington')->notice("i am about to run the query");
         $this->verification->api_key_validation($form,$form_state);
     }
     public function congress_number_markup(&$form, &$form_state)
@@ -78,7 +77,6 @@ class AdminIssueForm extends FormBase
         foreach($this->database->get_result() as $count)
         {
             $count = get_object_vars($count);
-            \Drupal::logger("nfb_washington_validation")->notice($count['issues']);
         }
 
         if($count['issues'] == $this->get_issue_limit() && $issue_type == "create" ||

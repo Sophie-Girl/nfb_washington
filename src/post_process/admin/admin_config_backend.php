@@ -128,7 +128,6 @@ Class admin_config_backend
         $query = "select * from nfb_washington_config where setting = 'seminar_type';";
         $key = "value";
         $this->database->select_query($query, $key);
-        \Drupal::logger("nfb_washington_updates")->notice("seminar_type: ".print_r($this->database->get_result(), true));
         if($this->database->get_result() == "error" || $this->database->get_result() == array())
         {
             $this->insert_seminar_type();
@@ -149,7 +148,6 @@ Class admin_config_backend
             "last_modified_user" => \drupal::currentUser()->getUsername(),
         );
         $this->database = new base();
-        \Drupal::logger('nfb_washington_updates')->notice("I am getting here");
         $this->database->insert_query($table, $fields);
     }
     public function update_seminar_type()
