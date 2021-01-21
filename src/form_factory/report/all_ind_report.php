@@ -5,7 +5,7 @@ use Drupal\Core\Form\FormStateInterface;
 class all_ind_report
 {
 
-    public function  build_form_array(&$from, FormStateInterface $form_state)
+    public function  build_form_array(&$form, FormStateInterface $form_state)
     {
         $form['report_markup'] = array(
             '#type' => 'item',

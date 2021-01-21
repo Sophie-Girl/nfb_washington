@@ -14,7 +14,7 @@ class FullIndReprotForm extends FormBase
     public function buildForm(array $form, FormStateInterface $form_state)
     {
         $this->form_factory = new all_ind_report();
-        $this->buildForm($form, $form_state);
+        $this->form_factory->build_form_array($form, $form_state);
         $this->form_factory = null;
         return $form;
     }
