@@ -50,6 +50,7 @@ class all_member_download extends ind_member_donwlaod
         $this->form_factory->state = $member['state'];
         $this->form_factory->rank = $member['rank'];
         $this->form_factory->district = $member['district'];
+        $this->form_factory->get_contact_info();
     }
     public function all_set__text_values()
     {
