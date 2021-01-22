@@ -3,10 +3,14 @@ Namespace Drupal\nfb_washington\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\form_factory\report\all_ind_report;
+use Drupal\nfb_washington\form_factory\report\individual_member_report;
+use Drupal\nfb_washington\microsoft_office\html_to_word;
+use Drupal\nfb_washington\post_process\report\all_member_download;
 
 class FullIndReprotForm extends FormBase
 {
     public $form_factory;
+    public $backend;
     public function getFormId()
     {
         return "nfb_washington_all_mem_report";
@@ -20,6 +24,9 @@ class FullIndReprotForm extends FormBase
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        // TODO: Implement submitForm() method.
+        $form_factory = new individual_member_report();
+        $php_word = new html_to_word();
+        $this->backend = new all_member_download($php_word, $form_factory);
+        $this->backend->full_backend();
     }
 }

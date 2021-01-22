@@ -10,9 +10,14 @@ class all_member_download extends ind_member_donwlaod
     public $full_markup;
     public function geT_full_markup()
 { return $this->full_markup;}
-    public function backend()
+    public function full_backend()
     {
-
+        $this->set_all_members();
+        $this->member_loop();
+        $this->phpoffice->font_size = '12';
+        $this->phpoffice->report_name = "all_member_report_washington_seminar.docx";
+        $text = $this->geT_full_markup();
+        $this->phpoffice->download_doc($text);
     }
     public function set_all_members( )
     {
@@ -34,7 +39,7 @@ class all_member_download extends ind_member_donwlaod
             $this->handle_notes();
             $this->committee_text_maker(); $this->relevant_issue_markup();
             $this->build_text($text);
-            $this->full_markup = $this->get_contact_markup(). $text;
+            $this->full_markup = $this->geT_full_markup(). $text;
             $this->clear_markups();
         }
     }
