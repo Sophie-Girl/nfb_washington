@@ -46,7 +46,7 @@ class all_member_download extends ind_member_donwlaod
     public  function  all_Set_values($member)
     {
         $this->form_factory->member_id = $member['member_id'];
-        $this->form_factory->civicrm_id = $member['civi_contact_id'];
+        $this->form_factory->civicrm_id = $member['civicrm_contact_id'];
         $this->form_factory->state = $member['state'];
         $this->form_factory->rank = $member['rank'];
         $this->form_factory->district = $member['district'];
