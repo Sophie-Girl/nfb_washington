@@ -74,3 +74,7 @@ nfb_washington.all_mem:
   route_name: nfb_washington_all_ind_report
   title: 'All Member Report'
   base_route: nfb_washington.admin
+nfb_washington.admin_faq:
+  route_name: nfb_washington.admin_faq
+  title: "FAQ"
+  base_route: nfb_washington.admin
