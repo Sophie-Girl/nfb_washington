@@ -6,6 +6,10 @@ class  AdminFAQController extends ControllerBase
     public function content()
     {
         $page = "<p>This text will be filled in at a later date</p>";
-        return $page;
+        return [
+            '#type' => 'markup',
+            '#markup' => $page,
+        ];
+
     }
 }
