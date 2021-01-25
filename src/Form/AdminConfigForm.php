@@ -18,7 +18,8 @@ class AdminConfigForm extends FormBase
     public function buildForm(array $form, FormStateInterface $form_state)
     {
         $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
-       $this->verification = new api_key_check(); $this->factory =  new admin_config();
+        $form['#attached']['library'][] = 'nfb_washington/edit-config';
+        $this->verification = new api_key_check(); $this->factory =  new admin_config();
        $this->verification->api_key_validation($form, $form_state);
        $this->factory->build_form_array($form, $form_state);
        return $form;

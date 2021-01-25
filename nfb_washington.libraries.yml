@@ -27,3 +27,7 @@ ind-report:
   version: 1.x
   js:
     js/ind-report.js: {}
+edit-config:
+  version: 1.x
+  js:
+    js/edit-config.js: {}

@@ -31,7 +31,7 @@ $this->process_sql_result();
 }
 public function request_js_data()
 {
-$request = Request::createFromGlobals();
+    $request = Request::createFromGlobals();
 $this->issue_id = $request->request->get('issueid');
 }
 public function issue_query()

@@ -162,6 +162,13 @@ nfb_washington.note_ajax:
     _title: 'ajax'
   requirements:
     _permission: 'access content'
+nfb_washington.config_ajax:
+  path: 'nfb_washington/admin/ajax/config'
+  defaults:
+    _controller: '\Drupal\nfb_washington\Controller\ConfigAjaxController::content'
+    _title: 'ajax'
+  requirements:
+    _permission: 'access content'
 nfb_washington_note_link:
   path: 'nfb_washington/admin/note_link'
   defaults:
