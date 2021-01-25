@@ -1,7 +1,7 @@
 <?php
 Namespace Drupal\nfb_washington\Controller;
 use Drupal\Core\Controller\ControllerBase;
-class  AdminFAQCOntroller extends ControllerBase
+class  AdminFAQController extends ControllerBase
 {
     public function content()
     {
