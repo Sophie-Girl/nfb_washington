@@ -30,7 +30,7 @@ class all_member_download extends ind_member_donwlaod
     }
     public function member_loop()
     { $year = date('Y');
-        $this->full_markup = $year. " Washington Seminar All Member " ;
+        $this->full_markup = $year. " Washington Seminar All Member Report".PHP_EOL;
         foreach($this->get_full_member_results() as $member)
         {
             $member = get_object_vars($member);
