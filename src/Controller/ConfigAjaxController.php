@@ -38,11 +38,28 @@ class ConfigAjaxController extends  ControllerBase
                 case 'staff_email':
                     $data[3]= $config['value']; break;
                 case 'issue_count':
-                    $data[4] = $config['value']; break;
+                    $this->issue_count_switch($issue_count, $config);
+                    $data[4] = $issue_count; break;
             }
         }
         $this->data = $data;
 
+    }
+    public function  issue_count_switch(&$issue_count, $config)
+    {
+        switch ($config['value'])
+        {
+            case '1':
+                $issue_count = 1; break;
+            case '2':
+                $issue_count = 2; break;
+            case '3':
+                $issue_count = 'original_spec'; break;
+            case '4':
+                $issue_count = 'death'; break;
+            case '5':
+                $issue_count = 'just_in_case';break;
+        }
     }
 
 }
