@@ -68,7 +68,7 @@ class markup_elements extends date_elements
     public function new_home_markup(FormStateInterface $form_state, &$markup)
     {
         $markup = "<table>
-    <tr><th class='table-header'>Member of Congress<th class='table-header'>Chamber</th><th class='table-header'>District/Rank</th><th class='table-header'>Meeting Location</th><th class='table-header'>Meeting Time</th><th class='table-header'>NFB Contact</th><th class='table-header'>Member of Congress Contact Person</th><th class='table-header'>Details/Meeting/Rating</th></tr>";
+    <tr><th class='table-header'>Member of Congress<th class='table-header'>Chamber</th><th class='table-header'>District/Rank</th><th class='table-header'>Meeting Location</th><th class='table-header'>Meeting Time</th><th class='table-header'>NFB Contact</th><th class='table-header'>Member of Congress Contact Person</th><th class='table-header'>Details</th><th class='table-header'>Meeting</th><th class='table-header'>Ratings</th></tr>";
         $this->database = new base();
         $query = "select * from nfb_washington_members where state = '".$form_state->getValue("select_state")."'
         and active = '0' and district = 'Senate';";
@@ -212,7 +212,7 @@ class markup_elements extends date_elements
         if($member_array['meeting_id'] == "new") {$button_2 = "Schedule";}
         else{$button_2 = "Edit";}
         $button_1 = "View";
-            $markup = $markup."<tr><td>".$member_array['first_name']." ".$member_array['last_name']."</td><td>".$chamber."</td><td>$rank</td><td>".$member_array['location']."</td><td>".$member_array['meeting_date']." ".$member_array['meeting_time']."</td><td>".$member_array['nfb_contact']."</td><td>".$member_array['moc_contact']."</td><td><a href='/nfb-washington/report/moc/".$member_array['id']."' class='button-1' role = 'button' aria-label='View Member Details'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_1."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;<a href='/nfb-washington/meeting/".$member_array['meeting_id']."' class='button-2' role='button' aria-label = '".$button_2." Meeting'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_2."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;<a  href='/nfb-washington/rating/".$button_3_url."' class='button-3' role = 'button' aria-label='".$button_3." Rating'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_3."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td></tr>";
+            $markup = $markup."<tr><th>".$member_array['first_name']." ".$member_array['last_name']."</th><td>".$chamber."</td><td>$rank</td><td>".$member_array['location']."</td><td>".$member_array['meeting_date']." ".$member_array['meeting_time']."</td><td>".$member_array['nfb_contact']."</td><td>".$member_array['moc_contact']."</td><td><a href='/nfb-washington/report/moc/".$member_array['id']."' class='button-1' role = 'button' aria-label='View Member Details'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_1."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td><td><a href='/nfb-washington/meeting/".$member_array['meeting_id']."' class='button-2' role='button' aria-label = '".$button_2." Meeting'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_2."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td><td><a  href='/nfb-washington/rating/".$button_3_url."' class='button-3' role = 'button' aria-label='".$button_3." Rating'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_3."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td></tr>";
     }
 
 
