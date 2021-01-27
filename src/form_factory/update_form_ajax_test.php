@@ -37,7 +37,7 @@ class update_form_ajax_test extends markup_elements
         $this->representative_data->get_rep_data_update($form_state, $category, $text);
         $form['meeting_data']['nfb_civicrm_phone_1'] = array(
             '#type' => 'textfield',
-            '#title' => $this->t("Contact Person Phone"),
+            '#title' => $this->t("NFB Contact Phone"),
             '#size' => 20,
             '#required' => TRUE,
         );

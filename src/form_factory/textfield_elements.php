@@ -48,7 +48,7 @@ class textfield_elements extends element_base
 
         $form['nfb_contact_name'] = array(
             '#type' => 'textfield',
-            '#title' => "Contact Person Name",
+            '#title' => "NFB Contact Person Name",
             '#size' => 20,
             '#required' => TRUE,
         );
@@ -77,7 +77,7 @@ class textfield_elements extends element_base
             '#required' => $this->get_element_required_status(),);
     }
     public function contact_first_name_element(&$form, $form_state)
-    {   $this->type = 'textfield'; $this->title = "Point of Contact First Name";
+    {   $this->type = 'textfield'; $this->title = "NFB Contact First Name";
         $this->min = '1'; $this->max = '30';
         $this->size = '20'; $this->required = TRUE;
         $this->element_id = 'nfb_civicrm_f_name_1';
@@ -85,13 +85,13 @@ class textfield_elements extends element_base
         $this->build_static_textfield($form, $form_state);
         }
     public function contact_last_name_element(&$form, $form_state)
-    {   $this->type = 'textfield'; $this->title = "Point of Contact Last Name";
+    {   $this->type = 'textfield'; $this->title = "NFB Contact Last Name";
         $this->min = '1'; $this->max = '30';
         $this->size = '20'; $this->required = TRUE;
         $this->element_id = 'nfb_civicrm_l_name_1';
         $this->build_static_textfield($form, $form_state);}
     public function contact_email_element(&$form, $form_state) // MOC contact info. todo ask Ross if we need a phone element
-    {   $this->type = 'textfield'; $this->title = "Point of Contact Phone";
+    {   $this->type = 'textfield'; $this->title = "NFB Contact Phone";
         $this->min = '1'; $this->max = '40';
         $this->size = '20'; $this->required = TRUE;
         $this->element_id = 'nfb_civicrm_phone_1';
