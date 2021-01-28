@@ -48,6 +48,7 @@ class drupal_propublica_committee_link
         $this->establish_propublica_dependencies();
         $this->propublica->search_criteria_1 = $form_state->getValue("committee_chamber");
         $this->propublica->general_committee_search();
+        \Drupal::logger('nfb_washington_debug')->notice("propublica_array: ".print_r($this->propublica->get_propublica_result(), true) );
         $this->initial_addition_run_through();
     }
     public function initial_addition_run_through()
