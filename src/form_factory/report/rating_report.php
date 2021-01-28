@@ -145,6 +145,7 @@ class rating_report extends meeting_report
             if($this->get_issue_count() > 4)
             {$this->rating_issue_5_query();}
             $this->build_array($ratings_array);
+            $this->clear_ratings();
         }
         $this->member_results = $ratings_array;
         if($this->get_file_type() == "csv")
@@ -159,6 +160,19 @@ class rating_report extends meeting_report
             $this->phpoffice->download_doc($text);
 
         }
+    }
+    public function clear_ratings()
+    {
+        $this->issue_1_rating = null;
+        $this->issue_1_comment = null;
+        $this->issue_2_rating = null;
+        $this->issue_2_comment = null;
+        $this->issue_3_rating = null;
+        $this->issue_3_comment = null;
+        $this->issue_4_rating = null;
+        $this->issue_4_comment = null;
+        $this->issue_5_rating = null;
+        $this->issue_5_comment = null;
     }
     public function set_meeting_id()
     {
@@ -238,7 +252,7 @@ class rating_report extends meeting_report
         $key = 'rating_id';
         $this->database->select_query($query, $key);
 
-        if($this->database->get_result() == array()) {
+        if($this->database->get_result() != array()) {
             foreach ($this->database->get_result() as $rating) {
                 $rating = get_object_vars($rating);
                 $this->rating_switch($rating, $rating_value);
@@ -254,7 +268,7 @@ class rating_report extends meeting_report
         $key = 'rating_id';
         $this->database->select_query($query, $key);
 
-        if($this->database->get_result() == array()) {
+        if($this->database->get_result() != array()) {
             foreach ($this->database->get_result() as $rating) {
                 $rating = get_object_vars($rating);
                 $this->rating_switch($rating, $rating_value);
