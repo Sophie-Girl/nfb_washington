@@ -129,6 +129,7 @@ class rating_report extends meeting_report
             $this->rank = $member['rank'];
             $this->district = $member['district'];
             $this->civi_id = $member['civicrm_contact_id'];
+            $this->member_id = $member['member_id'];
             $this->civi_query_stuff();
             $this->rating_issue_1_query();
             if($this->get_issue_count() > 1)
