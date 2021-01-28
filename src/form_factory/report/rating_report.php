@@ -29,10 +29,13 @@ class rating_report extends meeting_report
     public $issue_4_name;
     public $issue_5_name;
     public $issue_count;
+    public $meeting_id;
     public$file_type;
     public $phpoffice;
     public function get_rating_id()
     {return $this->rating_id;}
+    public function get_meeting_id()
+    {return $this->meeting_id;}
     public function get_issue_1_rating()
     {return $this->issue_1_rating;}
     public function get_issue_2_rating()
@@ -131,6 +134,7 @@ class rating_report extends meeting_report
             $this->civi_id = $member['civicrm_contact_id'];
             $this->member_id = $member['member_id'];
             $this->civi_query_stuff();
+            $this->set_meeting_id();
             $this->rating_issue_1_query();
             if($this->get_issue_count() > 1)
             {$this->rating_issue_2_query();}
@@ -157,10 +161,29 @@ class rating_report extends meeting_report
 
         }
     }
+    public function set_meeting_id()
+    {
+        $year = date('Y');
+        $this->database = new base();
+        $query = "select * from nfb_washington_activities  where member_id = '".$this->get_member_id()."' and meeting_year =
+        '".$year."';";
+        $key = 'activity_id';
+        $this->meeting_id = null;
+        $this->database->select_query($query, $key);
+        foreach( $this->database->get_result() as $meeting)
+        {
+            $meeting = get_object_vars($meeting);
+            if($this->get_meeting_id() == null)
+            {
+                $this->meeting_id = $meeting['member_id'];
+            }
+        }
+        $this->database = null;
+    }
     public function rating_issue_1_query()
     {
          $this->database = new base();
-         $query = "select * from nfb_washington_rating where member_id = '".$this->get_member_id()."' and issue_id = '".$this->get_issue_1_id()."';";
+         $query = "select * from nfb_washington_rating where activity_id' = '".$this->get_meeting_id()."' and issue_id = '".$this->get_issue_1_id()."';";
          $key = 'rating_id';
          $this->database->select_query($query, $key);
         \Drupal::logger('nfb_Washington_debug')->notice("sql results: ".print_r($this->database->get_result(), true));
