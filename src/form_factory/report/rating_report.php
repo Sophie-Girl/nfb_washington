@@ -183,7 +183,7 @@ class rating_report extends meeting_report
     public function rating_issue_1_query()
     {
          $this->database = new base();
-         $query = "select * from nfb_washington_rating where activity_id' = '".$this->get_meeting_id()."' and issue_id = '".$this->get_issue_1_id()."';";
+         $query = "select * from nfb_washington_rating where activity_id = '".$this->get_meeting_id()."' and issue_id = '".$this->get_issue_1_id()."';";
          $key = 'rating_id';
          $this->database->select_query($query, $key);
         \Drupal::logger('nfb_Washington_debug')->notice("sql results: ".print_r($this->database->get_result(), true));
