@@ -134,7 +134,6 @@ class rating_report extends meeting_report
             $this->civi_id = $member['civicrm_contact_id'];
             $this->member_id = $member['member_id'];
             $this->civi_query_stuff();
-            $this->set_meeting_id();
             $this->rating_issue_1_query();
             if($this->get_issue_count() > 1)
             {$this->rating_issue_2_query();}
@@ -165,13 +164,13 @@ class rating_report extends meeting_report
     {
         $year = date('Y');
         $this->database = new base();
-        $query = "select * from nfb_washington_activities  where member_id = '".$this->get_member_id()."' and meeting_year =
+        $query = "select * from nfb_washington_activities  where member_id = ".$this->get_member_id()." and meeting_year =
         '".$year."';";
         $key = 'activity_id';
         $this->meeting_id = null;
         $this->database->select_query($query, $key);
         \Drupal::logger('nfb_Washington_debug')->notice("sql results: ".print_r($this->database->get_result(), true));
-        \Drupal::logger('nfb_Washington_debug')->notice("query: ". $query);
+
         foreach( $this->database->get_result() as $meeting)
         {
             $meeting = get_object_vars($meeting);
@@ -185,11 +184,12 @@ class rating_report extends meeting_report
     public function rating_issue_1_query()
     {
          $this->database = new base();
-         $query = "select * from nfb_washington_rating where activity_id = '".$this->get_meeting_id()."' and issue_id = '".$this->get_issue_1_id()."';";
+         $query = "select * from nfb_washington_rating where member_id = '".$this->get_member_id()."' and issue_id = '".$this->get_issue_1_id()."';";
          $key = 'rating_id';
          $this->database->select_query($query, $key);
-        \Drupal::logger('nfb_Washington_debug')->notice("sql results: ".print_r($this->database->get_result(), true));
-         if($this->database->get_result() == array()) {
+        \Drupal::logger('nfb_Washington_debug')->notice("query: ". $query);
+         \Drupal::logger('nfb_Washington_debug')->notice("sql results: ".print_r($this->database->get_result(), true));
+         if($this->database->get_result() != array()) {
              foreach ($this->database->get_result() as $rating) {
                  $rating = get_object_vars($rating);
                  $this->rating_switch($rating, $rating_value);
@@ -205,7 +205,7 @@ class rating_report extends meeting_report
         $query = "select * from nfb_washington_rating where member_id = '".$this->get_member_id()."' and issue_id = '".$this->get_issue_2_id()."';";
         $key = 'rating_id';
         $this->database->select_query($query, $key);
-        if($this->database->get_result() == array()) {
+        if($this->database->get_result() != array()) {
             foreach ($this->database->get_result() as $rating) {
                 $rating = get_object_vars($rating);
                 $this->rating_switch($rating, $rating_value);
@@ -222,7 +222,7 @@ class rating_report extends meeting_report
         $key = 'rating_id';
         $this->database->select_query($query, $key);
 
-        if($this->database->get_result() == array()) {
+        if($this->database->get_result() != array()) {
             foreach ($this->database->get_result() as $rating) {
                 $rating = get_object_vars($rating);
                 $this->rating_switch($rating, $rating_value);
