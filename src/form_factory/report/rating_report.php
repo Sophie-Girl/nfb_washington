@@ -175,7 +175,7 @@ class rating_report extends meeting_report
             $meeting = get_object_vars($meeting);
             if($this->get_meeting_id() == null)
             {
-                $this->meeting_id = $meeting['member_id'];
+                $this->meeting_id = $meeting['activity_id'];
             }
         }
         $this->database = null;
