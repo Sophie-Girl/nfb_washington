@@ -258,6 +258,7 @@ class rating_report extends meeting_report
         $key = 'issue_id';
         $this->database->select_query($query, $key);
         $count = 1;
+        \Drupal::logger('nfb_Washington_debug')->notice("sql results: ".print_r($this->database->get_result(), true));
         foreach ($this->database->get_result() as $issue)
         {
             $issue = get_object_vars($issue);
