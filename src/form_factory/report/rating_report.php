@@ -163,7 +163,7 @@ class rating_report extends meeting_report
          $query = "select * from nfb_washington_rating where member_id = '".$this->get_member_id()."' and issue_id = '".$this->get_issue_1_id()."';";
          $key = 'rating_id';
          $this->database->select_query($query, $key);
-        \Drupal::logger('nfb_Washington_debug')->notice("sql query: ".$query);
+        \Drupal::logger('nfb_Washington_debug')->notice("sql results: ".print_r($this->database->get_result(), true));
          if($this->database->get_result() == array()) {
              foreach ($this->database->get_result() as $rating) {
                  $rating = get_object_vars($rating);
