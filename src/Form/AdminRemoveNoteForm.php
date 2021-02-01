@@ -8,9 +8,9 @@ class AdminRemoveNoteForm extends FormBase
     public $form_factory;
     public function  getFormId()
     {
-        return  "nfb_wash_remove_note";
+        return  "nfb_wash_remove_notes_from_member ";
     }
-    public function  buildForm(array $form, FormStateInterface $form_state, $link = 'none')
+    public function  buildForm(array $form, FormStateInterface $form_state, $link = 'na')
     {
         \Drupal::logger('nfb_washington')->notice("I am getting here");
         $this->form_factory = new admin_remove_note();

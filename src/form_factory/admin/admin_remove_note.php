@@ -30,7 +30,7 @@ class  admin_remove_note
     {return $this->last_nane;}
     public function build_form_array(&$form, $form_state, $link)
     {
-        if($link != "none")
+        if($link != "na")
         {
             $this->note_link_id = $link;
             $this->find_note_and_member_id();

@@ -193,7 +193,7 @@ nfb_washington_remove_note:
   defaults:
     _form: '\Drupal\nfb_washington\Form\IndMemberReportForm'
     _title: 'NFB Washington: Remove note from member'
-    link: "none"
+    link: "na"
   requirements:
     _access: 'TRUE'
     _permission: 'access content'
