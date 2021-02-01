@@ -3,6 +3,8 @@ Namespace Drupal\nfb_washington\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\form_factory\admin\admin_remove_note;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 class AdminRemoveNoteForm extends FormBase
 {
     public $form_factory;
@@ -24,5 +26,8 @@ class AdminRemoveNoteForm extends FormBase
         $this->database->delete('nfb_washington_note_link')
         ->condition ("link_id", $form_state->getValue('link_value'))
             ->execute();
+        $ender = new RedirectResponse('/nfb_washington/admin/notes');
+        $ender->send(); $ender = null;
+        return;
     }
 }
