@@ -1,7 +1,6 @@
 name: NFB Washington
 type: module
-description: 'Handles all Washington Seminar functions V 2.3
-updates - Individual report for all members of congress
-        - Help page explaining basic system information
-        - Javascript updates to preload information on the configuration page'
+description: 'Handles all Washington Seminar functions V 2.4
+updates - accessibility fixes.
+        - Bug fix on remove note form'
 core: 8.x
