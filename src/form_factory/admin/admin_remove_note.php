@@ -48,7 +48,7 @@ class  admin_remove_note
     public function find_note_and_member_id()
     {
         $this->database = new base();
-        $query = "select * from nfb_washington_note_link wehre link_id = '".$this->get_note_link_id()."';";
+        $query = "select * from nfb_washington_note_link where link_id = '".$this->get_note_link_id()."';";
         $key = 'link_id';
         $this->database->select_query($query, $key);
         foreach($this->database->get_result() as $link)
