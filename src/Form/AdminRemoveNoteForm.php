@@ -6,6 +6,7 @@ use Drupal\nfb_washington\form_factory\admin\admin_remove_note;
 class AdminRemoveNoteForm extends FormBase
 {
     public $form_factory;
+    public $database;
     public function  getFormId()
     {
         return  "nfb_wash_remove_notes_from_member ";
@@ -19,6 +20,9 @@ class AdminRemoveNoteForm extends FormBase
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        // TODO: Implement submitForm() method.
+        $this->database = \Drupal::database();
+        $this->database->delete('nfb_washington_note_link')
+        ->condition ("link_id", $form_state->getValue('link_value'))
+            ->execute();
     }
 }
