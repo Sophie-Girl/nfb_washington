@@ -17,7 +17,6 @@ class IndMemberReportForm extends FormBase
 
     public function buildForm(array $form, FormStateInterface $form_state, $member = "none")
     {
-        \Drupal::logger("this_is_weird")->notice($this->getFormId());
         $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
         $form['#attached']['library'][] = 'nfb_washington/ind-report';
         $this->form_factory = new individual_member_report();
