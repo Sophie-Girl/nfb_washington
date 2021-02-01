@@ -188,6 +188,16 @@ nfb_washington_ind_report:
     _access: 'TRUE'
     _permission: 'access content'
     _role: 'administrator + nfb_washington_admin + nfb_washington_user'
+nfb_washington_remove_note:
+  path: 'nfb_washington/admin/note/remove/{link}'
+  defaults:
+    _form: '\Drupal\nfb_washington\Form\IndMemberReportForm'
+    _title: 'NFB Washington: Remove note from member '
+    link: "none"
+  requirements:
+    _access: 'TRUE'
+    _permission: 'access content'
+    _role: 'administrator + nfb_washington_admin + nfb_washington_user'
 nfb_washington_meeting_report:
   path: 'nfb_washington/admin/reports/meeting'
   defaults:
