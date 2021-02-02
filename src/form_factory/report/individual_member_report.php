@@ -269,7 +269,7 @@ class individual_member_report
          if($this->get_user_permission() == "true")
          {
              $note_markup = $note_markup."<p><a href='/nfb_washington/admin/note/create' class='button-1' role ='button' aria-label='create new note'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create New&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='/nfb_washington/admin/note_link' class='button-2' role='button' aria-label='Link Existing Note'>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Link Existing&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href='nfb_washington/admin/notes/link/remove/".$this->get_link_id()."' class='button-3' role='button' aria-label='Remove note'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove This Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></p>";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Link Existing&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href='/nfb_washington/admin/notes/link/remove/".$this->get_link_id()."' class='button-3' role='button' aria-label='Remove note'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove This Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></p>";
          }
          $count++;
         }}
