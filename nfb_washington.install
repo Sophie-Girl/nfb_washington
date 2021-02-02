@@ -6,11 +6,7 @@ class database_functions
 {
     public function table_test($table_name) // check if table exists already and drops it if it does
     {
-       $moduleHandler = \Drupal::service('module_handler');
-    \Drupal::logger('drupal_weird')->notice("I'm running". $moduleHandler->moduleExists('nfb_Washington'));
-        if ($moduleHandler->moduleExists('nfb_washington')) {
-           \drupal::logger('nfb_washington_updates')->notice("Schema install Skipped. Reason: Module already enabled");}
-        else {
+
             if (db_table_exists($table_name)) {
                 \Drupal::logger('nfb_contribution_install')->notice("Dropping Table " . $table_name);
                 db_drop_table($table_name);
