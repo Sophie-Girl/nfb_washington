@@ -11,6 +11,7 @@ class committee extends members
         $this->api_url = "https://api.propublica.org/congress/v1/".$this->get_congress_number()."/".$this->get_search_criteria_1()."/".$this->get_entity().".json";
         $this->set_curl();
         $this->curl_execute_set_propublica_result();
+        \drupal::logger("nfb_washington_pp_api_check")->notice($this->get_api_url());
     }
     public function specific_committee_search()
     {
