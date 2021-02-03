@@ -25,7 +25,10 @@ class admin_note_create
                 "bill_sponsor" => "Bill Sponsor",
                 "bill_co_sponsor" => "Bill Co-Sponsor",
                 "state_convention" => "Spoke at a State Convention",
-                "national_convention" => " Spoke at National convention")
+                "national_convention" => " Spoke at National convention",
+                "committee_member" => "Committee Members",
+                "committee_ranking" => "Ranking Member of Committee",
+                "committee_chair" => "Committee Chair")
         );
     }
     public function note_text(&$form, $form_state)
