@@ -42,7 +42,8 @@ class  ind_member_donwlaod
     }
     public function build_text(&$text)
     {
-        $text = $this->get_contact_markup().$this->get_note_text().$this->get_committee_markup().$this->get_issue_markup();
+        \Drupal::logger("xml_check")->notice($this->get_note_text());
+        $text = $this->get_contact_markup().$this->get_note_text().$this->get_committee_markup().$this->get_issue_markup().PHP_EOL;
 
     }
     public function set_php_office_values()
@@ -102,7 +103,7 @@ class  ind_member_donwlaod
             foreach($this->database->get_result() as  $note) {
                 $note = get_object_vars($note);
                 $this->note_type_switch($note, $note_type);
-                $this->note_text = $this->get_note_text() . "-   " . $note_type . $note['note'] . PHP_EOL;
+                $this->note_text = $this->get_note_text() . "-   " . $note['note'] . PHP_EOL;
             }
         }
     }
