@@ -42,7 +42,7 @@ class  ind_member_donwlaod
     }
     public function build_text(&$text)
     {
-        \Drupal::logger("xml_check")->notice($this->get_note_text());
+
         $text = $this->get_contact_markup().$this->get_note_text().$this->get_committee_markup().$this->get_issue_markup().PHP_EOL;
 
     }
