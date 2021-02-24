@@ -17,7 +17,6 @@ class all_member_download extends ind_member_donwlaod
         $this->phpoffice->font_size = '12';
         $this->phpoffice->report_name = "all_member_report_washington_seminar.docx";
         $text = $this->geT_full_markup();
-        \Drupal::logger("xml_check")->notice($text);
         $this->phpoffice->download_doc($text);
     }
     public function set_all_members( )
