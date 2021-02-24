@@ -715,7 +715,7 @@ $install->set_up_com_issue_link_table();
 
 /**
  * A&P left out the fact they needed committee chairs and ranking members...
- * A note for whoever maintains this, aks lots of questions of Kyle, John Pare et al, because
+ * A note for whoever maintains this, ask lots of questions of Kyle, John Pare et al, because
  * they don't give denials of what they want often enough.  - Sophie Connell
  */
 /**
