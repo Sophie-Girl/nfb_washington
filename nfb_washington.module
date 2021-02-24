@@ -24,6 +24,7 @@ function nfb_washington_mail($key, &$message, $params)
  */
 function hook_schema()
 {
+    \Drupal::logger("nfb_washington_Database")->notice("changes made");
     $spec = [
         'type' => 'int',
         'description' => "If the member is the chairperson",
