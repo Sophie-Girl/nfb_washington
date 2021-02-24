@@ -22,23 +22,4 @@ function nfb_washington_mail($key, &$message, $params)
  * A note for whoever maintains this, aks lots of questions of Kyle, John Pare et al, because
  * they don't give denials of what they want often enough.  - Sophie Connell
  */
-function hook_schema()
-{
-    \Drupal::logger("nfb_washington_Database")->notice("changes made");
-    $spec = [
-        'type' => 'int',
-        'description' => "If the member is the chairperson",
-        'size' => 'tiny',
-        'not null' => false,
-    ];
-    $schema = Database::getConnection()->schema();
-    $schema->addField('nfb_washington_committee_mem', 'is_chair', $spec);
-    $spec = [
-        'type' => 'int',
-        'description' => "If the member is the ranking member",
-        'size' => 'tiny',
-        'not null' => false,
-    ];
-    $schema->addField('nfb_washington_committee_mem', 'is_ranking', $spec);
 
-}
