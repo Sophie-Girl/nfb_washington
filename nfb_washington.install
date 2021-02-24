@@ -721,7 +721,7 @@ $install->set_up_com_issue_link_table();
 /**
  * Implements hook_update_N().
  */
-function nfb_washington_update_8701()
+function nfb_washington_update_N()
 {
     \Drupal::logger("nfb_washington_Database")->notice("changes made");
     $spec = [
