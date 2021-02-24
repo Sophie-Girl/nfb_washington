@@ -718,7 +718,10 @@ $install->set_up_com_issue_link_table();
  * A note for whoever maintains this, aks lots of questions of Kyle, John Pare et al, because
  * they don't give denials of what they want often enough.  - Sophie Connell
  */
-function hook_schema()
+/**
+ * Implements hook_update_N().
+ */
+function nfb_washington_update_8701()
 {
     \Drupal::logger("nfb_washington_Database")->notice("changes made");
     $spec = [
