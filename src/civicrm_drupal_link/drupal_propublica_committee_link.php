@@ -165,6 +165,7 @@ class drupal_propublica_committee_link
     }
     public function member_committee_run_through()
     {
+        $this->propublica->set_chair_and_ranking_member();
         foreach($this->propublica->get_propublica_result()['results']['0']['current_members'] as $com_mem)
         {
             $this->drupal_member_id = null;
@@ -309,7 +310,7 @@ class drupal_propublica_committee_link
     }
     public function remove_old_member()
     {
-        foreach($this->propublica->get_propublica_result()['results']['0']['current_members'] as $com_mem)
+        foreach($this->propublica->get_propublica_result()['results']['0']['former_members'] as $com_mem)
         {
             $this->drupal_member_id = null;
             $this->propublica->specific_committee_parse($com_mem);

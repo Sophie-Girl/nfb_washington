@@ -1,6 +1,7 @@
 name: NFB Washington
 type: module
-description: 'Handles all Washington Seminar functions V 2.4
-updates - accessibility fixes.
-        - Bug fix on remove note form'
+description: 'Handles all Washington Seminar functions V 2.5
+updates - Database update
+        - Added Committee Chairs and Ranking member.
+        - Fixed bugged maintenance script for committees'
 core: 8.x
