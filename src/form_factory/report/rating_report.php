@@ -138,7 +138,7 @@ class rating_report extends meeting_report
             if($this->get_issue_count() > 1)
             {$this->rating_issue_2_query();}
             if($this->get_issue_count() > 2)
-            {$this->ratingf_issue_3_query();}
+            {$this->rating_issue_3_query();}
 
             if($this->get_issue_count() > 3)
             {$this->rating_issue_4_query();}
