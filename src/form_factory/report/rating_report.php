@@ -138,7 +138,7 @@ class rating_report extends meeting_report
             if($this->get_issue_count() > 1)
             {$this->rating_issue_2_query();}
             if($this->get_issue_count() > 2)
-            {$this->rating_issue_3_query();}
+            {$this->ratingf_issue_3_query();}
 
             if($this->get_issue_count() > 3)
             {$this->rating_issue_4_query();}
@@ -201,8 +201,6 @@ class rating_report extends meeting_report
          $query = "select * from nfb_washington_rating where member_id = '".$this->get_member_id()."' and issue_id = '".$this->get_issue_1_id()."';";
          $key = 'rating_id';
          $this->database->select_query($query, $key);
-        \Drupal::logger('nfb_Washington_debug')->notice("query: ". $query);
-         \Drupal::logger('nfb_Washington_debug')->notice("sql results: ".print_r($this->database->get_result(), true));
          if($this->database->get_result() != array()) {
              foreach ($this->database->get_result() as $rating) {
                  $rating = get_object_vars($rating);
@@ -391,10 +389,11 @@ class rating_report extends meeting_report
     public function check_file_size($data, $fileName, &$file, &$size)
     {
         if (isset($data['0'])) {
-            \Drupal::logger('nfb_bell_download')->notice("I am creating the csv");
+            \Drupal::logger('nfb_washington_download')->notice("I am creating the csv");
             $fp = fopen($fileName, 'w');
             fputcsv($fp, array_keys($data['0']));
             foreach ($data AS $values) {
+                \Drupal::logger('nfb_washington_download')->notice("value ".print_r($values, true));
                 fputcsv($fp, $values);}
             fclose($fp);}
         ob_flush();
