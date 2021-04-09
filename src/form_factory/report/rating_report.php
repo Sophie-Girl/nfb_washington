@@ -156,7 +156,7 @@ class rating_report extends meeting_report
             $text = $this->get_markup();
             $this->phpoffice = new html_to_word();
             $this->phpoffice->font_size = '12'; $year = date('Y');
-            $this->phpoffice->report_name = "/var/www/html/drupal/web/sites/sconnell.nfb.org/files/".$year."_washington_seminar_rating_Report.docx";
+            $this->phpoffice->report_name = "/var/www/html/drupal/web/sites/nfb.org/files/".$year."_washington_seminar_rating_Report.docx";
             $this->phpoffice->download_doc($text);
 
         }
@@ -369,7 +369,7 @@ class rating_report extends meeting_report
     public function csv_functions()
     {
         $data = $this->get_member_results(); $year = date("Y");
-        $filename = "/var/www/html/drupal/web/sites/sconnell.nfb.org/files/".$year."_washington_seminar_rating_report.csv";
+        $filename = "/var/www/html/drupal/web/sites/nfb.org/files/".$year."_washington_seminar_rating_report.csv";
         $this->set_csv_header($data);
         $this->set_headers($filename);
         $this->check_file_size($data, $filename, $file, $size);
