@@ -73,7 +73,7 @@ class  directory extends rating_report
         }
         $text = $this->get_markup();
         $this->phpoffice = new html_to_word();
-        $this->phpoffice->report_name = $year."_congressional_directory.docx";
+        $this->phpoffice->report_name = "/var/www/html/drupal/web/sites/nfb.org/".$year."_congressional_directory.docx";
         $this->phpoffice->font_size = '12';
         $this->phpoffice->download_doc($text);
     }
