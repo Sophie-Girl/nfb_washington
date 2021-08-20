@@ -6,10 +6,10 @@ class database_functions
 {
     public function table_test($table_name) // check if table exists already and drops it if it does
     {
-
-            if (db_table_exists($table_name)) {
+        $database = \Drupal::database();
+            if ($database->schema()->tableExists($table_name)) {
                 \Drupal::logger('nfb_contribution_install')->notice("Dropping Table " . $table_name);
-                db_drop_table($table_name);
+                $database->schema()->dropTable($table_name);
             }
 
     }
