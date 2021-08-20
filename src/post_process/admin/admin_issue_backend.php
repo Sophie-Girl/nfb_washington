@@ -50,12 +50,12 @@ class admin_issue_backend
     }
     public function created_user_set()
     {
-        $user = \Drupal::currentUser()->getUsername();
+        $user = \Drupal::currentUser()->getAccountName();
         $this->created_user = $user;
     }
     public function modified_user_set()
     {
-        $user = \drupal::currentUser()->getUsername();
+        $user = \drupal::currentUser()->getAccountName();
         $this->modified_user = $user;
     }
     public function  set_up_primary_issue_id(FormStateInterface $form_state)
@@ -164,7 +164,7 @@ class admin_issue_backend
         {$message = "Issue created for ".$form_state->getValue("issue_name");}
         else {$message = "Issue Updated";}
         $form_state = null;
-        drupal_set_message($message);
+        \Drupal::messenger()->addMessage($message);
         $ender = new RedirectResponse('/nfb_washington/admin/issues');
         $ender->send(); $ender = null;
         return;
