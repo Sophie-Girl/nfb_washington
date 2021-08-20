@@ -1,7 +1,6 @@
 name: NFB Washington
 type: module
-description: 'Handles all Washington Seminar functions V 2.5
-updates - Database update
-        - Added Committee Chairs and Ranking member.
-        - Fixed bugged maintenance script for committees'
+description: 'Handles all Washington Seminar functions V 2.6
+updates - Drupal 9 Compatability'
 core: 8.x
+core_version_requirement: ^8 || ^9

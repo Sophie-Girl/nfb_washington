@@ -29,7 +29,8 @@ class UpdateRatingForm extends FormBase
         $this->post_process = new new_ratings_form_backend();
         $this->post_process->backend($form_state);
         $this->post_process = null;
-        drupal_set_message($this->t("Rating Submitted"), 'status');
+
+        \Drupal::messenger()->addMessage($this->t("Rating Submitted"));
     }
 
     public function staterep_refresh(&$form, $form_state)
