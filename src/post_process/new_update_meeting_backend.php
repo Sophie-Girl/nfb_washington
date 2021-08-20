@@ -214,7 +214,8 @@ class  new_update_meeting_backend
             $url = "/nfb-washington/home";
             $message = "Meeting updated";
         }
-        drupal_set_message($message);
+
+        \Drupal::messenger()->addMessage($message);
         $ender = new RedirectResponse($url);
         $ender->send(); $ender = null;
         return;
