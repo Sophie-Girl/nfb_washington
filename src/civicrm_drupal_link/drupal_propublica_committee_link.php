@@ -234,7 +234,7 @@ class drupal_propublica_committee_link
     {
         if($error_status == "duplicate")
         {$message = "Error: The Committee already exists. Please enter a new committee";
-            drupal_set_message($message, "error");
+            \Drupal::messenger()->addError($message);
             $ender = new RedirectResponse('/nfb_washington/admin/committee/add');
             $ender->send(); $ender = null;
             return;
@@ -242,7 +242,7 @@ class drupal_propublica_committee_link
         elseif( $error_status == "nofound")
         {
             $message = "Error: The Committee Name provided, ".$this->get_committee_name().", is not matching anything in Propublica. Please try again";
-            drupal_set_message($message, "error");
+            \Drupal::messenger()->addError($message);
             $ender = new RedirectResponse('/nfb_washington/admin/committee/add');
             $ender->send(); $ender = null;
             return;
@@ -250,14 +250,14 @@ class drupal_propublica_committee_link
         elseif($error_status == "maint")
         {
             $message = "Committee Members Updated";
-            drupal_set_message($message);
+            \Drupal::messenger()->addMessage($message);
             $ender = new RedirectResponse('/nfb_washington/admin/committees');
             $ender->send(); $ender = null;
         return;
         }
         else {
         $message = "Committee Record Created/Updated";
-            drupal_set_message($message);
+            \Drupal::messenger()->addMessage($message);
         $ender = new RedirectResponse('/nfb_washington/admin/committees');
         $ender->send(); $ender = null;}
         return;
