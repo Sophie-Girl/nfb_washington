@@ -70,8 +70,8 @@ class admin_note_create_backend
           'note_type' => $this->get_note_type(),
           'note' => $this->get_note_text(),
           'note_year' => $this->get_note_year(),
-          'created_user' => \Drupal::currentUser()->getUsername(),
-          'last_modified_user' => \Drupal::currentUser() ->getUsername(),
+          'created_user' => \Drupal::currentUser()->getAccountName(),
+          'last_modified_user' => \Drupal::currentUser() ->getAccountName(),
         );
         $table = 'nfb_washington_note';
         $this->database->insert_query($table, $fields);
@@ -93,7 +93,7 @@ class admin_note_create_backend
         where note_id = '".$this->get_note_id()."';";
         $this->database->update_query($query);
         "update nfb_washington_note
-        set last_modififed_user = '".\drupal::currentUser()->getUsername()."'
+        set last_modififed_user = '".\drupal::currentUser()->getAccountName()."'
         where note_id = '".$this->get_note_id()."';";
         $this->database->update_query($query);
     }

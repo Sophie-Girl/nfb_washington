@@ -64,7 +64,7 @@ class admin_link_com_issue_backend
     public function redirect()
     {
         $message = "Committee linked to issue";
-        drupal_set_message($message);
+        \Drupal::messenger()->addMessage($message);
         $ender = new RedirectResponse('/nfb_washington/admin/committees');
         $ender->send(); $ender = null;
         return;

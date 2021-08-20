@@ -169,8 +169,8 @@ class new_ratings_form_backend
             "nfb_phone" => $this->get_nfb_phone(),
             "moc_attendance" => "1",
             "meeting_year" => $year,
-            "created_user" => \Drupal::currentUser()->getUsername(),
-            "last_modified_user" => \Drupal::currentUser()->getUsername(),
+            "created_user" => \Drupal::currentUser()->getAccountName(),
+            "last_modified_user" => \Drupal::currentUser()->getAccountName(),
         );
         $table = "nfb_washington_activities";
         $this->database->insert_query($table, $feilds);
@@ -338,8 +338,8 @@ class new_ratings_form_backend
             'issue_id' => $this->get_issue_1(),
             'rating' => $this->get_issue_1_rating(),
             'comment' => $this->get_issue_1_comments(),
-            'created_user' => \drupal::currentUser()->getUsername(),
-            'last_modified_user' => \drupal::currentUser()->getUsername(),
+            'created_user' => \drupal::currentUser()->getAccountName(),
+            'last_modified_user' => \drupal::currentUser()->getAccountName(),
             );
     }
     public function issue_2_create_array(&$fields)
@@ -350,8 +350,8 @@ class new_ratings_form_backend
             'issue_id' => $this->get_issue_2(),
             'rating' => $this->get_issue_2_rating(),
             'comment' => $this->get_issue_2_comments(),
-            'created_user' => \drupal::currentUser()->getUsername(),
-            'last_modified_user' => \drupal::currentUser()->getUsername(),
+            'created_user' => \drupal::currentUser()->getAccountName(),
+            'last_modified_user' => \drupal::currentUser()->getAccountName(),
         );
     }
     public function issue_3_create_array(&$fields)
@@ -362,8 +362,8 @@ class new_ratings_form_backend
             'issue_id' => $this->get_issue_3(),
             'rating' => $this->get_issue_3_rating(),
             'comment' => $this->get_issue_3_comments(),
-            'created_user' => \drupal::currentUser()->getUsername(),
-            'last_modified_user' => \drupal::currentUser()->getUsername(),
+            'created_user' => \drupal::currentUser()->getAccountName(),
+            'last_modified_user' => \drupal::currentUser()->getAccountName(),
         );
     }
     public function issue_4_create_array(&$fields)
@@ -374,8 +374,8 @@ class new_ratings_form_backend
             'issue_id' => $this->get_issue_4(),
             'rating' => $this->get_issue_4_rating(),
             'comment' => $this->get_issue_4_comments(),
-            'created_user' => \drupal::currentUser()->getUsername(),
-            'last_modified_user' => \drupal::currentUser()->getUsername(),
+            'created_user' => \drupal::currentUser()->getAccountName(),
+            'last_modified_user' => \drupal::currentUser()->getAccountName(),
         );
     }
     public function issue_5_create_array(&$fields)
@@ -386,8 +386,8 @@ class new_ratings_form_backend
             'issue_id' => $this->get_issue_5(),
             'rating' => $this->get_issue_5_rating(),
             'comment' => $this->get_issue_5_comments(),
-            'created_user' => \drupal::currentUser()->getUsername(),
-            'last_modified_user' => \drupal::currentUser()->getUsername(),
+            'created_user' => \drupal::currentUser()->getAccountName(),
+            'last_modified_user' => \drupal::currentUser()->getAccountName(),
         );
     }
     public function update_issue_1($rating_id)
@@ -403,7 +403,7 @@ class new_ratings_form_backend
         $this->database->update_query($query);
         $query = "update nfb_washington_rating
         set comment = '".$this->get_issue_1_comments()."'
-        where last_modified_user = '".\Drupal::currentUser()->getUsername()."';";
+        where last_modified_user = '".\Drupal::currentUser()->getAccountName()."';";
         $this->database->update_query($query);
     }
     public function update_issue_2($rating_id)
@@ -418,7 +418,7 @@ class new_ratings_form_backend
         where rating_id = '".$rating_id."';";
         $this->database->update_query($query);
         $query = "update nfb_washington_rating
-        set last_modified_user = '".\Drupal::currentUser()->getUsername()."'
+        set last_modified_user = '".\Drupal::currentUser()->getAccountName()."'
         where  rating_id = '".$rating_id."';";
         $this->database->update_query($query);
     }
@@ -434,7 +434,7 @@ class new_ratings_form_backend
         where rating_id = '".$rating_id."';";
         $this->database->update_query($query);
         $query = "update nfb_washington_rating
-        set last_modified_user = '".\Drupal::currentUser()->getUsername()."'
+        set last_modified_user = '".\Drupal::currentUser()->getAccountName()."'
         where  rating_id = '".$rating_id."';";
         $this->database->update_query($query);
     }
@@ -450,7 +450,7 @@ class new_ratings_form_backend
         where rating_id = '".$rating_id."';";
         $this->database->update_query($query);
         $query = "update nfb_washington_rating
-        set last_modified_user = '".\Drupal::currentUser()->getUsername()."'
+        set last_modified_user = '".\Drupal::currentUser()->getAccountName()."'
         where  rating_id = '".$rating_id."';";
         $this->database->update_query($query);
     }
@@ -466,7 +466,7 @@ class new_ratings_form_backend
         where rating_id = '".$rating_id."';";
         $this->database->update_query($query);
         $query = "update nfb_washington_rating
-        set last_modified_user = '".\Drupal::currentUser()->getUsername()."'
+        set last_modified_user = '".\Drupal::currentUser()->getAccountName()."'
         where  rating_id = '".$rating_id."';";
         $this->database->update_query($query);
     }

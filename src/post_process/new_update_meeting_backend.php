@@ -147,8 +147,8 @@ class  new_update_meeting_backend
             "nfb_phone" => $this->get_nfb_phone(),
             "moc_attendance" => $this->get_moc_attendance(),
             "meeting_year" => $year,
-            "created_user" => \Drupal::currentUser()->getUsername(),
-            "last_modified_user" => \Drupal::currentUser()->getUsername(),
+            "created_user" => \Drupal::currentUser()->getAccountName(),
+            "last_modified_user" => \Drupal::currentUser()->getAccountName(),
         );
         $table = "nfb_washington_activities";
         $this->database->insert_query($table, $feilds);
@@ -186,7 +186,7 @@ class  new_update_meeting_backend
         where activity_id = '".$this->get_meeting_id()."';";
         $this->database->update_query($query);
         $query = "update nfb_washington_activities
-        set last_modified_user = '".\Drupal::currentUser()->getUsername()."'
+        set last_modified_user = '".\Drupal::currentUser()->getAccountName()."'
         where activity_id = '".$this->get_meeting_id()."';";
         $this->database->update_query($query);
         $this->database = null;

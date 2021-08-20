@@ -17,7 +17,7 @@ class admin_note_link_backend
     {
         $this->set_values($form_state);
         $this->duplicate_check();
-        drupal_set_message("Note Linked to Member");
+        \Drupal::messenger()->addMessage("Note Linked to Member");
         $ender = new RedirectResponse('/nfb_washington/admin/notes');
         $ender->send(); $ender = null;
         return;
