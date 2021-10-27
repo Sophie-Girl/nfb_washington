@@ -22,7 +22,7 @@ class NewMeetingForm extends FormBase
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         $this->post_process = new new_update_meeting_backend();
-        \Drupal::logger("nfb_washington")->notice("New/Edit Meeting form submission created by ".\Drupal::currentUser()->getUsername());
+        \Drupal::logger("nfb_washington")->notice("New/Edit Meeting form submission created by ".\Drupal::currentUser()->getAccountName());
         $this->post_process->backed($form_state);
 
     }
