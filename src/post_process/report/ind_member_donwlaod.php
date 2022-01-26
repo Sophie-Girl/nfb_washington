@@ -410,7 +410,7 @@ $this->form_factory->get_issue_name_1().PHP_EOL;
     public function  find_all_all_repeat_uses($primary_id, $issue_id)
     {
         $this->database = new base();
-        $query = "select * from nfrb_washington_issues where primary_issue_id = '".$primary_id."' 
+        $query = "select * from nfb_washington_issues where primary_issue_id = '".$primary_id."' 
         and issue_id != '".$issue_id."';";
         $key = 'issue_id';
         $this->database->select_query($query, $key);
