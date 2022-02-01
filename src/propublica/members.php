@@ -76,6 +76,8 @@ class members extends query_base{
         $this->member_pp_id = $member["id"];
         $this->member_d_o_b = $member["date_of_birth"];
         $this->member_gender = $member["gender"];
+        \Drupal::logger("washington_sem_debug")->notice("Member In office: ".$this->get_member_first_name(). " ". $this->get_member_last_name().": ".$this->get_member_state()
+        ." ".$member['in_office']);
         if($member['in_office'] == 1){
             $this->member_active = "true";
         }
