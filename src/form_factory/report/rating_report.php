@@ -111,8 +111,10 @@ class rating_report extends meeting_report
             foreach($this->database->get_result() as $setting)
             {
                 if($issue_count == null){
+                    \Drupal::logger("nfb_washington_Debug")->notice("issue count");
                     $setting = get_object_vars($setting);
-                    $issue_count = $setting['value'];}
+                    $issue_count = $setting['value'];
+                    \Drupal::logger("nfb_washington_Debug")->notice("issue count ".$issue_count);}
             }
         }
         $this->issue_count = $issue_count;
