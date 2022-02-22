@@ -141,7 +141,7 @@ class rating_report extends meeting_report
             {$this->rating_issue_2_query();}
             if($this->get_issue_count() > 2)
             {$this->rating_issue_3_query();}
-
+            \Drupal::logger("nfb_washington_issue")->notice("Issue Count:".$this->get_issue_count());
             if($this->get_issue_count() > 3)
             {$this->rating_issue_4_query();}
             if($this->get_issue_count() > 4)
