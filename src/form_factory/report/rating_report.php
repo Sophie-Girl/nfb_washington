@@ -366,13 +366,18 @@ class rating_report extends meeting_report
                 "Rating: ".$member[$this->get_issue_3_name()."_rating"]. "Comments: ".$member[$this->get_issue_3_name()."_comment"].PHP_EOL;
             if($this->get_issue_count() == 4)
             {
-
+                $this->markup =   $this->get_markup().    $this->get_issue_4_name().PHP_EOL. "Rating: ".$member[$this->get_issue_4_name()."_rating"]. "Comments: ".$member[$this->get_issue_4_name()."_comment"].PHP_EOL
+                    ."---------------------------------------------------".PHP_EOL;
             }
             if($this->get_issue_count() == 5)
             {
                 $this->markup =   $this->get_markup().    $this->get_issue_4_name().PHP_EOL. "Rating: ".$member[$this->get_issue_4_name()."_rating"]. "Comments: ".$member[$this->get_issue_4_name()."_comment"].PHP_EOL.
                     $this->get_issue_5_name().PHP_EOL. "Rating: ".$member[$this->get_issue_5_name()."_rating"]. "Comments: ".$member[$this->get_issue_5_name()."_comment"].PHP_EOL
                     ."---------------------------------------------------".PHP_EOL;
+            }
+            if($this->get_issue_count() == 3)
+            {
+                $this->markup = $this->get_issue_count()                   ."---------------------------------------------------".PHP_EOL;
             }
 
 
