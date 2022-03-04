@@ -396,7 +396,7 @@ class rating_report extends meeting_report
     public function set_headers($fileName)
     {
         ob_clean();
-        header('Pragma: no-cache');
+        header('Pragma: public');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Cache-Control: private', false);
@@ -424,7 +424,7 @@ class rating_report extends meeting_report
             ob_end_clean();  // headers get sent, erase all buffering and enable output
             header("Content-type: application/csv; charset=UTF-8");
             header("Content-length: " . $size);
-            header('Pragma: no-cache');
+            header('Pragma: public');
             header("Content-Description: PHP Generated Data");
             header('Content-Disposition: attachment; filename="' . $filename . '"');
             echo $file;
