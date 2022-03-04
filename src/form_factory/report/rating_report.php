@@ -422,7 +422,7 @@ class rating_report extends meeting_report
         if (strlen($file) > 0) {
             ob_start();  // buffer all but headers
             ob_end_clean();  // headers get sent, erase all buffering and enable output
-            header("Content-type: application/csv; charset=us-ascii");
+            header("Content-type: application/csv; charset=UTF-8");
             header("Content-length: " . $size);
             header('Pragma: public');
             header("Content-Description: PHP Generated Data");
