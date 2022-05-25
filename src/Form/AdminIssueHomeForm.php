@@ -26,6 +26,7 @@ class AdminIssueHomeForm extends FormBase
     public function submitForm(array &$form, FormStateInterface $form_state)
         {
     // TODO: Implement submitForm() method.
+            // lol this form has no submit
         }
     public function verify_api_key(&$form, $form_state)
     {
