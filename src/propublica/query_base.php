@@ -50,6 +50,7 @@ class query_base
         $propublica_curl = curl_init();
         // set up curl
         if ($this->get_api_url() != false) {
+            \drupal::logger("steal_this_url")->notice("curl url: ".$this->get_api_url());
             // if a valid url has been set execute this
             curl_setopt($propublica_curl, CURLOPT_HTTPHEADER, array(
                 'X-API-Key:' . $this->get_api_key()));
