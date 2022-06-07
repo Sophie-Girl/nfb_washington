@@ -406,7 +406,7 @@ class rating_report extends meeting_report
     public function check_file_size($data, $fileName, &$file, &$size)
     {
         if (isset($data['0'])) {
-            \Drupal::logger('nfb_washington_download')->notice("I am creating the csv");
+            \Drupal::logger('nfb_washington_download')->notice("I am creating the csv ".$fileName);
             $fp = fopen($fileName, 'w');
             fputcsv($fp, array_keys($data['0']));
             foreach ($data AS $values) {
