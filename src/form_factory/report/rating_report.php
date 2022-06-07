@@ -386,7 +386,7 @@ class rating_report extends meeting_report
     public function csv_functions()
     {
         $data = $this->get_member_results(); $year = date("Y");
-        $filename = DRUPAL_ROOT.$year."_washington_seminar_rating_report.csv";
+        $filename = DRUPAL_ROOT."/".$year."_washington_seminar_rating_report.csv";
         $this->set_csv_header($data);
         $this->set_headers($filename);
         $this->check_file_size($data, $filename, $file, $size);
