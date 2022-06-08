@@ -67,8 +67,8 @@ class markup_elements extends date_elements
     }
     public function new_home_markup(FormStateInterface $form_state, &$markup)
     {
-        $markup = "<table>
-    <tr><th class='table-header'>Member of Congress<th class='table-header'>Chamber</th><th class='table-header'>District/Rank</th><th class='table-header'>Meeting Location</th><th class='table-header'>Meeting Time</th><th class='table-header'>NFB Contact</th><th class='table-header'>Member of Congress Contact Person</th><th class='table-header'>Details</th><th class='table-header'>Meeting</th><th class='table-header'>Ratings</th></tr>";
+        $markup = "<table><thead>
+    <tr><th class='table-header'>Member of Congress<th class='table-header'>Chamber</th><th class='table-header'>District/Rank</th><th class='table-header'>Meeting Location</th><th class='table-header'>Meeting Time</th><th class='table-header'>NFB Contact</th><th class='table-header'>Member of Congress Contact Person</th><th class='table-header'>Details</th><th class='table-header'>Meeting</th><th class='table-header'>Ratings</th></tr></thead>";
         $this->database = new base();
         $query = "select * from nfb_washington_members where state = '".$form_state->getValue("select_state")."'
         and active = '0' and district = 'Senate';";
