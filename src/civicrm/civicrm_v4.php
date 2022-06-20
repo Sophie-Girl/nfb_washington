@@ -2,6 +2,9 @@
 Namespace Drupal\nfb_washington\civicrm;
 use Drupal\civicrm\Civicrm;
 class civicrm_v4 {
+    /* ##################################################################
+     * # Connell, Sophi: Updated Civi query class for API Version 4     #
+     * ################################################################## */
     public $civicrm;
     public $civi_entity;
     public $civi_mode;
