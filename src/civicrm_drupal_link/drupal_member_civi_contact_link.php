@@ -200,6 +200,24 @@ class drupal_member_civi_contact_link
 
         $this->drupal_civicrm_id = $this->civi_query->get_civicrm_result()['id'];
     }
+    public function create_congressional_civi_record_v4()
+    {
+        $this->civi_query->civi_entity = "Contact";
+        $this->civi_query->civi_mode = "create";
+        $this->civi_query->civi_params =[
+            'values' => [
+        'contact_type' => 'Individual',
+        'contact_sub_type' => ['Congressional_Representative'],
+        'first_name' => $this->propublica_query->get_member_first_name(),
+        'middle_name' => $this->propublica_query->get_member_middle_name(),
+        'last_name' => $this->propublica_query->get_member_last_name(),
+        'birth_date' => $this->propublica_query->get_member_d_o_b(),
+        'gender_id:name' => $this->propublica_query->get_member_gender(),
+    ]
+        ];
+        $result = $this->civi_query->civi_query();
+        $this->drupal_civicrm_id = $result['id'];
+    }
     public function Phone_number()
     {
        if($this->propublica_query->get_member_phone_number()){
