@@ -215,7 +215,7 @@ class drupal_member_civi_contact_link
         'gender_id:name' => $this->propublica_query->get_member_gender(),
     ]
         ];
-        $result = $this->civi_query->civi_query();
+        $result = $this->civi_query->civi_query(); // convert to api v4
         $this->drupal_civicrm_id = $result['id'];
     }
     public function Phone_number()
