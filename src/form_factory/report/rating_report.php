@@ -6,7 +6,7 @@ use Drupal\nfb_washington\microsoft_office\html_to_word;
 
 class rating_report extends meeting_report
 {
-    // Connell Sophie: Uses many of the smae quieres as the meeting report so lets reuse it
+    // Connell Sophie: Uses many of the same quieres as the meeting report so lets reuse it
     public $rating_id;
     public $issue_1_rating;
     public $issue_2_rating;
