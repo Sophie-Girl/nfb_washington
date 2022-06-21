@@ -34,4 +34,26 @@ class NewMeetingForm extends FormBase
     {
         return $form['select_rep'];
     }
+    public function prevent_links(FormStateInterface $form_state)
+    {
+        $check = $form_state->getValue("meeting_location");
+
+    }
+    public function slash_check($check, FormStateInterface $form_state)
+    {
+        $slash = strpos(" ".$check, "/");
+        if($slash > 0)
+        {
+            $form_state->setErrorByName("meeting_location", "/ is not a valid character. If you are posting Zoom meeting information please use the meeting ID not join link");
+        }
+    }
+    public function com_check($check, FormStateInterface $form_state)
+    {
+        $com = strpos(" ".$check, ".com");
+        if($com > 0)
+        {
+            $form_state->setErrorByName("meeting_location", "If you are posting Zoom meeting information please use the meeting ID not join link");
+        }
+    }
+
 }
