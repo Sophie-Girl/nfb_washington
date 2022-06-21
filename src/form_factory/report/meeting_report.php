@@ -76,11 +76,6 @@ class meeting_report
             '#value' => "Download",
         );
     }
-
-    public function docx_backned(){
-        $this->full_member_query();
-        $this->start_full_download_markup();
-    }
     public function full_member_query()
     {
         $this->database = new base();
@@ -109,13 +104,6 @@ class meeting_report
             $this->meeting_query($member_array);
         }
         $this->member_results = $member_array;
-    }
-
-    public function start_full_download_markup()
-    {
-        $year = date('Y');
-        $this->markup = "Washington Seminar ".$year." Meetings Report".PHP_EOL;
-        $this->download_markup();
     }
     public function set_member_values($member)
     {
@@ -207,26 +195,7 @@ class meeting_report
         else
         {$attendance = "Yes";}
     }
-    public function begin_new_download_markup()
-    {
-        $year = date("Y");
-        $this->markup = $year." Washington Seminar Meetings Report".PHP_EOL.
-        "------------------------------------------------------------------".PHP_EOL;
-        $this->meeting_first_query();
-        $this->process_meeting_query();
-    }
-    public function download_markup()
-    {
 
-            $this->markup = $this->get_markup(). $this->get_first_name()." ".$this->get_last_name().PHP_EOL.
-                $this->district_text(). " Phone number: ".$this->get_phone().PHP_EOL.
-                "Zoom Meeting ID: ".$this->get_location()." Meeting date: ".$this->get_date().PHP_EOL.
-                "Meeting Time: ". $this->get_time(). PHP_EOL.
-                "NFB Contact: ".$this->get_nfb_contact(). " Phone: ".$this->get_nfb_phone(). PHP_EOL.
-                "Attending Meeting: ".$this->get_moc_attendance(). " MOC Contact: ". $this->get_moc_contact().PHP_EOL.
-                "---------------------------------------------------------------------".PHP_EOL;
-
-    }
     public function district_text()
     {
         if($this->get_district() == "Senate")
