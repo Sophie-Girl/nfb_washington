@@ -37,6 +37,9 @@ class NewMeetingForm extends FormBase
     public function prevent_links(FormStateInterface $form_state)
     {
         $check = $form_state->getValue("meeting_location");
+        $this->slash_check($check, $form_state);
+        $this->com_check($check, $form_state);
+        $this->https_check($check, $form_state);
 
     }
     public function slash_check($check, FormStateInterface $form_state)
@@ -51,6 +54,14 @@ class NewMeetingForm extends FormBase
     {
         $com = strpos(" ".$check, ".com");
         if($com > 0)
+        {
+            $form_state->setErrorByName("meeting_location", "If you are posting Zoom meeting information please use the meeting ID not join link");
+        }
+    }
+    public function https_check($check, FormStateInterface  $form_state)
+    {
+        $https = strpos(" ".$check, "http");
+        if($https > 0)
         {
             $form_state->setErrorByName("meeting_location", "If you are posting Zoom meeting information please use the meeting ID not join link");
         }
