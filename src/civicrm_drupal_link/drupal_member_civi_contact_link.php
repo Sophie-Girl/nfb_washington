@@ -221,7 +221,7 @@ class drupal_member_civi_contact_link
     public function Phone_number()
     {
        if($this->propublica_query->get_member_phone_number()){
-        $phone = $res = preg_replace("/[^0-9]/", "", $this->propublica_query->get_member_phone_number() );
+        $phone =  preg_replace("/[^0-9]/", "", $this->propublica_query->get_member_phone_number() );
         $this->civi_query->civi_entity = "Phone";
         $this->civi_query->civi_mode = "get";
         $this->civi_query->civi_params = array(
@@ -232,6 +232,26 @@ class drupal_member_civi_contact_link
         $this->civi_query->civi_query();
         if($this->civi_query->get_civicrm_result()['count'] < '1')
         {$this->create_phone();}}
+    }
+    public function Phone_number_v4()
+    {
+        if($this->propublica_query->get_member_phone_number()){
+            $phone =  preg_replace("/[^0-9]/", "", $this->propublica_query->get_member_phone_number() );
+            $this->civi_query->civi_entity = "Phone";
+            $this->civi_query->civi_mode = "get";
+            $this->civi_query->civi_params = array(
+                'select' => [
+                    '*',
+                ],
+                'where' => [
+                    ['contact_id', '=', $this->get_drupal_civicrm_id()],
+                    ['phone_numeric', '=', $phone],
+                ],
+                'limit' => 25,
+            );
+            $result = $this->civi_query->civi_query_v4();
+            if($result['count'] < '1') //check if that's good?
+            {$this->create_phone();}}
     }
     public function create_phone()
     {
