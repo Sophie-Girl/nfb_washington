@@ -4,10 +4,10 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\form_factory\report\meeting_report;
 use Drupal\nfb_washington\microsoft_office\html_to_word;
-
+use Drupal\nfb_washington\form_factory\report\meeting_report_backend;
 class MeetReportForm extends FormBase
 {
-    public $form_factory;
+    public $form_factory; public $backend;
     public function getFormId()
     {
         return 'meeting_report_nfb_washington';
@@ -22,9 +22,9 @@ class MeetReportForm extends FormBase
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        $this->form_factory = new meeting_report();
-        $this->form_factory->begin_new_download_markup();
-        $text = $this->form_factory->get_markup();
+        $this->backend = new meeting_report_backend();
+        $this->backend->begin_new_download_markup();
+        $text = $this->backend->get_markup();
         $word  = new html_to_word();
         $word->report_name = "washington_seminar_meeting_report.docx";
         $word->font_size = '12';

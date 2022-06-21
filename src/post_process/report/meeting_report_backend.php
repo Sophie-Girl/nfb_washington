@@ -1,6 +1,6 @@
 <?php
 namespace  Drupal\nfb_washington\form_factory\report;
-use Drupal\civicrm\Civicrm;
+use Drupal\civicrm\Civicrm; // V3 will become deprecated.
 use Drupal\nfb_washington\civicrm\civicrm_v4;
 use Drupal\nfb_washington\database\base;
 class meeting_report_backend
@@ -63,6 +63,9 @@ class meeting_report_backend
     public $moc_attendance;
     public function get_moc_attendance()
     {return $this->moc_attendance;}
+    public $markup;
+    public function get_markup()
+    {return $this->markup;}
 
     public function docx_backend(){
         $this->full_member_query();
