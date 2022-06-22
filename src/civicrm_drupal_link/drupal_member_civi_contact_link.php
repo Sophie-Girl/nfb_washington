@@ -250,10 +250,22 @@ class drupal_member_civi_contact_link
                 'limit' => 25,
             );
             $result = $this->civi_query->civi_query_v4();
+            \Drupal::logger("nfb_civicrm_v4_test")->notice("New result array structure: ".print_r($result, true));
             if($result['count'] < '1') //check if that's good? Need ot see result structure in a print_r to confirm how much has changed
             {$this->create_phone();}}
     }
     public function create_phone()
+    {
+        $this->civi_query->civi_entity = "Phone";
+        $this->civi_query->civi_mode = "create";
+        $this->civi_query->civi_params = array(
+            'contact_id' => $this->get_drupal_civicrm_id(),
+            'phone' => $this->propublica_query->get_member_phone_number(),
+            'location_type_id' => "Work",
+        );
+        $this->civi_query->civi_query();
+    }
+    public function create_phone_v4()
     {
         $this->civi_query->civi_entity = "Phone";
         $this->civi_query->civi_mode = "create";
