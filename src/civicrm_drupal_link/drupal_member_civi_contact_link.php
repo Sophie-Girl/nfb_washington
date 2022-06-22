@@ -250,7 +250,7 @@ class drupal_member_civi_contact_link
                 'limit' => 25,
             );
             $result = $this->civi_query->civi_query_v4();
-            if($result['count'] < '1') //check if that's good?
+            if($result['count'] < '1') //check if that's good? Need ot see result structure in a print_r to confirm how much has changed
             {$this->create_phone();}}
     }
     public function create_phone()
