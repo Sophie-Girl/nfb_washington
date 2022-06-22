@@ -270,11 +270,13 @@ class drupal_member_civi_contact_link
         $this->civi_query->civi_entity = "Phone";
         $this->civi_query->civi_mode = "create";
         $this->civi_query->civi_params = array(
-            'contact_id' => $this->get_drupal_civicrm_id(),
-            'phone' => $this->propublica_query->get_member_phone_number(),
-            'location_type_id' => "Work",
+            'values' => [
+                'contact_id' => $this->get_drupal_civicrm_id(),
+                'phone' => $this->propublica_query->get_member_phone_number(),
+                'location_type_id' => '2',
+            ],
         );
-        $this->civi_query->civi_query();
+        $result = $this->civi_query->civi_query_v4();
     }
     public function active_inactive()
     {
@@ -312,6 +314,23 @@ class drupal_member_civi_contact_link
 
         $this->civi_query->civi_query();
     }
+    public function activate_record_v4()
+    {
+        $this->civi_query->civi_entity ="Contact";
+        $this->civi_query->civi_mode = "update";
+        $this->civi_query->civi_params = array(
+            'where' => [
+                ['id', '=', $this->get_drupal_civicrm_id()],
+            ],
+            'values' => [
+                'contact_sub_type' => ['Congressional_Representative'],
+                'formal_title' => $this->get_title_for_record(),
+            ],
+            'limit' => 1,
+        );
+
+       $result = $this->civi_query->civi_query_v4();
+    }
     public function deactivate_record()
     {
         $this->civi_query->civi_entity ="Contact";
@@ -322,6 +341,21 @@ class drupal_member_civi_contact_link
             'formal_title' => $this->get_title_for_record(),
         );
         $this->civi_query->civi_query();
+    }
+    public function deactivate_record_v4()
+    {
+        $this->civi_query->civi_entity ="Contact";
+        $this->civi_query->civi_mode = "create";
+        $this->civi_query->civi_params = array(
+            'where' => [
+                ['id', '=', $this->get_drupal_civicrm_id()],],
+                'values' => [
+                'contact_sub_type' => [],
+            'formal_title' => $this->get_title_for_record(),
+                    ],
+            'limit' => 1,
+        );
+        $result = $this->civi_query->civi_query_v4();
     }
     public function database_process(){
         $member_id = null;
