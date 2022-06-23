@@ -1,9 +1,11 @@
 <?php
 Namespace Drupal\nfb_washington\form_factory;
 use Drupal\nfb_washington\database\base;
-
+use Drupal\nfb_washington\civicrm\civicrm_v4;
+use Drupal\civicrm\Civicrm;
 class form_factory extends update_form_ajax_test
 {
+    public $civi_query_v4;
     public function build_new_meeting_time(&$form, $form_state, $meeting)
     {
         if($meeting == "new"){
@@ -137,6 +139,13 @@ class form_factory extends update_form_ajax_test
             }
         }
         return $data;
+    }
+    public function get_first_name_last_name_direct($meeting)
+    {
+        $member_id = substr($meeting, 3, 10);
+        $data = $this->direct_link_query($member_id);
+        $civicrm = new Civicrm();
+        $this->civi_query_v4 = new civicrm_v4($civicrm);
     }
 
 
