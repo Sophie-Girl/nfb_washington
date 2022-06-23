@@ -27,6 +27,7 @@ class form_factory extends update_form_ajax_test
             $this->conditional_submit($form, $form_state);
         }
     }
+
     public function build_update_rating_form(&$form, $form_state, $rating)
     {
         $this->set_issue_limit();
@@ -120,5 +121,25 @@ class form_factory extends update_form_ajax_test
         $this->issue_count = $issue_count;
         $this->database = null;
     }
+    public function direct_link_query($member_id)
+    {
+        $query = "select * from nfb_washington_members where setting = 'member_id' and active = '0';";
+        $key = 'member_id';
+        $this->database = new base();
+        $this->database->select_query($query, $key);
+        $data = [];
+        if($this->database->get_result() != "error"|| $this->database->get_result() != array())
+        {
+            foreach($this->database->get_result() as $member)
+            {
+                $data['civi_id'] = $member['civicrm_contact_id'];
+                $data['state'] = $member['state'];
+            }
+        }
+        return $data;
+    }
+
+
+
 
 }
