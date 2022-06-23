@@ -140,12 +140,39 @@ class form_factory extends update_form_ajax_test
         }
         return $data;
     }
-    public function get_first_name_last_name_direct($meeting)
+    public function get_first_name_last_name_direct($meeting, &$data)
     {
         $member_id = substr($meeting, 3, 10);
         $data = $this->direct_link_query($member_id);
         $civicrm = new Civicrm();
         $this->civi_query_v4 = new civicrm_v4($civicrm);
+        $this->civi_query_v4->civi_mode = "get";
+        $this->civi_query_v4->civi_entity = "Contact";
+        $this->civi_query_v4->civi_params = array(
+            'select' => [
+                'first_name',
+                'last_name',
+            ],
+            'where' => [
+                ['id', '=', $data['civi_id']],
+            ],
+            'limit' => 1,
+        );
+        $result = $this->civi_query_v4->civi_query_v4();
+        foreach ( $result as $value) {
+            $data['first_name'] = $value['first_name'];
+            $data['last_name'] = $value['last_name'];
+        }
+        $data['member_id'] = $member_id;
+    }
+    public function build_directlink_select(&$form, $form_state, $meeting)
+    {
+        $this->get_first_name_last_name_direct($meeting, $data);
+        $options = [$data['member_id'] => $data['first_name']." ".$data['last_name']]; $this->prefix = "<div id='rep_wrapper'>";
+        $this->element_id = 'select_rep'; $this->type = 'select';
+        $this->title = "Select Elected Official"; $this->required = TRUE;
+        $this->suffix = "</div>";
+        $this->build_ajax_wrapped_select($form, $form_state, $options);
     }
 
 
