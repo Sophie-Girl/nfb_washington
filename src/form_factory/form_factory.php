@@ -11,10 +11,20 @@ class form_factory extends update_form_ajax_test
         if($meeting == "new"){
         $this->state_ajax_select_element($form,  $form_state);
         $this->state_rep_ajax_select_element($form, $form_state);}
+        elseif(strpos(" ".$meeting, "new") > 0 && strlen($meeting) > 3)
+        {
+            $this->build_directlink_select($form, $form_state, $meeting);
+        }
         $this->meeting_hidden_value($form, $form_state, $meeting);
+
         if($meeting == "new") {
         $this->contact_first_name_element($form, $form_state);
         $this->contact_last_name_element($form, $form_state);}
+        elseif(strpos(" ".$meeting, "new") > 0 && strlen($meeting) > 3)
+        {
+            $this->contact_first_name_element($form, $form_state);
+            $this->contact_last_name_element($form, $form_state);
+        }
         else { $this->update_first_name($form, $form_state);}
         $this->contact_email_element($form, $form_state);
         $this->meeting_day_element($form, $form_state);
