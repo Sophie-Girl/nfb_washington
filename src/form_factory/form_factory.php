@@ -47,6 +47,11 @@ class form_factory extends update_form_ajax_test
             $this->state_ajax_select_element($form,  $form_state);
             $this->state_rep_ajax_select_element($form, $form_state);
         }
+        elseif (strlen($rating ) > 3 && substr($rating, 0 ,3) == "new")
+        {
+            $meeting = $rating;
+            $this->build_directlink_select($form, $form_state, $meeting);
+        }
         $this->raiting_hidden_value($form, $form_state, $rating);
         $this->update_first_name($form, $form_state);
         $this->contact_email_element($form, $form_state);
