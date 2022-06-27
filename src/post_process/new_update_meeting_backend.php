@@ -94,7 +94,14 @@ class  new_update_meeting_backend
             $this->member_id = $form_state->getValue("select_rep");
             $this->meeting_id = null;
             $this->nfb_contact = $form_state->getValue("nfb_civicrm_f_name_1") . " " . $form_state->getValue("nfb_civicrm_l_name_1");
-        } else {
+        }
+        elseif(substr($form_state->getValue("meeting_value"), 0,3) == "new" && strlen($form_state->getValue("meeting_value")) > 4)
+        {
+            $this->member_id = $form_state->getValue("select_rep");
+            $this->meeting_id = null;
+            $this->nfb_contact = $form_state->getValue("nfb_civicrm_f_name_1") . " " . $form_state->getValue("nfb_civicrm_l_name_1");
+        }
+        else {
             $this->member_id = null;
             $this->meeting_id = $form_state->getValue("meeting_value");
             $this->nfb_contact = $form_state->getValue("nfb_contact_name");
