@@ -207,12 +207,14 @@ class markup_elements extends date_elements
             $rank = $member_array['state']." ".$member_array['district'];
         }
         if($member_array['rating_status'] == "new")
-        {$button_3 = "Rate"; $button_3_url = "new";} else {$button_3 = "Edit";
+        {$button_3 = "Rate"; $button_3_url = "new".$member_array['id'];} else {$button_3 = "Edit";
         $button_3_url = $member_array['meeting_id'];}
-        if($member_array['meeting_id'] == "new") {$button_2 = "Schedule";}
-        else{$button_2 = "Edit";}
+        if($member_array['meeting_id'] == "new") {$button_2 = "Schedule";
+        $button_2_url = "new".$member_array['id'];}
+        else{$button_2 = "Edit";
+        $button_2_url = $member_array['meeting_id'];}
         $button_1 = "View";
-            $markup = $markup."<tr><th>".$member_array['first_name']." ".$member_array['last_name']."</th><td>".$chamber."</td><td>$rank</td><td>".$member_array['location']."</td><td>".$member_array['meeting_date']." ".$member_array['meeting_time']."</td><td>".$member_array['nfb_contact']."</td><td>".$member_array['moc_contact']."</td><td><a href='/nfb-washington/report/moc/".$member_array['id']."' class='button-1' role = 'button' aria-label='View Member Details'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_1."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td><td><a href='/nfb-washington/meeting/".$member_array['meeting_id']."' class='button-2' role='button' aria-label = '".$button_2." Meeting'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_2."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td><td><a  href='/nfb-washington/rating/".$button_3_url."' class='button-3' role = 'button' aria-label='".$button_3." Rating'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_3."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td></tr>";
+            $markup = $markup."<tr><th>".$member_array['first_name']." ".$member_array['last_name']."</th><td>".$chamber."</td><td>$rank</td><td>".$member_array['location']."</td><td>".$member_array['meeting_date']." ".$member_array['meeting_time']."</td><td>".$member_array['nfb_contact']."</td><td>".$member_array['moc_contact']."</td><td><a href='/nfb-washington/report/moc/".$member_array['id']."' class='button-1' role = 'button' aria-label='View Member Details'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_1."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td><td><a href='/nfb-washington/meeting/".$button_2_url."' class='button-2' role='button' aria-label = '".$button_2." Meeting'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_2."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td><td><a  href='/nfb-washington/rating/".$button_3_url."' class='button-3' role = 'button' aria-label='".$button_3." Rating'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$button_3."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td></tr>";
     }
 
 
