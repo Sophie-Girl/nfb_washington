@@ -182,7 +182,6 @@ class meeting_report_backend
             $this->last_name =  $contact['last_name'];
             $this->phone = $contact['phone.phone'];
         }
-        $this->civicrm = null;
     }
 
 
