@@ -149,8 +149,9 @@ class form_factory extends update_form_ajax_test
         {
             foreach($this->database->get_result() as $member)
             {
-                $data['civi_id'] = $member['civicrm_contact_id'];
-                $data['state'] = $member['state'];
+                $result = get_object_vars($member);
+                $data['civi_id'] = $result['civicrm_contact_id'];
+                $data['state'] = $result['state'];
             }
         }
         return $data;
