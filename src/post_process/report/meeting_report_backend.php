@@ -103,6 +103,18 @@ class meeting_report_backend
         $this->database = null;
 
     }
+    public function district_text()
+    {
+        if($this->get_district() == "Senate")
+        { $district_text = strtoUpper(substr($this->get_rank(), 0,1)).substr($this->get_rank(), 1, 12). " Senator from "
+            . $this->get_state();}
+        elseif($this->get_state() == "DC")
+        {$district_text = "Delegate for ".$this->get_state();}
+        elseif($this->get_state() == "PR")
+        {$district_text = "Resident Commissioner for ".$this->get_state();}
+        else {$district_text = "Representative for ".$this->get_state()." District: ".$this->get_district();}
+        return $district_text;
+    }
     public function begin_new_download_markup()
     {
         $year = date("Y");
