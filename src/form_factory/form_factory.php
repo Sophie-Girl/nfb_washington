@@ -140,7 +140,7 @@ class form_factory extends update_form_ajax_test
     }
     public function direct_link_query($member_id)
     {
-        $query = "select * from nfb_washington_members where setting = 'member_id' and active = '0';";
+        $query = "select * from nfb_washington_members where member_id = '".$member_id."' and active = '0';";
         $key = 'member_id';
         $this->database = new base();
         $this->database->select_query($query, $key);
