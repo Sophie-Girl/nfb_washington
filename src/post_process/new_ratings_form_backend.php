@@ -106,7 +106,7 @@ class new_ratings_form_backend
     }
     public function set_values(FormStateInterface $form_state)
     {
-        if($form_state->getValue("rating_value") == "new")
+        if($form_state->getValue("rating_value") == "new" || substr($form_state->getValue("rating_value"),0,3) == "new")
         { $this->meeting_id = null;
           $this->member_id = $form_state->getValue("select_rep");
         }
