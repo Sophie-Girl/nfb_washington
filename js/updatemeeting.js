@@ -3,7 +3,7 @@
         attach: function(context, settings) {
             window.onload = function () {
                 var vmeetingid = $('#edit-meeting-value').val();
-                if (vmeetingid != "new") {
+                if (vmeetingid != "new" && vmeetingid.substr(0,3) != "new") {
                     $.ajax({
                         type: 'POST',
                         url: '/nfb_washington/ajax/meeting',
