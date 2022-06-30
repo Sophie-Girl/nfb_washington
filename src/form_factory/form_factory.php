@@ -32,7 +32,7 @@ class form_factory extends update_form_ajax_test
         $this->meeting_comments_element($form, $form_state);
         $this->new_attendance_element($form, $form_state);
         $this->MOC_contact_element($form, $form_state);
-        if($meeting == "new"){
+        if($meeting == "new" || substr($meeting,0,3) == "new"){
         $this->submit_button($form, $form_state);}
         else{
             $this->build_confirmation_checkbox($form, $form_state);
