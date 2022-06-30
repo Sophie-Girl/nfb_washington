@@ -190,6 +190,7 @@ class form_factory extends update_form_ajax_test
         $this->suffix = "</div>";
         $this->build_ajax_wrapped_select($form, $form_state, $options);
         $form['select_rep']['#value'] = $data['member_id'];
+        $form['select_rep']['#attributes']['readonly'] = "readonly";
     }
 
 
