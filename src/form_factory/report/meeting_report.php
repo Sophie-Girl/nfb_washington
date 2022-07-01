@@ -281,7 +281,7 @@ class meeting_report
         $civicrm = new Civicrm(); $civicrm->initialize();
         $civicrm_v4 = new civicrm_v4($civicrm);
         $civicrm_v4->civi_entity = "StateProvince";
-        $civicrm_v4->civi_params = "get";
+        $civicrm_v4->civi_mode = "get";
         $civicrm_v4->civi_params = [  'select' => [
         '*',
     ],
