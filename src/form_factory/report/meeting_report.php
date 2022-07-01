@@ -299,6 +299,7 @@ class meeting_report
         $options = [];
         foreach ($result['storage:ArrayObject:private'] as  $state)
         {
+            \Drupal::logger("civicrm_v4_debug")->notice("Result ".print_r($state, true));
             $options[$state['abbreviation']] = $state['abbreviation'];
         }
     }
