@@ -67,6 +67,22 @@ class meeting_report
     {return $this->markup;}
     public function build_form(&$form, $form_state)
     {
+        $form['filter_results'] = array(
+          '#type' => 'select',
+           '#title' => "Filter Report By",
+            '#options' => array(
+                'all' => "All Meetings",
+                'state' => "Specific State",
+                'unscheduled' => "Reps with no meetings"
+            ),
+            '#required' => true,
+        );
+        $form['state_select'] = array(
+          '#type' => "select",
+          "#title" => "Select State",
+          '#options' => array(),
+          '#states' => []
+        );
         $form['file_type'] = array(
             '#type' => 'item',
             '#markup' => "<p>This report download will show  all meetings in order of the day in which they will happen in a word document</p>",
@@ -254,7 +270,4 @@ class meeting_report
             $this->download_markup();
         }
     }
-
-
-
 }
