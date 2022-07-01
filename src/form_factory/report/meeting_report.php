@@ -297,7 +297,7 @@ class meeting_report
     public function  create_the_options($result, &$options)
     {
         $options = [];
-        foreach ($result as  $state)
+        foreach ($result['storage:ArrayObject:private'] as  $state)
         {
             $options[$state['abbreviation']] = $state['abbreviation'];
         }
