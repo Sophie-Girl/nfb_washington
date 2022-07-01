@@ -84,8 +84,13 @@ class meeting_report
           '#states' => []
         );
         $form['file_type'] = array(
-            '#type' => 'item',
-            '#markup' => "<p>This report download will show  all meetings in order of the day in which they will happen in a word document</p>",
+            '#type' => 'select',
+            '#title' => 'Select File Format',
+            '#options' => array(
+                'csv' => "Excel CSV File",
+                'docx' => "Microsoft Word",
+    ),
+            '#required' => true,
         );
         $form['submit'] = array(
             '#type' => 'submit',
