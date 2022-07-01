@@ -2,6 +2,7 @@
 namespace  Drupal\nfb_washington\form_factory\report;
 use Drupal\civicrm\Civicrm;
 use Drupal\nfb_washington\civicrm\civi_query;
+use Drupal\nfb_washington\civicrm\civicrm_v4;
 use Drupal\nfb_washington\database\base;
 
 class meeting_report
@@ -81,7 +82,7 @@ class meeting_report
           '#type' => "select",
           "#title" => "Select State",
           '#options' => array(),
-          '#states' => []
+          '#states' => $this->state_options()
         );
         $form['file_type'] = array(
             '#type' => 'select',
@@ -273,6 +274,31 @@ class meeting_report
             $this->civi_id = $member['civicrm_contact_id'];
             $this->civi_query_stuff();
             $this->download_markup();
+        }
+    }
+    public function state_options()
+    {
+        $civicrm = new Civicrm(); $civicrm->initialize();
+        $civicrm_v4 = new civicrm_v4($civicrm);
+        $civicrm_v4->civi_entity = "StateProvince";
+        $civicrm_v4->civi_params = "get";
+        $civicrm_v4->civi_params = [  'select' => [
+        '*',
+    ],
+  'where' => [
+        ['country_id', '=', 1228],
+    ],
+  'limit' => 60,];
+        $result = $civicrm_v4->civi_query_v4();
+        $this->create_the_options($result, $options);
+        return $options;
+    }
+    public function  create_the_options($result, &$options)
+    {
+        $options = [];
+        foreach ($result as  $state)
+        {
+            $options[$state['abbreviation']] = $state['abbreviation'];
         }
     }
 }
