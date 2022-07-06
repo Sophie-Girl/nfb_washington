@@ -301,7 +301,7 @@ class meeting_report
     public function  create_the_options($result, &$options)
     {
         \Drupal::logger("civicrm_v4_debug")->notice("Result ".print_r($result, true));
-        $options = [];
+        $options = ['' => "- select -"];
         $count = $result->count(); $current = 0;
         while($count > $current)
         {
