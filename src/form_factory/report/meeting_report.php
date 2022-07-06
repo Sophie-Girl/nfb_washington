@@ -303,7 +303,8 @@ class meeting_report
         while($count >= $current)
         {
             $state = $result->itemAt($current);
-            $options[$state['abbreviation']] = $state['abbreviation'];
+            \Drupal::logger("test")->notice("state ".print_r($state, true));
+            $options[$state['abbreviation']] = $state['name'];
             $current++;
         }
     }
