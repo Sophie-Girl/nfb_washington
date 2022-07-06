@@ -291,8 +291,7 @@ class meeting_report
   'limit' => 60,];
         $result = $civicrm_v4->civi_query_v4();
         \Drupal::logger("civicrm_v4_debug")->notice("result ".print_r($result, true));
-        $t_result = $result->itemat(0);
-        \Drupal::logger("civicrm_v4_debug")->notice("result ".print_r($t_result, true));
+
         $this->create_the_options($result, $options);
         return $options;
     }
@@ -300,10 +299,12 @@ class meeting_report
     {
         \Drupal::logger("civicrm_v4_debug")->notice("Result ".print_r($result, true));
         $options = [];
-        foreach ($result['storage:ArrayObject:private'] as  $state)
+        $count = $result->count(); $current = 0;
+        while($count >= $current)
         {
-            \Drupal::logger("civicrm_v4_debug")->notice("Result ".print_r($state, true));
+            $state = $result->itemAt($current);
             $options[$state['abbreviation']] = $state['abbreviation'];
+            $current++;
         }
     }
 }
