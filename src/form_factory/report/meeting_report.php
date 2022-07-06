@@ -81,8 +81,10 @@ class meeting_report
         $form['state_select'] = array(
           '#type' => "select",
           "#title" => "Select State",
-          '#options' => array(),
-          '#states' => $this->state_options()
+          '#options' => $this->state_options(),
+          '#states' => array(
+
+          ),
         );
         $form['file_type'] = array(
             '#type' => 'select',
@@ -301,7 +303,7 @@ class meeting_report
         \Drupal::logger("civicrm_v4_debug")->notice("Result ".print_r($result, true));
         $options = [];
         $count = $result->count(); $current = 0;
-        while($count >= $current)
+        while($count > $current)
         {
             $state = $result->itemAt($current);
             \Drupal::logger("test")->notice("state ".print_r($state, true));
