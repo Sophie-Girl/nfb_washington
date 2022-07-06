@@ -293,6 +293,7 @@ class meeting_report
         \Drupal::logger("civicrm_v4_debug")->notice("result ".print_r($result, true));
 
         $this->create_the_options($result, $options);
+        \Drupal::logger("test_options")->notice("Options ".print_r($options, true));
         return $options;
     }
     public function  create_the_options($result, &$options)
