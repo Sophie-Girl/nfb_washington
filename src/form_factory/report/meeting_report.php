@@ -290,7 +290,7 @@ class meeting_report
     ],
   'limit' => 60,];
         $result = $civicrm_v4->civi_query_v4();
-        \Drupal::logger("civicrm_v4_debug")->notice("result ".print_r($result, true));
+        \Drupal::logger("civicrm_v4_debug")->notice("result ".print_r($result['storage:ArrayObject:private'], true));
         $this->create_the_options($result, $options);
         return $options;
     }
