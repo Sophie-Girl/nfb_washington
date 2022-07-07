@@ -292,21 +292,16 @@ class meeting_report
     ],
   'limit' => 60,];
         $result = $civicrm_v4->civi_query_v4();
-        \Drupal::logger("civicrm_v4_debug")->notice("result ".print_r($result, true));
-
         $this->create_the_options($result, $options);
-        \Drupal::logger("test_options")->notice("Options ".print_r($options, true));
         return $options;
     }
     public function  create_the_options($result, &$options)
     {
-        \Drupal::logger("civicrm_v4_debug")->notice("Result ".print_r($result, true));
         $options = ['' => "- Select -"];
         $count = $result->count(); $current = 0;
         while($count > $current)
         {
             $state = $result->itemAt($current);
-            \Drupal::logger("test")->notice("state ".print_r($state, true));
             $options[$state['abbreviation']] = $state['name'];
             $current++;
         }
