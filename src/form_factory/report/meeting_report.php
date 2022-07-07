@@ -83,12 +83,10 @@ class meeting_report
           "#title" => "Select State",
           '#options' => $this->state_options(),
           '#states' => array(
-              'visible' => array(
-                  'element_id' => 'filter_results',
-                  'value' => "state"),
-              'connector_1' => 'and',
-              'required' => array('element_id' => 'filter_result',
-                  'value' => "state"),
+              'visible' => [':input[name="filter_results"]' => ['value' => "state"],
+              'and',
+              'required' => [':input[name="filter_results"]' => ['value' => "state"],
+
 
           ),
         );
