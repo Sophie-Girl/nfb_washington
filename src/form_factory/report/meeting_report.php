@@ -83,11 +83,9 @@ class meeting_report
           "#title" => "Select State",
           '#options' => $this->state_options(),
           '#states' => array(
-              'visible' => [':input[name="filter_results"]' => ['value' => "state"],
+              'visible' => [':input[name="filter_results"]' => ['value' => "state"]],
               'and',
-              'required' => [':input[name="filter_results"]' => ['value' => "state"],
-
-
+              'required' => [':input[name="filter_results"]' => ['value' => "state"]],
           ),
         );
         $form['file_type'] = array(
