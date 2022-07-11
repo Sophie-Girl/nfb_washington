@@ -1,6 +1,7 @@
 <?php
 namespace  Drupal\nfb_washington\post_process\report;
 use Drupal\civicrm\Civicrm; // V3 will become deprecated.
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\civicrm\civicrm_v4;
 use Drupal\nfb_washington\database\base;
 class meeting_report_backend
@@ -11,6 +12,12 @@ class meeting_report_backend
      * ################################################################  */
     public $database;
     public $civicrm;
+    public $null_filter;
+    public function get_null_filter()
+    {return $this->null_filter;}
+    public $state_filter;
+    public function get_state_filter()
+    {return $this->state_filter;}
     public function __construct(civicrm_v4 $civicrm_v4)
     {
         $this->civicrm = $civicrm_v4;
@@ -118,7 +125,7 @@ class meeting_report_backend
         else {$district_text = "Representative for ".$this->get_state()." District: ".$this->get_district();}
         return $district_text;
     }
-    public function begin_new_download_markup()
+    public function begin_new_download_markup(FormStateInterface $form_state)
     {
         $year = date("Y");
         $this->markup = $year." Washington Seminar Meetings Report".PHP_EOL.
@@ -131,6 +138,7 @@ class meeting_report_backend
         foreach($this->get_member_results() as $meeting)
         {
             $meeting = get_object_vars($meeting);
+
             $this->member_id = $meeting['member_id'];
             $this->location = $meeting['location'];
             $this->date = $meeting['meeting_date'];
