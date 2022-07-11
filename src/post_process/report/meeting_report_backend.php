@@ -104,6 +104,7 @@ class meeting_report_backend
         $this->member_results = $this->database->get_result();
         $this->database = null;
 
+
     }
     public function district_text()
     {
@@ -154,7 +155,7 @@ class meeting_report_backend
             $this->rank = $member['rank'];
             $this->district = $member['district'];
             $this->civi_id = $member['civicrm_contact_id'];
-            $this->first_name == null;
+            $this->first_name = null;
             $this->civi_query_stuff();
             $this->download_markup();
         }
