@@ -89,7 +89,9 @@ class meeting_report_backend
             "Meeting Time: ". $this->get_time(). PHP_EOL.
             "NFB Contact: ".$this->get_nfb_contact(). " Phone: ".$this->get_nfb_phone(). PHP_EOL.
             "Attending Meeting: ".$this->get_moc_attendance(). " MOC Contact: ". $this->get_moc_contact().PHP_EOL.
-            "---------------------------------------------------------------------".PHP_EOL;
+            "---------------------------------------------------------------------".PHP_EOL
+        .PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL
+            .PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL;
 
     }
     public function meeting_first_query()
