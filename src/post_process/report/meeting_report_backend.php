@@ -138,16 +138,18 @@ class meeting_report_backend
         foreach($this->get_member_results() as $meeting)
         {
             $meeting = get_object_vars($meeting);
-
-            $this->member_id = $meeting['member_id'];
-            $this->location = $meeting['location'];
-            $this->date = $meeting['meeting_date'];
-            $this->time = $meeting['meeting_time'];
-            $this->nfb_contact = $meeting['nfb_contact'];
-            $this->nfb_phone = $meeting['nfb_phone'];
-            $this->moc_contact = $meeting['m_o_c_contact'];
-            $this->moc_attendance = $meeting['moc_attendance'];
-            $this->member_query_meeting_report();
+            if($this->get_null_filter() == "on" && $meeting['location'] == "Unknown"
+             || $this->get_null_filter() == "off") {
+                $this->member_id = $meeting['member_id'];
+                $this->location = $meeting['location'];
+                $this->date = $meeting['meeting_date'];
+                $this->time = $meeting['meeting_time'];
+                $this->nfb_contact = $meeting['nfb_contact'];
+                $this->nfb_phone = $meeting['nfb_phone'];
+                $this->moc_contact = $meeting['m_o_c_contact'];
+                $this->moc_attendance = $meeting['moc_attendance'];
+                $this->member_query_meeting_report();
+            }
         }
     }
     public function member_query_meeting_report()
@@ -159,13 +161,15 @@ class meeting_report_backend
         foreach ($this->database->get_result() as $member)
         {
             $member = get_object_vars($member);
-            $this->state = $member['state'];
-            $this->rank = $member['rank'];
-            $this->district = $member['district'];
-            $this->civi_id = $member['civicrm_contact_id'];
-            $this->first_name = null;
-            $this->civi_query_stuff();
-            $this->download_markup();
+            if($this->get_state_filter()== $member['state']) {
+                $this->state = $member['state'];
+                $this->rank = $member['rank'];
+                $this->district = $member['district'];
+                $this->civi_id = $member['civicrm_contact_id'];
+                $this->first_name = null;
+                $this->civi_query_stuff();
+                $this->download_markup();
+            }
         }
     }
     public function civi_query_stuff()
