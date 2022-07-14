@@ -76,6 +76,9 @@ class meeting_report_backend
     public $array;
     public function get_array()
     {return $this->array;}
+    public $count;
+    public function get_count()
+    {return $this->count;}
 
     public function full_member_query()
     {
@@ -126,6 +129,7 @@ class meeting_report_backend
     }
     public function begin_new_download_markup(FormStateInterface $form_state)
     {
+        $this->count = 1;
         if($form_state->getValue("filter_results") == "unscheduled")
         {$this->null_filter = "on";} else{$this->null_filter = "yes";}
         if($form_state->getValue("filter_results") =="state")
@@ -226,6 +230,25 @@ class meeting_report_backend
         $data['0']['nfb_phone'] = "NFB Phone";
         $data['0']['attending'] = "Attending";
         $data['0']['congressional_contact'] = "Congressional Contact";
+        $this->array = $data;
+    }
+    public function build_array_row()
+    {
+        $data =  $this->get_array();
+        $data[$this->get_count()]['first_name'] = $this->get_first_name();
+        $data[$this->get_count()]['last_name'] = $this->get_last_name();
+        $data[$this->get_count()]['phone'] = $this->get_phone();
+        if($this->get_rank()){
+        $data[$this->get_count()]['district_text'] = $this->get_rank();}
+        else {$data[$this->get_count()]['district_text'] = $this->get_district()}
+        $data[$this->get_count()]['state'] = $this->get_state();
+        $data[$this->get_count()]['location'] = $this->get_location();
+        $data[$this->get_count()]['time'] = $this->get_time();
+        $data[$this->get_count()]['date'] = $this->get_date();
+        $data[$this->get_count()]['nfb_contact'] = $this->get_nfb_contact();
+        $data[$this->get_count()]['nfb_phone'] = $this->get_nfb_phone();
+        $data[$this->get_count()]['attending'] = $this->get_moc_attendance();
+        $data[$this->get_count()]['congressional_contact'] = $this->get_moc_contact();
         $this->array = $data;
     }
 
