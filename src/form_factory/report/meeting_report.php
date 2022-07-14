@@ -74,7 +74,7 @@ class meeting_report
             '#options' => array(
                 'all' => "All Meetings",
                 'state' => "Specific State",
-                'unscheduled' => "Reps with no meetings"
+                'unscheduled' => "Reps With No Meetings"
             ),
             '#required' => true,
         );

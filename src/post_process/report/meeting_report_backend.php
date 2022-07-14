@@ -73,11 +73,10 @@ class meeting_report_backend
     public $markup;
     public function get_markup()
     {return $this->markup;}
+    public $array;
+    public function get_array()
+    {return $this->array;}
 
-    public function docx_backend(){
-        $this->full_member_query();
-        $this->start_full_download_markup();
-    }
     public function full_member_query()
     {
         $this->database = new base();
@@ -127,13 +126,20 @@ class meeting_report_backend
     }
     public function begin_new_download_markup(FormStateInterface $form_state)
     {
+        if($form_state->getValue("filter_results") == "unscheduled")
+        {$this->null_filter = "on";} else{$this->null_filter = "yes";}
+        if($form_state->getValue("filter_results") =="state")
+        {$this->state_filter = $form_state->getValue("state_select");}
+        else{$this->state_filter = "all";}
         $year = date("Y");
+        if($form_state->getValue("file_type") == "docx"){
         $this->markup = $year." Washington Seminar Meetings Report".PHP_EOL.
-            "------------------------------------------------------------------".PHP_EOL;
+            "------------------------------------------------------------------".PHP_EOL;}
+        else {$this->start_array();}
         $this->meeting_first_query();
-        $this->process_meeting_query();
+        $this->process_meeting_query($form_state);
     }
-    public function process_meeting_query()
+    public function process_meeting_query(FormStateInterface $form_state)
     {
         foreach($this->get_member_results() as $meeting)
         {
@@ -148,11 +154,11 @@ class meeting_report_backend
                 $this->nfb_phone = $meeting['nfb_phone'];
                 $this->moc_contact = $meeting['m_o_c_contact'];
                 $this->moc_attendance = $meeting['moc_attendance'];
-                $this->member_query_meeting_report();
+                $this->member_query_meeting_report($form_state);
             }
         }
     }
-    public function member_query_meeting_report()
+    public function member_query_meeting_report(FormStateInterface $form_state)
     {
         $this->database = new base();
         $query = "select * from nfb_washington_members where member_id = '".$this->get_member_id()."';";
@@ -161,14 +167,17 @@ class meeting_report_backend
         foreach ($this->database->get_result() as $member)
         {
             $member = get_object_vars($member);
-            if($this->get_state_filter()== $member['state']) {
+            if($this->get_state_filter()== $member['state'] || $this->get_state_filter() == "all") {
                 $this->state = $member['state'];
                 $this->rank = $member['rank'];
                 $this->district = $member['district'];
                 $this->civi_id = $member['civicrm_contact_id'];
                 $this->first_name = null;
-                $this->civi_query_stuff();
-                $this->download_markup();
+                $this->civi_query_stuff();}
+            if($form_state->getValue("file_type") == "docx"){
+                $this->download_markup();}
+            else {
+
             }
         }
     }
@@ -200,10 +209,27 @@ class meeting_report_backend
             $this->first_name = $contact['first_name'];
             $this->last_name =  $contact['last_name'];
             $this->phone = $contact['phone.phone'];}
-
             $current++;
         }
     }
+    public function start_array()
+    {
+        $data['0']['first_name'] = "First_Name";
+        $data['0']['last_name'] = "Last_Name";
+        $data['0']['phone'] = "Office_Phone";
+        $data['0']['district_text'] = "District/Senate_Rank";
+        $data['0']['state'] = "State";
+        $data['0']['location'] = "Location";
+        $data['0']['time'] = "Time";
+        $data['0']['date'] = "Date";
+        $data['0']['nfb_contact'] = "NFB Contact";
+        $data['0']['nfb_phone'] = "NFB Phone";
+        $data['0']['attending'] = "Attending";
+        $data['0']['congressional_contact'] = "Congressional Contact";
+        $this->array = $data;
+    }
+
+
 
 
 

@@ -27,7 +27,7 @@ class MeetReportForm extends FormBase
         $civicrm = new Civicrm(); $civicrm->initialize();
         $civicrm_v4 = new civicrm_v4($civicrm);
         $this->backend = new meeting_report_backend($civicrm_v4);
-        $this->backend->begin_new_download_markup();
+        $this->backend->begin_new_download_markup($form_state);
         $text = $this->backend->get_markup();
         $word  = new html_to_word();
         $word->report_name = "washington_seminar_meeting_report.docx";
