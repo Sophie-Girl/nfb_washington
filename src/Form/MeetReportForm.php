@@ -56,7 +56,7 @@ class MeetReportForm extends FormBase
     {
         if (isset($data['0'])) {
             \Drupal::logger('nfb_washington_download')->notice("I am creating the csv ".$filename);
-            $fp = fopen($fileName, 'w');
+            $fp = fopen($filename, 'w');
             fputcsv($fp, array_keys($data['0']));
             foreach ($data AS $values) {
                 \Drupal::logger('nfb_washington_download')->notice("value ".print_r($values, true));
