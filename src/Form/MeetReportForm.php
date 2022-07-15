@@ -28,14 +28,56 @@ class MeetReportForm extends FormBase
         $civicrm_v4 = new civicrm_v4($civicrm);
         $this->backend = new meeting_report_backend($civicrm_v4);
         $this->backend->begin_new_download_markup($form_state);
+      if($form_state->getValue("") == "docx"){
         $text = $this->backend->get_markup();
         $word  = new html_to_word();
         $word->report_name = "washington_seminar_meeting_report.docx";
-        $word->font_size = '12';
-        $word->download_doc($text);
+        $word->font_size = '11';
+        $word->download_doc($text);}
+      else{
+          $data = $this->backend->get_array();
+          $this->csv_Set_up($data);
+      }
+
     }
     public function report_refresh(&$form, $form_state)
     {
         return $form['report_markup'];
+    }
+    public function csv_Set_up($data)
+    {
+       $year = date("Y");
+        $filename = DRUPAL_ROOT."/".$year."_washington_seminar_rating_report.csv";
+        $this->check_file_size($data, $filename, $file, $size);
+        $this->file_download($file, $size, $filename);
+
+    }
+    public function check_file_size($data, $filename, &$file, &$size)
+    {
+        if (isset($data['0'])) {
+            \Drupal::logger('nfb_washington_download')->notice("I am creating the csv ".$fileName);
+            $fp = fopen($fileName, 'w');
+            fputcsv($fp, array_keys($data['0']));
+            foreach ($data AS $values) {
+                \Drupal::logger('nfb_washington_download')->notice("value ".print_r($values, true));
+                fputcsv($fp, $values);}
+            fclose($fp);}
+        ob_flush();
+        $file = file_get_contents($filename);
+        $size = @filesize($filename);
+    }
+    public function file_download($file, $size, $filename)
+    {
+        if (strlen($file) > 0) {
+            ob_start();  // buffer all but headers
+            ob_end_clean();  // headers get sent, erase all buffering and enable output
+            header("Content-type: application/csv; charset=UTF-8");
+            header("Content-length: " . $size);
+            header('Pragma: public');
+            header("Content-Description: PHP Generated Data");
+            header('Content-Disposition: attachment; filename="' . $filename . '"');
+            echo $file;
+            unlink($filename);
+            exit;}
     }
 }
