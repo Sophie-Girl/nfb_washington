@@ -240,7 +240,7 @@ class meeting_report_backend
         $data[$this->get_count()]['phone'] = $this->get_phone();
         if($this->get_rank()){
         $data[$this->get_count()]['district_text'] = $this->get_rank();}
-        else {$data[$this->get_count()]['district_text'] = $this->get_district()}
+        else {$data[$this->get_count()]['district_text'] = $this->get_district();}
         $data[$this->get_count()]['state'] = $this->get_state();
         $data[$this->get_count()]['location'] = $this->get_location();
         $data[$this->get_count()]['time'] = $this->get_time();
