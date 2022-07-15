@@ -216,7 +216,8 @@ class drupal_member_civi_contact_link
     ]
         ];
         $result = $this->civi_query->civi_query_v4(); // convert to api v4
-        $this->drupal_civicrm_id = $result['id'];
+        $count = $result->count(); $new_c = $result->itemAt($count);
+        $this->drupal_civicrm_id = $new_c['id'];
     }
     public function Phone_number()
     {
