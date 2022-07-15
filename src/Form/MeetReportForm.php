@@ -55,7 +55,7 @@ class MeetReportForm extends FormBase
     public function check_file_size($data, $filename, &$file, &$size)
     {
         if (isset($data['0'])) {
-            \Drupal::logger('nfb_washington_download')->notice("I am creating the csv ".$fileName);
+            \Drupal::logger('nfb_washington_download')->notice("I am creating the csv ".$filename);
             $fp = fopen($fileName, 'w');
             fputcsv($fp, array_keys($data['0']));
             foreach ($data AS $values) {
