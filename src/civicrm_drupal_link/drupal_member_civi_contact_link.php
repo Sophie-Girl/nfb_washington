@@ -129,7 +129,8 @@ class drupal_member_civi_contact_link
         else{
             $this->create_address();
         }
-        $this->Phone_number();
+     //   $this->Phone_number(); API 3 no longer supported
+        $this->Phone_number_v4();
     }
     public function update_address($address_id)
     {
@@ -232,7 +233,11 @@ class drupal_member_civi_contact_link
         );
         $this->civi_query->civi_query();
         if($this->civi_query->get_civicrm_result()['count'] < '1')
-        {$this->create_phone();}}
+        {
+        //    $this->create_phone();
+        $this->create_phone_v4();
+        }
+       }
     }
     public function Phone_number_v4()
     {
@@ -285,10 +290,12 @@ class drupal_member_civi_contact_link
     {
         if($this->propublica_query->get_member_active() == "true")
         {
-            $this->activate_record();
+           // $this->activate_record(); deprecated API 3 call
+            $this->activate_record_v4();
         }
         else {
-            $this->deactivate_record();
+         //   $this->deactivate_record(); deprecated API 3 call
+            $this->deactivate_record_v4();
         }
     }
     public function get_title_for_record()
@@ -406,7 +413,8 @@ class drupal_member_civi_contact_link
         if($this->civi_query->get_civicrm_result()['count'] > 0)
         {
             $this->drupal_civicrm_id = $this->civi_query->get_civicrm_result()['values']['0']['contact_id'];
-            $this->deactivate_record();
+           // $this->deactivate_record();
+            $this->deactivate_record_v4(); // new version for API updates
             $this->maintnence_database();
         }
     }
