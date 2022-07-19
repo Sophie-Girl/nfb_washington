@@ -471,7 +471,7 @@ class drupal_member_civi_contact_link
     public function deactivate_record_v4()
     {
         $this->civi_query->civi_entity ="Contact";
-        $this->civi_query->civi_mode = "create";
+        $this->civi_query->civi_mode = "update";
         $this->civi_query->civi_params = array(
             'where' => [
                 ['id', '=', $this->get_drupal_civicrm_id()],],
