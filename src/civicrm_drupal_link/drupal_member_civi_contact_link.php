@@ -1,6 +1,6 @@
 <?php
 Namespace Drupal\nfb_washington\civicrm_drupal_link;
-use Drupal\nfb_washington\civicrm\civi_query;
+use Drupal\nfb_washington\civicrm\civicrm_v4;
 use Drupal\nfb_washington\database\base;
 use Drupal\nfb_washington\propublica\members;
 
@@ -12,7 +12,7 @@ class drupal_member_civi_contact_link
     public $database;
     public function  get_drupal_civicrm_id()
     {return $this->drupal_civicrm_id;}
-    public function  __construct(civi_query $civi_query, members $members)
+    public function  __construct(civicrm_v4 $civi_query, members $members)
     {
         $this->civi_query = $civi_query;
         $this->propublica_query = $members;
