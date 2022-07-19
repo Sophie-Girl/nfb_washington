@@ -512,7 +512,7 @@ class drupal_member_civi_contact_link
         foreach($this->propublica_query->get_propublica_result()['results']['0']['members'] as $member)
         {
         $this->propublica_query->leaving_congress_parse($member);
-                $this->find_civi_record();
+                $this->find_civi_record_v4();
                 $this->maintnence_database();}
     }
     public function find_civi_record()
@@ -538,16 +538,25 @@ class drupal_member_civi_contact_link
     {
         $this->civi_query->civi_mode = "get";
         $this->civi_query->civi_entity = "Contact";
-        $this->civi_query->civi_params = array(
-            'sequential' => 1,
-            'contact_sub_type' => "Congressional_Representative",
-            'first_name' => $this->propublica_query->get_member_first_name(),
-            'last_name' => $this->propublica_query->get_member_last_name(),
-        );
-        $this->civi_query->civi_query();
-        if($this->civi_query->get_civicrm_result()['count'] > 0)
+        $this->civi_query->civi_params =
+        [
+        'select' => [
+        '*',
+    ],
+  'where' => [
+        ['contact_sub_type', '=', 'Congressional_Representative'],
+        ['first_name', '=', $this->propublica_query->get_member_first_name()],
+        ['last_name', '=', $this->propublica_query->get_member_last_name()],
+    ],
+  'limit' => 25,
+]
+        ;
+        $result = $this->civi_query->civi_query_v4();
+        $count = $result->count();
+        if($count > 0)
         {
-            $this->drupal_civicrm_id = $this->civi_query->get_civicrm_result()['values']['0']['contact_id'];
+            $contact = $result->first();
+            $this->drupal_civicrm_id = $contact['contact_id'];
             // $this->deactivate_record();
             $this->deactivate_record_v4(); // new version for API updates
             $this->maintnence_database();
