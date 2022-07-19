@@ -4,6 +4,7 @@ use Drupal\civicrm\Civicrm;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\civicrm\civi_query;
+use Drupal\nfb_washington\civicrm\civicrm_v4;
 use Drupal\nfb_washington\civicrm_drupal_link\drupal_member_civi_contact_link;
 use Drupal\nfb_washington\form_factory\admin\admin_members;
 use Drupal\nfb_washington\post_process\admin\admin_member_backend;
@@ -54,8 +55,8 @@ class AdminMemberForm extends FormBase
     }
     public function form_backend($mode)
     {
-        $civi= new Civicrm(); $civi->initialize();
-        $civi_query = new civi_query($civi);
+        $civicrm = new Civicrm(); $civicrm->initialize();
+        $civi_query = new civicrm_v4($civicrm);
         $propulbica = new members();
         $link = new drupal_member_civi_contact_link($civi_query, $propulbica);
         $backend = new admin_member_backend($link);
