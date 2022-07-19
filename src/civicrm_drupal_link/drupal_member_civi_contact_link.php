@@ -81,8 +81,9 @@ class drupal_member_civi_contact_link
         }
     }
     public function civi_processes(){
-        $this->deduplication();
-        $this->address_and_phone();
+        $this->deduplication_v4();
+       // $this->address_and_phone(); API version 3 no longer viable
+        $this->address_and_phone_v4();
         $this->active_inactive();
     }
     public function deduplication()
@@ -109,6 +110,35 @@ class drupal_member_civi_contact_link
             $this->create_congressional_civi_record();
         }
     }
+    public function deduplication_v4()
+    {
+        $this->civi_query->civi_entity = "Contact";
+        $this->civi_query->civi_mode = "get";
+        $this->civi_query->civi_params = [
+          'select' => [
+        '*',
+    ],
+  'where' => [
+        ['contact_sub_type', '=', 'Congressional_Representative'],
+        ['first_name', '=', $this->propublica_query->get_member_first_name()],
+        ['last_name', '=', $this->propublica_query->get_member_last_name()],
+    ],
+  'limit' => 25,];
+        $result = $this->civi_query->civi_query_v4();
+        $count = $result->count();
+        if($count > 0)
+        {
+            $contact = $result->first();
+            $this->drupal_civicrm_id =  $contact['contact_id'];
+            $this->convert_gender();
+            $this->update_congressional_details_v4();
+
+        }
+        else {
+            $this->convert_gender();
+            $this->create_congressional_civi_record_v4();
+        }
+    }
     public function address_and_phone()
     {
         $this->civi_query->civi_entity = "Address";
@@ -132,6 +162,42 @@ class drupal_member_civi_contact_link
      //   $this->Phone_number(); API 3 no longer supported
         $this->Phone_number_v4();
     }
+    public function address_and_phone_v4()
+    {
+        $this->civi_query->civi_entity = "Address";
+        $this->civi_query->civi_mode = "get";
+        $this->civi_query->civi_params = [
+            'select' => [
+                '*',
+            ],
+            'where' => [
+                ['contact_id', '=', $this->get_drupal_civicrm_id()],
+                ['state_province_id', '=', 1050],
+                ['city', '=', 'Washington'],
+            ],
+            'limit' => 25,
+        ];
+        $result = $this->civi_query->civi_query_v4();
+        $count = $result->count();
+        if($count > 0)
+        {
+            $current = 0; $address_id = null;
+            while ($current <= $count){
+                $address =  $result->itemAt($current);
+                if($address_id == null)
+                {
+                    $address_id = $address['id'];
+                    $this->update_address_v4($address_id);
+                }
+                $current++;
+            }
+        }
+        else{
+            $this->create_address_v4();
+        }
+        //   $this->Phone_number(); API 3 no longer supported
+        $this->Phone_number_v4();
+    }
     public function update_address($address_id)
     {
         $this->civi_query->civi_mode = "create";
@@ -141,6 +207,22 @@ class drupal_member_civi_contact_link
             'street_address' => $this->propublica_query->get_office_address(),
         );
         $this->civi_query->civi_query();
+    }
+
+    public function update_address_v4($address_id)
+    {
+        $this->civi_query->civi_mode = "update";
+        $this->civi_query->civi_entity = "Address";
+        $this->civi_query->civi_params =
+        [
+        'values' => [
+        'street_adress' => $this->propublica_query->get_office_address(),
+    ],
+  'where' => [
+        ['id', '=', $address_id],
+    ],
+];
+        $result = $this->civi_query->civi_query_v4();
     }
     public function create_address()
     {
@@ -154,6 +236,23 @@ class drupal_member_civi_contact_link
             'city' => "Washington",
         );
         $this->civi_query->civi_query();
+
+    }
+    public function create_address_v4()
+    {
+        $this->civi_query->civi_mode = "create";
+        $this->civi_query->civi_entity = "Address";
+        $this->civi_query->civi_params = [
+          'values' => [
+        'contact_id' => $this->get_drupal_civicrm_id(),
+        'street_address' => $this->propublica_query->get_office_address(),
+        'location_type_id' => 2,
+        'state_province_id' => 1050,
+        'country_id' => 1228,
+        'city' => 'Washington',
+    ], ];
+
+        $result = $this->civi_query->civi_query_v4();
 
     }
     public function  update_congressional_details()
@@ -170,17 +269,34 @@ class drupal_member_civi_contact_link
         );
         $this->civi_query->civi_query();
     }
+    public function  update_congressional_details_v4()
+    {
+        $this->civi_query->civi_entity = "Contact";
+        $this->civi_query->civi_mode = "update";
+        $this->civi_query->civi_params =
+        [
+        'values' => [
+        'first_name' => $this->propublica_query->get_member_first_name(),
+        'last_name' => $this->propublica_query->get_member_last_name(),
+        'middle_name' => $this->propublica_query->get_member_middle_name(),
+        'birth_date' => $this->propublica_query->get_member_d_o_b(),
+        'gender_id:name' => $this->propublica_query->get_member_gender(),
+    ],
+  'where' => [
+        ['id', '=', $this->get_drupal_civicrm_id()],
+    ],];
+      $result =  $this->civi_query->civi_query_v4();
+    }
     public function convert_gender()
     {
         switch ($this->propublica_query->get_member_gender())
         {
             case "M":
-                $this->propublica_query->member_gender = "male"; break;
+                $this->propublica_query->member_gender = "Male"; break;
             case "F":
-                $this->propublica_query->member_gender = "female"; break;
+                $this->propublica_query->member_gender = "Female"; break;
             case "N":
-                $this->propublica_query->member_gender = "non-binary";
-
+                $this->propublica_query->member_gender = "Nonbinary"; break;
         }
     }
     public function create_congressional_civi_record()
