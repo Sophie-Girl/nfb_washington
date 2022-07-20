@@ -129,7 +129,7 @@ class drupal_member_civi_contact_link
         if($count > 0)
         {
             $contact = $result->first();
-            $this->drupal_civicrm_id =  $contact['contact_id'];
+            $this->drupal_civicrm_id =  $contact['id'];
             $this->convert_gender();
             $this->update_congressional_details_v4();
 
@@ -556,9 +556,7 @@ class drupal_member_civi_contact_link
         if($count > 0)
         {
             $contact = $result->first();
-            \Drupal::logger("double_check")->notice("Result, ".print_r($result, true));
-            \Drupal::logger("double_check")->notice("contact, ".print_r($contact, true));
-            $this->drupal_civicrm_id = $contact['contact_id'];
+            $this->drupal_civicrm_id = $contact['id'];
             // $this->deactivate_record();
             $this->deactivate_record_v4(); // new version for API updates
             $this->maintnence_database();
