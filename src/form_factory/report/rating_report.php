@@ -14,6 +14,9 @@ class rating_report extends meeting_report
             '#type' => 'item',
             '#markup' => "<p>This report download will show  all meetings in order of the day in which they will happen in a word document</p>",
         );
+        $form['filt_type'] = array(
+
+        );
         $form['file_type'] = array(
           '#type' => 'select',
           '#title' => "Select File Type",
