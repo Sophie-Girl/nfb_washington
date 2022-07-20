@@ -334,7 +334,7 @@ class drupal_member_civi_contact_link
         ];
         $result = $this->civi_query->civi_query_v4(); // convert to api v4
         \Drupal::logger("double_check")->notice("result, ".print_r($result, true));
-        $count = $result->count(); $new_c = $result->itemAt($count);
+        $count = $result->count(); $new_c = $result->first();
         $this->drupal_civicrm_id = $new_c['id'];
     }
     public function Phone_number()
