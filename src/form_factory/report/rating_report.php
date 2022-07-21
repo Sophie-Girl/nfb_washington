@@ -36,9 +36,9 @@ class rating_report extends meeting_report
             "#title" => "Select State",
             '#options' => $this->state_options(),
             '#states' => array(
-                'visible' => [':input[name="filter_results"]' => ['value' => "state"]],
+                'visible' => [':input[name="filt_type"]' => ['value' => "state"]],
                 'and',
-                'required' => [':input[name="filter_results"]' => ['value' => "state"]],
+                'required' => [':input[name="filt_type"]' => ['value' => "state"]],
             ),
         );
         $form['submit'] = array(
