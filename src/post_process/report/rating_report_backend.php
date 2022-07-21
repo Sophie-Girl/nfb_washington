@@ -4,7 +4,7 @@ use Drupal\civicrm\Civicrm; // V3 will become deprecated.
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\civicrm\civicrm_v4;
 use Drupal\nfb_washington\database\base;
-class rating_report_backend
+class rating_report_backend extends meeting_report_backend
 {
     public $rating_id;
     public $issue_1_rating;
