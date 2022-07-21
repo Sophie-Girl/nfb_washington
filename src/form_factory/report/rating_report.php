@@ -15,7 +15,14 @@ class rating_report extends meeting_report
             '#markup' => "<p>This report download will show  all meetings in order of the day in which they will happen in a word document</p>",
         );
         $form['filt_type'] = array(
-
+            '#type' => 'select',
+            '#title' => "Filter Report By",
+            '#options' => array(
+                'all' => "All Meetings",
+                'state' => "Specific State",
+                'unscheduled' => "Reps With No Meetings"
+            ),
+            '#required' => true,
         );
         $form['file_type'] = array(
           '#type' => 'select',
@@ -23,6 +30,16 @@ class rating_report extends meeting_report
           '#options' => array('csv' => "CSV Excel File",
               "docx" => "Word Document fro brailling"),
             '#required' => true
+        );
+        $form['state_select'] = array(
+            '#type' => "select",
+            "#title" => "Select State",
+            '#options' => $this->state_options(),
+            '#states' => array(
+                'visible' => [':input[name="filter_results"]' => ['value' => "state"]],
+                'and',
+                'required' => [':input[name="filter_results"]' => ['value' => "state"]],
+            ),
         );
         $form['submit'] = array(
             '#type' => 'submit',
