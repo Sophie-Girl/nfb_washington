@@ -20,7 +20,7 @@ class rating_report extends meeting_report
             '#options' => array(
                 'all' => "All Meetings",
                 'state' => "Specific State",
-                'unscheduled' => "Reps With No Meetings"
+                'unscheduled' => "Reps With No Ratings"
             ),
             '#required' => true,
         );

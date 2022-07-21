@@ -79,6 +79,15 @@ class rating_report_backend extends meeting_report_backend
     {return $this->issue_count;}
     public function  get_file_type()
     {return $this->file_type;}
+    public function set_filters(FormStateInterface  $form_state)
+    {
+        if($form_state->getValue("filt_type") == "state")
+        {
+            $this->state_filter = $form_state->getValue("state_select");
+        }else{ $this->state_filter = null;}
+        if($form_state->getValue("filt_type") == "unscheduled")
+        {$this->null_filter = "on";}else{$this->null_filter = "off";}
+    }
     public function set_issue_count()
     {
         $issue_count = null;
@@ -102,46 +111,59 @@ class rating_report_backend extends meeting_report_backend
     }
     public function backend_markups_and_array(FormStateInterface $form_state)
     {
+        $this->set_filters($form_state);
         $this->file_type = $form_state->getValue("file_type");
         $this->set_issue_count();
         $this->get_issues();
         $this->full_member_query();
         $ratings_array = [];
-        foreach ($this->get_member_results() as $member)
-        {
+        foreach ($this->get_member_results() as $member) {
             $member = get_object_vars($member);
-            $this->state = $member['state'];
-            $this->rank = $member['rank'];
-            $this->district = $member['district'];
-            $this->civi_id = $member['civicrm_contact_id'];
-            $this->member_id = $member['member_id'];
-            $this->civi_query_stuff();
-            $this->rating_issue_1_query();
-            if($this->get_issue_count() > 1)
-            {$this->rating_issue_2_query();}
-            if($this->get_issue_count() > 2)
-            {$this->rating_issue_3_query();}
-            if($this->get_issue_count() > 3)
-            {$this->rating_issue_4_query();}
-            if($this->get_issue_count() > 4)
-            {$this->rating_issue_5_query();}
-            $this->build_array($ratings_array);
-            $this->clear_ratings();
+            if ($this->get_state_filter() === null || $this->get_state_filter() == $member['state']) {
+
+                $this->state = $member['state'];
+                $this->rank = $member['rank'];
+                $this->district = $member['district'];
+                $this->civi_id = $member['civicrm_contact_id'];
+                $this->member_id = $member['member_id'];
+                $this->civi_query_stuff();
+                $this->rating_issue_1_query();
+                if ($this->get_issue_1_rating() != null) {
+                    if ($this->get_issue_count() > 1) {
+                        $this->rating_issue_2_query();
+                    }
+                    if ($this->get_issue_count() > 2) {
+                        $this->rating_issue_3_query();
+                    }
+                    if ($this->get_issue_count() > 3) {
+                        $this->rating_issue_4_query();
+                    }
+                    if ($this->get_issue_count() > 4) {
+                        $this->rating_issue_5_query();
+                    }
+                    $this->build_array($ratings_array);
+                    $this->clear_ratings();
+                }
+            }
         }
-        $this->member_results = $ratings_array;
-        if($this->get_file_type() == "csv")
-        {$this->csv_functions();
-        }
-        else {
-            $this->docx_function();
-            $text = $this->get_markup();
-            $this->phpoffice = new html_to_word();
-            $this->phpoffice->font_size = '12'; $year = date('Y');
-            $this->phpoffice->report_name = "/var/www/html/drupal/web/sites/nfb.org/files/".$year."_washington_seminar_rating_Report.docx";
-            $this->phpoffice->download_doc($text);
+
+                    $this->member_results = $ratings_array;
+                    if ($this->get_file_type() == "csv") {
+                        $this->csv_functions();
+                    } else {
+                        $this->docx_function();
+                        $text = $this->get_markup();
+                        $this->phpoffice = new html_to_word();
+                        $this->phpoffice->font_size = '12';
+                        $year = date('Y');
+                        $this->phpoffice->report_name = "/var/www/html/drupal/web/sites/nfb.org/files/" . $year . "_washington_seminar_rating_Report.docx";
+                        $this->phpoffice->download_doc($text);
+
+                    }
 
         }
-    }
+
+
     public function clear_ratings()
     {
         $this->issue_1_rating = null;
