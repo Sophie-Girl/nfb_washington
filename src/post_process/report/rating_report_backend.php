@@ -407,7 +407,7 @@ class rating_report_backend extends meeting_report_backend
     }
     public function check_file_size($data, $fileName, &$file, &$size)
     {
-        if (isset($data['0'])) {
+        if (isset($data['0'])){
             $fp = fopen($fileName, 'w');
             fputcsv($fp, array_keys($data['0']));
             foreach ($data AS $values) {
