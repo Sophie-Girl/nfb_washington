@@ -18,7 +18,7 @@ class rating_report extends meeting_report
             '#type' => 'select',
             '#title' => "Filter Report By",
             '#options' => array(
-                'all' => "All Meetings",
+                'all' => "All Ratings",
                 'state' => "Specific State",
                 'unscheduled' => "Reps With No Ratings"
             ),
