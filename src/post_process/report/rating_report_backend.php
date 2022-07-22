@@ -156,7 +156,7 @@ class rating_report_backend extends meeting_report_backend
                         $this->phpoffice = new html_to_word();
                         $this->phpoffice->font_size = '12';
                         $year = date('Y');
-                        $this->phpoffice->report_name = "/var/www/html/drupal/web/sites/nfb.org/files/" . $year . "_washington_seminar_rating_Report.docx";
+                        $this->phpoffice->report_name = DRUPAL_ROOT."/".$year."_washington_seminar_rating_Report.docx";
                         $this->phpoffice->download_doc($text);
 
                     }
