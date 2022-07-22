@@ -408,11 +408,10 @@ class rating_report_backend extends meeting_report_backend
     public function check_file_size($data, $fileName, &$file, &$size)
     {
         if (isset($data['0'])) {
-            \Drupal::logger('nfb_washington_download')->notice("I am creating the csv ".$fileName);
             $fp = fopen($fileName, 'w');
             fputcsv($fp, array_keys($data['0']));
             foreach ($data AS $values) {
-                \Drupal::logger('nfb_washington_download')->notice("value ".print_r($values, true));
+
                 fputcsv($fp, $values);}
             fclose($fp);}
         ob_flush();
