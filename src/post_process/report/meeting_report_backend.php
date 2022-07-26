@@ -148,7 +148,8 @@ class meeting_report_backend
         foreach($this->get_member_results() as $meeting)
         {
             $meeting = get_object_vars($meeting);
-            if($this->get_null_filter() == "on" && $meeting['location'] == "Unknown"
+            if($this->get_null_filter() == "on" && $meeting['location'] == "Unknown" ||
+                $this->get_null_filter() == "on" && $meeting['location'] == "TBD"
              || $this->get_null_filter() == "off") {
                 $this->member_id = $meeting['member_id'];
                 $this->location = $meeting['location'];
