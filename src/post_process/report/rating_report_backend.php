@@ -114,6 +114,7 @@ class rating_report_backend extends meeting_report_backend
         $this->set_issue_count();
         $this->get_issues();
         $this->full_member_query();
+        \Drupal::logger("test")->notice("I'm getting to after the member query, stage is being weird?");
         $ratings_array = [];
         foreach ($this->get_member_results() as $member) {
             $member = get_object_vars($member);
@@ -137,6 +138,7 @@ class rating_report_backend extends meeting_report_backend
                     }
                     if ($this->get_issue_count() > 4) {
                         $this->rating_issue_5_query();}
+            \Drupal::logger("test")->notice("I'm getting before the building array, stage is being weird?");
                     $this->build_array($ratings_array);
                     $this->clear_ratings();
 
