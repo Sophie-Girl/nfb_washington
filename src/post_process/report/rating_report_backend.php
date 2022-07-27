@@ -145,6 +145,7 @@ class rating_report_backend extends meeting_report_backend
 
                     $this->member_results = $ratings_array;
                     if ($this->get_file_type() == "csv") {
+                        \Drupal::logger("test")->notice("I'm getting here, stage is being weird?");
                         $this->csv_functions();
                     } else {
                         $this->docx_function();
