@@ -101,8 +101,7 @@ class rating_report_backend extends meeting_report_backend
             {
                 if($issue_count == null){
                     $setting = get_object_vars($setting);
-                    $issue_count = $setting['value'];
-                    \Drupal::logger("nfb_washington_Debug")->notice("issue count ".$issue_count);}
+                    $issue_count = $setting['value'];}
             }
         }
         $this->issue_count = $issue_count;
@@ -127,7 +126,6 @@ class rating_report_backend extends meeting_report_backend
                 $this->member_id = $member['member_id'];
                 $this->civi_query_stuff();
                 $this->rating_issue_1_query();
-                if ($this->get_issue_1_rating() != null) {
                     if ($this->get_issue_count() > 1) {
                         $this->rating_issue_2_query();
                     }
@@ -139,7 +137,6 @@ class rating_report_backend extends meeting_report_backend
                     }
                     if ($this->get_issue_count() > 4) {
                         $this->rating_issue_5_query();
-                    }
                     $this->build_array($ratings_array);
                     $this->clear_ratings();
                 }
