@@ -136,10 +136,10 @@ class rating_report_backend extends meeting_report_backend
                         $this->rating_issue_4_query();
                     }
                     if ($this->get_issue_count() > 4) {
-                        $this->rating_issue_5_query();
+                        $this->rating_issue_5_query();}
                     $this->build_array($ratings_array);
                     $this->clear_ratings();
-                }
+
 
         }
         \Drupal::logger("test")->notice("I'm getting before the file part, stage is being weird?");
