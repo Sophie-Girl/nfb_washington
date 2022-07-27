@@ -100,7 +100,6 @@ class rating_report_backend extends meeting_report_backend
             foreach($this->database->get_result() as $setting)
             {
                 if($issue_count == null){
-                    \Drupal::logger("nfb_washington_Debug")->notice("issue count");
                     $setting = get_object_vars($setting);
                     $issue_count = $setting['value'];
                     \Drupal::logger("nfb_washington_Debug")->notice("issue count ".$issue_count);}
@@ -119,7 +118,7 @@ class rating_report_backend extends meeting_report_backend
         $ratings_array = [];
         foreach ($this->get_member_results() as $member) {
             $member = get_object_vars($member);
-            if ($this->get_state_filter() === null || $this->get_state_filter() == $member['state']) {
+
 
                 $this->state = $member['state'];
                 $this->rank = $member['rank'];
@@ -144,7 +143,7 @@ class rating_report_backend extends meeting_report_backend
                     $this->build_array($ratings_array);
                     $this->clear_ratings();
                 }
-            }
+
         }
 
                     $this->member_results = $ratings_array;
@@ -332,25 +331,34 @@ class rating_report_backend extends meeting_report_backend
     }
     public function build_array(&$ratings_array)
     {
-        $array_key = $this->get_state().$this->get_last_name().$this->get_first_name();
-        $ratings_array[$array_key]['first_name'] = $this->get_first_name();
-        $ratings_array[$array_key]['last_name'] = $this->get_last_name();
-        $ratings_array[$array_key]['phone'] = $this->get_phone();
-        $ratings_array[$array_key]['district_text'] = $this->district_text();
-        $ratings_array[$array_key][$this->get_issue_1_name()."_rating"] = $this->get_issue_1_rating();
-        $ratings_array[$array_key][$this->get_issue_1_name()."_comment"] = $this->get_issue_1_comment();
-        if($this->get_issue_count() > 1)
-        {$ratings_array[$array_key][$this->get_issue_2_name()."_rating"] = $this->get_issue_2_rating();
-            $ratings_array[$array_key][$this->get_issue_2_name()."_comment"] = $this->get_issue_2_comment();}
-        if($this->get_issue_count() > 2)
-        {$ratings_array[$array_key][$this->get_issue_3_name()."_rating"] = $this->get_issue_3_rating();
-            $ratings_array[$array_key][$this->get_issue_3_name()."_comment"] = $this->get_issue_3_comment();}
-        if($this->get_issue_count() > 3)
-        {$ratings_array[$array_key][$this->get_issue_4_name()."_rating"] = $this->get_issue_4_rating();
-            $ratings_array[$array_key][$this->get_issue_4_name()."_comment"] = $this->get_issue_4_comment();}
-        if($this->get_issue_count() > 4)
-        {$ratings_array[$array_key][$this->get_issue_5_name()."_rating"] = $this->get_issue_5_rating();
-            $ratings_array[$array_key][$this->get_issue_5_name()."_comment"] = $this->get_issue_5_comment();}
+        if ($this->get_state_filter() === null || $this->get_state_filter() == $this->get_state()
+            || $this->get_null_filter() == "off" &&  $this->get_state_filter() === null
+        || $this->get_null_filter() == "on" and  $this->get_issue_1_rating() == null) {
+            $array_key = $this->get_state() . $this->get_last_name() . $this->get_first_name();
+            $ratings_array[$array_key]['first_name'] = $this->get_first_name();
+            $ratings_array[$array_key]['last_name'] = $this->get_last_name();
+            $ratings_array[$array_key]['phone'] = $this->get_phone();
+            $ratings_array[$array_key]['district_text'] = $this->district_text();
+            $ratings_array[$array_key][$this->get_issue_1_name() . "_rating"] = $this->get_issue_1_rating();
+            $ratings_array[$array_key][$this->get_issue_1_name() . "_comment"] = $this->get_issue_1_comment();
+            if ($this->get_issue_count() > 1) {
+                $ratings_array[$array_key][$this->get_issue_2_name() . "_rating"] = $this->get_issue_2_rating();
+                $ratings_array[$array_key][$this->get_issue_2_name() . "_comment"] = $this->get_issue_2_comment();
+            }
+            if ($this->get_issue_count() > 2) {
+                $ratings_array[$array_key][$this->get_issue_3_name() . "_rating"] = $this->get_issue_3_rating();
+                $ratings_array[$array_key][$this->get_issue_3_name() . "_comment"] = $this->get_issue_3_comment();
+            }
+            if ($this->get_issue_count() > 3) {
+                $ratings_array[$array_key][$this->get_issue_4_name() . "_rating"] = $this->get_issue_4_rating();
+                $ratings_array[$array_key][$this->get_issue_4_name() . "_comment"] = $this->get_issue_4_comment();
+            }
+            if ($this->get_issue_count() > 4) {
+                $ratings_array[$array_key][$this->get_issue_5_name() . "_rating"] = $this->get_issue_5_rating();
+                $ratings_array[$array_key][$this->get_issue_5_name() . "_comment"] = $this->get_issue_5_comment();
+            }
+
+        }
     }
     public function docx_function()
     { $year = date("Y");
