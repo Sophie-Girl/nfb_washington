@@ -140,8 +140,8 @@ class rating_report_backend extends meeting_report_backend
 
                     $this->build_array($ratings_array);
                     $this->clear_ratings();
-            \Drupal::logger("test")->notice("I'm getting before the clear, stage is being weird?");}
-        \Drupal::logger("test")->notice("I'm getting before the file part, stage is being weird?");
+        }
+        \Drupal::logger("test_why_not_getting")->notice("I'm getting before the file part, stage is being weird?");
                     $this->member_results = $ratings_array;
                     if ($this->get_file_type() == "csv") {
                         \Drupal::logger("test")->notice("I'm getting here, stage is being weird?");
