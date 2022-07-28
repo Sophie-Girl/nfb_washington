@@ -24,13 +24,6 @@ class rating_report extends meeting_report
             ),
             '#required' => true,
         );
-        $form['file_type'] = array(
-          '#type' => 'select',
-          '#title' => "Select File Type",
-          '#options' => array('csv' => "CSV Excel File",
-              "docx" => "Word Document fro brailling"),
-            '#required' => true
-        );
         $form['state_select'] = array(
             '#type' => "select",
             "#title" => "Select State",
@@ -41,6 +34,14 @@ class rating_report extends meeting_report
                 'required' => [':input[name="filt_type"]' => ['value' => "state"]],
             ),
         );
+        $form['file_type'] = array(
+          '#type' => 'select',
+          '#title' => "Select File Type",
+          '#options' => array('csv' => "CSV Excel File",
+              "docx" => "Word Document fro brailling"),
+            '#required' => true
+        );
+
         $form['submit'] = array(
             '#type' => 'submit',
             '#value' => "Download",
