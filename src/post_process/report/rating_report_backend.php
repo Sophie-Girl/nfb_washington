@@ -117,8 +117,6 @@ class rating_report_backend extends meeting_report_backend
         $ratings_array = [];
         foreach ($this->get_member_results() as $member) {
             $member = get_object_vars($member);
-
-
                 $this->state = $member['state'];
                 $this->rank = $member['rank'];
                 $this->district = $member['district'];
@@ -137,7 +135,6 @@ class rating_report_backend extends meeting_report_backend
                     }
                     if ($this->get_issue_count() > 4) {
                         $this->rating_issue_5_query();}
-
                     $this->build_array($ratings_array);
                     $this->clear_ratings();
         }
