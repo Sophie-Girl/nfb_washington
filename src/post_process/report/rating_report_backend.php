@@ -117,8 +117,8 @@ class rating_report_backend extends meeting_report_backend
         $this->full_member_query();
         $ratings_array = [];
         //error_reporting(E_ALL | E_STRICT);
-        foreach ($this->get_member_results() as $member) {
-            $member = get_object_vars($member);
+        foreach ($this->get_member_results() as $members) {
+            $member = get_object_vars($members);
                 $this->state = $member['state'];
                 $this->rank = $member['rank'];
                 $this->district = $member['district'];
