@@ -109,6 +109,7 @@ class rating_report_backend extends meeting_report_backend
     }
     public function backend_markups_and_array(FormStateInterface $form_state)
     {
+        ini_set('max_execution_time', 500);
         $this->set_filters($form_state);
         $this->file_type = $form_state->getValue("file_type");
         $this->set_issue_count();
