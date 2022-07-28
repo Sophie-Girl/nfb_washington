@@ -125,6 +125,7 @@ class rating_report_backend extends meeting_report_backend
                 $this->civi_id = $member['civicrm_contact_id'];
                 $this->member_id = $member['member_id'];
                 $this->civi_query_stuff();
+                \Drupal::logger("state_test")->notice("State: ".$member['state']." Name: ".$this->get_first_name()." ".$this->get_last_name());
                 $this->rating_issue_1_query();
                     if ($this->get_issue_count() > 1) {
                         $this->rating_issue_2_query();
@@ -143,7 +144,7 @@ class rating_report_backend extends meeting_report_backend
         \Drupal::logger("test_array")->notice("array result: ".print_r($ratings_array, true));
                     $this->member_results = $ratings_array;
                     if ($this->get_file_type() == "csv") {
-                        \Drupal::logger("test")->notice("I'm getting here, stage is being weird?");
+
                         $this->csv_functions();
                     } else {
                         $this->docx_function();
