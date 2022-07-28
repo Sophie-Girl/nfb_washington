@@ -123,6 +123,7 @@ class rating_report_backend extends meeting_report_backend
                 $this->rank = $member['rank'];
                 $this->district = $member['district'];
                 $this->civi_id = $member['civicrm_contact_id'];
+                \Drupal::logger("civi_id_check")->notice("civi_id: ".$this->get_civicrm_id());
                 $this->member_id = $member['member_id'];
                 $this->civi_query_stuff();
                 \Drupal::logger("state_test")->notice("State: ".$member['state']." Name: ".$this->get_first_name()." ".$this->get_last_name());
