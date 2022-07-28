@@ -47,7 +47,7 @@ class MeetReportForm extends FormBase
     public function csv_Set_up($data)
     {
        $year = date("Y");
-        $filename = DRUPAL_ROOT."/".$year."_washington_seminar_rating_report.csv";
+        $filename = DRUPAL_ROOT."/modules/custom/".$year."_washington_seminar_rating_report.csv";
         $this->check_file_size($data, $filename, $file, $size);
         $this->file_download($file, $size, $filename);
 
