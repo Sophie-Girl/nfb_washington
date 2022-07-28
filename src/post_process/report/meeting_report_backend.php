@@ -188,6 +188,7 @@ class meeting_report_backend
     }
     public function civi_query_stuff()
     {
+        $this->first_name = null;
         $this->civicrm->civi_entity = "Contact";
         $this->civicrm->civi_mode = 'get';
         $this->civicrm->civi_params = [
@@ -203,7 +204,7 @@ class meeting_report_backend
                 ['phone.is_primary', '=', TRUE],
                 // So using primary is needed for just grabbing one contact
             ],
-            'limit' => 25,
+            'limit' => 1,
         ];
         $result = $this->civicrm->civi_query_v4();
         $count = $result->count(); $current = 0;

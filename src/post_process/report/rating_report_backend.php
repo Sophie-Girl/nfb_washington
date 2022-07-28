@@ -174,6 +174,7 @@ class rating_report_backend extends meeting_report_backend
         $this->issue_5_rating = null;
         $this->issue_5_comment = null;
         $this->state = null;
+        $this->first_name = null;
     }
     public function set_meeting_id()
     {
