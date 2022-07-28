@@ -171,6 +171,7 @@ class rating_report_backend extends meeting_report_backend
         $this->issue_4_comment = null;
         $this->issue_5_rating = null;
         $this->issue_5_comment = null;
+        $this->state = null;
     }
     public function set_meeting_id()
     {
@@ -327,9 +328,10 @@ class rating_report_backend extends meeting_report_backend
     }
     public function build_array(&$ratings_array)
     {
-        if ($this->get_state_filter() === null || $this->get_state_filter() == $this->get_state()
+        if ($this->get_state_filter() === null || $this->get_state_filter() == $this->get_state() && $this->get_null_filter() == "off"
             || $this->get_null_filter() == "off" &&  $this->get_state_filter() === null
         || $this->get_null_filter() == "on" and  $this->get_issue_1_rating() == null) {
+
             $array_key = $this->get_state() . $this->get_last_name() . $this->get_first_name();
             $ratings_array[$array_key]['first_name'] = $this->get_first_name();
             $ratings_array[$array_key]['last_name'] = $this->get_last_name();
