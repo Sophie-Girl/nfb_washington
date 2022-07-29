@@ -10,8 +10,13 @@ class drupal_member_civi_contact_link
     public $propublica_query;
     public $drupal_civicrm_id;
     public $database;
+    public $relationship_id;
     public function  get_drupal_civicrm_id()
     {return $this->drupal_civicrm_id;}
+    public function get_relationsihp_id()
+    {
+        return $this->relationship_id;
+    }
     public function  __construct(civicrm_v4 $civi_query, members $members)
     {
         $this->civi_query = $civi_query;
@@ -656,7 +661,78 @@ class drupal_member_civi_contact_link
         where member_id = '".$member_id."';";
         $this->database->update_query($query);
     }
+    public function party_functions()
+    {
+        $this->relationship_id = null;
+        $p_name = $this->party_name_switch();
+        $party_c_id = $this->find_party_c_id($p_name);
 
+
+
+
+    }
+    public function party_name_switch()
+    {
+        switch ($this->propublica_query->get_member_party())
+        {
+            case "R":
+                $p_name = "Republican Party";
+                break;
+            case "D":
+                $p_name = "Democratic Party";
+                break;
+            case "I":
+                $p_name = "Independent Party";
+                break;
+        }
+        return $p_name;
+    }
+    public function find_party_c_id($p_name)
+    {
+        $party_c_id = null;
+        $this->civi_query->civi_mode = "get";
+        $this->civi_query->civi_entity = "Contact";
+        $this->civi_query->civi_params = [
+            'select' => [
+                '*',
+            ],
+            'where' => [
+                ['organization_name', '=', $p_name],
+                ['contact_sub_type', '=', 'Political_Party'],
+            ],
+            'limit' => 25,
+        ];
+       $result = $this->civi_query->civi_query_v4();
+       $count = $result->count(); $current = 0;
+       while($current <= $count)
+       {
+           $party =  $result->itemAt($current);
+           if($party_c_id == null)
+           {
+               $party_c_id = $party['id'];
+           }
+           $current++;
+       }
+       return $party_c_id;
+    }
+    public function check_for_member_ships(&$party_c_id)
+    {
+        $this->civi_query->civi_mode = "get";
+        $this->civi_query->civi_entity = "Relationship";
+        $this->civi_query->civi_params = [
+            'select' => [
+            '*',
+        ],
+  'where' => [
+        ['relationship_type_id', '=', '55'],
+        ['contact_id_a', '=', $this->get_drupal_civicrm_id()],
+    ],
+  'limit' => 25,
+];
+        $result = $this->civi_query->civi_query_v4();
+        $count = $result->count();
+
+    }
 
 
 }
