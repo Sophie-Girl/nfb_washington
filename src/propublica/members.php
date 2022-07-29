@@ -15,6 +15,7 @@ class members extends query_base{
     public $member_gender;
     public $member_active;
     public $member_state;
+    public $member_party;
     public function get_member_state()
     {return $this->member_state;}
     public function get_member_first_name()
@@ -39,6 +40,8 @@ class members extends query_base{
     {return $this->member_gender;}
     public function get_member_active()
     {return $this->member_active;}
+    public function get_member_party()
+    {return $this->member_party;}
     public function set_congress_number()
     {
         $this->database = new base();
