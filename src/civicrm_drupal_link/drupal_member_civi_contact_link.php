@@ -741,7 +741,7 @@ class drupal_member_civi_contact_link
         ],
   'where' => [
         ['relationship_type_id', '=', $type],
-        ['contact_id_a', '=', $this->get_drupal_civicrm_id()],
+        ['contact_id_b', '=', $this->get_drupal_civicrm_id()],
     ],
   'limit' => 25,
 ];
