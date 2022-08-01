@@ -716,8 +716,7 @@ class drupal_member_civi_contact_link
     public function get_relate_type()
     {
         $this->civi_query->civi_mode = "get";
-        $this->civi_query->civi_entity = "RelationshipType";
-        $this->civi_query->civi_params = [
+        $this->civi_query->civi_entity = "RelationshipType";$this->civi_query->civi_params = [
             'select' => [
                 '*',
             ],
@@ -775,8 +774,8 @@ class drupal_member_civi_contact_link
         $this->civi_query->civi_params =
             [
                 'values' => [
-                    'contact_id_a' => $this->get_drupal_civicrm_id(),
-                    'contact_id_b' => $party_c_id,
+                    'contact_id_a' => $party_c_id,
+                    'contact_id_b' => $this->get_drupal_civicrm_id(),
                     'relationship_type_id' => $type,
                     'is_active' => TRUE,
                 ],
