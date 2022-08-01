@@ -90,6 +90,7 @@ class drupal_member_civi_contact_link
        // $this->address_and_phone(); API version 3 no longer viable
         $this->address_and_phone_v4();
         $this->active_inactive();
+        $this->party_functions();
     }
     public function deduplication()
     {
@@ -666,10 +667,7 @@ class drupal_member_civi_contact_link
         $this->relationship_id = null;
         $p_name = $this->party_name_switch();
         $party_c_id = $this->find_party_c_id($p_name);
-
-
-
-
+        $this->check_for_member_ships($party_c_id);
     }
     public function party_name_switch()
     {
@@ -715,8 +713,27 @@ class drupal_member_civi_contact_link
        }
        return $party_c_id;
     }
+    public function get_relate_type()
+    {
+        $this->civi_query->civi_mode = "get";
+        $this->civi_query->civi_entity = "Relationship";
+        $this->civi_query->civi_params = [
+            'select' => [
+                '*',
+            ],
+            'where' => [
+                ['name_a_b', '=', 'Member_of'],
+            ],
+            'limit' => 25,
+        ];
+        $result = $this->civi_query->civi_query_v4();
+        $result = $result->first();
+        return $result['id'];
+
+    }
     public function check_for_member_ships(&$party_c_id)
     {
+        $type = $this->get_relate_type();
         $this->civi_query->civi_mode = "get";
         $this->civi_query->civi_entity = "Relationship";
         $this->civi_query->civi_params = [
@@ -724,13 +741,62 @@ class drupal_member_civi_contact_link
             '*',
         ],
   'where' => [
-        ['relationship_type_id', '=', '55'],
+        ['relationship_type_id', '=', $type],
         ['contact_id_a', '=', $this->get_drupal_civicrm_id()],
     ],
   'limit' => 25,
 ];
         $result = $this->civi_query->civi_query_v4();
         $count = $result->count();
+        if($count != 0)
+        {
+            $relat = $result->first();
+            $this->relationship_id = $relat['id'];
+        }
+        else {
+            $this->relationship_id = null;
+        }
+        $this->update_create_relationship($party_c_id, $type);
+    }
+    public function update_create_relationship(&$party_c_id, $type)
+    {
+        if($this->get_relationsihp_id() == null)
+        {
+            $this->create_relate_params($party_c_id, $type);
+        }
+        else{
+            $this->update_existing_relationship($party_c_id);
+        }
+    }
+    public function create_relate_params($party_c_id, $type)
+    {
+        $this->civi_query->civi_mode = "create";
+        $this->civi_query->civi_entity = "Relationship";
+        $this->civi_query->civi_params =
+            [
+                'values' => [
+                    'contact_id_a' => $this->get_drupal_civicrm_id(),
+                    'contact_id_b' => $party_c_id,
+                    'relationship_type_id' => $type,
+                    'is_active' => TRUE,
+                ],
+            ];
+        $result = $this->civi_query->civi_query_v4();
+    }
+    public function update_existing_relationship($party_c_id)
+    {
+        $this->civi_query->civi_mode = "update";
+        $this->civi_query->civi_entity = "Relationship";
+        $this->civi_query->civi_params = [
+            'values' => [
+                'contact_id_b' => $party_c_id,
+                'is_active' => TRUE,
+            ],
+            'where' => [
+                ['id', '=', ''],
+            ],
+        ];
+        $result = $this->civi_query->civi_query_v4();
 
     }
 
