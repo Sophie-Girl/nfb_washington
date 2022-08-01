@@ -788,7 +788,7 @@ class drupal_member_civi_contact_link
         $this->civi_query->civi_entity = "Relationship";
         $this->civi_query->civi_params = [
             'values' => [
-                'contact_id_b' => $party_c_id,
+                'contact_id_a' => $party_c_id,
                 'is_active' => TRUE,
             ],
             'where' => [
