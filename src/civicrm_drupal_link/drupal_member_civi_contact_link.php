@@ -716,7 +716,7 @@ class drupal_member_civi_contact_link
     public function get_relate_type()
     {
         $this->civi_query->civi_mode = "get";
-        $this->civi_query->civi_entity = "Relationship";
+        $this->civi_query->civi_entity = "RelationshipType";
         $this->civi_query->civi_params = [
             'select' => [
                 '*',
