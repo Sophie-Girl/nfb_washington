@@ -683,6 +683,12 @@ class drupal_member_civi_contact_link
             case "ID":
                 $p_name = "Independent";
                 break;
+            case "IR":
+                $p_name = "Independent";
+                break;
+            case "I":
+                $p_name = "Independent";
+                break;
         }
         \Drupal::logger("party_issue")->notice("party: ".$p_name);
         return $p_name;
