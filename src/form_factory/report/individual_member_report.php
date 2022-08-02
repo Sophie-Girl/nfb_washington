@@ -2,6 +2,7 @@
 namespace  Drupal\nfb_washington\form_factory\report;
 use Drupal\civicrm\Civicrm;
 use Drupal\nfb_washington\civicrm\civi_query;
+use Drupal\nfb_washington\civicrm\civicrm_v4;
 use Drupal\nfb_washington\database\base;
 
 class individual_member_report
@@ -182,6 +183,38 @@ class individual_member_report
             $this->phone_number = $contact['phone'];
         }
         $this->civi_query = null;
+    }
+    public function contact_info_v4()
+    {
+        $civi = new Civicrm(); $civi->initialize();
+        $this->civi_query = new civicrm_v4($civi);
+        $this->civi_query->civi_entity = "Contact";
+        $this->civi_query->civi_mode = 'get';
+        $this->civi_query->civi_params =  [
+            'select' => [
+                '*',
+                'phone.*',
+            ],
+            'join' => [
+                ['Phone AS phone', 'LEFT', ['phone.contact_id', '=', 'id']],
+            ],
+            'where' => [
+                ['id', '=', $this->get_civicrm_id()],
+                ['phone.is_primary', '=', TRUE],
+            ],
+            'limit' => 25,
+        ];
+        $result = $this->civi_query->civi_query_v4();
+        $res = $result->first();
+        $this->first_name = $res['first_name'];
+        $this->last_name =  $res['last_name'];
+        $this->phone_number = $res['phone.phone'];
+
+
+    }
+    public function party_info()
+    {
+
     }
     public function build_contact_markup()
     {
