@@ -671,6 +671,7 @@ class drupal_member_civi_contact_link
     }
     public function party_name_switch()
     {
+        \Drupal::logger("party_issue")->notice("party: ".$this->propublica_query->get_member_party());
         switch ($this->propublica_query->get_member_party())
         {
             case "R":
@@ -683,6 +684,7 @@ class drupal_member_civi_contact_link
                 $p_name = "Independent";
                 break;
         }
+        \Drupal::logger("party_issue")->notice("party: ".$p_name);
         return $p_name;
     }
     public function find_party_c_id($p_name)
