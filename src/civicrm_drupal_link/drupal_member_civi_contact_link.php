@@ -680,7 +680,7 @@ class drupal_member_civi_contact_link
                 $p_name = "Democratic Party";
                 break;
             case "I":
-                $p_name = "Independent Party";
+                $p_name = "Independent";
                 break;
         }
         return $p_name;
