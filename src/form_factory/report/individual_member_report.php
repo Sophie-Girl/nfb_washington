@@ -209,6 +209,7 @@ class individual_member_report
         $this->first_name = $res['first_name'];
         $this->last_name =  $res['last_name'];
         $this->phone_number = $res['phone.phone'];
+        $this->civi_query = null;
 
 
     }
