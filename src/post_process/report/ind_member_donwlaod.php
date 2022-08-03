@@ -79,7 +79,8 @@ class  ind_member_donwlaod
     {
         $this->contact_markup = $this->get_contact_markup().
         "State: ".$this->form_factory->get_state()."      Rank: ".strtoupper(substr($this->form_factory->get_rank(),0, 1)).substr($this->form_factory->get_rank(), 1,20).PHP_EOL
-        ."Phone: ".$this->form_factory->get_phone_number().PHP_EOL;
+        ."Phone: ".$this->form_factory->get_phone_number().PHP_EOL.
+        "Party: ".$this->form_factory->get__party_name().PHP_EOL;
     }
     public function house_contact_markup()
     {
