@@ -167,7 +167,7 @@ class individual_member_report
     }
     public function get_contact_info()
     {
-        $civi = new Civicrm(); $civi->initialize();
+    /*    $civi = new Civicrm(); $civi->initialize();
         $this->civi_query = new civi_query($civi);
         $this->civi_query->civi_entity = "Contact";
         $this->civi_query->civi_mode = 'get';
@@ -182,7 +182,8 @@ class individual_member_report
             $this->last_name =  $contact['last_name'];
             $this->phone_number = $contact['phone'];
         }
-        $this->civi_query = null;
+        $this->civi_query = null; */
+        $this->contact_info_v4();
     }
     public function contact_info_v4()
     {
@@ -210,8 +211,6 @@ class individual_member_report
         $this->last_name =  $res['last_name'];
         $this->phone_number = $res['phone.phone'];
         $this->civi_query = null;
-
-
     }
     public function party_info()
     {
