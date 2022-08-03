@@ -86,7 +86,8 @@ class  ind_member_donwlaod
     {
         $this->contact_markup = $this->get_contact_markup().PHP_EOL.
         "State: ".$this->form_factory->get_state()." District: ".strtoupper(substr($this->form_factory->get_district(),0, 1)).substr($this->form_factory->get_district(), 1,20).PHP_EOL.
-       "Phone: ".$this->form_factory->get_phone_number().PHP_EOL;
+       "Phone: ".$this->form_factory->get_phone_number().PHP_EOL.
+            "Party: ".$this->form_factory->get__party_name().PHP_EOL;
     }
     public function handle_notes()
     {
