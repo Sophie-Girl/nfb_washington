@@ -87,6 +87,9 @@ class individual_member_report
     public $committee_name;
     public function get_committee_name()
     {return $this->committee_name;}
+    public $party_name;
+    public function get__party_name()
+    {return $this->party_name;}
     public $committee_markup;
     public $committee_member_match;
     public function  get_committee_member_match()
@@ -182,7 +185,9 @@ class individual_member_report
             $this->last_name =  $contact['last_name'];
             $this->phone_number = $contact['phone'];
         }
-        $this->civi_query = null; */
+        $this->civi_query = null;
+
+    v4 instead  */
         $this->contact_info_v4();
     }
     public function contact_info_v4()
@@ -211,10 +216,50 @@ class individual_member_report
         $this->last_name =  $res['last_name'];
         $this->phone_number = $res['phone.phone'];
         $this->civi_query = null;
+        $this->party_info();
     }
     public function party_info()
     {
+        $civi = new Civicrm(); $civi->initialize();
+        $this->civi_query = new civicrm_v4($civi);
+        $this->civi_query->civi_entity = "Relationship";
+        $this->civi_query->civi_mode = "get";
+        $this->civi_query->civi_params = [
+            'select' => [
+                '*',
+                '*',
+            ],
+            'where' => [
+                ['contact_id_b', '=', $this->get_civicrm_id()],
+                ['relationship_type_id', '=', 55],
+            ],
+            'limit' => 25,
+        ];
+        $result = $this->civi_query->civi_query_v4();
+        $relat = $result->first();
+        $party_id = $relat['contact_id_a'];
+        $this->party_name = $this->get_party_dispaly_name($party_id);
+        $this->civi_query = null;
 
+    }
+    public function get_party_dispaly_name($party_id)
+    {
+        $civi = new Civicrm(); $civi->initialize();
+        $this->civi_query = new civicrm_v4($civi);
+        $this->civi_query->civi_entity = "Contact";
+        $this->civi_query->civi_mode = 'get';
+        $this->civi_query->civi_params =  [
+            'select' => [
+                '*',
+            ],
+            'where' => [
+                ['id', '=', $party_id],
+            ],
+            'limit' => 25,
+        ];
+        $result = $this->civi_query->civi_query_v4();
+        $party = $result->first();
+        return $party['display_name'];
     }
     public function build_contact_markup()
     {
@@ -239,13 +284,15 @@ class individual_member_report
     {
         $this->contact_markup = $this->get_contact_markup()."
         <p class='right-side'>State: ".$this->get_state()." <span>Rank: ".strtoupper(substr($this->get_rank(),0, 1)).substr($this->get_rank(), 1,20)."</span></p>
-        <p class='right-side'>Phone: ".$this->get_phone_number()."</p>";
+        <p class='right-side'>Phone: ".$this->get_phone_number()."</p>
+        <p>Party: ".$this->get__party_name()."</p>";
     }
     public function house_contact_markup()
     {
         $this->contact_markup = $this->get_contact_markup()."
         <p class='right-side'>State: ".$this->get_state()." <span>District: ".strtoupper(substr($this->get_district(),0, 1)).substr($this->get_district(), 1,20)."</span></p>
-        <p>Phone: ".$this->get_phone_number()."</p>";
+        <p>Phone: ".$this->get_phone_number()."</p>
+        <p>Party: ".$this->get__party_name()."</p>";
     }
     public function set_note_markup()
     {
