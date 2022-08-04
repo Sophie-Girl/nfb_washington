@@ -331,24 +331,26 @@ class rating_report_backend extends meeting_report_backend
     }
     public function build_array(&$ratings_array)
     {
-        if($this->get_state() == "MD")
-        {
-            \drupal::logger("issue_check")->notice("Check of null filter: ".$this->get_null_filter()." district: ".$this->get_district());
-            if ( $this->get_state_filter() == $this->get_state()){
-                \drupal::logger("issue_check")->notice("State check. district: ".$this->get_district());
-            }
-            if ( $this->get_null_filter() == "off" &&  $this->get_state_filter() === null){
-                \drupal::logger("issue_check")->notice("all check works district: ".$this->get_district());
-            }
-            if ( $this->get_null_filter() == "on" and  $this->get_issue_1_rating() == null){
-                \drupal::logger("issue_check")->notice("null works district: ".$this->get_district());
-            }
-
-
+        if($this->get_state_filter() === null) {
+            $go_state = true;
         }
-        if ( $this->get_state_filter() == $this->get_state()
-            || $this->get_null_filter() == "off" &&  $this->get_state_filter() === null
-        || $this->get_null_filter() == "on" and  $this->get_issue_1_rating() == null) {
+        elseif($this->get_state_filter() == $this->get_state())
+        {
+            $go_state = true;
+        }
+        else{ $go_state = false;}
+        if($this->get_null_filter() == "off")
+        {
+            $go_null = true;
+        }
+        elseif($this->get_null_filter() == "on" and $this->get_issue_1_rating() == null)
+        {
+            $go_null = true;
+        }
+        else{ $go_null = false;}
+
+
+        if ( $go_state == true && $go_null == true) {
             \drupal::logger("dt_issue_check")->notice("array key  ".$this->get_district().$this->get_state() . $this->get_last_name() . $this->get_first_name().$this->get_district());
             $array_key = $this->get_state() . $this->get_last_name() . $this->get_first_name().$this->get_district();
             $ratings_array[$array_key]['first_name'] = $this->get_first_name();
