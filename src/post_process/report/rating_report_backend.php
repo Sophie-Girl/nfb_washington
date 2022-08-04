@@ -349,7 +349,7 @@ class rating_report_backend extends meeting_report_backend
         if ( $this->get_state_filter() == $this->get_state()
             || $this->get_null_filter() == "off" &&  $this->get_state_filter() === null
         || $this->get_null_filter() == "on" and  $this->get_issue_1_rating() == null) {
-
+            \drupal::logger("dt_issue_check")->notice("array key  ".$this->get_district().$this->get_state() . $this->get_last_name() . $this->get_first_name().$this->get_district());
             $array_key = $this->get_state() . $this->get_last_name() . $this->get_first_name().$this->get_district();
             $ratings_array[$array_key]['first_name'] = $this->get_first_name();
             $ratings_array[$array_key]['last_name'] = $this->get_last_name();
