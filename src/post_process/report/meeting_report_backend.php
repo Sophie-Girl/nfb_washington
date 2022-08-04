@@ -131,7 +131,7 @@ class meeting_report_backend
     {
         $this->count = 1;
         if($form_state->getValue("filter_results") == "unscheduled")
-        {$this->null_filter = "on";} else{$this->null_filter = "yes";}
+        {$this->null_filter = "on";} else{$this->null_filter = "off";}
         if($form_state->getValue("filter_results") =="state")
         {$this->state_filter = $form_state->getValue("state_select");}
         else{$this->state_filter = "all";}
