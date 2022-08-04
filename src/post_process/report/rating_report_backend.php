@@ -350,7 +350,7 @@ class rating_report_backend extends meeting_report_backend
             || $this->get_null_filter() == "off" &&  $this->get_state_filter() === null
         || $this->get_null_filter() == "on" and  $this->get_issue_1_rating() == null) {
 
-            $array_key = $this->get_state() . $this->get_last_name() . $this->get_first_name();
+            $array_key = $this->get_state() . $this->get_last_name() . $this->get_first_name().$this->get_district();
             $ratings_array[$array_key]['first_name'] = $this->get_first_name();
             $ratings_array[$array_key]['last_name'] = $this->get_last_name();
             $ratings_array[$array_key]['phone'] = $this->get_phone();
