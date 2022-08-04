@@ -335,7 +335,7 @@ class rating_report_backend extends meeting_report_backend
         {
             \drupal::logger("issue_check")->notice("Check of null filter: ".$this->get_null_filter()." district: ".$this->get_district());
         }
-        if ($this->get_state_filter() === null || $this->get_state_filter() == $this->get_state() && $this->get_null_filter() == "off"
+        if ( $this->get_state_filter() == $this->get_state()
             || $this->get_null_filter() == "off" &&  $this->get_state_filter() === null
         || $this->get_null_filter() == "on" and  $this->get_issue_1_rating() == null) {
 
