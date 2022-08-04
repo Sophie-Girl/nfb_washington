@@ -148,6 +148,10 @@ class meeting_report_backend
         foreach($this->get_member_results() as $meeting)
         {
             $meeting = get_object_vars($meeting);
+            if($this->get_state() == "MD" && $this->get_district() == "6")
+            {
+                \drupal::logger("issue_check")->notice("Check of null filter: ".$this->get_null_filter());
+            }
             if($this->get_null_filter() == "on" && $meeting['location'] == "Unknown" ||
                 $this->get_null_filter() == "on" && $meeting['location'] == "TBD"
              || $this->get_null_filter() == "off") {
