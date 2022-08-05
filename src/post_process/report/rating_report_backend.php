@@ -474,24 +474,24 @@ class rating_report_backend extends meeting_report_backend
     }
     public function  set_csv_header(&$data)
     {
-        $data['0']['first_name'] = "First_Name";
-        $data['0']['last_name'] = "Last_Name";
-        $data['0']['phone'] = "Office_Phone";
-        $data['0']['district_text'] = "District/Senate_Rank";
+        $data['0']['first_name'] = "first_name";
+        $data['0']['last_name'] = "last_name";
+        $data['0']['phone'] = "phone";
+        $data['0']['district_text'] = "district_text";
         $data['0'][$this->get_issue_1_name()."_rating"] = $this->get_issue_1_name()."_rating";
-        $data['0'][$this->get_issue_1_name()."_comment"] = $this->get_issue_1_name()."_comments";
+        $data['0'][$this->get_issue_1_name()."_comment"] = $this->get_issue_1_name()."_comment";
         if($this->get_issue_count() > 1)
         {$data['0'][$this->get_issue_2_name()."_rating"] = $this->get_issue_2_name()."rating";
-            $data['0'][$this->get_issue_2_name()."_comment"] = $this->get_issue_2_name()."_comments";}
+            $data['0'][$this->get_issue_2_name()."_comment"] = $this->get_issue_2_name()."_comment";}
         if($this->get_issue_count() > 2)
         {$data['0'][$this->get_issue_3_name()."_rating"] = $this->get_issue_3_name()."_rating";
-            $data['0'][$this->get_issue_3_name()."_comment"] = $this->get_issue_3_name()."_comments";}
+            $data['0'][$this->get_issue_3_name()."_comment"] = $this->get_issue_3_name()."_comment";}
         if($this->get_issue_count() > 3)
         {$data['0'][$this->get_issue_4_name()."_rating"]  = $this->get_issue_4_name()."_rating";
-            $data['0'][$this->get_issue_4_name()."_comment"] = $this->get_issue_4_name()."_comments";}
+            $data['0'][$this->get_issue_4_name()."_comment"] = $this->get_issue_4_name()."_comment";}
         if($this->get_issue_count() > 4)
         {$data['0'][$this->get_issue_5_name()."_rating"]  = $this->get_issue_5_name()."_rating";
-            $data['0'][$this->get_issue_5_name()."_comment"] = $this->get_issue_5_name()."_comments";}
+            $data['0'][$this->get_issue_5_name()."_comment"] = $this->get_issue_5_name()."_comment";}
 
     }
 }
