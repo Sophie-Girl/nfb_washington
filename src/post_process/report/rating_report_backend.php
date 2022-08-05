@@ -351,7 +351,6 @@ class rating_report_backend extends meeting_report_backend
 
 
         if ( $go_state == true && $go_null == true) {
-            \drupal::logger("dt_issue_check")->notice("array key  ".$this->get_district().$this->get_state() . $this->get_last_name() . $this->get_first_name().$this->get_district());
             $array_key = $this->get_state() . $this->get_last_name() . $this->get_first_name().$this->get_district();
             $ratings_array[$array_key]['first_name'] = $this->get_first_name();
             $ratings_array[$array_key]['last_name'] = $this->get_last_name();
