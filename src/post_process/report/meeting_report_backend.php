@@ -152,9 +152,20 @@ class meeting_report_backend
             {
                 \drupal::logger("issue_check")->notice("Check of null filter: ".$this->get_null_filter()." district: ".$this->get_district());
             }
-            if($this->get_null_filter() == "on" && $meeting['location'] == "Unknown" ||
-                $this->get_null_filter() == "on" && $meeting['location'] == "TBD"
-             || $this->get_null_filter() == "off") {
+            if($this->get_null_filter() == "on" && $meeting['location'] == "Unknown" )
+            {
+                $null_go = true;
+            }
+            elseif(   $this->get_null_filter() == "on" && $meeting['location'] == "TBD")
+            {
+                $null_go = true;
+            }
+            elseif($this->get_null_filter() == "off")
+            {
+                $null_go = true;
+            }
+            else{ $null_go = false;}
+            if($null_go == true) {
                 $this->member_id = $meeting['member_id'];
                 $this->location = $meeting['location'];
                 $this->date = $meeting['meeting_date'];
