@@ -6,6 +6,9 @@ use Drupal\nfb_washington\civicrm\civicrm_v4;
 use Drupal\nfb_washington\database\base;
 class rating_report_backend extends meeting_report_backend
 {
+    public $row_count;
+    public function get_row_count()
+    {return $this->row_count;}
     public $rating_id;
     public $issue_1_rating;
     public $issue_2_rating;
@@ -117,7 +120,9 @@ class rating_report_backend extends meeting_report_backend
         $this->full_member_query();
         $ratings_array = [];
         //error_reporting(E_ALL | E_STRICT);
+        $this->row_count = 0;
         foreach ($this->get_member_results() as $members) {
+
             $member = get_object_vars($members);
                 $this->state = $member['state'];
                 $this->rank = $member['rank'];
@@ -351,6 +356,7 @@ class rating_report_backend extends meeting_report_backend
 
 
         if ( $go_state == true && $go_null == true) {
+           $count =  $this->get_row_count();
             $array_key = $this->get_state() . $this->get_last_name() . $this->get_first_name().$this->get_district();
             $ratings_array[$array_key]['first_name'] = $this->get_first_name();
             $ratings_array[$array_key]['last_name'] = $this->get_last_name();
@@ -374,6 +380,8 @@ class rating_report_backend extends meeting_report_backend
                 $ratings_array[$array_key][$this->get_issue_5_name() . "_rating"] = $this->get_issue_5_rating();
                 $ratings_array[$array_key][$this->get_issue_5_name() . "_comment"] = $this->get_issue_5_comment();
             }
+            $count++;
+            $this->row_count = $count;
 
         }
     }
@@ -414,7 +422,7 @@ class rating_report_backend extends meeting_report_backend
     {
         $data = $this->get_member_results(); $year = date("Y");
         $filename = DRUPAL_ROOT."/modules/custom/".$year."_washington_seminar_rating_report.csv";
-        $this->set_csv_header($data);
+       // $this->set_csv_header($data);
         $this->set_headers($filename);
         $this->check_file_size($data, $filename, $file, $size);
         $this->file_download($file, $size, $filename);
@@ -433,7 +441,7 @@ class rating_report_backend extends meeting_report_backend
     public function check_file_size($data, $fileName, &$file, &$size)
     {
         \Drupal::logger("filename_check")->notice("file name: ".$fileName);
-        if (isset($data['0'])){
+        if ($this->get_row_count() > 1){
             $fp = fopen($fileName, 'w');
             fputcsv($fp, array_keys($data['0']));
             foreach ($data AS $values) {
