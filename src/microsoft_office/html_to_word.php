@@ -12,7 +12,7 @@ class html_to_word
     public function download_doc($text)
     {
         $phpword = new \PhpOffice\PhpWord\PhpWord();
-        $section = $this->phpWord->addSection();
+        $section = $phpword->addSection();
         $text_xplode = explode("\n", $text);
         foreach($text_xplode as $line){
         $section->addText($line,
