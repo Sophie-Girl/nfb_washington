@@ -11,14 +11,14 @@ class html_to_word
     return $this->report_name;}
     public function download_doc($text)
     {
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();
-        $section = $phpWord->addSection();
+        $phpword = new \PhpOffice\PhpWord\PhpWord();
+        $section = $this->phpWord->addSection();
         $text_xplode = explode("\n", $text);
         foreach($text_xplode as $line){
         $section->addText($line,
             array('name' => 'Tahoma', 'size' => $this->get_font_size()));
-        $section->addTextBreak();}
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        $section->addPageBreak();}
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpword, 'Word2007');
         $objWriter->save($this->get_report_name());
         header("Content-Disposition: attachment; filename='".$this->get_report_name()."'");
         header('Content-Description: File Transfer');
@@ -33,5 +33,11 @@ class html_to_word
         readfile($this->get_report_name());
         unlink($this->get_report_name());
     }
+    public function add_page_break($text)
+    {
+
+
+    }
+
 
 }
