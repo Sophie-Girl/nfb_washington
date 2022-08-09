@@ -12,6 +12,7 @@ class all_member_download extends ind_member_donwlaod
 { return $this->full_markup;}
     public function full_backend()
     {
+        ini_set('max_execution_time', 500);
         $this->set_all_members();
         $this->member_loop();
         $this->phpoffice->font_size = '12';
