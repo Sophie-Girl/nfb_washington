@@ -15,9 +15,17 @@ class html_to_word
         $section = $phpword->addSection();
         $text_xplode = explode("\n", $text);
         foreach($text_xplode as $line){
+            if($line == "-"){
+                $line = " ";
         $section->addText($line,
             array('name' => 'Tahoma', 'size' => $this->get_font_size()));
         $section->addPageBreak();}
+        else{
+            $section->addText($line,
+                array('name' => 'Tahoma', 'size' => $this->get_font_size()));
+            $section->addTextBreak();
+    }
+        }
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpword, 'Word2007');
         $objWriter->save($this->get_report_name());
         header("Content-Disposition: attachment; filename='".$this->get_report_name()."'");

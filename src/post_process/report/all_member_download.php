@@ -40,7 +40,7 @@ class all_member_download extends ind_member_donwlaod
             $this->handle_notes();
             $this->committee_text_maker(); $this->relevant_issue_markup();
             $this->build_text($text);
-            $this->full_markup = $this->geT_full_markup(). $text;
+            $this->full_markup = $this->geT_full_markup(). $text.PHP_EOL."-";
             $this->clear_markups();
         }
     }
