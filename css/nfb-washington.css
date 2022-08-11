@@ -33,6 +33,7 @@
 }
 .button-2
 {
+    word-break: keep-all;
     border: 1px;
     border-style: solid;
     border-left-color: 	#01893e;
