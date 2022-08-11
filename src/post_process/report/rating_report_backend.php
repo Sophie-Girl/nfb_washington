@@ -4,6 +4,7 @@ use Drupal\civicrm\Civicrm; // V3 will become deprecated.
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\civicrm\civicrm_v4;
 use Drupal\nfb_washington\database\base;
+use Drupal\nfb_washington\microsoft_office\html_to_word;
 class rating_report_backend extends meeting_report_backend
 {
     public $row_count;
