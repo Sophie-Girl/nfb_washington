@@ -178,6 +178,17 @@ class meeting_report_backend
             }
         }
     }
+    public function clear_meeting()
+    {
+        $this->member_id = null;
+        $this->location = null;
+        $this->date = null;
+        $this->time = null;
+        $this->nfb_contact = null;
+        $this->nfb_phone = null;
+        $this->moc_contact = null;
+        $this->moc_attendance = null;
+    }
     public function member_query_meeting_report(FormStateInterface $form_state)
     {
         $this->database = new base();
