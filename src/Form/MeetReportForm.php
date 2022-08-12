@@ -31,7 +31,7 @@ class MeetReportForm extends FormBase
       if($form_state->getValue("") == "docx"){
         $text = $this->backend->get_markup();
         $word  = new html_to_word();
-        $word->report_name = DRUPAL_ROOT."modules/custom/washington_seminar_meeting_report.docx";
+        $word->report_name = DRUPAL_ROOT."/modules/custom/washington_seminar_meeting_report.docx";
         $word->font_size = '11';
         $word->download_doc($text);}
       else{
