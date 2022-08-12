@@ -28,7 +28,7 @@ class MeetReportForm extends FormBase
         $civicrm_v4 = new civicrm_v4($civicrm);
         $this->backend = new meeting_report_backend($civicrm_v4);
         $this->backend->begin_new_download_markup($form_state);
-      if($form_state->getValue("") == "docx"){
+      if($form_state->getValue("file_type") == "docx"){
         $text = $this->backend->get_markup();
         $word  = new html_to_word();
         $word->report_name = DRUPAL_ROOT."/modules/custom/washington_seminar_meeting_report.docx";
