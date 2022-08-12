@@ -32,7 +32,7 @@ class MeetReportForm extends FormBase
         $text = $this->backend->get_markup();
         $word  = new html_to_word();
         $word->report_name = DRUPAL_ROOT."/modules/custom/washington_seminar_meeting_report.docx";
-        $word->font_size = '11';
+        $word->font_size = '12';
         \Drupal::logger("wtf")->notice("text: ".$text);
         $word->download_doc($text);}
       else{

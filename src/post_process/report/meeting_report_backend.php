@@ -187,6 +187,7 @@ class meeting_report_backend
         foreach ($this->database->get_result() as $member)
         {
             $member = get_object_vars($member);
+            \Drupal::logger("state")->notice("state ".$member['state']);
             if($this->get_state_filter()== $member['state'] || $this->get_state_filter() == "all") {
                 $this->state = $member['state'];
                 $this->rank = $member['rank'];
@@ -197,7 +198,7 @@ class meeting_report_backend
             if($form_state->getValue("file_type") == "docx"){
                 $this->download_markup();}
             else {
-
+                $this->build_array_row();
             }
         }
     }
