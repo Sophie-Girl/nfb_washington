@@ -194,11 +194,10 @@ class meeting_report_backend
                 $this->district = $member['district'];
                 $this->civi_id = $member['civicrm_contact_id'];
                 $this->first_name = null;
-                $this->civi_query_stuff();}
-            if($form_state->getValue("file_type") == "docx"){
-                $this->download_markup();}
-            else {
-                $this->build_array_row();
+                $this->civi_query_stuff();
+            if($form_state->getValue("file_type") == "docx") {
+                     $this->download_markup();}
+
             }
         }
     }
