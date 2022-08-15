@@ -203,7 +203,7 @@ class meeting_report_backend
             {$state_go = "go";}
             elseif($this->get_state_filter() == "all")
             {$state_go = "go";}
-            else { $state_go = "no"}
+            else { $state_go = "no";}
             $member = get_object_vars($member);
             \Drupal::logger("state")->notice("state ".$member['state']);
             if($state_go == "go") {
