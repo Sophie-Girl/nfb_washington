@@ -198,9 +198,14 @@ class meeting_report_backend
         $this->database->select_query($query, $key);
         foreach ($this->database->get_result() as $member)
         {
+            if($this->get_state_filter()== $member['state'])
+            {$state_go = "go";}
+            elseif($this->get_state_filter() == "all")
+            {$state_go = "go";}
+            else { $state_go = "no"}
             $member = get_object_vars($member);
             \Drupal::logger("state")->notice("state ".$member['state']);
-            if($this->get_state_filter()== $member['state'] || $this->get_state_filter() == "all") {
+            if($state_go == "go") {
                 $this->state = $member['state'];
                 $this->rank = $member['rank'];
                 $this->district = $member['district'];
