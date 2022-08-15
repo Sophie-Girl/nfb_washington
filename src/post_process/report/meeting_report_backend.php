@@ -165,6 +165,7 @@ class meeting_report_backend
             }
             else{ $null_go = false;}
             if($null_go == true) {
+                $this->clear_meeting();
                 $this->member_id = $meeting['member_id'];
                 $this->location = $meeting['location'];
                 $this->date = $meeting['meeting_date'];
@@ -207,6 +208,9 @@ class meeting_report_backend
                 $this->civi_query_stuff();
             if($form_state->getValue("file_type") == "docx") {
                      $this->download_markup();}
+            else{
+                $this->build_array_row();
+            }
 
             }
         }
