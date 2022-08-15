@@ -191,6 +191,7 @@ class meeting_report_backend
     }
     public function member_query_meeting_report(FormStateInterface $form_state)
     {
+        $this->count = 1;
         $this->database = new base();
         $query = "select * from nfb_washington_members where member_id = '".$this->get_member_id()."';";
         $key = "member_id";
@@ -281,6 +282,8 @@ class meeting_report_backend
         $data[$this->get_count()]['attending'] = $this->get_moc_attendance();
         $data[$this->get_count()]['congressional_contact'] = $this->get_moc_contact();
         $this->array = $data;
+        $count = $this->get_count(); $count++;
+        $this->count = $count;
     }
 
 
