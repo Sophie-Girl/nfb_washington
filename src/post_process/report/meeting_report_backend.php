@@ -144,6 +144,7 @@ class meeting_report_backend
     }
     public function process_meeting_query(FormStateInterface $form_state)
     {
+        $this->count = 1;
         foreach($this->get_member_results() as $meeting)
         {
             $meeting = get_object_vars($meeting);
@@ -191,7 +192,7 @@ class meeting_report_backend
     }
     public function member_query_meeting_report(FormStateInterface $form_state)
     {
-        $this->count = 1;
+
         $this->database = new base();
         $query = "select * from nfb_washington_members where member_id = '".$this->get_member_id()."';";
         $key = "member_id";
