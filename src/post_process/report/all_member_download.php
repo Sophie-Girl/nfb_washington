@@ -10,6 +10,12 @@ class all_member_download extends ind_member_donwlaod
     public $full_markup;
     public function geT_full_markup()
 { return $this->full_markup;}
+    public $last_state;
+    public function get_last_state()
+    {
+        return $this->last_state;
+    }
+
     public function full_backend()
     {
         ini_set('max_execution_time', 500);
@@ -32,6 +38,7 @@ class all_member_download extends ind_member_donwlaod
     public function member_loop()
     { $year = date('Y');
         $this->full_markup = $year. " Washington Seminar All Member Report".PHP_EOL;
+        $this->last_state = null;
         foreach($this->get_full_member_results() as $member)
         {
             $member = get_object_vars($member);
@@ -49,6 +56,11 @@ class all_member_download extends ind_member_donwlaod
         $this->form_factory->member_id = $member['member_id'];
         $this->form_factory->civicrm_id = $member['civicrm_contact_id'];
         $this->form_factory->state = $member['state'];
+        if($this->get_last_state() == $member['state'])
+        {
+            $this->last_state = $member['state'];
+            $this->full_markup = $this->geT_full_markup()."-ns-".$member['state'].PHP_EOL;
+        }
         $this->form_factory->rank = $member['rank'];
         $this->form_factory->district = $member['district'];
         $this->form_factory->get_contact_info();

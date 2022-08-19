@@ -20,10 +20,14 @@ class html_to_word
         $section->addText($line,
             array('name' => 'Tahoma', 'size' => $this->get_font_size()));
         $section->addPageBreak();}
+            elseif(strpos(" ".$line, "-ns-") > 0)
+            {
+
+            }
         else{
             $section->addText($line,
                 array('name' => 'Tahoma', 'size' => $this->get_font_size()));
-            $section->addTextBreak();
+           // $section->addTextBreak();
     }
         }
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpword, 'Word2007');

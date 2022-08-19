@@ -15,6 +15,8 @@ class admin_notification extends email_base
         $send = true;
         $params['message'] = $this->get_body();
         $params['subject'] = "A Meeting Has Been created or Updated";
+        $params['message-id'] = rand(90000, 900000);
+        $params['in-reply-to'] = false;
         $langcode = \Drupal::currentUser()->getPreferredLangcode();
         $result = $mailManager->mail($module, $key, $to, $langcode, $params, $send);
     }
@@ -30,6 +32,8 @@ class admin_notification extends email_base
         $send = true;
         $params['message'] = $this->get_body();
         $params['subject'] = "A New Rating Has Been Submitted";
+        $params['message-id'] = rand(90000, 900000);
+        $params['in-reply-to'] = false;
         $langcode = \Drupal::currentUser()->getPreferredLangcode();
         $result = $mailManager->mail($module, $key, $to, $langcode, $params, $send);
     }
