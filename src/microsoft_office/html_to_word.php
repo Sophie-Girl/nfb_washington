@@ -22,6 +22,11 @@ class html_to_word
         $section->addPageBreak();}
             elseif(strpos(" ".$line, "-ns-") > 0)
             {
+                $new_line = str_replace("-ns-", "", $line);
+                $section->setStyle(['underline' => 'single']);
+                $section->addText($line,
+                    array('name' => 'Tahoma', 'size' => $this->get_font_size()));
+                $section->setStyle(['underline' => 'none']);
 
             }
         else{
