@@ -23,10 +23,8 @@ class html_to_word
             elseif(strpos(" ".$line, "-ns-") > 0)
             {
                 $new_line = str_replace("-ns-", "", $line);
-                $section->setStyle(['underline' => 'single']);
                 $section->addText($new_line,
-                    array('name' => 'Arial', 'size' => '20'));
-                $section->setStyle(['underline' => 'none']);
+                    array('name' => 'Arial', 'size' => '20', 'underline' => 'single'));
 
             }
         else{
