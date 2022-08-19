@@ -25,13 +25,13 @@ class html_to_word
                 $new_line = str_replace("-ns-", "", $line);
                 $section->setStyle(['underline' => 'single']);
                 $section->addText($new_line,
-                    array('name' => 'Tahoma', 'size' => $this->get_font_size()));
+                    array('name' => 'Arial', 'size' => '20'));
                 $section->setStyle(['underline' => 'none']);
 
             }
         else{
             $section->addText($line,
-                array('name' => 'Tahoma', 'size' => $this->get_font_size()));
+                array('name' => 'Arial', 'size' => "16"));
            // $section->addTextBreak();
     }
         }
