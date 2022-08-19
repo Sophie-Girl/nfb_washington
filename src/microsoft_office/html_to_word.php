@@ -17,14 +17,14 @@ class html_to_word
         foreach($text_xplode as $line){
             if($line == "-"){
                 $line = " ";
-        $section->addText($line,
-            array('name' => 'Tahoma', 'size' => $this->get_font_size()));
+     /*   $section->addText($line,
+            array('name' => 'Tahoma', 'size' => $this->get_font_size())); */
         $section->addPageBreak();}
             elseif(strpos(" ".$line, "-ns-") > 0)
             {
                 $new_line = str_replace("-ns-", "", $line);
                 $section->setStyle(['underline' => 'single']);
-                $section->addText($line,
+                $section->addText($new_line,
                     array('name' => 'Tahoma', 'size' => $this->get_font_size()));
                 $section->setStyle(['underline' => 'none']);
 
