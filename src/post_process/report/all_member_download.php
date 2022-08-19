@@ -56,7 +56,7 @@ class all_member_download extends ind_member_donwlaod
         $this->form_factory->member_id = $member['member_id'];
         $this->form_factory->civicrm_id = $member['civicrm_contact_id'];
         $this->form_factory->state = $member['state'];
-        if($this->get_last_state() == $member['state'])
+        if($this->get_last_state() != $member['state'])
         {
             $this->last_state = $member['state'];
             $this->full_markup = $this->geT_full_markup()."-ns-".$member['state'].PHP_EOL;
