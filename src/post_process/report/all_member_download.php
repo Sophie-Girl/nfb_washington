@@ -74,7 +74,12 @@ class all_member_download extends ind_member_donwlaod
         elseif($this->form_factory->get_state() == "DC")
         {$this->contact_markup = "Delegate ".$this->form_factory->get_first_name()." ".$this->form_factory->get_last_name().PHP_EOL;}
         else {$this->contact_markup = "Representative ".$this->form_factory->get_first_name()." ".$this->form_factory->get_last_name().PHP_EOL;}
-        $this->new_under_name_markup();
+        if($this->form_factory->get_district() != "Senate") {
+            $this->new_under_name_markup();
+        }
+        else{
+            $this->new_under_name_markup_senate();
+        }
     }
     public function clear_markups()
     {
@@ -86,6 +91,11 @@ class all_member_download extends ind_member_donwlaod
     public function new_under_name_markup()
     {
       $this->contact_markup = $this->get_contact_markup()  .PHP_EOL.
-      $this->form_factory->get__party_name()."-".$this->form_factory->get_state()."-".$this->form_factory->get_district();
+      $this->form_factory->get__party_name()."-".$this->form_factory->get_state()."-".$this->form_factory->get_district().PHP_EOL;
+    }
+    public function new_under_name_markup_senate()
+    {
+        $this->contact_markup = $this->get_contact_markup()  .PHP_EOL.
+            $this->form_factory->get__party_name()."-".$this->form_factory->get_state()."-".$this->form_factory->get_rank().PHP_EOL;
     }
 }
