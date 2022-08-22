@@ -227,7 +227,6 @@ class individual_member_report
         $this->civi_query->civi_params = [
             'select' => [
                 '*',
-                '*',
             ],
             'where' => [
                 ['contact_id_b', '=', $this->get_civicrm_id()],
@@ -236,6 +235,7 @@ class individual_member_report
             'limit' => 25,
         ];
         $result = $this->civi_query->civi_query_v4();
+        \Drupal::logger("sigh")->notice("results: ".print_r($result, true));
         $relat = $result->first();
         $party_id = $relat['contact_id_a'];
         $this->party_name = $this->get_party_dispaly_name($party_id);
