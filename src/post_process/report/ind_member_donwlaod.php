@@ -126,7 +126,7 @@ class  ind_member_donwlaod
     public function committee_text_maker()
     {
         $this->form_factory->set_issues();
-        $this->committee_markup = "Committees: ".PHP_EOL;
+        $this->committee_markup = "Committees: ";
         $this->form_factory->set_issue_count();
         $this->find_committee_1();
         if($this->form_factory->get_issue_count() > 1)
