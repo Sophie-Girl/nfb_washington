@@ -95,7 +95,7 @@ class all_member_download extends ind_member_donwlaod
     }
     public function new_under_name_markup_senate()
     {
-        $this->contact_markup = $this->get_contact_markup()  .PHP_EOL.
+        $this->contact_markup = $this->get_contact_markup()  .
             substr($this->form_factory->get__party_name(),0,1)."-".$this->form_factory->get_state()."-".$this-> senate_text().PHP_EOL;
     }
     public function senate_text()
