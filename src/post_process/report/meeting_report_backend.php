@@ -79,6 +79,9 @@ class meeting_report_backend
     public $count;
     public function get_count()
     {return $this->count;}
+    public $committee_text;
+    public function get_committee_text()
+    {return $this->committee_text;}
 
     public function full_member_query()
     {
@@ -92,12 +95,11 @@ class meeting_report_backend
     public function download_markup()
     {
 
-        $this->markup = $this->get_markup(). $this->get_first_name()." ".$this->get_last_name().PHP_EOL.
-            $this->district_text(). " Phone number: ".$this->get_phone().PHP_EOL.
-            "Zoom Meeting ID: ".$this->get_location()." Meeting date: ".$this->get_date().PHP_EOL.
-            "Meeting Time: ". $this->get_time(). PHP_EOL.
+        $this->markup = $this->get_markup()."Date: ".$this->get_date()." Time: ". $this->get_time()." ". $this->get_first_name()." ".$this->get_last_name()." ".$this->district_text().PHP_EOL.
+            "Committes:".
+            "Zoom Meeting ID: ".$this->get_location().PHP_EOL.
             "NFB Contact: ".$this->get_nfb_contact(). " Phone: ".$this->get_nfb_phone(). PHP_EOL.
-            "Attending Meeting: ".$this->get_moc_attendance(). " MOC Contact: ". $this->get_moc_contact().PHP_EOL.
+             " MOC Contact: ". $this->get_moc_contact().PHP_EOL.
             "---------------------------------------------------------------------".PHP_EOL
     ;
 
@@ -291,6 +293,49 @@ class meeting_report_backend
         $this->array = $data;
         $count = $this->get_count(); $count++;
         $this->count = $count;
+    }
+    public function create_committe_text()
+    {
+        $this->committee_text = "Comitte: ".PHP_EOL;
+
+    }
+    public function relationship_check_for_party()
+    {
+        $this->civicrm->civi_mode = "get";
+        $this->civicrm->civi_entity = "Relationship";
+        $this->civicrm->civi_params = [
+            'select' => [
+                '*',
+            ],
+            'where' => [
+                ['contact_id_b', '=', $this->get_civicrm_id()],
+                ['relationship_type_id', '=', 55],
+            ],
+            'limit' => 25,
+        ];
+        $result = $this->civicrm->civi_query_v4();
+        $relat = $result->first();
+        $party_id = $relat['contact_id_a'];
+        $name  = $this->get_party_dispaly_name($party_id);
+        Return substr($name,0,1);
+
+    }
+    public function get_party_dispaly_name($party_id)
+    {
+        $this->civicrm->civi_entity = "Contact";
+        $this->civicrm->civi_mode = 'get';
+        $this->civicrm->civi_params =  [
+            'select' => [
+                '*',
+            ],
+            'where' => [
+                ['id', '=', $party_id],
+            ],
+            'limit' => 25,
+        ];
+        $result = $this->civicrm->civi_query_v4();
+        $party = $result->first();
+        return $party['display_name'];
     }
 
 
