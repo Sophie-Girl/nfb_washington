@@ -91,11 +91,21 @@ class all_member_download extends ind_member_donwlaod
     public function new_under_name_markup()
     {
       $this->contact_markup = $this->get_contact_markup()  .PHP_EOL.
-      $this->form_factory->get__party_name()."-".$this->form_factory->get_state()."-".$this->form_factory->get_district().PHP_EOL;
+      substr($this->form_factory->get__party_name(),0, 1)."-".$this->form_factory->get_state()."-".$this->form_factory->get_district().PHP_EOL;
     }
     public function new_under_name_markup_senate()
     {
         $this->contact_markup = $this->get_contact_markup()  .PHP_EOL.
-            $this->form_factory->get__party_name()."-".$this->form_factory->get_state()."-".$this->form_factory->get_rank().PHP_EOL;
+            substr($this->form_factory->get__party_name(),0,1)."-".$this->form_factory->get_state()."-".$this-> senate_text().PHP_EOL;
+    }
+    public function senate_text()
+    {
+        if( $this->form_factory->get_rank() == "senior")
+        {
+            return "Sr.";
+        }
+        else {
+            return "Jr.";
+        }
     }
 }
