@@ -4,6 +4,7 @@ use Drupal\civicrm\Civicrm;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\civicrm\civicrm_v4;
+use Drupal\nfb_washington\form_factory\report\individual_member_report;
 use Drupal\nfb_washington\form_factory\report\meeting_report;
 use Drupal\nfb_washington\microsoft_office\html_to_word;
 use Drupal\nfb_washington\post_process\report\meeting_report_backend;
@@ -24,9 +25,11 @@ class MeetReportForm extends FormBase
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
+        $form_factory = new individual_member_report();
+        $php_word = new html_to_word();
         $civicrm = new Civicrm(); $civicrm->initialize();
         $civicrm_v4 = new civicrm_v4($civicrm);
-        $this->backend = new meeting_report_backend($civicrm_v4);
+        $this->backend = new meeting_report_backend($php_word, $form_factory, $civicrm_v4);
         $this->backend->begin_new_download_markup($form_state);
       if($form_state->getValue("file_type") == "docx"){
         $text = $this->backend->get_markup();

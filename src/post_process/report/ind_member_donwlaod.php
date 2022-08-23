@@ -4,17 +4,19 @@ use Drupal\core\Form\FormStateInterface;
 use Drupal\nfb_washington\database\base;
 use Drupal\nfb_washington\form_factory\report\individual_member_report;
 use Drupal\nfb_washington\microsoft_office\html_to_word;
-
+use Drupal\nfb_washington\civicrm\civicrm_v4;
 class  ind_member_donwlaod
 {
     public $phpoffice;
     public $form_factory;
-    public function __construct(html_to_word $html_to_word, individual_member_report $individual_member_report)
+    public function __construct(html_to_word $html_to_word, individual_member_report $individual_member_report, civicrm_v4 $civicrm_v4)
     {
         $this->phpoffice = $html_to_word;
         $this->form_factory = $individual_member_report;
+        $this->civicrm = $civicrm_v4;
     }
     public $database;
+    public $civicrm;
     public $civi_query;
     public $note_text;
     public function get_note_text()
@@ -31,6 +33,7 @@ class  ind_member_donwlaod
     public $issue_count;
     public function get_issue_count()
     {return $this->issue_count;}
+
 
     public function backend(FormStateInterface $form_state)
     {

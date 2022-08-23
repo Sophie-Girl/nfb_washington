@@ -4,7 +4,7 @@ use Drupal\civicrm\Civicrm; // V3 will become deprecated.
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\nfb_washington\civicrm\civicrm_v4;
 use Drupal\nfb_washington\database\base;
-class meeting_report_backend
+class meeting_report_backend extends all_member_download
 {
     /* ################################################################
      * # Connell, Sophia: Code Clean up cause I was rushed af on this #
@@ -18,10 +18,6 @@ class meeting_report_backend
     public $state_filter;
     public function get_state_filter()
     {return $this->state_filter;}
-    public function __construct(civicrm_v4 $civicrm_v4)
-    {
-        $this->civicrm = $civicrm_v4;
-    }
     public $member_results;
     public function get_member_results()
     {return $this->member_results;}
@@ -296,7 +292,11 @@ class meeting_report_backend
     }
     public function create_committe_text()
     {
-        $this->committee_text = "Comitte: ".PHP_EOL;
+        $this->committee_text = "";
+
+    }
+    public function commitee_search()
+    {
 
     }
     public function relationship_check_for_party()

@@ -1,7 +1,9 @@
 <?php
 Namespace Drupal\nfb_washington\Form;
+use Drupal\civicrm\Civicrm;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\nfb_washington\civicrm\civicrm_v4;
 use Drupal\nfb_washington\form_factory\report\individual_member_report;
 use Drupal\nfb_washington\microsoft_office\html_to_word;
 use Drupal\nfb_washington\post_process\report\ind_member_donwlaod;
@@ -34,7 +36,9 @@ class IndMemberReportForm extends FormBase
     {
         $form_factory = new individual_member_report();
         $php_word = new html_to_word();
-        $this->backend = new ind_member_donwlaod($php_word, $form_factory);
+        $civicrm = new Civicrm(); $civicrm->initialize();
+        $civicrm_v4 = new civicrm_v4($civicrm);
+        $this->backend = new ind_member_donwlaod($php_word, $form_factory, $civicrm_v4);
         $this->backend->backend($form_state);
     }
 }
