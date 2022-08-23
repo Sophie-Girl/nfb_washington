@@ -151,7 +151,7 @@ class meeting_report_backend
     }
     public function process_meeting_query(FormStateInterface $form_state)
     {
-        $this->count = 1;
+       //
         foreach($this->get_member_results() as $meeting)
         {
             $meeting = get_object_vars($meeting);
