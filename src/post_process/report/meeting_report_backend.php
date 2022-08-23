@@ -120,7 +120,7 @@ class meeting_report_backend
     public function district_text()
     {
         if($this->get_district() == "Senate")
-        { $district_text = strtoUpper(substr($this->get_rank(),0,1)."-". $this->get_state();}
+        { $district_text = strtoUpper(substr($this->get_rank(),0,1))."-". $this->get_state();}
         elseif($this->get_state() == "DC")
         {$district_text = "Delegate - ".$this->get_state();}
         elseif($this->get_state() == "PR")
