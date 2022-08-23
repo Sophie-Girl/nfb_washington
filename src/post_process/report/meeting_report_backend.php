@@ -95,9 +95,9 @@ class meeting_report_backend
     public function download_markup()
     {
 
+     //   $this->markup = $this->get_markup()."Date: ".$this->get_date()." Time: ". $this->get_time()." ". $this->get_first_name()." ".$this->get_last_name()." ".$this->district_text()."-".$this->relationship_check_for_party().PHP_EOL.
         $this->markup = $this->get_markup()."Date: ".$this->get_date()." Time: ". $this->get_time()." ". $this->get_first_name()." ".$this->get_last_name()." ".$this->district_text()."-".$this->relationship_check_for_party().PHP_EOL.
-        $this->markup = $this->get_markup()."Date: ".$this->get_date()." Time: ". $this->get_time()." ". $this->get_first_name()." ".$this->get_last_name()." ".$this->district_text()."-".$this->relationship_check_for_party().PHP_EOL.
-            "Committes:".
+            "Committees:".PHP_EOL.
             "Zoom Meeting ID: ".$this->get_location().PHP_EOL.
             "NFB Contact: ".$this->get_nfb_contact(). " Phone: ".$this->get_nfb_phone(). PHP_EOL.
              " MOC Contact: ". $this->get_moc_contact().PHP_EOL.
@@ -207,8 +207,6 @@ class meeting_report_backend
             elseif($this->get_state_filter() == "all")
             {$state_go = "go";}
             else { $state_go = "no";}
-
-            \Drupal::logger("state")->notice("state ".$member['state']);
             if($state_go == "go") {
                 $this->state = $member['state'];
                 $this->rank = $member['rank'];
