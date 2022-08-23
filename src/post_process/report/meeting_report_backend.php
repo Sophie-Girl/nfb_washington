@@ -134,6 +134,7 @@ class meeting_report_backend
     }
     public function begin_new_download_markup(FormStateInterface $form_state)
     {
+        ini_set('max_execution_time', 500);
         $this->count = 1;
         if($form_state->getValue("filter_results") == "unscheduled")
         {$this->null_filter = "on";} else{$this->null_filter = "off";}
