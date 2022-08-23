@@ -297,7 +297,10 @@ class meeting_report_backend extends all_member_download
     }
     public function commitee_search()
     {
-
+        $this->form_factory->member_id = $this->get_member_id();
+        $this->form_factory->civicrm_id = $this->get_civicrm_id();
+        $this->committee_text_maker();
+        $this->committee_text = $this->get_committee_markup();
     }
     public function relationship_check_for_party()
     {
