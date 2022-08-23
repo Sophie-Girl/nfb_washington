@@ -95,7 +95,8 @@ class meeting_report_backend
     public function download_markup()
     {
 
-        $this->markup = $this->get_markup()."Date: ".$this->get_date()." Time: ". $this->get_time()." ". $this->get_first_name()." ".$this->get_last_name()." ".$this->district_text().PHP_EOL.
+        $this->markup = $this->get_markup()."Date: ".$this->get_date()." Time: ". $this->get_time()." ". $this->get_first_name()." ".$this->get_last_name()." ".$this->district_text()."-".$this->relationship_check_for_party().PHP_EOL.
+        $this->markup = $this->get_markup()."Date: ".$this->get_date()." Time: ". $this->get_time()." ". $this->get_first_name()." ".$this->get_last_name()." ".$this->district_text()."-".$this->relationship_check_for_party().PHP_EOL.
             "Committes:".
             "Zoom Meeting ID: ".$this->get_location().PHP_EOL.
             "NFB Contact: ".$this->get_nfb_contact(). " Phone: ".$this->get_nfb_phone(). PHP_EOL.
@@ -119,13 +120,12 @@ class meeting_report_backend
     public function district_text()
     {
         if($this->get_district() == "Senate")
-        { $district_text = strtoUpper(substr($this->get_rank(), 0,1)).substr($this->get_rank(), 1, 12). " Senator from "
-            . $this->get_state();}
+        { $district_text = strtoUpper(substr($this->get_rank(),0,1)."-". $this->get_state();}
         elseif($this->get_state() == "DC")
-        {$district_text = "Delegate for ".$this->get_state();}
+        {$district_text = "Delegate - ".$this->get_state();}
         elseif($this->get_state() == "PR")
-        {$district_text = "Resident Commissioner for ".$this->get_state();}
-        else {$district_text = "Representative for ".$this->get_state()." District: ".$this->get_district();}
+        {$district_text = "Resident Commissioner - ".$this->get_state();}
+        else {$district_text = $this->get_district()." - ".$this->get_state();}
         return $district_text;
     }
     public function begin_new_download_markup(FormStateInterface $form_state)
