@@ -143,6 +143,7 @@ class meeting_report_backend
         else {$this->start_array();}
         $this->meeting_first_query();
         $this->process_meeting_query($form_state);
+        \Drupal::logger("markup_text")->notice("text: ".$this->get_markup());
     }
     public function process_meeting_query(FormStateInterface $form_state)
     {
