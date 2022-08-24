@@ -94,7 +94,7 @@ class meeting_report_backend extends all_member_download
         $this-> commitee_search();
      //   $this->markup = $this->get_markup()."Date: ".$this->get_date()." Time: ". $this->get_time()." ". $this->get_first_name()." ".$this->get_last_name()." ".$this->district_text()."-".$this->relationship_check_for_party().PHP_EOL.
         $this->markup = $this->get_markup()."Date: ".$this->get_date()." Time: ". $this->get_time()." ". $this->get_first_name()." ".$this->get_last_name()." ".$this->district_text()."-".$this->relationship_check_for_party().PHP_EOL.
-            "Committees:".PHP_EOL. $this->get_committee_text().PHP_EOL.
+            $this->get_committee_text().PHP_EOL.
             "Location: ".$this->get_location().PHP_EOL.
             "NFB Contact: ".$this->get_nfb_contact(). " Phone: ".$this->get_nfb_phone(). PHP_EOL.
              " MOC Contact: ". $this->get_moc_contact().PHP_EOL.
