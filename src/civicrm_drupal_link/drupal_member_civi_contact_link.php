@@ -339,7 +339,6 @@ class drupal_member_civi_contact_link
     ]
         ];
         $result = $this->civi_query->civi_query_v4(); // convert to api v4
-        \Drupal::logger("double_check")->notice("result, ".print_r($result, true));
         $count = $result->count(); $new_c = $result->first();
         $this->drupal_civicrm_id = $new_c['id'];
     }
@@ -380,7 +379,6 @@ class drupal_member_civi_contact_link
             );
             $result = $this->civi_query->civi_query_v4();
             $count = $result->count();
-            \Drupal::logger("nfb_civicrm_v4_test")->notice("New result array structure: ".print_r($result, true));
 
             if($count < '1') //check if that's good? Need ot see result structure in a print_r to confirm how much has changed
             {$this->create_phone_v4();}}
@@ -671,7 +669,6 @@ class drupal_member_civi_contact_link
     }
     public function party_name_switch()
     {
-        \Drupal::logger("party_issue")->notice("party: ".$this->propublica_query->get_member_party());
         switch ($this->propublica_query->get_member_party())
         {
             case "R":
@@ -690,7 +687,6 @@ class drupal_member_civi_contact_link
                 $p_name = "Independent";
                 break;
         }
-        \Drupal::logger("party_issue")->notice("party: ".$p_name);
         return $p_name;
     }
     public function find_party_c_id($p_name)
