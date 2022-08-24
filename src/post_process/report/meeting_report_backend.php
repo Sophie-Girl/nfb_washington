@@ -91,6 +91,7 @@ class meeting_report_backend extends all_member_download
     public function download_markup()
     {
 
+        $this-> commitee_search();
      //   $this->markup = $this->get_markup()."Date: ".$this->get_date()." Time: ". $this->get_time()." ". $this->get_first_name()." ".$this->get_last_name()." ".$this->district_text()."-".$this->relationship_check_for_party().PHP_EOL.
         $this->markup = $this->get_markup()."Date: ".$this->get_date()." Time: ". $this->get_time()." ". $this->get_first_name()." ".$this->get_last_name()." ".$this->district_text()."-".$this->relationship_check_for_party().PHP_EOL.
             "Committees:".PHP_EOL.
