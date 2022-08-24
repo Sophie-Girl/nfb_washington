@@ -129,10 +129,8 @@ class rating_report_backend extends meeting_report_backend
                 $this->rank = $member['rank'];
                 $this->district = $member['district'];
                 $this->civi_id = $member['civicrm_contact_id'];
-                \Drupal::logger("civi_id_check")->notice("civi_id: ".$this->get_civicrm_id());
                 $this->member_id = $member['member_id'];
                 $this->civi_query_stuff();
-                \Drupal::logger("state_test")->notice("State: ".$member['state']." Name: ".$this->get_first_name()." ".$this->get_last_name());
                 $this->rating_issue_1_query();
                     if ($this->get_issue_count() > 1) {
                         $this->rating_issue_2_query();
@@ -148,7 +146,6 @@ class rating_report_backend extends meeting_report_backend
                     $this->build_array($ratings_array);
                     $this->clear_ratings();
         }
-        \Drupal::logger("test_array")->notice("array result: ".print_r($ratings_array, true));
                     $this->member_results = $ratings_array;
                     if ($this->get_file_type() == "csv") {
 
@@ -191,7 +188,6 @@ class rating_report_backend extends meeting_report_backend
         $key = 'activity_id';
         $this->meeting_id = null;
         $this->database->select_query($query, $key);
-        \Drupal::logger('nfb_Washington_debug')->notice("sql results: ".print_r($this->database->get_result(), true));
 
         foreach( $this->database->get_result() as $meeting)
         {
@@ -441,7 +437,7 @@ class rating_report_backend extends meeting_report_backend
     }
     public function check_file_size($data, $fileName, &$file, &$size)
     {
-        \Drupal::logger("filename_check")->notice("file name: ".$fileName);
+
         if (isset($data['0'])){
             $fp = fopen($fileName, 'w');
             fputcsv($fp, array_keys($data['0']));
