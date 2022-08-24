@@ -100,7 +100,6 @@ class meeting_report_backend extends all_member_download
              " MOC Contact: ". $this->get_moc_contact().PHP_EOL.
             "---------------------------------------------------------------------".PHP_EOL
     ;
-        \Drupal::logger("markup_issue".$this->get_count())->notice("markup: ".$this->get_markup());
         $count = $this->get_count();
         $this->count = $count++;
 
@@ -145,7 +144,6 @@ class meeting_report_backend extends all_member_download
         else {$this->start_array();}
         $this->meeting_first_query();
         $this->process_meeting_query($form_state);
-        \Drupal::logger("markup_text")->notice("text: ".$this->get_markup());
     }
     public function process_meeting_query(FormStateInterface $form_state)
     {
