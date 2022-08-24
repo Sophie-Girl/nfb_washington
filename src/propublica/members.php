@@ -87,8 +87,6 @@ class members extends query_base{
         else {$this->member_active = "false";}
         $this->member_active = $member["in_office"];
         $this->member_state = $member['state'];
-        \Drupal::logger("washington_sem_debug")->notice("Member In office: ".$this->get_member_first_name(). " ". $this->get_member_last_name().": ".$this->get_member_state()
-            ." ".$member['in_office']);
     }
     public function leaving_congress_query()
     {
