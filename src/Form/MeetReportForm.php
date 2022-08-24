@@ -36,7 +36,6 @@ class MeetReportForm extends FormBase
         $word  = new html_to_word();
         $word->report_name = DRUPAL_ROOT."/modules/custom/washington_seminar_meeting_report.docx";
         $word->font_size = '12';
-        \Drupal::logger("wtf")->notice("text: ".$text);
         $word->download_doc($text);}
       else{
           $data = $this->backend->get_array();
@@ -59,11 +58,9 @@ class MeetReportForm extends FormBase
     public function check_file_size($data, $filename, &$file, &$size)
     {
         if (isset($data['0'])) {
-            \Drupal::logger('nfb_washington_download')->notice("I am creating the csv ".$filename);
             $fp = fopen($filename, 'w');
             fputcsv($fp, array_keys($data['0']));
             foreach ($data AS $values) {
-                \Drupal::logger('nfb_washington_download')->notice("value ".print_r($values, true));
                 fputcsv($fp, $values);}
             fclose($fp);}
         ob_flush();
