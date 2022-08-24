@@ -301,7 +301,8 @@ class meeting_report_backend extends all_member_download
         $this->form_factory->member_id = $this->get_member_id();
         $this->form_factory->civicrm_id = $this->get_civicrm_id();
         $this->committee_text_maker();
-        $this->committee_text = $this->get_committee_markup();
+        $this->handle_notes();
+        $this->committee_text = $this->get_committee_markup().PHP_EOL.$this->get_note_text();
     }
     public function relationship_check_for_party()
     {
