@@ -42,7 +42,6 @@ class NewMeetingForm extends FormBase
         $this->slash_check($check, $form_state);
         $this->com_check($check, $form_state);
         $this->https_check($check, $form_state);
-
     }
     public function slash_check($check, FormStateInterface $form_state)
     {
@@ -81,6 +80,34 @@ class NewMeetingForm extends FormBase
         {
             $form_state->setErrorByName("moc_contact", "Illegal character choice in >. Please remove");
         }
+        $check = $form_state->getValue("meeting_location");
+        $carrot = strpos(" ".$check, "<");
+        $close_carrot = strpos(" ".$check, ">");
+        if($carrot > 0)
+        {
+            $form_state->setErrorByName("meeting_location", "Illegal character choice in <. Please remove");
+        }
+        if($close_carrot > 0 )
+        {
+            $form_state->setErrorByName("meeting_location", "Illegal character choice in >. Please remove");
+        }
+    }
+    public function and_check(FormStateInterface  $form_state)
+    {
+        $check = $form_state->getValue("moc_contact");
+        $carrot = strpos(" ".$check, "&");
+
+        if($carrot > 0)
+        {
+            $form_state->setErrorByName("moc_contact", "Illegal character choice in &. Please remove");
+        }
+        $check = $form_state->getValue("meeting_location");
+        $carrot = strpos(" ".$check, "&");
+        if($carrot > 0)
+        {
+            $form_state->setErrorByName("meeting_location", "Illegal character choice in &. Please remove");
+        }
+
     }
 
 
