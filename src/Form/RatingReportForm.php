@@ -2,6 +2,7 @@
 Namespace Drupal\nfb_washington\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\nfb_washington\database\base;
 use Drupal\nfb_washington\form_factory\report\individual_member_report;
 use Drupal\nfb_washington\form_factory\report\rating_report;
 use Drupal\nfb_washington\microsoft_office\html_to_word;
@@ -33,4 +34,5 @@ class  RatingReportForm extends FormBase
 
 
     }
+
 }
