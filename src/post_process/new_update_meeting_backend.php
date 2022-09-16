@@ -80,12 +80,12 @@ class  new_update_meeting_backend
         } else {
             $status = $this->update_meeting_info();
         }
-        $this->redirect($status);
+
         $this->set_email_params($params);
         $params['nfb_name'] = $this->get_nfb_contact();
         $email = new admin_notification();
         $email->meeting_details($form_state, $params);
-
+        $this->redirect($status);
     }
 
     public function set_values(FormStateInterface $form_state)
@@ -207,12 +207,7 @@ class  new_update_meeting_backend
 
     public function redirect($status)
     {
-        if ($status == "duplicate")
-        {
-            $url = '/nfb-washington/meeting/'.$this->get_meeting_id();
-            $message = "There is another meeting for this member of congress. Please update it below";
-        }
-        elseif($status == "success")
+            if($status == "success")
         {
             $url = "/nfb-washington/home";
             $message = "Meeting scheduled";
@@ -225,7 +220,7 @@ class  new_update_meeting_backend
         \Drupal::messenger()->addMessage($message);
         $ender = new RedirectResponse($url);
         $ender->send(); $ender = null;
-        return;
+         exit;
     }
     public function find_member_id()
     {
