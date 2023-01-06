@@ -604,7 +604,7 @@ class drupal_member_civi_contact_link
         where member_id = '".$member_id."';";
             $this->database->update_query($query);
             $query = "update nfb_washington_members
-        set rank = '".$this->propublica_query->get_member_rank()."'
+        set `rank` = '".$this->propublica_query->get_member_rank()."'
         where member_id = '".$member_id."';";
             $this->database->update_query($query);
         }
@@ -616,9 +616,10 @@ class drupal_member_civi_contact_link
             $member_id = str_replace('"', "", $member_id);
             $member_id = str_replace("'", "", $member_id);
             $query = "update nfb_washington_members
-                    set rank = 'House'
+                    set `rank` = House
                     where member_id = '".$member_id."';";
-                 //  $this->database->update_query($query);
+
+            $this->database->update_query($query);
 
         }
 
