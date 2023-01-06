@@ -47,7 +47,7 @@ Class admin_config_backend
 
     }
     public function set_user_name(){
-        $user = \drupal::currentUser()->getUsername();
+        $user = \drupal::currentUser()->getAccountName();
     }
     public function find_existing_api_key()
     {
@@ -79,8 +79,8 @@ Class admin_config_backend
             'setting' => "pp_id",
             'value' => $this->get_api_key_value(),
             "active" => "0",
-            "created_user" => \drupal::currentUser()->getUsername(),
-            "last_modified_user" => \drupal::currentUser()->getUsername(),
+            "created_user" =>\drupal::currentUser()->getAccountName(),
+            "last_modified_user" => \drupal::currentUser()->getAccountName(),
         );
         $this->database = new base();
         $this->database->insert_query($table, $fields);
@@ -108,8 +108,8 @@ Class admin_config_backend
             'setting' => "congress_number",
             'value' => $this->get_congress_number_value(),
             "active" => "0",
-            "created_user" => \drupal::currentUser()->getUsername(),
-            "last_modified_user" => \drupal::currentUser()->getUsername(),
+            "created_user" => \drupal::currentUser()->getAccountName(),
+            "last_modified_user" => \drupal::currentUser()->getAccountName(),
         );
         $this->database = new base();
         $this->database->insert_query($table, $fields);
@@ -144,8 +144,8 @@ Class admin_config_backend
             'setting' => "seminar_type",
             'value' => $this->get_seminar_type(),
             "active" => "0",
-            "created_user" => \drupal::currentUser()->getUsername(),
-            "last_modified_user" => \drupal::currentUser()->getUsername(),
+            "created_user" => \drupal::currentUser()->getAccountName(),
+            "last_modified_user" => \drupal::currentUser()->getAccountName(),
         );
         $this->database = new base();
         $this->database->insert_query($table, $fields);
@@ -180,8 +180,8 @@ Class admin_config_backend
             'setting' => "staff_email",
             'value' => $this->get_staff_email(),
             "active" => "0",
-            "created_user" => \drupal::currentUser()->getUsername(),
-            "last_modified_user" => \drupal::currentUser()->getUsername(),
+            "created_user" => \drupal::currentUser()->getAccountName(),
+            "last_modified_user" => \drupal::currentUser()->getAccountName(),
         );
         $this->database = new base();
         $this->database->insert_query($table, $fields);
@@ -234,8 +234,8 @@ Class admin_config_backend
             'setting' => "issue_count",
             'value' => $this->get_issue_number(),
             "active" => "0",
-            "created_user" => \drupal::currentUser()->getUsername(),
-            "last_modified_user" => \drupal::currentUser()->getUsername(),
+            "created_user" => \drupal::currentUser()->getAccountName(),
+            "last_modified_user" => \drupal::currentUser()->getAccountName(),
         );
         $this->database = new base();
         $this->database->insert_query($table, $fields);
