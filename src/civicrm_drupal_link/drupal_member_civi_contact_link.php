@@ -616,8 +616,9 @@ class drupal_member_civi_contact_link
             $member_id = str_replace('"', "", $member_id);
             $member_id = str_replace("'", "", $member_id);
             $query = "update nfb_washington_members
-                    set rank = 'House'
-                    where member_id = '".$member_id."';";//       $this->database->update_query($query);
+                    set rank = House
+                    where member_id = '".$member_id."';";
+                   $this->database->update_query($query);
 
         }
 
