@@ -616,6 +616,7 @@ class drupal_member_civi_contact_link
             $query = "update nfb_washington_members
         set rank = 'House'
         where member_id = '".$member_id."';";
+            \Drupal::logger("Kevin_mccarthy_sucks")->notice("query: ".$query);
             $this->database->update_query($query);
 
         }
