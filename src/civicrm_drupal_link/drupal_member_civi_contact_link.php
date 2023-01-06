@@ -600,7 +600,7 @@ class drupal_member_civi_contact_link
         if($this->propublica_query->get_search_criteria_1() == "senate")
         {
             $query = "update nfb_washington_members
-        set district = 'Senate'
+        set district = '"."Senate"."'
         where member_id = '".$member_id."';";
             $this->database->update_query($query);
             $query = "update nfb_washington_members
@@ -614,7 +614,7 @@ class drupal_member_civi_contact_link
         where member_id = '".$member_id."';";
             $this->database->update_query($query);
             $query = "update nfb_washington_members
-        set rank = 'House'
+        set rank = '"."House"."'
         where member_id = '".$member_id."';";
 
             $this->database->update_query($query);
