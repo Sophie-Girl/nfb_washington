@@ -21,7 +21,6 @@ class base
     public function update_query($query)
     {
         $this->database = \Drupal::database();
-        \Drupal::logger("Kevin_mccarthy_sucks")->notice("query: ".$query);
         $this->result =  $this->database->query($query)->execute();
     }
     public function insert_query($table, $fields)

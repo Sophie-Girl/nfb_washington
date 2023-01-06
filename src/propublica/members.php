@@ -64,7 +64,7 @@ class members extends query_base{
         $this->api_url = $api_url;
         $this->set_curl();
         $this->curl_execute_set_propublica_result();
-        \Drupal::logger("kevin_mccarthy_sucks")->notice("Print: ".print_r($this->get_propublica_result(), true));
+
     }
     public function parse_member($member)
     {
