@@ -227,7 +227,7 @@ class  new_update_meeting_backend
         if($this->get_member_id() == null)
         {
             $this->database = new base();
-            $query = "select * from nnfb_washington_activities where activity_id = '".$this->get_meeting_id()."';";
+            $query = "select * from nfb_washington_activities where activity_id = '".$this->get_meeting_id()."';";
             $key = 'activity_id';
             $this->database->select_query($query, $key);
             $member_id = null;
