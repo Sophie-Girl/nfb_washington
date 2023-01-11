@@ -206,7 +206,6 @@ class individual_member_report
             ],
             'where' => [
                 ['id', '=', $this->get_civicrm_id()],
-                ['phone.is_primary', '=', TRUE],
             ],
             'limit' => 25,
         ];
