@@ -208,6 +208,7 @@ class individual_member_report
                 ['id', '=', $this->get_civicrm_id()],
                 ['phone.is_primary', '=', TRUE],
             ],
+            'checkPermissions' => FALSE,
             'limit' => 25,
         ];
         $result = $this->civi_query->civi_query_v4();
