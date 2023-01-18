@@ -22,7 +22,7 @@ class all_member_download extends ind_member_donwlaod
         $this->set_all_members();
         $this->member_loop();
         $this->phpoffice->font_size = '12';
-        $this->phpoffice->report_name = DRUPAL_ROOT."/modules/custom/all_member_report_washington_seminar.docx";
+        $this->phpoffice->report_name = "/var/www/html/drupal/web/sites/default/files/all_member_report_washington_seminar.docx";
         $text = $this->geT_full_markup();
         $this->phpoffice->download_doc($text);
     }
