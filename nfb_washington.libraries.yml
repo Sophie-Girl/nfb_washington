@@ -31,3 +31,7 @@ edit-config:
   version: 1.x
   js:
     js/edit-config.js: {}
+ease-of-use:
+  version: 1.x
+  js:
+    js/ease-of-use.js: {}

@@ -30,6 +30,7 @@ class UpdateRatingForm extends FormBase
 
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
+        $form['#attached']['library'][] = 'nfb_washington/ease-of-use';
         $this->post_process = new new_ratings_form_backend();
         $this->post_process->backend($form_state);
         $this->post_process = null;

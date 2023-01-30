@@ -14,6 +14,7 @@ class HomeSemForm extends FormBase
     public function buildForm(array $form, FormStateInterface $form_state)
     {
         $form['#attached']['library'][] = 'nfb_washington/nfb-washington';
+        $form['#attached']['library'][] = 'nfb_washington/ease-of-use';
         $this->form_factory = new form_factory();
         $this->form_factory->build_home_page_form($form, $form_state);
         $this->form_factory = null;
