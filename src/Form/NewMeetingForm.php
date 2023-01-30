@@ -13,8 +13,8 @@ class NewMeetingForm extends FormBase
     {return 'washington_sem_new_meeting';}
     public function buildForm(array $form, FormStateInterface $form_state, $meeting = "new")
     {
-        $form['#attached']['library'][] = 'nfb_washington/updatemeeting';
         $form['#attached']['library'][] = 'nfb_washington/ease-of-use';
+        $form['#attached']['library'][] = 'nfb_washington/updatemeeting';
         $this->form_factory = new form_factory();
         $this->form_factory->build_new_meeting_time($form, $form_state, $meeting);
         $this->form_factory = null;
