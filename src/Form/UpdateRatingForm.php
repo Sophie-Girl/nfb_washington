@@ -60,6 +60,10 @@ class UpdateRatingForm extends FormBase
         {
             $form_state->setErrorByName("nfb_civicrm_phone_1", "Please Remove the previous entry, what you have submitted is too long");
         }
+        if(strlen($check) > 12)
+        {
+            $form_state->setErrorByName("nfb_civicrm_phone_1", "What you have submitted is too long");
+        }
     }
     public function prevent_links(FormStateInterface $form_state)
     {
