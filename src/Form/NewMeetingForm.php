@@ -19,6 +19,7 @@ class NewMeetingForm extends FormBase
         $this->form_factory = null;
         return $form;
     }
+
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         $this->post_process = new new_update_meeting_backend();
@@ -32,6 +33,15 @@ class NewMeetingForm extends FormBase
         $this->prevent_links($form_state);
         $this->prevent_carrots($form_state);
         $this->and_check($form_state);
+        $this->prevent_TBD($form_state);
+    }
+    public function prevent_TBD(FormStateInterface $form_state)
+    {
+        $check = $form_state->getValue("nfb_civicrm_phone_1");
+        if(strpos(" ".$check, "TBD")  > 0)
+        {
+            $form_state->setErrorByName("nfb_civicrm_phone_1", "Please Remove the previous entry, what you have submitted is too long");
+        }
     }
     public function staterep_refresh(&$form, $form_state)
     {
