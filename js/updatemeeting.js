@@ -2,6 +2,8 @@
     Drupal.behaviors.wash_sem_meeitng = {
         attach: function(context, settings) {
             window.onload = function () {
+                document.getElementById('edit-meeting-value').style.display = 'none';
+                document.getElementsByClassName("form-item js-form-item form-type-textfield js-form-type-textfield form-item-meeting-value js-form-item-meeting-value")['0'].style.display = 'none';
                 var vmeetingid = $('#edit-meeting-value').val();
                 if (vmeetingid != "new" && vmeetingid.substr(0,3) != "new") {
                     $.ajax({
