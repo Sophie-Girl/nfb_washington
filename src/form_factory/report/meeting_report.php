@@ -292,6 +292,7 @@ class meeting_report
   'where' => [
         ['country_id', '=', 1228],
     ],
+            'checkPermissions' => FALSE,
   'limit' => 60,];
         $result = $civicrm_v4->civi_query_v4();
         $this->create_the_options($result, $options);
