@@ -184,7 +184,9 @@ class form_factory extends update_form_ajax_test
     public function build_directlink_select(&$form, $form_state, $meeting)
     {
         $this->get_first_name_last_name_direct($meeting, $data);
-        $options = [$data['member_id'] => $data['first_name']." ".$data['last_name']]; $this->prefix = "<div id='rep_wrapper'>";
+        $options = [$data['member_id'] => $data['first_name']." ".$data['last_name']]; $this->prefix = "<div id='rep_wrapper'>
+        <div aria-label='".$data['first_name']." ".$data['last_name']." is pre-selected'></div>";
+        // Connell, Sophi: Temporary patch due to Jaws not picking up read only.
         $this->element_id = 'select_rep'; $this->type = 'select';
         $this->title = "Select Elected Official"; $this->required = TRUE;
         $this->suffix = "</div>";
