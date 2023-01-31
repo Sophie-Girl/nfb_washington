@@ -9,7 +9,7 @@ use Drupal\nfb_washington\microsoft_office\html_to_word;
 use Drupal\nfb_washington\post_process\report\rating_report_backend;
 use Drupal\nfb_washington\civicrm\civicrm_v4;
 use Drupal\civicrm\Civicrm;
-class  RatingReportForm extends FormBase
+class RatingReportForm extends FormBase
 {
     public  $form_factory;
     public function getFormId()
