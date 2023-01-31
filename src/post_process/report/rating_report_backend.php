@@ -418,7 +418,7 @@ class rating_report_backend extends meeting_report_backend
     public function csv_functions()
     {
         $data = $this->get_member_results(); $year = date("Y");
-        $filename = DRUPAL_ROOT."/modules/custom/".$year."_washington_seminar_rating_report.csv";
+        $filename = "/var/www/html/drupal/web/sites/default/files/".$year."_washington_seminar_rating_report.csv";
         $this->set_csv_header($data);
         $this->set_headers($filename);
         $this->check_file_size($data, $filename, $file, $size);
