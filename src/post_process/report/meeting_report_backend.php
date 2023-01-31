@@ -238,6 +238,7 @@ class meeting_report_backend extends all_member_download
                 ['phone.is_primary', '=', TRUE],
                 // So using primary is needed for just grabbing one contact
             ],
+            'checkPermissions' => FALSE,
             'limit' => 1,
         ];
         $result = $this->civicrm->civi_query_v4();
@@ -314,6 +315,7 @@ class meeting_report_backend extends all_member_download
                 ['contact_id_b', '=', $this->get_civicrm_id()],
                 ['relationship_type_id', '=', 55],
             ],
+            'checkPermissions' => FALSE,
             'limit' => 25,
         ];
         $result = $this->civicrm->civi_query_v4();
