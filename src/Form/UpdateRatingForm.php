@@ -52,6 +52,7 @@ class UpdateRatingForm extends FormBase
         $this->prevent_carrots($form_state);
         $this->and_check($form_state);
         $this->prevent_TBD($form_state);
+        $this->prevent_semi_colon( $form_state);
     }
     public function prevent_TBD(FormStateInterface $form_state)
     {
@@ -64,6 +65,45 @@ class UpdateRatingForm extends FormBase
         {
             $form_state->setErrorByName("nfb_civicrm_phone_1", "What you have submitted is too long");
         }
+    }
+    public function prevent_semi_colon(FormStateInterface  $form_state)
+    {
+        $check = " ".$form_state->getValue("nfb_contact_name");
+        if(strpos($check, ";") > 0)
+        {
+            $form_state->setErrorByName("nfb_contact_name", "No Semi-colons");
+        }
+        $check = " ".$form_state->getValue("nfb_civicrm_phone_1");
+        if(strpos($check, ";") > 0)
+        {
+            $form_state->setErrorByName("nfb_civicrm_phone_1", "No Semi-colons");
+        }
+        $check = " ".$form_state->getValue("issue_1_comment");
+        if(strpos($check, ";") > 0)
+        {
+            $form_state->setErrorByName("issue_1_comment", "No Semi-colons");
+        }
+        $check = " ".$form_state->getValue("issue_2_comment");
+        if(strpos($check, ";") > 0)
+        {
+            $form_state->setErrorByName("issue_2_comment", "No Semi-colons");
+        }
+        $check = " ".$form_state->getValue("issue_3_comment");
+        if(strpos($check, ";") > 0)
+        {
+            $form_state->setErrorByName("issue_3_comment", "No Semi-colons");
+        }
+        $check = " ".$form_state->getValue("issue_4_comment");
+        if(strpos($check, ";") > 0)
+        {
+            $form_state->setErrorByName("issue_4_comment", "No Semi-colons");
+        }
+        $check = " ".$form_state->getValue("issue_5_comment");
+        if(strpos($check, ";") > 0)
+        {
+            $form_state->setErrorByName("issue_5_comment", "No Semi-colons");
+        }
+
     }
     public function prevent_links(FormStateInterface $form_state)
     {

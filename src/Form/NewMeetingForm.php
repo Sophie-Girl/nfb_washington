@@ -34,6 +34,7 @@ class NewMeetingForm extends FormBase
         $this->prevent_carrots($form_state);
         $this->and_check($form_state);
         $this->prevent_TBD($form_state);
+        $this->prevent_semi_colon( $form_state);
     }
     public function prevent_TBD(FormStateInterface $form_state)
     {
@@ -57,6 +58,30 @@ class NewMeetingForm extends FormBase
         $this->slash_check($check, $form_state);
         $this->com_check($check, $form_state);
         $this->https_check($check, $form_state);
+    }
+    public function prevent_semi_colon(FormStateInterface  $form_state)
+    {
+        $check = " ".$form_state->getValue("nfb_contact_name");
+        if(strpos($check, ";") > 0)
+        {
+            $form_state->setErrorByName("nfb_contact_name", "No Semi-colons");
+        }
+        $check = " ".$form_state->getValue("nfb_civicrm_phone_1");
+        if(strpos($check, ";") > 0)
+        {
+            $form_state->setErrorByName("nfb_civicrm_phone_1", "No Semi-colons");
+        }
+        $check = " ".$form_state->getValue("meeting_location");
+        if(strpos($check, ";") > 0)
+        {
+            $form_state->setErrorByName("meeting_location", "No Semi-colons");
+        }
+        $check = " ".$form_state->getValue("moc_contact");
+        if(strpos($check, ";") > 0)
+        {
+            $form_state->setErrorByName("moc_contact", "No Semi-colons");
+        }
+
     }
     public function slash_check($check, FormStateInterface $form_state)
     {
