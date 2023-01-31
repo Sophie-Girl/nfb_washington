@@ -59,6 +59,29 @@ class NewMeetingForm extends FormBase
         $this->com_check($check, $form_state);
         $this->https_check($check, $form_state);
     }
+    public function prevent_sql_injection($form_state)
+    {
+        $check = " ".strtolower($form_state->getValue("nfb_contact_name"));
+        if(strpos($check, "drop table") > 0)
+        {
+            $form_state->setErrorByName("nfb_contact_name", "No Semi-colons");
+        }
+        $check = " ".strtolower($form_state->getValue("nfb_civicrm_phone_1"));
+        if(strpos($check, "drop table") > 0)
+        {
+            $form_state->setErrorByName("nfb_civicrm_phone_1", "No Semi-colons");
+        }
+        $check = " ".strtolower($form_state->getValue("meeting_location"));
+        if(strpos($check, "drop table") > 0)
+        {
+            $form_state->setErrorByName("meeting_location", "No Semi-colons");
+        }
+        $check = " ".strtolower($form_state->getValue("moc_contact"));
+        if(strpos($check, "drop table") > 0)
+        {
+            $form_state->setErrorByName("moc_contact", "No Semi-colons");
+        }
+    }
     public function prevent_semi_colon(FormStateInterface  $form_state)
     {
         $check = " ".$form_state->getValue("nfb_contact_name");

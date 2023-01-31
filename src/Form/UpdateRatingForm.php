@@ -53,6 +53,45 @@ class UpdateRatingForm extends FormBase
         $this->and_check($form_state);
         $this->prevent_TBD($form_state);
         $this->prevent_semi_colon( $form_state);
+        $this->prevent_sql_injection($form_state);
+    }
+    public function prevent_sql_injection($form_state)
+    {
+        $check = " ".strtolower($form_state->getValue("nfb_contact_name"));
+        if(strpos($check, "drop table") > 0)
+        {
+            $form_state->setErrorByName("nfb_contact_name", "No Semi-colons");
+        }
+        $check = " ".strtolower($form_state->getValue("nfb_civicrm_phone_1"));
+        if(strpos($check, "drop table") > 0)
+        {
+            $form_state->setErrorByName("nfb_civicrm_phone_1", "No Semi-colons");
+        }
+        $check = " ".strtolower($form_state->getValue("issue_1_comment"));
+        if(strpos($check, "drop table") > 0)
+        {
+            $form_state->setErrorByName("issue_1_comment", "No Semi-colons");
+        }
+        $check = " ".strtolower($form_state->getValue("issue_2_comment"));
+        if(strpos($check, "drop table") > 0)
+        {
+            $form_state->setErrorByName("issue_2_comment", "No Semi-colons");
+        }
+        $check = " ".strtolower($form_state->getValue("issue_3_comment"));
+        if(strpos($check, "drop table") > 0)
+        {
+            $form_state->setErrorByName("issue_3_comment", "No Semi-colons");
+        }
+        $check = " ".strtolower($form_state->getValue("issue_4_comment"));
+        if(strpos($check, "drop table") > 0)
+        {
+            $form_state->setErrorByName("issue_4_comment", "No Semi-colons");
+        }
+        $check = " ".strtolower($form_state->getValue("issue_5_comment"));
+        if(strpos($check, "drop table") > 0)
+        {
+            $form_state->setErrorByName("issue_5_comment", "No Semi-colons");
+        }
     }
     public function prevent_TBD(FormStateInterface $form_state)
     {
