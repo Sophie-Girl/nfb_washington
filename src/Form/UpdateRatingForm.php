@@ -27,7 +27,6 @@ class UpdateRatingForm extends FormBase
         $this->form_factory = null;
         return $form;
     }
-
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         $this->post_process = new new_ratings_form_backend();
@@ -140,7 +139,6 @@ class UpdateRatingForm extends FormBase
         {
             $form_state->setErrorByName("issue_5_comment", "No Semi-colons");
         }
-
     }
     public function prevent_links(FormStateInterface $form_state)
     {
@@ -336,12 +334,12 @@ class UpdateRatingForm extends FormBase
             {
                 if($issue_count == null){
                     $setting = get_object_vars($setting);
+
                     $issue_count = $setting['value'];}
             }
         }
         $this->issue_count = $issue_count;
         $this->database = null;
-
     }
 
 }
