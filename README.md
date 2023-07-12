@@ -1,3 +1,3 @@
 # nfb_washington
 
-New Washington Seminar Module for D8. 
+Custom event module I created for the National Federation of the Blind fro Drupal 8-9
